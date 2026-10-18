@@ -28,7 +28,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC_JES--dYnPWRGKSZX3OPoH9UqmF2lRo4',
-    appId: '1:1089152291243:android:34d65de0d8c1ab6892c2ee',
+    appId: '1:1089152291243:android:18373f2100e44bb692c2ee',
     messagingSenderId: '1089152291243',
     projectId: 'pomodoro-app-d3068',
     storageBucket: 'pomodoro-app-d3068.firebasestorage.app',
