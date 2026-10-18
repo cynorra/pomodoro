@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/ad_service.dart';
@@ -18,7 +17,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   @override
   void initState() {
     super.initState();
-    if (kReleaseMode && !AdService.bannerAdUnitId.contains('GERCEK')) _load();
+    if (AdService.hasBannerAdUnit) _load();
   }
 
   void _load() {
@@ -58,7 +57,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   Widget build(BuildContext context) {
     final ad = _ad;
     if (!_loaded || ad == null) {
-      return const SizedBox(height: 50);
+      return const SizedBox.shrink();
     }
     return SizedBox(height: 50, child: AdWidget(ad: ad));
   }

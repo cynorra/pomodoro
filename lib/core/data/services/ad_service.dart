@@ -16,22 +16,26 @@ class AdService {
 
   // Release builds ship with placeholder ad unit IDs until real ones are set;
   // loading ads with them would only produce failed requests.
-  static bool get _hasRealAdUnits =>
+  static bool get hasBannerAdUnit =>
+      kDebugMode || !bannerAdUnitId.contains('GERCEK');
+
+  static bool get _hasRewardedAdUnit =>
       kDebugMode || !rewardedAdUnitId.contains('GERCEK');
 
   static Future<void> initialize() async {
-    if (_isInitialized || !_hasRealAdUnits) return;
+    if (_isInitialized) return;
 
     try {
       await MobileAds.instance.initialize();
       _isInitialized = true;
-      await _loadRewardedAd();
+      if (_hasRewardedAdUnit) await _loadRewardedAd();
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'AdMob init failed');
     }
   }
 
   static Future<void> _loadRewardedAd() async {
+    if (!_hasRewardedAdUnit) return;
     try {
       await RewardedAd.load(
         adUnitId: rewardedAdUnitId,
