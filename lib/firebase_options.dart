@@ -40,6 +40,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1234567890',
     projectId: 'cynora-focus',
     storageBucket: 'cynora-focus.appspot.com',
-    iosBundleId: 'com.cynora.cynoraFocus',
+    iosBundleId: 'com.studycafe.pomodoro',
   );
 }

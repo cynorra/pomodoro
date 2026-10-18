@@ -1,4 +1,4 @@
-package com.cynora.cynora_focus
+package com.studycafe.pomodoro
 
 import io.flutter.embedding.android.FlutterActivity
 
