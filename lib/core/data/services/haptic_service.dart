@@ -6,7 +6,7 @@ class HapticService {
   static Future<void> sessionComplete() async {
     try {
       if (Platform.isAndroid) {
-        if (await Vibration.hasVibrator() ?? false) {
+        if (await Vibration.hasVibrator()) {
           await Vibration.vibrate(pattern: [0, 100, 50, 100]);
         }
       } else {
@@ -22,7 +22,7 @@ class HapticService {
   static Future<void> purchaseSuccess() async {
     try {
       if (Platform.isAndroid) {
-        if (await Vibration.hasVibrator() ?? false) {
+        if (await Vibration.hasVibrator()) {
           await Vibration.vibrate(duration: 50);
         }
       } else {
@@ -36,7 +36,7 @@ class HapticService {
   static Future<void> insufficientPoints() async {
     try {
       if (Platform.isAndroid) {
-        if (await Vibration.hasVibrator() ?? false) {
+        if (await Vibration.hasVibrator()) {
           await Vibration.vibrate(pattern: [0, 200]);
         }
       } else {
