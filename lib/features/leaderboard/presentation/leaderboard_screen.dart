@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
+import '../../../l10n/l10n_extension.dart';
 
 const _rankAvatars = ['🥇', '🥈', '🥉'];
 
@@ -47,7 +48,7 @@ class LeaderboardScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Global Sıralama',
+          context.l10n.leaderboard,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -57,16 +58,16 @@ class LeaderboardScreen extends ConsumerWidget {
           child: CircularProgressIndicator(color: ZyraColors.primary),
         ),
         error: (_, __) => _Message(
-          text: 'Sıralama yüklenemedi',
-          actionLabel: 'Tekrar dene',
+          text: context.l10n.leaderboardLoadFailed,
+          actionLabel: context.l10n.tryAgain,
           onAction: () => ref.invalidate(_leaderboardProvider),
         ),
         data: (list) {
           if (list.isEmpty) {
             return _Message(
               text: signedIn
-                  ? 'Henüz sıralamada kimse yok'
-                  : 'Sıralamaya katılmak için giriş yap',
+                  ? context.l10n.leaderboardEmpty
+                  : context.l10n.leaderboardSignInPrompt,
             );
           }
           return Column(
@@ -180,7 +181,7 @@ class _PodiumItem extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          '${entry.points} pts',
+          context.l10n.pointsCount(entry.points),
           style: ZyraTypography.labelSmall.copyWith(
             color: _color,
             fontWeight: FontWeight.bold,
@@ -275,7 +276,7 @@ class _LeaderboardTile extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '🔥 ${entry.streak} gün seri',
+                  context.l10n.streakDays(entry.streak),
                   style: ZyraTypography.labelSmall.copyWith(
                     color: ZyraColors.onSurface.withOpacity(0.6),
                   ),

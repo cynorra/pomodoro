@@ -41,7 +41,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = AuthState.loading();
     final result = await AuthService.signIn(email: email, password: password);
     if (!result.isSuccess) {
-      state = AuthState.error(result.errorMessage ?? 'Giriş yapılamadı');
+      state = AuthState.error(result.errorMessage ?? 'sign-in-failed');
     }
     return result;
   }
@@ -58,7 +58,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       displayName: displayName,
     );
     if (!result.isSuccess) {
-      state = AuthState.error(result.errorMessage ?? 'Kayıt yapılamadı');
+      state = AuthState.error(result.errorMessage ?? 'sign-up-failed');
     }
     return result;
   }
@@ -74,7 +74,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     if (result.isSuccess) {
       state = AuthState.unauthenticated();
     } else {
-      state = AuthState.error(result.errorMessage ?? 'Hesap silinemedi');
+      state = AuthState.error(result.errorMessage ?? 'delete-failed');
     }
     return result;
   }

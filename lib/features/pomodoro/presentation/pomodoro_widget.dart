@@ -18,13 +18,13 @@ class PomodoroWidget extends ConsumerWidget {
     String sessionLabel;
     switch (state.sessionType) {
       case SessionType.focus:
-        sessionLabel = l10n?.deepFocus ?? 'Derin Odak';
+        sessionLabel = l10n.deepFocus;
         break;
       case SessionType.shortBreak:
-        sessionLabel = l10n?.cafeBreak ?? 'Kafe Molası';
+        sessionLabel = l10n.cafeBreak;
         break;
       case SessionType.longBreak:
-        sessionLabel = l10n?.longBreak ?? 'Uzun Mola';
+        sessionLabel = l10n.longBreak;
         break;
     }
 
@@ -45,8 +45,8 @@ class PomodoroWidget extends ConsumerWidget {
             Semantics(
               button: true,
               label: state.isRunning
-                  ? (l10n?.pauseTimer ?? 'Zamanlayıcıyı duraklat')
-                  : (l10n?.startTimer ?? 'Zamanlayıcıyı başlat'),
+                  ? (l10n.pauseTimer)
+                  : (l10n.startTimer),
               child: GestureDetector(
                 onTapUp: (_) => notifier.toggleTimer(),
                 child: Container(
@@ -67,8 +67,8 @@ class PomodoroWidget extends ConsumerWidget {
                   ),
                   child: Text(
                     state.isRunning
-                        ? (l10n?.pause ?? 'Duraklat')
-                        : (l10n?.start ?? 'Başlat'),
+                        ? (l10n.pause)
+                        : (l10n.start),
                     style: ZyraTypography.labelLarge.copyWith(
                       color: ZyraColors.onPrimary,
                     ),

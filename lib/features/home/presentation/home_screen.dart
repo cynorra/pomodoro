@@ -122,7 +122,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     setState(() => _showConfetti = true);
 
     final l10n = AppLocalizations.of(context);
-    final isTr = l10n?.localeName == 'tr';
+    final isTr = l10n.localeName == 'tr';
 
     showDialog(
       context: context,
@@ -147,7 +147,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                l10n?.achievementUnlocked ?? 'Rozet Kazandın!',
+                l10n.achievementUnlocked,
                 style: ZyraTypography.headlineMedium.copyWith(
                   color: ZyraColors.primary,
                 ),
@@ -164,7 +164,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               TextButton(
                 onPressed: () => Navigator.pop(dialogContext),
                 child: Text(
-                  l10n?.awesome ?? 'Harika!',
+                  l10n.awesome,
                   style: ZyraTypography.labelLarge.copyWith(
                     color: ZyraColors.primary,
                   ),
@@ -182,7 +182,7 @@ class _TopHeader extends StatelessWidget {
   final int totalPoints;
   final int totalMinutes;
   final int currentStreak;
-  final AppLocalizations? l10n;
+  final AppLocalizations l10n;
 
   const _TopHeader({
     required this.totalPoints,
@@ -260,7 +260,7 @@ class _TopHeader extends StatelessWidget {
 }
 
 class _MotivationCard extends StatelessWidget {
-  final AppLocalizations? l10n;
+  final AppLocalizations l10n;
 
   const _MotivationCard({required this.l10n});
 
@@ -287,7 +287,7 @@ class _MotivationCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                l10n?.dailyMotivation ?? 'Günün Motivasyonu',
+                l10n.dailyMotivation,
                 style: ZyraTypography.titleMedium.copyWith(
                   color: ZyraColors.primary,
                 ),
@@ -296,8 +296,7 @@ class _MotivationCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            l10n?.motivationText ??
-                'Başarı, her gün tekrarlanan küçük çabaların toplamıdır. Bugün bir adım daha at! 🚀',
+            l10n.motivationText,
             style: ZyraTypography.bodyMedium.copyWith(
               color: ZyraColors.onSurface.withOpacity(0.8),
               height: 1.5,

@@ -6,7 +6,10 @@ import '../../../core/data/services/auth_service.dart';
 import '../../../core/data/models/auth_status.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import 'auth_notifier.dart';
+import 'auth_state.dart';
 import 'signup_screen.dart';
+import '../../../l10n/l10n_extension.dart';
+import 'auth_error_text.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -32,6 +35,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
     final l10n = AppLocalizations.of(context);
+
+    ref.listen<AuthState>(authProvider, (previous, next) {
+      if (next.status == AuthStatus.authenticated && mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    });
 
     return Scaffold(
       backgroundColor: ZyraColors.background,
@@ -67,7 +76,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  l10n?.appTitle ?? 'YKS Pomodoro & Sanal Cafe',
+                  l10n.appTitle,
                   style: ZyraTypography.bodyMedium.copyWith(
                     color: ZyraColors.onSurface.withOpacity(0.6),
                   ),
@@ -79,7 +88,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: false,
                   decoration: InputDecoration(
-                    labelText: l10n?.email ?? 'Email',
+                    labelText: l10n.email,
                     prefixIcon: const Icon(Icons.email_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -87,10 +96,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Email gerekli';
+                      return context.l10n.emailRequired;
                     }
                     if (!value.contains('@')) {
-                      return 'Geçerli bir email girin';
+                      return context.l10n.emailInvalid;
                     }
                     return null;
                   },
@@ -100,7 +109,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   controller: _passwordController,
                   obscureText: _obscurePassword,
                   decoration: InputDecoration(
-                    labelText: l10n?.password ?? 'Şifre',
+                    labelText: l10n.password,
                     prefixIcon: const Icon(Icons.lock_outlined),
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -118,10 +127,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Şifre gerekli';
+                      return context.l10n.passwordRequired;
                     }
                     if (value.length < 6) {
-                      return 'Şifre en az 6 karakter olmalı';
+                      return context.l10n.passwordTooShort;
                     }
                     return null;
                   },
@@ -132,7 +141,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: TextButton(
                     onPressed: _showPasswordResetDialog,
                     child: Text(
-                      l10n?.forgotPassword ?? 'Şifremi unuttum',
+                      l10n.forgotPassword,
                       style: ZyraTypography.labelLarge.copyWith(
                         color: ZyraColors.primary,
                       ),
@@ -151,7 +160,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       border: Border.all(color: Colors.red.withOpacity(0.3)),
                     ),
                     child: Text(
-                      authState.errorMessage ?? 'Bilinmeyen hata',
+                      authErrorText(context.l10n, authState.errorMessage),
                       style: const TextStyle(color: Colors.redAccent),
                       textAlign: TextAlign.center,
                     ),
@@ -161,8 +170,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ? null
                       : _handleLogin,
                   label: authState.status == AuthStatus.loading
-                      ? 'Giriş yapılıyor...'
-                      : (l10n?.login ?? 'Giriş Yap'),
+                      ? context.l10n.signingIn
+                      : (l10n.login),
                 ),
                 const SizedBox(height: 16),
                 TextButton(
@@ -175,7 +184,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     );
                   },
                   child: Text(
-                    l10n?.noAccountSignup ?? 'Hesabın yok mu? Kayıt ol',
+                    l10n.noAccountSignup,
                     style: ZyraTypography.labelLarge.copyWith(
                       color: ZyraColors.primary,
                     ),
@@ -184,14 +193,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 const SizedBox(height: 24),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (_) => const _GuestHomeEntry(),
-                      ),
-                    );
+                    Navigator.of(context).maybePop();
                   },
                   child: Text(
-                    'Misafir olarak devam et',
+                    context.l10n.continueAsGuest,
                     style: ZyraTypography.labelLarge.copyWith(
                       color: ZyraColors.onSurface.withOpacity(0.6),
                     ),
@@ -204,7 +209,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        l10n?.privacyPolicy ?? 'Gizlilik',
+                        l10n.privacyPolicy,
                         style: ZyraTypography.labelSmall.copyWith(
                           color: ZyraColors.onSurface.withOpacity(0.6),
                         ),
@@ -214,7 +219,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        l10n?.termsOfService ?? 'Kullanım Şartları',
+                        l10n.termsOfService,
                         style: ZyraTypography.labelSmall.copyWith(
                           color: ZyraColors.onSurface.withOpacity(0.6),
                         ),
@@ -247,7 +252,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       builder: (dialogContext) => AlertDialog(
         backgroundColor: ZyraColors.surface,
         title: Text(
-          'Şifre Sıfırla',
+          context.l10n.resetPasswordTitle,
           style: ZyraTypography.titleMedium.copyWith(
             color: ZyraColors.onSurface,
           ),
@@ -255,12 +260,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         content: TextFormField(
           controller: emailController,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(labelText: 'Email adresiniz'),
+          decoration: InputDecoration(labelText: context.l10n.yourEmailAddress),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('İptal'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -273,13 +278,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 SnackBar(
                   content: Text(
                     result.isSuccess
-                        ? 'Sıfırlama emaili gönderildi'
-                        : (result.errorMessage ?? 'Hata'),
+                        ? context.l10n.resetEmailSent
+                        : authErrorText(context.l10n, result.errorMessage),
                   ),
                 ),
               );
             },
-            child: const Text('Gönder'),
+            child: Text(context.l10n.send),
           ),
         ],
       ),
@@ -287,15 +292,3 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 }
 
-class _GuestHomeEntry extends StatelessWidget {
-  const _GuestHomeEntry();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('HomeScreen buraya gelecek'),
-      ),
-    );
-  }
-}

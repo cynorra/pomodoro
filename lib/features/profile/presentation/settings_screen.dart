@@ -18,7 +18,7 @@ class SettingsScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.settings ?? 'Ayarlar',
+          l10n.settings,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -29,7 +29,7 @@ class SettingsScreen extends ConsumerWidget {
           children: [
             _SettingsTile(
               icon: Icons.language_rounded,
-              title: l10n?.language ?? 'Dil',
+              title: l10n.language,
               trailing: DropdownButton<Locale>(
                 value: _isValidLocale(currentLocale) ? currentLocale : const Locale('tr'),
                 dropdownColor: ZyraColors.surface,
@@ -40,11 +40,11 @@ class SettingsScreen extends ConsumerWidget {
                 items: [
                   DropdownMenuItem(
                     value: const Locale('tr'),
-                    child: Text(l10n?.turkish ?? 'Türkçe'),
+                    child: Text(l10n.turkish),
                   ),
                   DropdownMenuItem(
                     value: const Locale('en'),
-                    child: Text(l10n?.english ?? 'English'),
+                    child: Text(l10n.english),
                   ),
                 ],
                 onChanged: (locale) {

@@ -6,6 +6,8 @@ import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../core/data/services/auth_service.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/presentation/auth_notifier.dart';
+import '../../../l10n/l10n_extension.dart';
+import '../../auth/presentation/auth_error_text.dart';
 
 class AccountDeletionScreen extends ConsumerStatefulWidget {
   const AccountDeletionScreen({super.key});
@@ -29,7 +31,7 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.deleteAccount ?? 'Hesabı Sil',
+          l10n.deleteAccount,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -47,7 +49,7 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               ),
               const SizedBox(height: 24),
               Text(
-                'Hesabını silmek istediğinden emin misin?',
+                context.l10n.deleteConfirmTitle,
                 style: ZyraTypography.headlineMedium.copyWith(
                   color: ZyraColors.onSurface,
                 ),
@@ -55,28 +57,28 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                'Bu işlem geri alınamaz. Tüm verilerin kalıcı olarak silinecek:',
+                context.l10n.deleteIrreversible,
                 style: ZyraTypography.bodyMedium.copyWith(
                   color: ZyraColors.onSurface.withOpacity(0.7),
                 ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              const _DeletionItem(
+              _DeletionItem(
                 icon: Icons.data_usage_outlined,
-                text: 'Tüm çalışma verilerin',
+                text: context.l10n.deleteItemStudy,
               ),
-              const _DeletionItem(
+              _DeletionItem(
                 icon: Icons.emoji_events_outlined,
-                text: 'Kazandığın rozetler ve puanlar',
+                text: context.l10n.deleteItemBadges,
               ),
-              const _DeletionItem(
+              _DeletionItem(
                 icon: Icons.local_fire_department_outlined,
-                text: 'Streak kayıtların',
+                text: context.l10n.deleteItemStreak,
               ),
-              const _DeletionItem(
+              _DeletionItem(
                 icon: Icons.coffee_outlined,
-                text: 'Sanal kafe envanterin',
+                text: context.l10n.deleteItemCafe,
               ),
               const SizedBox(height: 32),
               Row(
@@ -90,7 +92,7 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      'Hesabımın kalıcı olarak silinmesini onaylıyorum',
+                      context.l10n.deleteConfirmCheckbox,
                       style: ZyraTypography.bodyMedium.copyWith(
                         color: ZyraColors.onSurface,
                       ),
@@ -102,8 +104,8 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               JellyButton(
                 onPressed: _confirmed && !_isLoading ? _handleDelete : null,
                 label: _isLoading
-                    ? 'Hesap siliniyor...'
-                    : 'Hesabı Kalıcı Olarak Sil',
+                    ? context.l10n.deleting
+                    : context.l10n.deleteAccountPermanently,
                 backgroundColor: _confirmed
                     ? Colors.redAccent
                     : Colors.redAccent.withOpacity(0.5),
@@ -111,7 +113,7 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                'Buton çalışmıyorsa web üzerinden silebilirsin:',
+                context.l10n.deleteWebHint,
                 style: ZyraTypography.bodyMedium.copyWith(
                   color: ZyraColors.onSurface.withOpacity(0.6),
                 ),
@@ -163,8 +165,8 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
 
     if (result.isSuccess) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Hesabın başarıyla silindi'),
+        SnackBar(
+          content: Text(context.l10n.accountDeleted),
           backgroundColor: Colors.green,
         ),
       );
@@ -174,7 +176,7 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(result.errorMessage ?? 'Hesap silinemedi'),
+          content: Text(authErrorText(context.l10n, result.errorMessage)),
           backgroundColor: Colors.red,
         ),
       );
@@ -192,29 +194,29 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
       barrierDismissible: false,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: ZyraColors.surface,
-        title: const Text('Güvenlik Doğrulaması'),
+        title: Text(context.l10n.securityCheck),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Hesap silme için şifrenizi tekrar girin'),
+            Text(context.l10n.reauthPrompt),
             const SizedBox(height: 16),
             TextField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(labelText: context.l10n.email),
             ),
             const SizedBox(height: 8),
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Şifre'),
+              decoration: InputDecoration(labelText: context.l10n.password),
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('İptal'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -223,7 +225,7 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               if (email.isEmpty || password.isEmpty) return;
               Navigator.pop(dialogContext, (email, password));
             },
-            child: const Text('Doğrula'),
+            child: Text(context.l10n.verify),
           ),
         ],
       ),

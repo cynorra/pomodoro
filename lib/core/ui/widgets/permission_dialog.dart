@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../zyra_theme.dart';
 import 'jelly_button.dart';
+import '../../../l10n/l10n_extension.dart';
 
 class PermissionDialog extends StatelessWidget {
   final String title;
@@ -68,7 +69,7 @@ class PermissionDialog extends StatelessWidget {
                 Navigator.of(context).pop();
                 onAllow();
               },
-              label: 'İzin Ver',
+              label: context.l10n.allow,
             ),
             if (onDeny != null) ...[
               const SizedBox(height: 8),

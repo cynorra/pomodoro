@@ -39,7 +39,7 @@ class AuthService {
       return AuthResult.error(_mapAuthError(e.code));
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'Sign up failed');
-      return AuthResult.error('Bilinmeyen bir hata oluştu');
+      return AuthResult.error('unknown');
     }
   }
 
@@ -58,7 +58,7 @@ class AuthService {
       return AuthResult.error(_mapAuthError(e.code));
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'Sign in failed');
-      return AuthResult.error('Bilinmeyen bir hata oluştu');
+      return AuthResult.error('unknown');
     }
   }
 
@@ -77,7 +77,7 @@ class AuthService {
     try {
       final user = _auth.currentUser;
       if (user == null) {
-        return AuthResult.error('Kullanıcı bulunamadı');
+        return AuthResult.error('user-not-found');
       }
 
       if (email != null && password != null) {
@@ -99,10 +99,10 @@ class AuthService {
       if (e.code == 'requires-recent-login') {
         return AuthResult.error('requires-recent-login');
       }
-      return AuthResult.error('Hesap silme başarısız');
+      return AuthResult.error('delete-failed');
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'Delete account failed');
-      return AuthResult.error('Hesap silme başarısız');
+      return AuthResult.error('delete-failed');
     }
   }
 
@@ -114,7 +114,7 @@ class AuthService {
       return AuthResult.error(_mapAuthError(e.code));
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'Password reset failed');
-      return AuthResult.error('Email gönderilemedi');
+      return AuthResult.error('reset-failed');
     }
   }
 
@@ -125,19 +125,21 @@ class AuthService {
   static String _mapAuthError(String code) {
     switch (code) {
       case 'email-already-in-use':
-        return 'Bu email zaten kullanımda';
+        return 'email-already-in-use';
       case 'invalid-email':
-        return 'Geçersiz email adresi';
+        return 'invalid-email';
       case 'weak-password':
-        return 'Şifre çok zayıf (en az 6 karakter)';
+        return 'weak-password';
       case 'user-not-found':
-        return 'Kullanıcı bulunamadı';
+        return 'user-not-found';
       case 'wrong-password':
-        return 'Yanlış şifre';
+      case 'invalid-credential':
+      case 'invalid-login-credentials':
+        return 'wrong-password';
       case 'too-many-requests':
-        return 'Çok fazla deneme. Lütfen sonra tekrar deneyin';
+        return 'too-many-requests';
       default:
-        return 'Bir hata oluştu';
+        return 'generic';
     }
   }
 }

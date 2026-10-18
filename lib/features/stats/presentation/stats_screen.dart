@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import 'stats_provider.dart';
+import '../../../l10n/l10n_extension.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({super.key});
@@ -24,7 +25,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.statistics ?? 'İstatistikler',
+          l10n.statistics,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -89,17 +90,17 @@ class _FilterSelector extends StatelessWidget {
       child: Row(
         children: [
           _FilterButton(
-            label: l10n?.week ?? 'Hafta',
+            label: l10n.week,
             isSelected: selected == StatsFilter.week,
             onTap: () => onSelected(StatsFilter.week),
           ),
           _FilterButton(
-            label: l10n?.month ?? 'Ay',
+            label: l10n.month,
             isSelected: selected == StatsFilter.month,
             onTap: () => onSelected(StatsFilter.month),
           ),
           _FilterButton(
-            label: l10n?.allTime ?? 'Tümü',
+            label: l10n.allTime,
             isSelected: selected == StatsFilter.allTime,
             onTap: () => onSelected(StatsFilter.allTime),
           ),
@@ -200,7 +201,7 @@ class _SummaryCards extends ConsumerWidget {
               child: _SummaryCard(
                 icon: Icons.timer_outlined,
                 value: '${(totalMinutes / 60).toStringAsFixed(1)}',
-                unit: l10n?.hours ?? 'Saat',
+                unit: l10n.hours,
                 color: ZyraColors.primary,
               ),
             ),
@@ -209,7 +210,7 @@ class _SummaryCards extends ConsumerWidget {
               child: _SummaryCard(
                 icon: Icons.stars_rounded,
                 value: '$totalPoints',
-                unit: l10n?.points ?? 'Puan',
+                unit: l10n.points,
                 color: ZyraColors.secondary,
               ),
             ),
@@ -218,7 +219,7 @@ class _SummaryCards extends ConsumerWidget {
               child: _SummaryCard(
                 icon: Icons.check_circle_outline,
                 value: '$sessionsCompleted',
-                unit: l10n?.sessions ?? 'Seans',
+                unit: l10n.sessions,
                 color: ZyraColors.primary,
               ),
             ),
@@ -230,7 +231,7 @@ class _SummaryCards extends ConsumerWidget {
       ),
       error: (err, stack) => Center(
         child: Text(
-          l10n?.somethingWentWrong ?? 'Hata',
+          l10n.somethingWentWrong,
           style: const TextStyle(color: Colors.red),
         ),
       ),
@@ -326,7 +327,7 @@ class _WeeklyChart extends ConsumerWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Henüz çalışma verisi yok',
+                    context.l10n.noStudyData,
                     style: ZyraTypography.bodyMedium.copyWith(
                       color: ZyraColors.onSurface.withOpacity(0.6),
                     ),
@@ -395,7 +396,7 @@ class _WeeklyChart extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n?.weeklyChart ?? 'Haftalık Çalışma Grafiği',
+                l10n.weeklyChart,
                 style: ZyraTypography.titleMedium.copyWith(
                   color: ZyraColors.onSurface,
                 ),
@@ -429,15 +430,15 @@ class _WeeklyChart extends ConsumerWidget {
     );
   }
 
-  List<String> _getDayNames(AppLocalizations? l10n) {
+  List<String> _getDayNames(AppLocalizations l10n) {
     return [
-      l10n?.dayMonday ?? 'Mon',
-      l10n?.dayTuesday ?? 'Tue',
-      l10n?.dayWednesday ?? 'Wed',
-      l10n?.dayThursday ?? 'Thu',
-      l10n?.dayFriday ?? 'Fri',
-      l10n?.daySaturday ?? 'Sat',
-      l10n?.daySunday ?? 'Sun',
+      l10n.dayMonday,
+      l10n.dayTuesday,
+      l10n.dayWednesday,
+      l10n.dayThursday,
+      l10n.dayFriday,
+      l10n.daySaturday,
+      l10n.daySunday,
     ];
   }
 }
@@ -504,7 +505,7 @@ class _BarChartItem extends StatelessWidget {
 }
 
 class _AchievementBadges extends StatelessWidget {
-  final AppLocalizations? l10n;
+  final AppLocalizations l10n;
 
   const _AchievementBadges({required this.l10n});
 
@@ -513,18 +514,18 @@ class _AchievementBadges extends StatelessWidget {
     final badges = [
       {
         'icon': '🔥',
-        'title': l10n?.threeDayStreak ?? '3 Gün Seri',
-        'description': l10n?.threeDayStreakDesc ?? 'Üst üste 3 gün çalış'
+        'title': l10n.threeDayStreak,
+        'description': l10n.threeDayStreakDesc
       },
       {
         'icon': '⭐',
-        'title': l10n?.first100Points ?? 'İlk 100 Puan',
-        'description': l10n?.first100PointsDesc ?? '100 puan topla'
+        'title': l10n.first100Points,
+        'description': l10n.first100PointsDesc
       },
       {
         'icon': '🎯',
-        'title': l10n?.focusMaster ?? 'Odak Ustası',
-        'description': l10n?.focusMasterDesc ?? '10 seans tamamla'
+        'title': l10n.focusMaster,
+        'description': l10n.focusMasterDesc
       },
     ];
 
@@ -542,7 +543,7 @@ class _AchievementBadges extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n?.achievementBadges ?? 'Başarı Rozetleri',
+            l10n.achievementBadges,
             style: ZyraTypography.titleMedium.copyWith(
               color: ZyraColors.onSurface,
             ),

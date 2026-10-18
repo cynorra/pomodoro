@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../l10n/l10n_extension.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -16,7 +17,7 @@ class HelpScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.help ?? 'Yardım',
+          l10n.help,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -25,39 +26,34 @@ class HelpScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: [
           _FaqItem(
-            question: 'Pomodoro tekniği nedir?',
+            question: context.l10n.faqPomodoroQ,
             answer:
-                '25 dakika odaklanma, 5 dakika mola prensibine dayalı verimli çalışma yöntemidir. Her 4 seans sonrası 15-30 dakika uzun mola verilir.',
+                context.l10n.faqPomodoroA,
           ),
           _FaqItem(
-            question: 'Puanlarımı nasıl kazanırım?',
+            question: context.l10n.faqPointsQ,
             answer:
-                'Her tamamlanan Pomodoro seansı için 10 puan, molalar için 2 puan kazanırsın. Reklam izleyerek de +50 puan kazanabilirsin.',
+                context.l10n.faqPointsA,
           ),
           _FaqItem(
-            question: 'Sanal kafede ne yapabilirim?',
+            question: context.l10n.faqCafeQ,
             answer:
-                'Kazandığın puanlarla kahve, çay, tatlı gibi sanal ürünler alabilir, ortam sesleri ile çalışma atmosferini özelleştirebilirsin.',
+                context.l10n.faqCafeA,
           ),
           _FaqItem(
-            question: 'Streak (seri) nasıl korunur?',
+            question: context.l10n.faqStreakQ,
             answer:
-                'Her gün en az bir Pomodoro seansı tamamlarsan serin devam eder. Bir gün atlarsan seri sıfırlanır.',
+                context.l10n.faqStreakA,
           ),
           _FaqItem(
-            question: 'Verilerim güvende mi?',
+            question: context.l10n.faqDataQ,
             answer:
-                'Tüm verilerin cihazında şifrelenmiş olarak saklanır. Cloud sync için giriş yapman gerekir. Gizlilik politikamızı okuyabilirsin.',
+                context.l10n.faqDataA,
           ),
           _FaqItem(
-            question: 'Premium ne sağlar?',
+            question: context.l10n.faqDeleteQ,
             answer:
-                'Reklamsız deneyim, 50+ premium ortam sesi, özel temalar, global leaderboard ve öncelikli destek.',
-          ),
-          _FaqItem(
-            question: 'Hesabımı nasıl silerim?',
-            answer:
-                'Profil → Hesabı Sil menüsünden veya cynora.com/delete-account adresinden hesabını kalıcı olarak silebilirsin.',
+                context.l10n.faqDeleteA,
           ),
           const SizedBox(height: 24),
           Container(
@@ -73,14 +69,14 @@ class HelpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Başka sorunun mu var?',
+                  context.l10n.helpMoreQuestions,
                   style: ZyraTypography.titleMedium.copyWith(
                     color: ZyraColors.primary,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Bize ulaş: support@cynora.com',
+                  context.l10n.contactUs('support@cynora.com'),
                   style: ZyraTypography.bodyMedium.copyWith(
                     color: ZyraColors.onSurface,
                   ),
@@ -90,7 +86,7 @@ class HelpScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _LinkButton(
-                        label: 'Gizlilik Politikası',
+                        label: context.l10n.privacyPolicy,
                         onTap: () =>
                             _launchUrl('https://cynora.com/privacy'),
                       ),
@@ -98,7 +94,7 @@ class HelpScreen extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: _LinkButton(
-                        label: 'Kullanım Şartları',
+                        label: context.l10n.termsOfService,
                         onTap: () =>
                             _launchUrl('https://cynora.com/terms'),
                       ),

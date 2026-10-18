@@ -19,7 +19,7 @@ class AchievementsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final achievementsAsync = ref.watch(achievementsProvider);
-    final isTr = l10n?.localeName == 'tr';
+    final isTr = l10n.localeName == 'tr';
 
     return Scaffold(
       backgroundColor: ZyraColors.background,
@@ -27,7 +27,7 @@ class AchievementsScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.achievementBadges ?? 'Başarı Rozetleri',
+          l10n.achievementBadges,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -83,7 +83,7 @@ class AchievementsScreen extends ConsumerWidget {
         ),
         error: (err, stack) => Center(
           child: Text(
-            l10n?.somethingWentWrong ?? 'Hata',
+            l10n.somethingWentWrong,
             style: const TextStyle(color: Colors.red),
           ),
         ),
@@ -95,7 +95,7 @@ class AchievementsScreen extends ConsumerWidget {
 class _ProgressHeader extends StatelessWidget {
   final int unlocked;
   final int total;
-  final AppLocalizations? l10n;
+  final AppLocalizations l10n;
 
   const _ProgressHeader({
     required this.unlocked,
@@ -127,7 +127,7 @@ class _ProgressHeader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    l10n?.progress ?? 'İlerleme',
+                    l10n.progress,
                     style: ZyraTypography.titleMedium.copyWith(
                       color: ZyraColors.onSurface,
                     ),
@@ -173,7 +173,7 @@ class _AchievementCard extends StatelessWidget {
   final Achievement achievement;
   final bool isTr;
   final int index;
-  final AppLocalizations? l10n;
+  final AppLocalizations l10n;
 
   const _AchievementCard({
     required this.achievement,
@@ -275,8 +275,8 @@ class _AchievementCard extends StatelessWidget {
         .slideY(begin: 0.2, end: 0, duration: 400.ms);
   }
 
-  String _formatDate(DateTime date, AppLocalizations? l10n) {
-    final isTr = l10n?.localeName == 'tr';
+  String _formatDate(DateTime date, AppLocalizations l10n) {
+    final isTr = l10n.localeName == 'tr';
     if (isTr) {
       return '${date.day}/${date.month}/${date.year}';
     } else {

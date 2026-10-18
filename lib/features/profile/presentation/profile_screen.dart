@@ -6,12 +6,14 @@ import '../../../core/data/state/user_notifier.dart';
 import '../../../core/data/state/streak_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/presentation/auth_notifier.dart';
+import '../../auth/presentation/login_screen.dart';
 import '../../leaderboard/presentation/leaderboard_screen.dart';
 import 'account_deletion_screen.dart';
 import 'settings_screen.dart';
 import '../../achievements/presentation/achievements_screen.dart';
 import '../../help/presentation/help_screen.dart';
 import '../../social/presentation/invite_friends_screen.dart';
+import '../../../l10n/l10n_extension.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -29,7 +31,7 @@ class ProfileScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.profile ?? 'Profil',
+          l10n.profile,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -52,8 +54,8 @@ class ProfileScreen extends ConsumerWidget {
         child: Column(
           children: [
             _ProfileCard(
-              displayName: authState.userDisplayName ?? 'Misafir',
-              email: authState.userEmail ?? 'Giriş yapılmadı',
+              displayName: authState.userDisplayName ?? context.l10n.guestName,
+              email: authState.userEmail ?? context.l10n.notSignedIn,
               isAuthenticated:
                   authState.status == AuthStatus.authenticated,
             ),
@@ -70,7 +72,7 @@ class ProfileScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             _MenuItem(
               icon: Icons.leaderboard_outlined,
-              title: 'Global Sıralama',
+              title: context.l10n.leaderboard,
               onTap: () {
                 Navigator.push(
                   context,
@@ -83,7 +85,7 @@ class ProfileScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             _MenuItem(
               icon: Icons.emoji_events_outlined,
-              title: l10n?.achievements ?? 'Başarılar',
+              title: l10n.achievements,
               onTap: () {
                 Navigator.push(
                   context,
@@ -95,7 +97,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
             _MenuItem(
               icon: Icons.share_outlined,
-              title: l10n?.inviteFriends ?? 'Arkadaş Davet Et',
+              title: l10n.inviteFriends,
               onTap: () {
                 Navigator.push(
                   context,
@@ -107,7 +109,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
             _MenuItem(
               icon: Icons.help_outline,
-              title: l10n?.help ?? 'Yardım',
+              title: l10n.help,
               onTap: () {
                 Navigator.push(
                   context,
@@ -119,26 +121,26 @@ class ProfileScreen extends ConsumerWidget {
             ),
             _MenuItem(
               icon: Icons.policy_outlined,
-              title: l10n?.privacyPolicy ?? 'Gizlilik Politikası',
+              title: l10n.privacyPolicy,
               onTap: () {},
             ),
             _MenuItem(
               icon: Icons.description_outlined,
-              title: l10n?.termsOfService ?? 'Kullanım Şartları',
+              title: l10n.termsOfService,
               onTap: () {},
             ),
             const SizedBox(height: 16),
             if (authState.status == AuthStatus.authenticated) ...[
               _MenuItem(
                 icon: Icons.logout,
-                title: l10n?.logout ?? 'Çıkış Yap',
+                title: l10n.logout,
                 textColor: Colors.redAccent,
                 onTap: () => _showLogoutDialog(context, ref),
               ),
               const SizedBox(height: 8),
               _MenuItem(
                 icon: Icons.delete_forever_outlined,
-                title: l10n?.deleteAccount ?? 'Hesabı Sil',
+                title: l10n.deleteAccount,
                 textColor: Colors.redAccent,
                 onTap: () {
                   Navigator.push(
@@ -152,9 +154,14 @@ class ProfileScreen extends ConsumerWidget {
             ] else ...[
               _MenuItem(
                 icon: Icons.login,
-                title: 'Giriş Yap / Kayıt Ol',
+                title: context.l10n.signInOrSignUp,
                 textColor: ZyraColors.primary,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const LoginScreen()),
+                  );
+                },
               ),
             ],
           ],
@@ -168,21 +175,21 @@ class ProfileScreen extends ConsumerWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: ZyraColors.surface,
-        title: const Text('Çıkış Yap'),
-        content: const Text('Çıkış yapmak istediğine emin misin?'),
+        title: Text(context.l10n.logout),
+        content: Text(context.l10n.logoutConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('İptal'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
               Navigator.pop(dialogContext);
               await ref.read(authProvider.notifier).signOut();
             },
-            child: const Text(
-              'Çıkış Yap',
-              style: TextStyle(color: Colors.redAccent),
+            child: Text(
+              context.l10n.logout,
+              style: const TextStyle(color: Colors.redAccent),
             ),
           ),
         ],
@@ -280,7 +287,7 @@ class _StatsGrid extends StatelessWidget {
           child: _StatCard(
             icon: Icons.stars_rounded,
             value: '$totalPoints',
-            label: 'Puan',
+            label: context.l10n.points,
             color: ZyraColors.primary,
           ),
         ),
@@ -289,7 +296,7 @@ class _StatsGrid extends StatelessWidget {
           child: _StatCard(
             icon: Icons.timer_outlined,
             value: '${(totalMinutes / 60).toStringAsFixed(1)}',
-            label: 'Saat',
+            label: context.l10n.hours,
             color: ZyraColors.secondary,
           ),
         ),
@@ -298,7 +305,7 @@ class _StatsGrid extends StatelessWidget {
           child: _StatCard(
             icon: Icons.local_fire_department_rounded,
             value: '$currentStreak',
-            label: 'Gün',
+            label: context.l10n.days,
             color: Colors.orange,
           ),
         ),

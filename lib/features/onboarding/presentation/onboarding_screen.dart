@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../l10n/l10n_extension.dart';
 import '../../home/presentation/main_shell.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
@@ -18,26 +19,23 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   int _currentPage = 0;
   final _storage = const FlutterSecureStorage();
 
-  static const _pages = [
+  List<_OnboardingPage> _pages(BuildContext context) => [
     _OnboardingPage(
       icon: Icons.timer_rounded,
-      title: 'Odaklan',
-      description:
-          'Pomodoro tekniği ile verimli çalış. 25 dakika odak, 5 dakika mola.',
+      title: context.l10n.onboardFocusTitle,
+      description: context.l10n.onboardFocusBody,
       color: ZyraColors.primary,
     ),
     _OnboardingPage(
       icon: Icons.coffee_rounded,
-      title: 'Kazan',
-      description:
-          'Her seans sonunda puan kazan. Sanal kafende kahve, çay, tatlı al.',
+      title: context.l10n.onboardEarnTitle,
+      description: context.l10n.onboardEarnBody,
       color: ZyraColors.secondary,
     ),
     _OnboardingPage(
       icon: Icons.emoji_events_rounded,
-      title: 'Başar',
-      description:
-          'Rozetler kazan, serini koru, istatistiklerini takip et.',
+      title: context.l10n.onboardAchieveTitle,
+      description: context.l10n.onboardAchieveBody,
       color: Colors.orange,
     ),
   ];
@@ -80,12 +78,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
-                itemCount: _pages.length,
+                itemCount: _pages(context).length,
                 onPageChanged: (index) {
                   setState(() => _currentPage = index);
                 },
                 itemBuilder: (context, index) {
-                  final page = _pages[index];
+                  final page = _pages(context)[index];
                   return Padding(
                     padding: const EdgeInsets.all(32),
                     child: Column(
@@ -134,7 +132,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                _pages.length,
+                _pages(context).length,
                 (index) => Container(
                   width: _currentPage == index ? 24 : 8,
                   height: 8,
@@ -153,7 +151,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: JellyButton(
                 onPressed: () {
-                  if (_currentPage == _pages.length - 1) {
+                  if (_currentPage == _pages(context).length - 1) {
                     _completeOnboarding();
                   } else {
                     _pageController.nextPage(
@@ -162,9 +160,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     );
                   }
                 },
-                label: _currentPage == _pages.length - 1
-                    ? (l10n?.start ?? 'Başla')
-                    : 'İleri',
+                label: _currentPage == _pages(context).length - 1
+                    ? (l10n.start)
+                    : context.l10n.onboardNext,
               ),
             ),
             const SizedBox(height: 32),

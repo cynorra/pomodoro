@@ -5,6 +5,9 @@ import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../core/data/models/auth_status.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import 'auth_notifier.dart';
+import 'auth_state.dart';
+import '../../../l10n/l10n_extension.dart';
+import 'auth_error_text.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
@@ -33,13 +36,19 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     final authState = ref.watch(authProvider);
     final l10n = AppLocalizations.of(context);
 
+    ref.listen<AuthState>(authProvider, (previous, next) {
+      if (next.status == AuthStatus.authenticated && mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    });
+
     return Scaffold(
       backgroundColor: ZyraColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.createAccount ?? 'Hesap Oluştur',
+          l10n.createAccount,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -56,7 +65,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 TextFormField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    labelText: l10n?.displayName ?? 'İsim',
+                    labelText: l10n.displayName,
                     prefixIcon: const Icon(Icons.person_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -64,7 +73,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'İsim gerekli';
+                      return context.l10n.nameRequired;
                     }
                     return null;
                   },
@@ -75,7 +84,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: false,
                   decoration: InputDecoration(
-                    labelText: l10n?.email ?? 'Email',
+                    labelText: l10n.email,
                     prefixIcon: const Icon(Icons.email_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -83,10 +92,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Email gerekli';
+                      return context.l10n.emailRequired;
                     }
                     if (!value.contains('@')) {
-                      return 'Geçerli bir email girin';
+                      return context.l10n.emailInvalid;
                     }
                     return null;
                   },
@@ -96,19 +105,19 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    labelText: l10n?.password ?? 'Şifre',
+                    labelText: l10n.password,
                     prefixIcon: const Icon(Icons.lock_outlined),
-                    helperText: 'En az 6 karakter',
+                    helperText: context.l10n.passwordHint,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Şifre gerekli';
+                      return context.l10n.passwordRequired;
                     }
                     if (value.length < 6) {
-                      return 'Şifre en az 6 karakter olmalı';
+                      return context.l10n.passwordTooShort;
                     }
                     return null;
                   },
@@ -129,8 +138,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                           setState(() => _agreedToTerms = !_agreedToTerms);
                         },
                         child: Text(
-                          l10n?.agreeToTerms ??
-                              'Kullanım şartlarını ve gizlilik politikasını kabul ediyorum',
+                          l10n.agreeToTerms,
                           style: ZyraTypography.bodyMedium.copyWith(
                             color: ZyraColors.onSurface,
                           ),
@@ -151,7 +159,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       border: Border.all(color: Colors.red.withOpacity(0.3)),
                     ),
                     child: Text(
-                      authState.errorMessage ?? 'Bilinmeyen hata',
+                      authErrorText(context.l10n, authState.errorMessage),
                       style: const TextStyle(color: Colors.redAccent),
                       textAlign: TextAlign.center,
                     ),
@@ -162,8 +170,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       ? _handleSignup
                       : null,
                   label: authState.status == AuthStatus.loading
-                      ? 'Kayıt yapılıyor...'
-                      : (l10n?.signUp ?? 'Kayıt Ol'),
+                      ? context.l10n.signingUp
+                      : (l10n.signUp),
                 ),
               ],
             ),

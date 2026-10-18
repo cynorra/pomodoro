@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../ui/zyra_theme.dart';
 
 class ShareCardGenerator {
   static Widget buildSessionCompleteCard({
+    required AppLocalizations l10n,
     required int minutesStudied,
     required int pointsEarned,
     required int currentStreak,
@@ -63,8 +65,8 @@ class ShareCardGenerator {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'ODAKLANDIM',
+                Text(
+                  l10n.shareCardFocused,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w300,
@@ -82,8 +84,8 @@ class ShareCardGenerator {
                     height: 1,
                   ),
                 ),
-                const Text(
-                  'dakika',
+                Text(
+                  l10n.shareCardMinutes,
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white70,
@@ -95,14 +97,14 @@ class ShareCardGenerator {
                   children: [
                     _StatBadge(
                       icon: '🔥',
-                      value: '$currentStreak gün',
-                      label: 'SERİ',
+                      value: l10n.daysCount(currentStreak),
+                      label: l10n.shareCardStreak,
                     ),
                     const SizedBox(width: 8),
                     _StatBadge(
                       icon: '⭐',
                       value: '+$pointsEarned',
-                      label: 'PUAN',
+                      label: l10n.shareCardPoints,
                     ),
                   ],
                 ),
@@ -134,6 +136,7 @@ class ShareCardGenerator {
   }
 
   static Widget buildStreakCard({
+    required AppLocalizations l10n,
     required int currentStreak,
     required int longestStreak,
   }) {
@@ -175,8 +178,8 @@ class ShareCardGenerator {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'SERİM',
+                Text(
+                  l10n.shareCardMyStreak,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w300,
@@ -197,10 +200,10 @@ class ShareCardGenerator {
                         height: 1,
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(bottom: 12),
                       child: Text(
-                        ' gün',
+                        ' ${l10n.daysUnit}',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white70,
@@ -211,7 +214,7 @@ class ShareCardGenerator {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'En uzun: $longestStreak gün',
+                  l10n.shareCardLongest(longestStreak),
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white54,

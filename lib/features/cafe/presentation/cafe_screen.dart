@@ -31,14 +31,14 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.virtualCafe ?? 'Sanal Kafe',
+          l10n.virtualCafe,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
         actions: [
           Semantics(
             button: true,
-            label: l10n?.selectAmbientSound ?? 'Ortam sesi seç',
+            label: l10n.selectAmbientSound,
             child: IconButton(
               icon: Icon(
                 currentSound != null ? Icons.volume_up : Icons.volume_off,
@@ -106,7 +106,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
         ),
         error: (err, stack) => Center(
           child: Text(
-            l10n?.somethingWentWrong ?? 'Bir hata oluştu',
+            l10n.somethingWentWrong,
             style: const TextStyle(color: Colors.red),
           ),
         ),
@@ -133,7 +133,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              l10n?.selectAmbientSound ?? 'Ortam Sesi Seç',
+              l10n.selectAmbientSound,
               style: ZyraTypography.titleMedium.copyWith(
                 color: ZyraColors.onSurface,
               ),
@@ -141,25 +141,25 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
             const SizedBox(height: 16),
             _SoundOption(
               icon: '🌧️',
-              label: l10n?.rain ?? 'Yağmur',
+              label: l10n.rain,
               isSelected: currentSound == 'rain.mp3',
               onTap: () => _selectSound('rain.mp3', sheetContext),
             ),
             _SoundOption(
               icon: '☕',
-              label: l10n?.coffeeShop ?? 'Kahve Dükkanı',
+              label: l10n.coffeeShop,
               isSelected: currentSound == 'coffee_shop.mp3',
               onTap: () => _selectSound('coffee_shop.mp3', sheetContext),
             ),
             _SoundOption(
               icon: '🔥',
-              label: l10n?.fireplace ?? 'Şömine',
+              label: l10n.fireplace,
               isSelected: currentSound == 'fireplace.mp3',
               onTap: () => _selectSound('fireplace.mp3', sheetContext),
             ),
             _SoundOption(
               icon: '🎵',
-              label: l10n?.lofiBeats ?? 'Lo-Fi Beats',
+              label: l10n.lofiBeats,
               isSelected: currentSound == 'lofi_beats.mp3',
               onTap: () => _selectSound('lofi_beats.mp3', sheetContext),
             ),
@@ -167,7 +167,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
             TextButton(
               onPressed: () => Navigator.pop(sheetContext),
               child: Text(
-                l10n?.close ?? 'Kapat',
+                l10n.close,
                 style: ZyraTypography.labelLarge.copyWith(
                   color: ZyraColors.onSurface.withOpacity(0.6),
                 ),
@@ -181,7 +181,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
                   if (mounted) setState(() {});
                 },
                 child: Text(
-                  l10n?.turnOffSound ?? 'Sesi Kapat',
+                  l10n.turnOffSound,
                   style: ZyraTypography.labelLarge.copyWith(
                     color: ZyraColors.primary,
                   ),
@@ -205,7 +205,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n?.somethingWentWrong ?? 'Ses çalınamadı',
+              l10n.somethingWentWrong,
             ),
             backgroundColor: Colors.red.shade900,
             behavior: SnackBarBehavior.floating,
@@ -233,13 +233,12 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final isTr = l10n?.localeName == 'tr';
+    final isTr = l10n.localeName == 'tr';
     final name = isTr ? widget.item.nameTr : widget.item.nameEn;
 
     return Semantics(
       button: true,
-      label: l10n?.buyItem(name, widget.item.cost) ??
-          '$name satın al, ${widget.item.cost} puan',
+      label: l10n.buyItem(name, widget.item.cost),
       child: GestureDetector(
         onTapDown: (_) => setState(() => _isPressed = true),
         onTapUp: (_) async {
@@ -263,7 +262,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  l10n?.insufficientPoints ?? 'Yetersiz Puan! 🎯',
+                  l10n.insufficientPoints,
                 ),
                 backgroundColor: Colors.red.shade900,
                 behavior: SnackBarBehavior.floating,
@@ -276,7 +275,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  l10n?.purchaseSuccess ?? 'Satın alındı! ☕',
+                  l10n.purchaseSuccess,
                 ),
                 backgroundColor: Colors.green.shade900,
                 behavior: SnackBarBehavior.floating,
@@ -342,7 +341,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          '${widget.item.cost} ${l10n?.points ?? 'Puan'}',
+                          '${widget.item.cost} ${l10n.points}',
                           style: ZyraTypography.labelLarge.copyWith(
                             color: ZyraColors.primary,
                           ),
@@ -351,7 +350,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
                       if (widget.item.isOwned) ...[
                         const SizedBox(height: 8),
                         Text(
-                          '${l10n?.inventory ?? 'Envanter'}: ${widget.item.quantity}',
+                          '${l10n.inventory}: ${widget.item.quantity}',
                           style: ZyraTypography.labelSmall.copyWith(
                             color: ZyraColors.secondary,
                           ),

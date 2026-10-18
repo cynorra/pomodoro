@@ -4,6 +4,7 @@ import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/services/ad_service.dart';
 import '../../../core/data/state/user_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../l10n/l10n_extension.dart';
 
 class RewardedAdButton extends ConsumerWidget {
   const RewardedAdButton({super.key});
@@ -15,7 +16,7 @@ class RewardedAdButton extends ConsumerWidget {
 
     return Semantics(
       button: true,
-      label: l10n?.watchAdForPoints ?? 'Reklam İzle +50 Puan Kazan',
+      label: l10n.watchAdForPoints,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -57,7 +58,7 @@ class RewardedAdButton extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        l10n?.watchAdForPoints ?? 'Reklam İzle',
+                        l10n.watchAdForPoints,
                         style: ZyraTypography.titleMedium.copyWith(
                           color: ZyraColors.onSurface,
                         ),
@@ -92,8 +93,8 @@ class RewardedAdButton extends ConsumerWidget {
       case RewardedAdResult.rewarded:
         ref.read(userProvider.notifier).addPoints(50);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('🎉 +50 puan kazandın!'),
+          SnackBar(
+            content: Text(context.l10n.adRewardEarned),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
           ),
@@ -101,8 +102,8 @@ class RewardedAdButton extends ConsumerWidget {
         break;
       case RewardedAdResult.notRewarded:
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Reklam tamamlanmadı'),
+          SnackBar(
+            content: Text(context.l10n.adNotCompleted),
             backgroundColor: Colors.orange,
           ),
         );
@@ -110,8 +111,8 @@ class RewardedAdButton extends ConsumerWidget {
       case RewardedAdResult.notReady:
       case RewardedAdResult.error:
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Reklam şu an kullanılamıyor'),
+          SnackBar(
+            content: Text(context.l10n.adUnavailable),
             backgroundColor: Colors.red,
           ),
         );

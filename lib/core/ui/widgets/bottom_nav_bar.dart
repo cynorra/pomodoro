@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../zyra_theme.dart';
+import '../../../l10n/l10n_extension.dart';
 
 class ZyraBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -42,28 +43,28 @@ class ZyraBottomNavBar extends StatelessWidget {
                 _NavItem(
                   icon: Icons.timer_outlined,
                   selectedIcon: Icons.timer_rounded,
-                  label: 'Focus',
+                  label: context.l10n.navFocus,
                   isSelected: currentIndex == 0,
                   onTap: () => onTap(0),
                 ),
                 _NavItem(
                   icon: Icons.bar_chart_outlined,
                   selectedIcon: Icons.bar_chart_rounded,
-                  label: 'Stats',
+                  label: context.l10n.navStats,
                   isSelected: currentIndex == 1,
                   onTap: () => onTap(1),
                 ),
                 _NavItem(
                   icon: Icons.local_cafe_outlined,
                   selectedIcon: Icons.local_cafe_rounded,
-                  label: 'Cafe',
+                  label: context.l10n.navCafe,
                   isSelected: currentIndex == 2,
                   onTap: () => onTap(2),
                 ),
                 _NavItem(
                   icon: Icons.person_outline_rounded,
                   selectedIcon: Icons.person_rounded,
-                  label: 'Profile',
+                  label: context.l10n.profile,
                   isSelected: currentIndex == 3,
                   onTap: () => onTap(3),
                 ),

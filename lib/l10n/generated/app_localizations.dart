@@ -67,8 +67,8 @@ abstract class AppLocalizations {
 
   final String localeName;
 
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
@@ -100,495 +100,1113 @@ abstract class AppLocalizations {
 
   /// No description provided for @appTitle.
   ///
-  /// In tr, this message translates to:
-  /// **'YKS Pomodoro & Sanal Cafe'**
+  /// In en, this message translates to:
+  /// **'Study Cafe: Pomodoro Timer'**
   String get appTitle;
 
   /// No description provided for @deepFocus.
   ///
-  /// In tr, this message translates to:
-  /// **'Derin Odak'**
+  /// In en, this message translates to:
+  /// **'Deep Focus'**
   String get deepFocus;
 
   /// No description provided for @cafeBreak.
   ///
-  /// In tr, this message translates to:
-  /// **'Kafe Molası'**
+  /// In en, this message translates to:
+  /// **'Cafe Break'**
   String get cafeBreak;
 
   /// No description provided for @longBreak.
   ///
-  /// In tr, this message translates to:
-  /// **'Uzun Mola'**
+  /// In en, this message translates to:
+  /// **'Long Break'**
   String get longBreak;
 
   /// No description provided for @start.
   ///
-  /// In tr, this message translates to:
-  /// **'Başlat'**
+  /// In en, this message translates to:
+  /// **'Start'**
   String get start;
 
   /// No description provided for @pause.
   ///
-  /// In tr, this message translates to:
-  /// **'Duraklat'**
+  /// In en, this message translates to:
+  /// **'Pause'**
   String get pause;
 
   /// No description provided for @reset.
   ///
-  /// In tr, this message translates to:
-  /// **'Sıfırla'**
+  /// In en, this message translates to:
+  /// **'Reset'**
   String get reset;
 
   /// No description provided for @totalPoints.
   ///
-  /// In tr, this message translates to:
-  /// **'Toplam Puan'**
+  /// In en, this message translates to:
+  /// **'Total Points'**
   String get totalPoints;
 
   /// No description provided for @totalHours.
   ///
-  /// In tr, this message translates to:
-  /// **'Toplam Saat'**
+  /// In en, this message translates to:
+  /// **'Total Hours'**
   String get totalHours;
 
   /// No description provided for @points.
   ///
-  /// In tr, this message translates to:
-  /// **'Puan'**
+  /// In en, this message translates to:
+  /// **'Points'**
   String get points;
 
   /// No description provided for @hours.
   ///
-  /// In tr, this message translates to:
-  /// **'Saat'**
+  /// In en, this message translates to:
+  /// **'Hours'**
   String get hours;
 
   /// No description provided for @sessions.
   ///
-  /// In tr, this message translates to:
-  /// **'Seans'**
+  /// In en, this message translates to:
+  /// **'Sessions'**
   String get sessions;
 
   /// No description provided for @virtualCafe.
   ///
-  /// In tr, this message translates to:
-  /// **'Sanal Kafe'**
+  /// In en, this message translates to:
+  /// **'Virtual Cafe'**
   String get virtualCafe;
 
   /// No description provided for @statistics.
   ///
-  /// In tr, this message translates to:
-  /// **'İstatistikler'**
+  /// In en, this message translates to:
+  /// **'Statistics'**
   String get statistics;
 
   /// No description provided for @settings.
   ///
-  /// In tr, this message translates to:
-  /// **'Ayarlar'**
+  /// In en, this message translates to:
+  /// **'Settings'**
   String get settings;
 
   /// No description provided for @profile.
   ///
-  /// In tr, this message translates to:
-  /// **'Profil'**
+  /// In en, this message translates to:
+  /// **'Profile'**
   String get profile;
 
   /// No description provided for @achievements.
   ///
-  /// In tr, this message translates to:
-  /// **'Başarılar'**
+  /// In en, this message translates to:
+  /// **'Achievements'**
   String get achievements;
 
   /// No description provided for @insufficientPoints.
   ///
-  /// In tr, this message translates to:
-  /// **'Yetersiz Puan! Biraz daha odaklanmalısın 🎯'**
+  /// In en, this message translates to:
+  /// **'Not enough points! Focus a bit more 🎯'**
   String get insufficientPoints;
 
   /// No description provided for @purchaseSuccess.
   ///
-  /// In tr, this message translates to:
-  /// **'Satın alma başarılı! ☕'**
+  /// In en, this message translates to:
+  /// **'Purchase successful! ☕'**
   String get purchaseSuccess;
 
   /// No description provided for @inventory.
   ///
-  /// In tr, this message translates to:
-  /// **'Envanter'**
+  /// In en, this message translates to:
+  /// **'Inventory'**
   String get inventory;
 
   /// No description provided for @week.
   ///
-  /// In tr, this message translates to:
-  /// **'Hafta'**
+  /// In en, this message translates to:
+  /// **'Week'**
   String get week;
 
   /// No description provided for @month.
   ///
-  /// In tr, this message translates to:
-  /// **'Ay'**
+  /// In en, this message translates to:
+  /// **'Month'**
   String get month;
 
   /// No description provided for @allTime.
   ///
-  /// In tr, this message translates to:
-  /// **'Tümü'**
+  /// In en, this message translates to:
+  /// **'All Time'**
   String get allTime;
 
   /// No description provided for @weeklyChart.
   ///
-  /// In tr, this message translates to:
-  /// **'Haftalık Çalışma Grafiği'**
+  /// In en, this message translates to:
+  /// **'Weekly Study Chart'**
   String get weeklyChart;
 
   /// No description provided for @achievementBadges.
   ///
-  /// In tr, this message translates to:
-  /// **'Başarı Rozetleri'**
+  /// In en, this message translates to:
+  /// **'Achievement Badges'**
   String get achievementBadges;
 
   /// No description provided for @progress.
   ///
-  /// In tr, this message translates to:
-  /// **'İlerleme'**
+  /// In en, this message translates to:
+  /// **'Progress'**
   String get progress;
 
   /// No description provided for @dayMonday.
   ///
-  /// In tr, this message translates to:
-  /// **'Pzt'**
+  /// In en, this message translates to:
+  /// **'Mon'**
   String get dayMonday;
 
   /// No description provided for @dayTuesday.
   ///
-  /// In tr, this message translates to:
-  /// **'Sal'**
+  /// In en, this message translates to:
+  /// **'Tue'**
   String get dayTuesday;
 
   /// No description provided for @dayWednesday.
   ///
-  /// In tr, this message translates to:
-  /// **'Çar'**
+  /// In en, this message translates to:
+  /// **'Wed'**
   String get dayWednesday;
 
   /// No description provided for @dayThursday.
   ///
-  /// In tr, this message translates to:
-  /// **'Per'**
+  /// In en, this message translates to:
+  /// **'Thu'**
   String get dayThursday;
 
   /// No description provided for @dayFriday.
   ///
-  /// In tr, this message translates to:
-  /// **'Cum'**
+  /// In en, this message translates to:
+  /// **'Fri'**
   String get dayFriday;
 
   /// No description provided for @daySaturday.
   ///
-  /// In tr, this message translates to:
-  /// **'Cmt'**
+  /// In en, this message translates to:
+  /// **'Sat'**
   String get daySaturday;
 
   /// No description provided for @daySunday.
   ///
-  /// In tr, this message translates to:
-  /// **'Paz'**
+  /// In en, this message translates to:
+  /// **'Sun'**
   String get daySunday;
 
   /// No description provided for @threeDayStreak.
   ///
-  /// In tr, this message translates to:
-  /// **'3 Gün Seri'**
+  /// In en, this message translates to:
+  /// **'3 Day Streak'**
   String get threeDayStreak;
 
   /// No description provided for @threeDayStreakDesc.
   ///
-  /// In tr, this message translates to:
-  /// **'Üst üste 3 gün çalış'**
+  /// In en, this message translates to:
+  /// **'Study 3 days in a row'**
   String get threeDayStreakDesc;
 
   /// No description provided for @first100Points.
   ///
-  /// In tr, this message translates to:
-  /// **'İlk 100 Puan'**
+  /// In en, this message translates to:
+  /// **'First 100 Points'**
   String get first100Points;
 
   /// No description provided for @first100PointsDesc.
   ///
-  /// In tr, this message translates to:
-  /// **'100 puan topla'**
+  /// In en, this message translates to:
+  /// **'Collect 100 points'**
   String get first100PointsDesc;
 
   /// No description provided for @focusMaster.
   ///
-  /// In tr, this message translates to:
-  /// **'Odak Ustası'**
+  /// In en, this message translates to:
+  /// **'Focus Master'**
   String get focusMaster;
 
   /// No description provided for @focusMasterDesc.
   ///
-  /// In tr, this message translates to:
-  /// **'10 seans tamamla'**
+  /// In en, this message translates to:
+  /// **'Complete 10 sessions'**
   String get focusMasterDesc;
 
   /// No description provided for @weekStreak.
   ///
-  /// In tr, this message translates to:
-  /// **'1 Hafta Seri'**
+  /// In en, this message translates to:
+  /// **'1 Week Streak'**
   String get weekStreak;
 
   /// No description provided for @weekStreakDesc.
   ///
-  /// In tr, this message translates to:
-  /// **'Üst üste 7 gün çalış'**
+  /// In en, this message translates to:
+  /// **'Study 7 days in a row'**
   String get weekStreakDesc;
 
   /// No description provided for @pointHunter.
   ///
-  /// In tr, this message translates to:
-  /// **'Puan Avcısı'**
+  /// In en, this message translates to:
+  /// **'Point Hunter'**
   String get pointHunter;
 
   /// No description provided for @pointHunterDesc.
   ///
-  /// In tr, this message translates to:
-  /// **'500 puan topla'**
+  /// In en, this message translates to:
+  /// **'Collect 500 points'**
   String get pointHunterDesc;
 
   /// No description provided for @dailyMotivation.
   ///
-  /// In tr, this message translates to:
-  /// **'Günün Motivasyonu'**
+  /// In en, this message translates to:
+  /// **'Daily Motivation'**
   String get dailyMotivation;
 
   /// No description provided for @motivationText.
   ///
-  /// In tr, this message translates to:
-  /// **'Başarı, her gün tekrarlanan küçük çabaların toplamıdır. Bugün bir adım daha at! 🚀'**
+  /// In en, this message translates to:
+  /// **'Success is the sum of small efforts repeated day in and day out. Take one more step today! 🚀'**
   String get motivationText;
 
   /// No description provided for @language.
   ///
-  /// In tr, this message translates to:
-  /// **'Dil'**
+  /// In en, this message translates to:
+  /// **'Language'**
   String get language;
 
   /// No description provided for @turkish.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'Türkçe'**
   String get turkish;
 
   /// No description provided for @english.
   ///
-  /// In tr, this message translates to:
-  /// **'İngilizce'**
+  /// In en, this message translates to:
+  /// **'English'**
   String get english;
 
   /// No description provided for @notifications.
   ///
-  /// In tr, this message translates to:
-  /// **'Bildirimler'**
+  /// In en, this message translates to:
+  /// **'Notifications'**
   String get notifications;
 
   /// No description provided for @allow.
   ///
-  /// In tr, this message translates to:
-  /// **'İzin Ver'**
+  /// In en, this message translates to:
+  /// **'Allow'**
   String get allow;
 
   /// No description provided for @notNow.
   ///
-  /// In tr, this message translates to:
-  /// **'Şimdi Değil'**
+  /// In en, this message translates to:
+  /// **'Not Now'**
   String get notNow;
 
   /// No description provided for @close.
   ///
-  /// In tr, this message translates to:
-  /// **'Kapat'**
+  /// In en, this message translates to:
+  /// **'Close'**
   String get close;
 
   /// No description provided for @turnOffSound.
   ///
-  /// In tr, this message translates to:
-  /// **'Sesi Kapat'**
+  /// In en, this message translates to:
+  /// **'Turn Off Sound'**
   String get turnOffSound;
 
   /// No description provided for @selectAmbientSound.
   ///
-  /// In tr, this message translates to:
-  /// **'Ortam Sesi Seç'**
+  /// In en, this message translates to:
+  /// **'Select Ambient Sound'**
   String get selectAmbientSound;
 
   /// No description provided for @startTimer.
   ///
-  /// In tr, this message translates to:
-  /// **'Zamanlayıcıyı başlat'**
+  /// In en, this message translates to:
+  /// **'Start timer'**
   String get startTimer;
 
   /// No description provided for @pauseTimer.
   ///
-  /// In tr, this message translates to:
-  /// **'Zamanlayıcıyı duraklat'**
+  /// In en, this message translates to:
+  /// **'Pause timer'**
   String get pauseTimer;
 
   /// No description provided for @buyItem.
   ///
-  /// In tr, this message translates to:
-  /// **'{name} satın al, {cost} puan'**
+  /// In en, this message translates to:
+  /// **'Buy {name}, {cost} points'**
   String buyItem(String name, int cost);
 
   /// No description provided for @achievementUnlocked.
   ///
-  /// In tr, this message translates to:
-  /// **'Rozet Kazandın!'**
+  /// In en, this message translates to:
+  /// **'Achievement Unlocked!'**
   String get achievementUnlocked;
 
   /// No description provided for @awesome.
   ///
-  /// In tr, this message translates to:
-  /// **'Harika!'**
+  /// In en, this message translates to:
+  /// **'Awesome!'**
   String get awesome;
 
   /// No description provided for @somethingWentWrong.
   ///
-  /// In tr, this message translates to:
-  /// **'Bir şeyler ters gitti 😔'**
+  /// In en, this message translates to:
+  /// **'Something went wrong 😔'**
   String get somethingWentWrong;
 
   /// No description provided for @rain.
   ///
-  /// In tr, this message translates to:
-  /// **'Yağmur'**
+  /// In en, this message translates to:
+  /// **'Rain'**
   String get rain;
 
   /// No description provided for @coffeeShop.
   ///
-  /// In tr, this message translates to:
-  /// **'Kahve Dükkanı'**
+  /// In en, this message translates to:
+  /// **'Coffee Shop'**
   String get coffeeShop;
 
   /// No description provided for @fireplace.
   ///
-  /// In tr, this message translates to:
-  /// **'Şömine'**
+  /// In en, this message translates to:
+  /// **'Fireplace'**
   String get fireplace;
 
   /// No description provided for @lofiBeats.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'Lo-Fi Beats'**
   String get lofiBeats;
 
   /// No description provided for @email.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'Email'**
   String get email;
 
   /// No description provided for @password.
   ///
-  /// In tr, this message translates to:
-  /// **'Şifre'**
+  /// In en, this message translates to:
+  /// **'Password'**
   String get password;
 
   /// No description provided for @login.
   ///
-  /// In tr, this message translates to:
-  /// **'Giriş Yap'**
+  /// In en, this message translates to:
+  /// **'Log In'**
   String get login;
 
   /// No description provided for @signUp.
   ///
-  /// In tr, this message translates to:
-  /// **'Kayıt Ol'**
+  /// In en, this message translates to:
+  /// **'Sign Up'**
   String get signUp;
 
   /// No description provided for @displayName.
   ///
-  /// In tr, this message translates to:
-  /// **'İsim'**
+  /// In en, this message translates to:
+  /// **'Name'**
   String get displayName;
 
   /// No description provided for @forgotPassword.
   ///
-  /// In tr, this message translates to:
-  /// **'Şifremi unuttum'**
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
   String get forgotPassword;
 
   /// No description provided for @noAccountSignup.
   ///
-  /// In tr, this message translates to:
-  /// **'Hesabın yok mu? Kayıt ol'**
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? Sign up'**
   String get noAccountSignup;
 
   /// No description provided for @createAccount.
   ///
-  /// In tr, this message translates to:
-  /// **'Hesap Oluştur'**
+  /// In en, this message translates to:
+  /// **'Create Account'**
   String get createAccount;
 
   /// No description provided for @agreeToTerms.
   ///
-  /// In tr, this message translates to:
-  /// **'Kullanım şartlarını ve gizlilik politikasını kabul ediyorum'**
+  /// In en, this message translates to:
+  /// **'I agree to the terms of service and privacy policy'**
   String get agreeToTerms;
 
   /// No description provided for @privacyPolicy.
   ///
-  /// In tr, this message translates to:
-  /// **'Gizlilik Politikası'**
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
   String get privacyPolicy;
 
   /// No description provided for @termsOfService.
   ///
-  /// In tr, this message translates to:
-  /// **'Kullanım Şartları'**
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
   String get termsOfService;
 
   /// No description provided for @logout.
   ///
-  /// In tr, this message translates to:
-  /// **'Çıkış Yap'**
+  /// In en, this message translates to:
+  /// **'Log Out'**
   String get logout;
 
   /// No description provided for @deleteAccount.
   ///
-  /// In tr, this message translates to:
-  /// **'Hesabı Sil'**
+  /// In en, this message translates to:
+  /// **'Delete Account'**
   String get deleteAccount;
 
   /// No description provided for @inviteFriends.
   ///
-  /// In tr, this message translates to:
-  /// **'Arkadaş Davet Et'**
+  /// In en, this message translates to:
+  /// **'Invite Friends'**
   String get inviteFriends;
 
   /// No description provided for @help.
   ///
-  /// In tr, this message translates to:
-  /// **'Yardım'**
+  /// In en, this message translates to:
+  /// **'Help'**
   String get help;
-
-  /// No description provided for @premium.
-  ///
-  /// In tr, this message translates to:
-  /// **'Premium'**
-  String get premium;
 
   /// No description provided for @watchAdForPoints.
   ///
-  /// In tr, this message translates to:
-  /// **'Reklam İzle +50 Puan'**
+  /// In en, this message translates to:
+  /// **'Watch Ad +50 Points'**
   String get watchAdForPoints;
 
   /// No description provided for @leaderboard.
   ///
-  /// In tr, this message translates to:
-  /// **'Global Sıralama'**
+  /// In en, this message translates to:
+  /// **'Global Leaderboard'**
   String get leaderboard;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get tryAgain;
+
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
+  /// No description provided for @navFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus'**
+  String get navFocus;
+
+  /// No description provided for @navStats.
+  ///
+  /// In en, this message translates to:
+  /// **'Stats'**
+  String get navStats;
+
+  /// No description provided for @navCafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Cafe'**
+  String get navCafe;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get days;
+
+  /// No description provided for @authErrorUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get authErrorUnknown;
+
+  /// No description provided for @authErrorUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get authErrorUserNotFound;
+
+  /// No description provided for @authErrorDeleteFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not delete the account'**
+  String get authErrorDeleteFailed;
+
+  /// No description provided for @authErrorResetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send the email'**
+  String get authErrorResetFailed;
+
+  /// No description provided for @authErrorEmailInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already in use'**
+  String get authErrorEmailInUse;
+
+  /// No description provided for @authErrorInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email address'**
+  String get authErrorInvalidEmail;
+
+  /// No description provided for @authErrorWeakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak (at least 6 characters)'**
+  String get authErrorWeakPassword;
+
+  /// No description provided for @authErrorWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong email or password'**
+  String get authErrorWrongPassword;
+
+  /// No description provided for @authErrorTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Please try again later'**
+  String get authErrorTooManyRequests;
+
+  /// No description provided for @authErrorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred'**
+  String get authErrorGeneric;
+
+  /// No description provided for @authSignInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not sign in'**
+  String get authSignInFailed;
+
+  /// No description provided for @authSignUpFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not sign up'**
+  String get authSignUpFailed;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @emailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get emailInvalid;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordTooShort;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameRequired;
+
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 6 characters'**
+  String get passwordHint;
+
+  /// No description provided for @signingIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in...'**
+  String get signingIn;
+
+  /// No description provided for @signingUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing up...'**
+  String get signingUp;
+
+  /// No description provided for @continueAsGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as guest'**
+  String get continueAsGuest;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @yourEmailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your email address'**
+  String get yourEmailAddress;
+
+  /// No description provided for @resetEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent'**
+  String get resetEmailSent;
+
+  /// No description provided for @deleteConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get deleteConfirmTitle;
+
+  /// No description provided for @deleteIrreversible.
+  ///
+  /// In en, this message translates to:
+  /// **'This cannot be undone. All your data will be permanently deleted:'**
+  String get deleteIrreversible;
+
+  /// No description provided for @deleteItemStudy.
+  ///
+  /// In en, this message translates to:
+  /// **'All your study data'**
+  String get deleteItemStudy;
+
+  /// No description provided for @deleteItemBadges.
+  ///
+  /// In en, this message translates to:
+  /// **'Badges and points you\'ve earned'**
+  String get deleteItemBadges;
+
+  /// No description provided for @deleteItemStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Your streak records'**
+  String get deleteItemStreak;
+
+  /// No description provided for @deleteItemCafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Your virtual cafe inventory'**
+  String get deleteItemCafe;
+
+  /// No description provided for @deleteConfirmCheckbox.
+  ///
+  /// In en, this message translates to:
+  /// **'I confirm that my account will be permanently deleted'**
+  String get deleteConfirmCheckbox;
+
+  /// No description provided for @deleting.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting account...'**
+  String get deleting;
+
+  /// No description provided for @deleteWebHint.
+  ///
+  /// In en, this message translates to:
+  /// **'If the button doesn\'t work, you can delete it on the web:'**
+  String get deleteWebHint;
+
+  /// No description provided for @accountDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account was deleted'**
+  String get accountDeleted;
+
+  /// No description provided for @securityCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Security Check'**
+  String get securityCheck;
+
+  /// No description provided for @reauthPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password again to delete your account'**
+  String get reauthPrompt;
+
+  /// No description provided for @guestName.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get guestName;
+
+  /// No description provided for @notSignedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Not signed in'**
+  String get notSignedIn;
+
+  /// No description provided for @signInOrSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Log In / Sign Up'**
+  String get signInOrSignUp;
+
+  /// No description provided for @logoutConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get logoutConfirm;
+
+  /// No description provided for @leaderboardLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the leaderboard'**
+  String get leaderboardLoadFailed;
+
+  /// No description provided for @leaderboardEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is on the leaderboard yet'**
+  String get leaderboardEmpty;
+
+  /// No description provided for @leaderboardSignInPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to join the leaderboard'**
+  String get leaderboardSignInPrompt;
+
+  /// No description provided for @streakDays.
+  ///
+  /// In en, this message translates to:
+  /// **'🔥 {count}-day streak'**
+  String streakDays(int count);
+
+  /// No description provided for @pointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} pts'**
+  String pointsCount(int count);
+
+  /// No description provided for @noStudyData.
+  ///
+  /// In en, this message translates to:
+  /// **'No study data yet'**
+  String get noStudyData;
+
+  /// No description provided for @adNotCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Ad not completed'**
+  String get adNotCompleted;
+
+  /// No description provided for @adUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'The ad is not available right now'**
+  String get adUnavailable;
+
+  /// No description provided for @shareCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'🔥 I\'m focusing with Study Cafe! #StudyCafe #Pomodoro'**
+  String get shareCaption;
+
+  /// No description provided for @shareCaptionWithLink.
+  ///
+  /// In en, this message translates to:
+  /// **'🔥 I\'m focusing with Study Cafe! Join me: {link}'**
+  String shareCaptionWithLink(String link);
+
+  /// No description provided for @shareSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'I studied with Study Cafe!'**
+  String get shareSubject;
+
+  /// No description provided for @shareSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'🎯 I focused for {minutes} minutes today!\n\n🔥 My {streak}-day streak continues\n⭐ I earned {points} points in total\n\nStart focusing with Study Cafe too!\n{link}\n\n#StudyCafe #Pomodoro #StudyGram #Focus'**
+  String shareSummary(int minutes, int streak, int points, String link);
+
+  /// No description provided for @shareCardFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the card'**
+  String get shareCardFailed;
+
+  /// No description provided for @shareCardStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'STREAK'**
+  String get shareCardStreak;
+
+  /// No description provided for @shareCardPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'POINTS'**
+  String get shareCardPoints;
+
+  /// No description provided for @shareCardLongest.
+  ///
+  /// In en, this message translates to:
+  /// **'Longest: {days} days'**
+  String shareCardLongest(int days);
+
+  /// No description provided for @inviteBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn +200 points for every friend you invite!'**
+  String get inviteBonus;
+
+  /// No description provided for @inviteStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Share the link with your friend'**
+  String get inviteStep1;
+
+  /// No description provided for @inviteStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Your friend downloads the app and signs up'**
+  String get inviteStep2;
+
+  /// No description provided for @inviteStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'You both earn +200 points!'**
+  String get inviteStep3;
+
+  /// No description provided for @inviteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Start focusing with Study Cafe! {link}'**
+  String inviteMessage(String link);
+
+  /// No description provided for @faqPomodoroQ.
+  ///
+  /// In en, this message translates to:
+  /// **'What is the Pomodoro technique?'**
+  String get faqPomodoroQ;
+
+  /// No description provided for @faqPomodoroA.
+  ///
+  /// In en, this message translates to:
+  /// **'A productive study method built on 25 minutes of focus followed by a 5-minute break. After every 4 sessions, take a longer 15-30 minute break.'**
+  String get faqPomodoroA;
+
+  /// No description provided for @faqPointsQ.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I earn points?'**
+  String get faqPointsQ;
+
+  /// No description provided for @faqPointsA.
+  ///
+  /// In en, this message translates to:
+  /// **'You earn 10 points for every completed Pomodoro session and 2 points for breaks. You can also earn +50 points by watching an ad.'**
+  String get faqPointsA;
+
+  /// No description provided for @faqCafeQ.
+  ///
+  /// In en, this message translates to:
+  /// **'What can I do in the virtual cafe?'**
+  String get faqCafeQ;
+
+  /// No description provided for @faqCafeA.
+  ///
+  /// In en, this message translates to:
+  /// **'Spend your points on virtual items like coffee, tea and dessert, and set the mood with ambient sounds.'**
+  String get faqCafeA;
+
+  /// No description provided for @faqStreakQ.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I keep my streak?'**
+  String get faqStreakQ;
+
+  /// No description provided for @faqStreakA.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete at least one Pomodoro session every day to keep your streak going. If you skip a day, it resets.'**
+  String get faqStreakA;
+
+  /// No description provided for @faqDataQ.
+  ///
+  /// In en, this message translates to:
+  /// **'Is my data safe?'**
+  String get faqDataQ;
+
+  /// No description provided for @faqDataA.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is stored on your device. Log in to join the leaderboard. You can read our privacy policy for details.'**
+  String get faqDataA;
+
+  /// No description provided for @faqDeleteQ.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I delete my account?'**
+  String get faqDeleteQ;
+
+  /// No description provided for @faqDeleteA.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Profile → Delete Account, or delete it permanently from the web.'**
+  String get faqDeleteA;
+
+  /// No description provided for @helpMoreQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Have another question?'**
+  String get helpMoreQuestions;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact us: {email}'**
+  String contactUs(String email);
+
+  /// No description provided for @onboardFocusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus'**
+  String get onboardFocusTitle;
+
+  /// No description provided for @onboardFocusBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Study efficiently with the Pomodoro technique. 25 minutes of focus, 5 minutes of break.'**
+  String get onboardFocusBody;
+
+  /// No description provided for @onboardEarnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn'**
+  String get onboardEarnTitle;
+
+  /// No description provided for @onboardEarnBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn points after every session. Buy coffee, tea and dessert in your virtual cafe.'**
+  String get onboardEarnBody;
+
+  /// No description provided for @onboardAchieveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Achieve'**
+  String get onboardAchieveTitle;
+
+  /// No description provided for @onboardAchieveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock badges, keep your streak alive and track your stats.'**
+  String get onboardAchieveBody;
+
+  /// No description provided for @notifFocusDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus session done, time for a break! ☕'**
+  String get notifFocusDone;
+
+  /// No description provided for @notifBreakDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Break is over, time to focus!'**
+  String get notifBreakDone;
+
+  /// No description provided for @shareCardFocused.
+  ///
+  /// In en, this message translates to:
+  /// **'FOCUSED'**
+  String get shareCardFocused;
+
+  /// No description provided for @shareCardMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'minutes'**
+  String get shareCardMinutes;
+
+  /// No description provided for @shareCardMyStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'MY STREAK'**
+  String get shareCardMyStreak;
+
+  /// No description provided for @daysCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String daysCount(int count);
+
+  /// No description provided for @daysUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get daysUnit;
+
+  /// No description provided for @adRewardEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 You earned +50 points!'**
+  String get adRewardEarned;
+
+  /// No description provided for @shareRewardEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 You earned +25 points for sharing!'**
+  String get shareRewardEarned;
+
+  /// No description provided for @shareYourSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Your Achievement'**
+  String get shareYourSuccess;
+
+  /// No description provided for @deleteAccountPermanently.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account Permanently'**
+  String get deleteAccountPermanently;
+
+  /// No description provided for @inviteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Your Friends'**
+  String get inviteTitle;
+
+  /// No description provided for @howItWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'How It Works'**
+  String get howItWorks;
+
+  /// No description provided for @onboardNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardNext;
 }
 
 class _AppLocalizationsDelegate

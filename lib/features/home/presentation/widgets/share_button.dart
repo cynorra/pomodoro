@@ -7,6 +7,7 @@ import '../../../../core/data/services/share_card_capture.dart';
 import '../../../../core/data/state/user_notifier.dart';
 import '../../../../core/data/state/streak_notifier.dart';
 import '../../../../l10n/generated/app_localizations.dart';
+import '../../../../l10n/l10n_extension.dart';
 
 class ShareButton extends ConsumerStatefulWidget {
   final int minutesStudied;
@@ -53,7 +54,7 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Başarını Paylaş',
+                context.l10n.shareYourSuccess,
                 style: ZyraTypography.headlineMedium.copyWith(
                   color: ZyraColors.onSurface,
                 ),
@@ -62,6 +63,7 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
               RepaintBoundary(
                 key: _cardKey,
                 child: ShareCardGenerator.buildSessionCompleteCard(
+                  l10n: context.l10n,
                   minutesStudied: widget.minutesStudied,
                   pointsEarned: widget.pointsEarned,
                   currentStreak: streak,
@@ -101,7 +103,7 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
                   ),
                   _ShareOption(
                     icon: Icons.share,
-                    label: 'Diğer',
+                    label: context.l10n.other,
                     color: ZyraColors.primary,
                     onTap: () async {
                       Navigator.pop(context);
@@ -114,7 +116,7 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(
-                  l10n?.close ?? 'Kapat',
+                  l10n.close,
                   style: ZyraTypography.labelLarge.copyWith(
                     color: ZyraColors.onSurface.withOpacity(0.6),
                   ),
@@ -128,17 +130,12 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
   }
 
   String _buildShareText(int totalPoints, int streak) {
-    return '''
-🎯 Bugün ${widget.minutesStudied} dakika odaklandım!
-
-🔥 $streak günlük serim devam ediyor
-⭐ Toplam $totalPoints puan kazandım
-
-Sen de Study Cafe ile odaklanmaya başla!
-${ShareService.getAppStoreLink()}
-
-#StudyCafe #Pomodoro #StudyGram #Odaklan
-''';
+    return context.l10n.shareSummary(
+      widget.minutesStudied,
+      streak,
+      totalPoints,
+      ShareService.getAppStoreLink(),
+    );
   }
 
   Future<void> _shareToWhatsApp(int totalPoints, int streak) async {
@@ -152,8 +149,8 @@ ${ShareService.getAppStoreLink()}
     ref.read(userProvider.notifier).addPoints(25);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('🎉 Paylaştığın için +25 Puan kazandın!'),
+        SnackBar(
+          content: Text(context.l10n.shareRewardEarned),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
         ),
@@ -166,12 +163,15 @@ ${ShareService.getAppStoreLink()}
     if (file == null) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Kart oluşturulamadı')),
+          SnackBar(content: Text(context.l10n.shareCardFailed)),
         );
       }
       return;
     }
-    await ShareService.shareToInstagramStories(imageFile: file);
+    await ShareService.shareToInstagramStories(
+      imageFile: file,
+      caption: context.l10n.shareCaption,
+    );
     _rewardViralShare();
   }
 
@@ -180,12 +180,16 @@ ${ShareService.getAppStoreLink()}
     if (file == null) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Kart oluşturulamadı')),
+          SnackBar(content: Text(context.l10n.shareCardFailed)),
         );
       }
       return;
     }
-    await ShareService.shareToTikTok(videoOrImage: file);
+    await ShareService.shareToTikTok(
+      videoOrImage: file,
+      text: context.l10n.shareCaptionWithLink(ShareService.getAppStoreLink()),
+      subject: context.l10n.shareSubject,
+    );
     _rewardViralShare();
   }
 

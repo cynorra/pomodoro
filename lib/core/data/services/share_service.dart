@@ -30,6 +30,7 @@ class ShareService {
 
   static Future<void> shareToInstagramStories({
     required File imageFile,
+    required String caption,
     String? backgroundTopColor,
     String? backgroundBottomColor,
   }) async {
@@ -47,7 +48,7 @@ class ShareService {
       } else {
         await Share.shareXFiles(
           [XFile(imageFile.path)],
-          text: '🔥 Study Cafe ile odaklanıyorum! #StudyCafe #Pomodoro',
+          text: caption,
         );
       }
     } catch (e, stack) {
@@ -55,12 +56,16 @@ class ShareService {
     }
   }
 
-  static Future<void> shareToTikTok({required File videoOrImage}) async {
+  static Future<void> shareToTikTok({
+    required File videoOrImage,
+    required String text,
+    required String subject,
+  }) async {
     try {
       await Share.shareXFiles(
         [XFile(videoOrImage.path)],
-        text: '🔥 Study Cafe ile odaklanıyorum! Sen de katıl: ${getAppStoreLink()}',
-        subject: 'Study Cafe ile çalıştım!',
+        text: text,
+        subject: subject,
       );
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'TikTok share failed');

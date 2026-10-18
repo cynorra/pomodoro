@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/services/share_service.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../l10n/l10n_extension.dart';
 
 class InviteFriendsScreen extends ConsumerStatefulWidget {
   const InviteFriendsScreen({super.key});
@@ -27,7 +28,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          l10n?.inviteFriends ?? 'Arkadaş Davet Et',
+          l10n.inviteFriends,
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
@@ -62,7 +63,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Arkadaşını Davet Et',
+                    context.l10n.inviteTitle,
                     style: ZyraTypography.headlineMedium.copyWith(
                       color: ZyraColors.onSurface,
                     ),
@@ -70,7 +71,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Her davet ettiğin arkadaş için +200 puan kazan!',
+                    context.l10n.inviteBonus,
                     style: ZyraTypography.bodyMedium.copyWith(
                       color: ZyraColors.onSurface.withOpacity(0.7),
                     ),
@@ -125,7 +126,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   color: const Color(0xFF25D366),
                   onTap: () {
                     ShareService.shareToWhatsApp(
-                      text: 'Study Cafe ile odaklanmaya başla! $inviteLink',
+                      text: context.l10n.inviteMessage(inviteLink),
                     );
                   },
                 ),
@@ -135,17 +136,17 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   color: const Color(0xFFE4405F),
                   onTap: () {
                     ShareService.shareGeneral(
-                      text: 'Study Cafe ile odaklanmaya başla! $inviteLink',
+                      text: context.l10n.inviteMessage(inviteLink),
                     );
                   },
                 ),
                 _ShareIconButton(
                   icon: Icons.share,
-                  label: 'Diğer',
+                  label: context.l10n.other,
                   color: ZyraColors.primary,
                   onTap: () {
                     ShareService.shareGeneral(
-                      text: 'Study Cafe ile odaklanmaya başla! $inviteLink',
+                      text: context.l10n.inviteMessage(inviteLink),
                     );
                   },
                 ),
@@ -162,7 +163,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nasıl Çalışır?',
+                    context.l10n.howItWorks,
                     style: ZyraTypography.titleMedium.copyWith(
                       color: ZyraColors.primary,
                     ),
@@ -170,15 +171,15 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   const SizedBox(height: 12),
                   _HowItWorksStep(
                     number: '1',
-                    text: 'Linki arkadaşınla paylaş',
+                    text: context.l10n.inviteStep1,
                   ),
                   _HowItWorksStep(
                     number: '2',
-                    text: 'Arkadaşın uygulamayı indirip kayıt olsun',
+                    text: context.l10n.inviteStep2,
                   ),
                   _HowItWorksStep(
                     number: '3',
-                    text: 'İkiniz de +200 puan kazanın!',
+                    text: context.l10n.inviteStep3,
                   ),
                 ],
               ),

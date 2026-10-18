@@ -46,7 +46,7 @@
   "dailyMotivation": "Daily Motivation",
   "motivationText": "Success is the sum of small efforts repeated day in and day out. Take one more step today! 🚀",
   "language": "Language",
-  "turkish": "Turkish",
+  "turkish": "Türkçe",
   "english": "English",
   "notifications": "Notifications",
   "allow": "Allow",
@@ -79,7 +79,185 @@
   "deleteAccount": "Delete Account",
   "inviteFriends": "Invite Friends",
   "help": "Help",
-  "premium": "Premium",
   "watchAdForPoints": "Watch Ad +50 Points",
-  "leaderboard": "Global Leaderboard"
+  "leaderboard": "Global Leaderboard",
+  "@buyItem": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "cost": {
+        "type": "int"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "send": "Send",
+  "verify": "Verify",
+  "tryAgain": "Try again",
+  "other": "Other",
+  "navFocus": "Focus",
+  "navStats": "Stats",
+  "navCafe": "Cafe",
+  "days": "Days",
+  "authErrorUnknown": "Something went wrong. Please try again.",
+  "authErrorUserNotFound": "User not found",
+  "authErrorDeleteFailed": "Could not delete the account",
+  "authErrorResetFailed": "Could not send the email",
+  "authErrorEmailInUse": "This email is already in use",
+  "authErrorInvalidEmail": "Invalid email address",
+  "authErrorWeakPassword": "Password is too weak (at least 6 characters)",
+  "authErrorWrongPassword": "Wrong email or password",
+  "authErrorTooManyRequests": "Too many attempts. Please try again later",
+  "authErrorGeneric": "An error occurred",
+  "authSignInFailed": "Could not sign in",
+  "authSignUpFailed": "Could not sign up",
+  "emailRequired": "Email is required",
+  "emailInvalid": "Enter a valid email",
+  "passwordRequired": "Password is required",
+  "passwordTooShort": "Password must be at least 6 characters",
+  "nameRequired": "Name is required",
+  "passwordHint": "At least 6 characters",
+  "signingIn": "Signing in...",
+  "signingUp": "Signing up...",
+  "continueAsGuest": "Continue as guest",
+  "resetPasswordTitle": "Reset Password",
+  "yourEmailAddress": "Your email address",
+  "resetEmailSent": "Password reset email sent",
+  "deleteConfirmTitle": "Are you sure you want to delete your account?",
+  "deleteIrreversible": "This cannot be undone. All your data will be permanently deleted:",
+  "deleteItemStudy": "All your study data",
+  "deleteItemBadges": "Badges and points you've earned",
+  "deleteItemStreak": "Your streak records",
+  "deleteItemCafe": "Your virtual cafe inventory",
+  "deleteConfirmCheckbox": "I confirm that my account will be permanently deleted",
+  "deleting": "Deleting account...",
+  "deleteWebHint": "If the button doesn't work, you can delete it on the web:",
+  "accountDeleted": "Your account was deleted",
+  "securityCheck": "Security Check",
+  "reauthPrompt": "Enter your password again to delete your account",
+  "guestName": "Guest",
+  "notSignedIn": "Not signed in",
+  "signInOrSignUp": "Log In / Sign Up",
+  "logoutConfirm": "Are you sure you want to log out?",
+  "leaderboardLoadFailed": "Could not load the leaderboard",
+  "leaderboardEmpty": "Nobody is on the leaderboard yet",
+  "leaderboardSignInPrompt": "Log in to join the leaderboard",
+  "streakDays": "🔥 {count}-day streak",
+  "@streakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pointsCount": "{count} pts",
+  "@pointsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noStudyData": "No study data yet",
+  "adNotCompleted": "Ad not completed",
+  "adUnavailable": "The ad is not available right now",
+  "shareCaption": "🔥 I'm focusing with Study Cafe! #StudyCafe #Pomodoro",
+  "shareCaptionWithLink": "🔥 I'm focusing with Study Cafe! Join me: {link}",
+  "@shareCaptionWithLink": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "shareSubject": "I studied with Study Cafe!",
+  "shareSummary": "🎯 I focused for {minutes} minutes today!\n\n🔥 My {streak}-day streak continues\n⭐ I earned {points} points in total\n\nStart focusing with Study Cafe too!\n{link}\n\n#StudyCafe #Pomodoro #StudyGram #Focus",
+  "@shareSummary": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "streak": {
+        "type": "int"
+      },
+      "points": {
+        "type": "int"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "shareCardFailed": "Could not create the card",
+  "shareCardStreak": "STREAK",
+  "shareCardPoints": "POINTS",
+  "shareCardLongest": "Longest: {days} days",
+  "@shareCardLongest": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "inviteBonus": "Earn +200 points for every friend you invite!",
+  "inviteStep1": "Share the link with your friend",
+  "inviteStep2": "Your friend downloads the app and signs up",
+  "inviteStep3": "You both earn +200 points!",
+  "inviteMessage": "Start focusing with Study Cafe! {link}",
+  "@inviteMessage": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "faqPomodoroQ": "What is the Pomodoro technique?",
+  "faqPomodoroA": "A productive study method built on 25 minutes of focus followed by a 5-minute break. After every 4 sessions, take a longer 15-30 minute break.",
+  "faqPointsQ": "How do I earn points?",
+  "faqPointsA": "You earn 10 points for every completed Pomodoro session and 2 points for breaks. You can also earn +50 points by watching an ad.",
+  "faqCafeQ": "What can I do in the virtual cafe?",
+  "faqCafeA": "Spend your points on virtual items like coffee, tea and dessert, and set the mood with ambient sounds.",
+  "faqStreakQ": "How do I keep my streak?",
+  "faqStreakA": "Complete at least one Pomodoro session every day to keep your streak going. If you skip a day, it resets.",
+  "faqDataQ": "Is my data safe?",
+  "faqDataA": "Your data is stored on your device. Log in to join the leaderboard. You can read our privacy policy for details.",
+  "faqDeleteQ": "How do I delete my account?",
+  "faqDeleteA": "Go to Profile → Delete Account, or delete it permanently from the web.",
+  "helpMoreQuestions": "Have another question?",
+  "contactUs": "Contact us: {email}",
+  "@contactUs": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardFocusTitle": "Focus",
+  "onboardFocusBody": "Study efficiently with the Pomodoro technique. 25 minutes of focus, 5 minutes of break.",
+  "onboardEarnTitle": "Earn",
+  "onboardEarnBody": "Earn points after every session. Buy coffee, tea and dessert in your virtual cafe.",
+  "onboardAchieveTitle": "Achieve",
+  "onboardAchieveBody": "Unlock badges, keep your streak alive and track your stats.",
+  "notifFocusDone": "Focus session done, time for a break! ☕",
+  "notifBreakDone": "Break is over, time to focus!",
+  "shareCardFocused": "FOCUSED",
+  "shareCardMinutes": "minutes",
+  "shareCardMyStreak": "MY STREAK",
+  "daysCount": "{count} days",
+  "@daysCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "daysUnit": "days",
+  "adRewardEarned": "🎉 You earned +50 points!",
+  "shareRewardEarned": "🎉 You earned +25 points for sharing!",
+  "shareYourSuccess": "Share Your Achievement",
+  "deleteAccountPermanently": "Delete Account Permanently",
+  "inviteTitle": "Invite Your Friends",
+  "howItWorks": "How It Works",
+  "onboardNext": "Next"
 }

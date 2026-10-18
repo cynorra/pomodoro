@@ -195,7 +195,7 @@ class ErrorApp extends StatelessWidget {
           backgroundColor: ZyraColors.background,
           body: Center(
             child: Text(
-              l10n?.somethingWentWrong ?? 'Bir şeyler ters gitti 😔',
+              l10n.somethingWentWrong,
               style: ZyraTypography.headlineMedium.copyWith(
                 color: ZyraColors.onBackground,
               ),

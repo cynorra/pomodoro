@@ -31,8 +31,8 @@ class NotificationService {
     if (Platform.isAndroid) {
       const channel = AndroidNotificationChannel(
         'pomodoro_channel',
-        'Pomodoro Bildirimleri',
-        description: 'Seans tamamlandığında bildirim',
+        'Pomodoro Notifications',
+        description: 'Notification when a session ends',
         importance: Importance.high,
       );
 
@@ -43,8 +43,8 @@ class NotificationService {
 
       const breakChannel = AndroidNotificationChannel(
         'break_channel',
-        'Mola Hatırlatmaları',
-        description: 'Mola zamanı geldiğinde bildirim',
+        'Break Reminders',
+        description: 'Notification when it is time for a break',
         importance: Importance.max,
       );
 
@@ -90,8 +90,8 @@ class NotificationService {
   }) async {
     const androidDetails = AndroidNotificationDetails(
       'pomodoro_channel',
-      'Pomodoro Bildirimleri',
-      channelDescription: 'Seans tamamlandığında bildirim',
+      'Pomodoro Notifications',
+      channelDescription: 'Notification when a session ends',
       importance: Importance.high,
       priority: Priority.high,
       icon: '@mipmap/ic_launcher',
@@ -125,8 +125,8 @@ class NotificationService {
     final notificationDetails = const NotificationDetails(
       android: AndroidNotificationDetails(
         'break_channel',
-        'Mola Hatırlatmaları',
-        channelDescription: 'Mola zamanı geldiğinde bildirim',
+        'Break Reminders',
+        channelDescription: 'Notification when it is time for a break',
         importance: Importance.max,
         priority: Priority.high,
       ),
@@ -182,8 +182,8 @@ class NotificationService {
         const NotificationDetails(
           android: AndroidNotificationDetails(
             'pomodoro_channel',
-            'Pomodoro Bildirimleri',
-            channelDescription: 'Seans tamamlandığında bildirim',
+            'Pomodoro Notifications',
+            channelDescription: 'Notification when a session ends',
             importance: Importance.high,
             priority: Priority.high,
           ),

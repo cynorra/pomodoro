@@ -1,10 +1,11 @@
 import 'dart:async';
-import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/data/database/database_service.dart';
 import '../../../core/data/models/study_session.dart';
+import '../../../core/data/state/locale_notifier.dart';
 import '../../../core/data/state/user_notifier.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../../core/data/state/streak_notifier.dart';
 import '../../../core/data/services/streak_service.dart';
 import '../../../core/data/services/achievement_service.dart';
@@ -88,14 +89,12 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       (deadline.difference(DateTime.now()).inMilliseconds + 999) ~/ 1000;
 
   void _scheduleEndNotification() {
-    final isTr = PlatformDispatcher.instance.locale.languageCode == 'tr';
+    final l10n = lookupAppLocalizations(ref.read(localeProvider));
     final isFocus = state.sessionType == SessionType.focus;
     unawaited(NotificationService.scheduleSessionEnd(
       delay: Duration(seconds: state.remainingSeconds),
       title: 'Study Cafe',
-      body: isFocus
-          ? (isTr ? 'Odak seansı bitti, mola zamanı! ☕' : 'Focus session done, time for a break! ☕')
-          : (isTr ? 'Mola bitti, odaklanma zamanı!' : 'Break is over, time to focus!'),
+      body: isFocus ? l10n.notifFocusDone : l10n.notifBreakDone,
     ));
   }
 
