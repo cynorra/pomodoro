@@ -99,6 +99,6 @@ class ShareService {
     if (Platform.isIOS) {
       return 'https://apps.apple.com/app/cynora-focus/id0000000000';
     }
-    return 'https://play.google.com/store/apps/details?id=com.studycafe.pomodoro';
+    return 'https://play.google.com/store/apps/details?id=com.cynora.studycafe.pomodoro';
   }
 }

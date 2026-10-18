@@ -1,4 +1,4 @@
-package com.studycafe.pomodoro
+package com.cynora.studycafe.pomodoro
 
 import io.flutter.embedding.android.FlutterActivity
 

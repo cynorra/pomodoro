@@ -18,7 +18,7 @@ fun signingValue(propName: String, envName: String): String? =
     keystoreProperties.getProperty(propName) ?: System.getenv(envName)
 
 android {
-    namespace = "com.studycafe.pomodoro"
+    namespace = "com.cynora.studycafe.pomodoro"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -33,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.studycafe.pomodoro"
+        applicationId = "com.cynora.studycafe.pomodoro"
         minSdk = 24
         targetSdk = 36
         versionCode = flutter.versionCode
