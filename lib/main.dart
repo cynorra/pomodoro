@@ -65,7 +65,7 @@ void main() async {
             ),
           ),
         ],
-        child: const CynoraFocusApp(),
+        child: const StudyCafeApp(),
       ),
     );
   } catch (e, stack) {
@@ -74,14 +74,14 @@ void main() async {
   }
 }
 
-class CynoraFocusApp extends ConsumerStatefulWidget {
-  const CynoraFocusApp({super.key});
+class StudyCafeApp extends ConsumerStatefulWidget {
+  const StudyCafeApp({super.key});
 
   @override
-  ConsumerState<CynoraFocusApp> createState() => _CynoraFocusAppState();
+  ConsumerState<StudyCafeApp> createState() => _StudyCafeAppState();
 }
 
-class _CynoraFocusAppState extends ConsumerState<CynoraFocusApp> {
+class _StudyCafeAppState extends ConsumerState<StudyCafeApp> {
   bool _showSplash = true;
   bool _showOnboarding = false;
   final _storage = const FlutterSecureStorage();
@@ -125,10 +125,10 @@ class _CynoraFocusAppState extends ConsumerState<CynoraFocusApp> {
     }
 
     return MaterialApp(
-      title: 'Cynora Focus',
+      title: 'Study Cafe',
       debugShowCheckedModeBanner: false,
       locale: locale,
-      supportedLocales: const [Locale('tr'), Locale('en')],
+      supportedLocales: const [Locale('en'), Locale('tr')],
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -188,7 +188,7 @@ class ErrorApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('tr'), Locale('en')],
+      supportedLocales: const [Locale('en'), Locale('tr')],
       builder: (context, child) {
         final l10n = AppLocalizations.of(context);
         return Scaffold(

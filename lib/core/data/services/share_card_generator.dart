@@ -116,7 +116,7 @@ class ShareCardGenerator {
                     ),
                     SizedBox(width: 4),
                     Text(
-                      'Cynora Focus',
+                      'Study Cafe',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -226,7 +226,7 @@ class ShareCardGenerator {
                     ),
                     SizedBox(width: 4),
                     Text(
-                      'Cynora Focus',
+                      'Study Cafe',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,

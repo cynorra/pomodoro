@@ -92,7 +92,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
     final isFocus = state.sessionType == SessionType.focus;
     unawaited(NotificationService.scheduleSessionEnd(
       delay: Duration(seconds: state.remainingSeconds),
-      title: 'Cynora Focus',
+      title: 'Study Cafe',
       body: isFocus
           ? (isTr ? 'Odak seansı bitti, mola zamanı! ☕' : 'Focus session done, time for a break! ☕')
           : (isTr ? 'Mola bitti, odaklanma zamanı!' : 'Break is over, time to focus!'),

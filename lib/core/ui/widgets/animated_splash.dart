@@ -94,7 +94,7 @@ class _AnimatedSplashOverlayState extends State<AnimatedSplashOverlay>
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'Cynora Focus',
+                      'Study Cafe',
                       style: ZyraTypography.headlineMedium.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

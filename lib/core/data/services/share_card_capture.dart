@@ -23,7 +23,7 @@ class ShareCardCapture {
 
       final dir = await getTemporaryDirectory();
       final file = File(
-        '${dir.path}/cynora_${DateTime.now().millisecondsSinceEpoch}.png',
+        '${dir.path}/studycafe_${DateTime.now().millisecondsSinceEpoch}.png',
       );
       await file.writeAsBytes(byteData.buffer.asUint8List());
       return file;

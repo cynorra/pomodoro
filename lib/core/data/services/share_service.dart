@@ -47,7 +47,7 @@ class ShareService {
       } else {
         await Share.shareXFiles(
           [XFile(imageFile.path)],
-          text: '🔥 Cynora Focus ile odaklanıyorum! #CynoraFocus #Pomodoro',
+          text: '🔥 Study Cafe ile odaklanıyorum! #StudyCafe #Pomodoro',
         );
       }
     } catch (e, stack) {
@@ -59,8 +59,8 @@ class ShareService {
     try {
       await Share.shareXFiles(
         [XFile(videoOrImage.path)],
-        text: '🔥 Cynora Focus ile odaklanıyorum! Sen de katıl: ${getAppStoreLink()}',
-        subject: 'Cynora Focus ile çalıştım!',
+        text: '🔥 Study Cafe ile odaklanıyorum! Sen de katıl: ${getAppStoreLink()}',
+        subject: 'Study Cafe ile çalıştım!',
       );
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'TikTok share failed');

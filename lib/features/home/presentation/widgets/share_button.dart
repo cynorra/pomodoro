@@ -134,10 +134,10 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
 🔥 $streak günlük serim devam ediyor
 ⭐ Toplam $totalPoints puan kazandım
 
-Sen de Cynora Focus ile odaklanmaya başla!
+Sen de Study Cafe ile odaklanmaya başla!
 ${ShareService.getAppStoreLink()}
 
-#CynoraFocus #Pomodoro #StudyGram #Odaklan
+#StudyCafe #Pomodoro #StudyGram #Odaklan
 ''';
   }
 

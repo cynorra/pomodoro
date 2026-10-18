@@ -125,7 +125,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   color: const Color(0xFF25D366),
                   onTap: () {
                     ShareService.shareToWhatsApp(
-                      text: 'Cynora Focus ile odaklanmaya başla! $inviteLink',
+                      text: 'Study Cafe ile odaklanmaya başla! $inviteLink',
                     );
                   },
                 ),
@@ -135,7 +135,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   color: const Color(0xFFE4405F),
                   onTap: () {
                     ShareService.shareGeneral(
-                      text: 'Cynora Focus ile odaklanmaya başla! $inviteLink',
+                      text: 'Study Cafe ile odaklanmaya başla! $inviteLink',
                     );
                   },
                 ),
@@ -145,7 +145,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   color: ZyraColors.primary,
                   onTap: () {
                     ShareService.shareGeneral(
-                      text: 'Cynora Focus ile odaklanmaya başla! $inviteLink',
+                      text: 'Study Cafe ile odaklanmaya başla! $inviteLink',
                     );
                   },
                 ),

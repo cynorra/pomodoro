@@ -1,4 +1,4 @@
-# cynora_focus
+# Study Cafe: Pomodoro Timer
 
 A new Flutter project.
 

@@ -59,7 +59,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Cynora Focus',
+                  'Study Cafe',
                   style: ZyraTypography.headlineLarge.copyWith(
                     color: ZyraColors.primary,
                   ),
