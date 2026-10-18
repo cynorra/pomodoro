@@ -26,8 +26,12 @@ jobs:
 
       - name: Restore upload keystore
         env:
-          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE_64 }}
         run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "::error::ANDROID_KEYSTORE_BASE_64 secret is missing or empty"
+            exit 1
+          fi
           echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.jks"
           echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
 
@@ -37,9 +41,10 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
         run: |
           # Fail fast (before the long build) if the secrets do not form a readable keystore.
+          set -o pipefail
           ls -l "$ANDROID_KEYSTORE_PATH"
           sha256sum "$ANDROID_KEYSTORE_PATH"
-          keytool -list -keystore "$ANDROID_KEYSTORE_PATH"             -storepass:env ANDROID_KEYSTORE_PASSWORD             -alias "$ANDROID_KEY_ALIAS" | tail -n 3
+          keytool -list -keystore "$ANDROID_KEYSTORE_PATH" -storepass:env ANDROID_KEYSTORE_PASSWORD -alias "$ANDROID_KEY_ALIAS" | tail -n 3
 
       - run: flutter pub get
 
