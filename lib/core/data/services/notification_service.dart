@@ -1,6 +1,5 @@
 import 'dart:io' show Platform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
 
@@ -57,6 +56,28 @@ class NotificationService {
     _initialized = true;
   }
 
+  static Future<bool> _isPermitted() async {
+    try {
+      if (Platform.isAndroid) {
+        return await _android?.areNotificationsEnabled() ?? false;
+      }
+      if (Platform.isIOS) {
+        final options = await _ios?.checkPermissions();
+        return options?.isEnabled ?? false;
+      }
+    } catch (_) {}
+    return false;
+  }
+
+  static AndroidFlutterLocalNotificationsPlugin? get _android =>
+      _plugin.resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>();
+
+  static IOSFlutterLocalNotificationsPlugin? get _ios =>
+      _plugin.resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>();
+
+  /// Asks the OS for notification permission (Android 13+ / iOS).
   static Future<bool> requestPermissionWithDialog({
     required String title,
     required String body,
@@ -64,24 +85,9 @@ class NotificationService {
     required String denyLabel,
     required dynamic context,
   }) async {
-    final status = await Permission.notification.status;
-
-    if (status.isGranted) return true;
-
-    if (status.isPermanentlyDenied) {
-      await openAppSettings();
-      return false;
-    }
-
-    final result = await Permission.notification.request();
-
-    if (result.isGranted) {
-      return true;
-    } else if (result.isPermanentlyDenied) {
-      await openAppSettings();
-    }
-
-    return false;
+    await initialize();
+    if (await _isPermitted()) return true;
+    return requestPermissionIfNeeded();
   }
 
   static Future<void> showSessionComplete({
@@ -154,8 +160,7 @@ class NotificationService {
   }) async {
     try {
       await initialize();
-      final status = await Permission.notification.status;
-      if (!status.isGranted) return;
+      if (!await _isPermitted()) return;
 
       await _plugin.zonedSchedule(
         id: _sessionEndId,
@@ -183,11 +188,23 @@ class NotificationService {
     } catch (_) {}
   }
 
-  static Future<void> requestPermissionIfNeeded() async {
+  static Future<bool> requestPermissionIfNeeded() async {
     try {
-      final status = await Permission.notification.status;
-      if (status.isDenied) await Permission.notification.request();
+      await initialize();
+      if (await _isPermitted()) return true;
+      if (Platform.isAndroid) {
+        return await _android?.requestNotificationsPermission() ?? false;
+      }
+      if (Platform.isIOS) {
+        return await _ios?.requestPermissions(
+              alert: true,
+              badge: true,
+              sound: true,
+            ) ??
+            false;
+      }
     } catch (_) {}
+    return false;
   }
 
   static Future<void> cancelAll() async {
