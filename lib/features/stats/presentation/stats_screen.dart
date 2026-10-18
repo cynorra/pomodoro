@@ -5,6 +5,7 @@ import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import 'stats_provider.dart';
 import '../../../l10n/l10n_extension.dart';
+import '../../../core/ui/responsive.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({super.key});
@@ -39,7 +40,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               child: _FilterSelector(
                 selected: selectedFilter,
                 onSelected: (filter) {
-                  ref.read(selectedFilterProvider.notifier).state = filter;
+                  ref.read(selectedFilterProvider.notifier).select(filter);
                 },
               ),
             ),
@@ -403,7 +404,7 @@ class _WeeklyChart extends ConsumerWidget {
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: 200,
+                height: (context.screenSize.height * 0.25).clamp(150.0, 260.0).toDouble(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -470,8 +471,8 @@ class _BarChartItem extends StatelessWidget {
         AnimatedContainer(
           duration: const Duration(milliseconds: 600),
           curve: Curves.easeOutCubic,
-          width: 32,
-          height: 150 * heightFactor,
+          width: context.scaled(28),
+          height: context.scaled(150) * heightFactor,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -486,7 +487,7 @@ class _BarChartItem extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '${minutes}dk',
+          context.l10n.minutesShort(minutes),
           style: ZyraTypography.labelSmall.copyWith(
             color: ZyraColors.onSurface.withOpacity(0.6),
             fontSize: 10,

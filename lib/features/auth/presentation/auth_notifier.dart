@@ -1,37 +1,24 @@
-import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/data/services/auth_service.dart';
 import 'auth_state.dart';
 
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  return AuthNotifier();
-});
+final authProvider =
+    NotifierProvider<AuthNotifier, AuthState>(AuthNotifier.new);
 
-class AuthNotifier extends StateNotifier<AuthState> {
-  StreamSubscription<dynamic>? _authSub;
-
-  AuthNotifier() : super(AuthState.initial()) {
-    _init();
-  }
-
-  void _init() {
-    final current = AuthService.currentUser;
-    if (current != null) {
-      state = AuthState.authenticated(current);
-    }
-    _authSub = AuthService.authStateChanges.listen((user) {
-      if (user != null) {
-        state = AuthState.authenticated(user);
-      } else {
-        state = AuthState.unauthenticated();
-      }
-    });
-  }
-
+class AuthNotifier extends Notifier<AuthState> {
   @override
-  void dispose() {
-    _authSub?.cancel();
-    super.dispose();
+  AuthState build() {
+    final subscription = AuthService.authStateChanges.listen((user) {
+      state = user != null
+          ? AuthState.authenticated(user)
+          : AuthState.unauthenticated();
+    });
+    ref.onDispose(subscription.cancel);
+
+    final current = AuthService.currentUser;
+    return current != null
+        ? AuthState.authenticated(current)
+        : AuthState.initial();
   }
 
   Future<AuthResult> signIn({

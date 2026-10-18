@@ -56,6 +56,7 @@ void main() async {
 
     runApp(
       ProviderScope(
+        retry: (retryCount, error) => null,
         overrides: [
           initialLocaleProvider.overrideWithValue(initialLocale),
           initialUserProvider.overrideWithValue(
@@ -150,8 +151,10 @@ class _StudyCafeAppState extends ConsumerState<StudyCafeApp> {
       // system font scaling so fixed-size widgets do not overflow.
       builder: (context, child) {
         final media = MediaQuery.of(context);
+        final width = media.size.width > 600 ? 600.0 : media.size.width;
         return MediaQuery(
           data: media.copyWith(
+            size: Size(width, media.size.height),
             textScaler: media.textScaler.clamp(
               minScaleFactor: 0.85,
               maxScaleFactor: 1.3,

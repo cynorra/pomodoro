@@ -83,7 +83,7 @@ const AchievementSchema = CollectionSchema(
   getId: _achievementGetId,
   getLinks: _achievementGetLinks,
   attach: _achievementAttach,
-  version: '3.1.0+1',
+  version: '3.3.0',
 );
 
 int _achievementEstimateSize(

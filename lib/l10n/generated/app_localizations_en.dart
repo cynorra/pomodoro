@@ -598,4 +598,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardNext => 'Next';
+
+  @override
+  String get onboardSkip => 'Skip';
+
+  @override
+  String get splashTagline => 'Gamified Study Cafe';
+
+  @override
+  String get rewardedAdHint => 'Earn +50 points';
+
+  @override
+  String minutesShort(int count) {
+    return '${count}m';
+  }
 }

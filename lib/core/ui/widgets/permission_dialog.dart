@@ -79,7 +79,7 @@ class PermissionDialog extends StatelessWidget {
                   onDeny!();
                 },
                 child: Text(
-                  'Daha Sonra',
+                  context.l10n.notNow,
                   style: TextStyle(
                     color: ZyraColors.onSurface.withOpacity(0.5),
                   ),

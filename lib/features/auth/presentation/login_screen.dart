@@ -10,6 +10,7 @@ import 'auth_state.dart';
 import 'signup_screen.dart';
 import '../../../l10n/l10n_extension.dart';
 import 'auth_error_text.dart';
+import '../../../core/ui/responsive.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -52,10 +53,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 60),
+                SizedBox(height: context.isShort ? 16 : 60),
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: context.scaled(100),
+                  height: context.scaled(100),
                   decoration: BoxDecoration(
                     color: ZyraColors.primary,
                     borderRadius: BorderRadius.circular(24),

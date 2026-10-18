@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import '../database/database_service.dart';
 import '../models/user_stats.dart';
 import 'user_state.dart';
@@ -10,13 +10,11 @@ final initialUserProvider = Provider<UserState>((ref) {
   return const UserState();
 });
 
-final userProvider = StateNotifierProvider<UserNotifier, UserState>((ref) {
-  final initial = ref.watch(initialUserProvider);
-  return UserNotifier(initial);
-});
+final userProvider = NotifierProvider<UserNotifier, UserState>(UserNotifier.new);
 
-class UserNotifier extends StateNotifier<UserState> {
-  UserNotifier(super.initialState);
+class UserNotifier extends Notifier<UserState> {
+  @override
+  UserState build() => ref.watch(initialUserProvider);
 
   Future<void> addPoints(int points) async {
     state = state.copyWith(totalPoints: state.totalPoints + points);

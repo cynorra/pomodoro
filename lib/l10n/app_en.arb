@@ -259,5 +259,16 @@
   "deleteAccountPermanently": "Delete Account Permanently",
   "inviteTitle": "Invite Your Friends",
   "howItWorks": "How It Works",
-  "onboardNext": "Next"
+  "onboardNext": "Next",
+  "onboardSkip": "Skip",
+  "splashTagline": "Gamified Study Cafe",
+  "rewardedAdHint": "Earn +50 points",
+  "minutesShort": "{count}m",
+  "@minutesShort": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

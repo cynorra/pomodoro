@@ -21,7 +21,7 @@ class NotificationService {
     );
 
     await _plugin.initialize(
-      const InitializationSettings(
+      settings: const InitializationSettings(
         android: androidSettings,
         iOS: iosSettings,
       ),
@@ -104,10 +104,10 @@ class NotificationService {
     );
 
     await _plugin.show(
-      0,
-      title,
-      body,
-      const NotificationDetails(
+      id: 0,
+      title: title,
+      body: body,
+      notificationDetails: const NotificationDetails(
         android: androidDetails,
         iOS: iosDetails,
       ),
@@ -133,31 +133,14 @@ class NotificationService {
       iOS: DarwinNotificationDetails(),
     );
 
-    if (Platform.isAndroid) {
-      final scheduleMode = AndroidScheduleMode.inexactAllowWhileIdle;
-
-      await _plugin.zonedSchedule(
-        1,
-        title,
-        body,
-        scheduledTime,
-        notificationDetails,
-        androidScheduleMode: scheduleMode,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-      );
-    } else {
-      await _plugin.zonedSchedule(
-        1,
-        title,
-        body,
-        scheduledTime,
-        notificationDetails,
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-      );
-    }
+    await _plugin.zonedSchedule(
+      id: 1,
+      title: title,
+      body: body,
+      scheduledDate: scheduledTime,
+      notificationDetails: notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+    );
   }
 
   static const _sessionEndId = 2;
@@ -175,11 +158,11 @@ class NotificationService {
       if (!status.isGranted) return;
 
       await _plugin.zonedSchedule(
-        _sessionEndId,
-        title,
-        body,
-        tz.TZDateTime.now(tz.local).add(delay),
-        const NotificationDetails(
+        id: _sessionEndId,
+        title: title,
+        body: body,
+        scheduledDate: tz.TZDateTime.now(tz.local).add(delay),
+        notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
             'pomodoro_channel',
             'Pomodoro Notifications',
@@ -190,15 +173,13 @@ class NotificationService {
           iOS: DarwinNotificationDetails(),
         ),
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
       );
     } catch (_) {}
   }
 
   static Future<void> cancelSessionEnd() async {
     try {
-      await _plugin.cancel(_sessionEndId);
+      await _plugin.cancel(id: _sessionEndId);
     } catch (_) {}
   }
 

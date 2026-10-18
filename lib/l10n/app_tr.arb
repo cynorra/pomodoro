@@ -194,5 +194,9 @@
   "deleteAccountPermanently": "Hesabı Kalıcı Olarak Sil",
   "inviteTitle": "Arkadaşını Davet Et",
   "howItWorks": "Nasıl Çalışır?",
-  "onboardNext": "İleri"
+  "onboardNext": "İleri",
+  "onboardSkip": "Atla",
+  "splashTagline": "Oyunlaştırılmış Çalışma Kafesi",
+  "rewardedAdHint": "+50 puan kazan",
+  "minutesShort": "{count}dk"
 }

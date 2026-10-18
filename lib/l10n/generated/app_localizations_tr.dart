@@ -596,4 +596,18 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardNext => 'İleri';
+
+  @override
+  String get onboardSkip => 'Atla';
+
+  @override
+  String get splashTagline => 'Oyunlaştırılmış Çalışma Kafesi';
+
+  @override
+  String get rewardedAdHint => '+50 puan kazan';
+
+  @override
+  String minutesShort(int count) {
+    return '${count}dk';
+  }
 }

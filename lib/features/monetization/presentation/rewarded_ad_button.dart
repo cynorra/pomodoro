@@ -64,7 +64,7 @@ class RewardedAdButton extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        '+50 puan kazan',
+                        context.l10n.rewardedAdHint,
                         style: ZyraTypography.labelSmall.copyWith(
                           color: ZyraColors.primary,
                         ),

@@ -6,6 +6,7 @@ import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../l10n/l10n_extension.dart';
 import '../../home/presentation/main_shell.dart';
+import '../../../core/ui/responsive.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -68,7 +69,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               child: TextButton(
                 onPressed: _completeOnboarding,
                 child: Text(
-                  'Atla',
+                  context.l10n.onboardSkip,
                   style: ZyraTypography.labelLarge.copyWith(
                     color: ZyraColors.onSurface.withOpacity(0.6),
                   ),
@@ -84,14 +85,20 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 },
                 itemBuilder: (context, index) {
                   final page = _pages(context)[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(32),
-                    child: Column(
+                  final compact = context.isShort;
+                  return LayoutBuilder(
+                    builder: (context, constraints) => SingleChildScrollView(
+                      padding: EdgeInsets.all(compact ? 16 : 32),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight - (compact ? 32 : 64),
+                        ),
+                        child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 160,
-                          height: 160,
+                          width: context.scaled(compact ? 100 : 160),
+                          height: context.scaled(compact ? 100 : 160),
                           decoration: BoxDecoration(
                             color: page.color.withOpacity(0.15),
                             shape: BoxShape.circle,
@@ -103,10 +110,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           child: Icon(
                             page.icon,
                             color: page.color,
-                            size: 80,
+                            size: context.scaled(compact ? 50 : 80),
                           ),
                         ),
-                        const SizedBox(height: 48),
+                        SizedBox(height: compact ? 20 : 48),
                         Text(
                           page.title,
                           style: ZyraTypography.headlineLarge.copyWith(
@@ -124,6 +131,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           textAlign: TextAlign.center,
                         ),
                       ],
+                    ),
+                      ),
                     ),
                   );
                 },

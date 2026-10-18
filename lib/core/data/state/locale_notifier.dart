@@ -6,16 +6,15 @@ final initialLocaleProvider = Provider<Locale>((ref) {
   return const Locale('en');
 });
 
-final localeProvider = StateNotifierProvider<LocaleNotifier, Locale>((ref) {
-  final initial = ref.watch(initialLocaleProvider);
-  return LocaleNotifier(initial);
-});
+final localeProvider =
+    NotifierProvider<LocaleNotifier, Locale>(LocaleNotifier.new);
 
-class LocaleNotifier extends StateNotifier<Locale> {
+class LocaleNotifier extends Notifier<Locale> {
   static const _storage = FlutterSecureStorage();
   static const _key = 'selected_locale';
 
-  LocaleNotifier(super.initialLocale);
+  @override
+  Locale build() => ref.watch(initialLocaleProvider);
 
   static Future<Locale> loadInitialLocale() async {
     try {

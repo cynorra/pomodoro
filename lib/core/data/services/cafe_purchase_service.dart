@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import '../database/database_service.dart';
 import '../models/cafe_item.dart';
 import '../state/user_notifier.dart';

@@ -63,7 +63,7 @@ const StudySessionSchema = CollectionSchema(
   getId: _studySessionGetId,
   getLinks: _studySessionGetLinks,
   attach: _studySessionAttach,
-  version: '3.1.0+1',
+  version: '3.3.0',
 );
 
 int _studySessionEstimateSize(

@@ -1,4 +1,4 @@
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import '../database/database_service.dart';
 import '../models/achievement.dart';
 import '../models/user_stats.dart';

@@ -1207,6 +1207,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next'**
   String get onboardNext;
+
+  /// No description provided for @onboardSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardSkip;
+
+  /// No description provided for @splashTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Gamified Study Cafe'**
+  String get splashTagline;
+
+  /// No description provided for @rewardedAdHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn +50 points'**
+  String get rewardedAdHint;
+
+  /// No description provided for @minutesShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}m'**
+  String minutesShort(int count);
 }
 
 class _AppLocalizationsDelegate

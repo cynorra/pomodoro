@@ -1,7 +1,7 @@
 import 'dart:math' show max;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import '../database/database_service.dart';
 import '../models/user_stats.dart';
 import '../../utils/global_exception_handler.dart';

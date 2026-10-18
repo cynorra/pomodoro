@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../zyra_theme.dart';
+import '../../../l10n/l10n_extension.dart';
+import '../responsive.dart';
 
 class AnimatedSplashOverlay extends StatefulWidget {
   final VoidCallback onComplete;
@@ -68,8 +70,8 @@ class _AnimatedSplashOverlayState extends State<AnimatedSplashOverlay>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
-                      width: 100,
-                      height: 100,
+                      width: context.scaled(100),
+                      height: context.scaled(100),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: const LinearGradient(
@@ -103,7 +105,7 @@ class _AnimatedSplashOverlayState extends State<AnimatedSplashOverlay>
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Gamified Study Cafe',
+                      context.l10n.splashTagline,
                       style: ZyraTypography.bodyMedium.copyWith(
                         color: ZyraColors.onSurface.withOpacity(0.6),
                       ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/l10n_extension.dart';
+import '../../../core/ui/responsive.dart';
 
 const _rankAvatars = ['🥇', '🥈', '🥉'];
 
@@ -132,9 +133,9 @@ class _TopThreePodium extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _PodiumItem(entry: entries[1], height: 120, order: 2),
-          _PodiumItem(entry: entries[0], height: 160, order: 1),
-          _PodiumItem(entry: entries[2], height: 100, order: 3),
+          _PodiumItem(entry: entries[1], height: context.scaled(120), order: 2),
+          _PodiumItem(entry: entries[0], height: context.scaled(160), order: 1),
+          _PodiumItem(entry: entries[2], height: context.scaled(100), order: 3),
         ],
       ),
     );
@@ -170,7 +171,7 @@ class _PodiumItem extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(entry.avatar, style: const TextStyle(fontSize: 48)),
+        Text(entry.avatar, style: TextStyle(fontSize: context.scaled(48))),
         const SizedBox(height: 8),
         Text(
           entry.name,
@@ -189,7 +190,7 @@ class _PodiumItem extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Container(
-          width: 80,
+          width: context.scaled(80),
           height: height,
           decoration: BoxDecoration(
             gradient: LinearGradient(

@@ -64,7 +64,7 @@ const UserStatsSchema = CollectionSchema(
   getId: _userStatsGetId,
   getLinks: _userStatsGetLinks,
   attach: _userStatsAttach,
-  version: '3.1.0+1',
+  version: '3.3.0',
 );
 
 int _userStatsEstimateSize(
