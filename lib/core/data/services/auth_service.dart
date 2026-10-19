@@ -183,9 +183,18 @@ class AuthService {
     }
   }
 
-  static String get accountDeletionWebUrl => 'https://cynorra.github.io/studycafe/delete-account.html';
-  static String get privacyPolicyUrl => 'https://cynorra.github.io/studycafe/privacy.html';
-  static String get termsOfServiceUrl => 'https://cynorra.github.io/studycafe/terms.html';
+  static const _legalBase = 'https://cynorra.github.io/studycafe/';
+
+  /// Legal pages exist in English and Turkish; [languageCode] picks one.
+  static String _legalUrl(String page, String languageCode) =>
+      '$_legalBase$page${languageCode == 'tr' ? '-tr' : ''}.html';
+
+  static String accountDeletionWebUrl(String languageCode) =>
+      _legalUrl('delete-account', languageCode);
+  static String privacyPolicyUrl(String languageCode) =>
+      _legalUrl('privacy', languageCode);
+  static String termsOfServiceUrl(String languageCode) =>
+      _legalUrl('terms', languageCode);
 
   static String _mapAuthError(String code) {
     switch (code) {

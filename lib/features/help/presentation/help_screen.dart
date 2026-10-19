@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/data/services/auth_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -88,7 +89,7 @@ class HelpScreen extends StatelessWidget {
                       child: _LinkButton(
                         label: context.l10n.privacyPolicy,
                         onTap: () =>
-                            _launchUrl('https://cynorra.github.io/studycafe/privacy.html'),
+                            _launchUrl(AuthService.privacyPolicyUrl(context.l10n.localeName)),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -96,7 +97,7 @@ class HelpScreen extends StatelessWidget {
                       child: _LinkButton(
                         label: context.l10n.termsOfService,
                         onTap: () =>
-                            _launchUrl('https://cynorra.github.io/studycafe/terms.html'),
+                            _launchUrl(AuthService.termsOfServiceUrl(context.l10n.localeName)),
                       ),
                     ),
                   ],

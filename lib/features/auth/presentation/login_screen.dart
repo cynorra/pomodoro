@@ -240,7 +240,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () => _openUrl(AuthService.privacyPolicyUrl),
+                      onPressed: () => _openUrl(AuthService.privacyPolicyUrl(l10n.localeName)),
                       child: Text(
                         l10n.privacyPolicy,
                         style: ZyraTypography.labelSmall.copyWith(
@@ -250,7 +250,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     const SizedBox(width: 16),
                     TextButton(
-                      onPressed: () => _openUrl(AuthService.termsOfServiceUrl),
+                      onPressed: () => _openUrl(AuthService.termsOfServiceUrl(l10n.localeName)),
                       child: Text(
                         l10n.termsOfService,
                         style: ZyraTypography.labelSmall.copyWith(

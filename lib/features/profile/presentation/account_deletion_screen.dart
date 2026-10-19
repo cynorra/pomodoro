@@ -122,13 +122,13 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () async {
-                  final uri = Uri.parse(AuthService.accountDeletionWebUrl);
+                  final uri = Uri.parse(AuthService.accountDeletionWebUrl(context.l10n.localeName));
                   if (await canLaunchUrl(uri)) {
                     await launchUrl(uri);
                   }
                 },
                 child: Text(
-                  AuthService.accountDeletionWebUrl,
+                  AuthService.accountDeletionWebUrl(context.l10n.localeName),
                   style: ZyraTypography.labelLarge.copyWith(
                     color: ZyraColors.primary,
                   ),
