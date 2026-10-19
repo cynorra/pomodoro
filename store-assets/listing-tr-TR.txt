@@ -2,16 +2,16 @@ TITLE
 Study Cafe: Pomodoro Sayacı
 
 SHORT
-Pomodoro odaklanma ve ders çalışma sayacı. Puan kazan, seri yap, kafeni büyüt.
+Pomodoro timer ve ders çalışma sayacı. Puan kazan, seri yap, kafeni büyüt.
 
 FULL
-Study Cafe, Android için ücretsiz bir pomodoro sayacı ve ders çalışma zamanlayıcısıdır. 25 dakika odaklan, 5 dakika mola ver ve kazandığın puanlarla kendi sanal kafeni büyüt. Öğrenciler, uzaktan çalışanlar ve odaklanmak, günlük çalışma alışkanlığı kazanmak isteyen herkes için tasarlandı.
+Study Cafe, Android için ücretsiz bir pomodoro timer uygulaması (pomodoro sayacı) ve ders çalışma zamanlayıcısıdır. 25 dakika odaklan, 5 dakika mola ver ve kazandığın puanlarla kendi sanal kafeni büyüt. Öğrenciler, uzaktan çalışanlar ve odaklanmak, günlük çalışma alışkanlığı kazanmak isteyen herkes için tasarlandı.
 
 POMODORO TEKNİĞİ NEDİR?
 Pomodoro tekniği, işi aralarda molalar olan kısa odaklanma seanslarına böler. Study Cafe'de bir odaklanma seansı 25 dakika, kısa mola 5 dakika sürer; her 4 odaklanma seansından sonra 15 dakikalık uzun mola gelir. Sayaç seanslar arasında senin yerine geçiş yapar.
 
 NEDEN STUDY CAFE?
-- Odaklanma, kısa mola ve uzun mola seanslarını otomatik değiştiren sayaç
+- Odaklanma, kısa mola ve uzun mola seanslarını otomatik değiştiren pomodoro saati
 - Biten her seans için puan; puanlarla sanal kafen için espresso, yeşil çay ve cheesecake al
 - Düzenli çalışmayı ödüllendiren günlük seriler ve başarımlar
 - Çalışırken sakinleştiren ortam sesleri: yağmur, şömine ve kahverengi gürültü

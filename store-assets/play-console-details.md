@@ -26,8 +26,8 @@ Everything decided for the store listing and the Play Console forms (as of 2026-
 
 ## Store listing texts
 Full texts: `listing-en-US.txt`, `listing-tr-TR.txt`, `play-listing.csv` (same folder).
-- en-US short (78): Pomodoro focus timer & study timer. Earn points, keep streaks, grow your cafe.
-- tr-TR short (78): Pomodoro odaklanma ve ders çalışma sayacı. Puan kazan, seri yap, kafeni büyüt.
+- en-US short (78): Pomodoro timer app & study timer. Earn points, keep streaks, grow your cafe.
+- tr-TR short (78): Pomodoro timer ve ders çalışma sayacı. Puan kazan, seri yap, kafeni büyüt.
 
 ## Graphics
 - App icon 512x512: `icon-512.png`
