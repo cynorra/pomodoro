@@ -1,0 +1,32 @@
+TITLE
+Study Cafe: Pomodoro Sayacı
+
+SHORT
+Pomodoro odaklanma ve ders çalışma sayacı. Puan kazan, seri yap, kafeni büyüt.
+
+FULL
+Study Cafe, Android için ücretsiz bir pomodoro sayacı ve ders çalışma zamanlayıcısıdır. 25 dakika odaklan, 5 dakika mola ver ve kazandığın puanlarla kendi sanal kafeni büyüt. Öğrenciler, uzaktan çalışanlar ve odaklanmak, günlük çalışma alışkanlığı kazanmak isteyen herkes için tasarlandı.
+
+POMODORO TEKNİĞİ NEDİR?
+Pomodoro tekniği, işi aralarda molalar olan kısa odaklanma seanslarına böler. Study Cafe'de bir odaklanma seansı 25 dakika, kısa mola 5 dakika sürer; her 4 odaklanma seansından sonra 15 dakikalık uzun mola gelir. Sayaç seanslar arasında senin yerine geçiş yapar.
+
+NEDEN STUDY CAFE?
+- Odaklanma, kısa mola ve uzun mola seanslarını otomatik değiştiren sayaç
+- Biten her seans için puan; puanlarla sanal kafeni süsleyen öğeler al
+- Düzenli çalışmayı ödüllendiren günlük seriler ve başarımlar
+- Çalışırken sakinleştiren ortam sesleri: yağmur, şömine ve kahverengi gürültü
+- İstatistikler: çalışma süreni haftalık, aylık ve tüm zamanlar için gör
+- İsteğe bağlı liderlik tablosu: e-posta veya Google ile giriş yap, puanlarını diğer öğrencilerle karşılaştır
+- Uygulama arka plandayken bile seans sonu hatırlatıcıları
+- İlerlemeni kart olarak arkadaşlarınla paylaş
+- Türkçe ve İngilizce dil desteği
+
+KISA CEVAPLAR
+Study Cafe ücretsiz mi? Evet. Ücretsizdir ve reklamlarla desteklenir. İsteğe bağlı ödüllü reklam bonus puan verir.
+Hesap açmam gerekir mi? Hayır. Sayaç, kafe, seriler, sesler ve istatistikler hesapsız çalışır. Hesap yalnızca liderlik tablosu için gerekir.
+Kimler için? Sınavlara hazırlanan öğrenciler, derin çalışma yapanlar ve ders çalışmak ya da çalışmak için basit bir odaklanma sayacı isteyen herkes.
+Hangi diller destekleniyor? Türkçe ve İngilizce.
+Hesabımı nasıl silerim? Profil > Hesabı Sil bölümünden veya https://cynorra.github.io/studycafe/delete-account-tr.html adresinden.
+
+Gizlilik politikası: https://cynorra.github.io/studycafe/privacy-tr.html
+İletişim: eren.gp54@gmail.com

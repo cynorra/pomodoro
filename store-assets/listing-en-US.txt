@@ -1,0 +1,32 @@
+TITLE
+Study Cafe: Pomodoro Timer
+
+SHORT
+Pomodoro focus timer & study timer. Earn points, keep streaks, grow your cafe.
+
+FULL
+Study Cafe is a free Pomodoro timer and study timer for Android. Focus for 25 minutes, take a 5-minute break, and earn points that grow your own virtual cafe. It is made for students, remote workers and anyone who wants to stay focused and build a daily study habit.
+
+WHAT IS THE POMODORO TECHNIQUE?
+The Pomodoro technique splits work into short focus sessions with breaks in between. In Study Cafe a focus session lasts 25 minutes, a short break lasts 5 minutes, and after every 4 focus sessions you get a 15-minute long break. The timer switches between them for you.
+
+WHY STUDY CAFE?
+- Focus timer with automatic focus, short break and long break sessions
+- Points for every finished session, spent on items that decorate your virtual cafe
+- Daily streaks and achievements that reward consistent studying
+- Calming ambient sounds while you study: rain, fireplace and brown noise
+- Statistics: see your study time by week, month and all time
+- Optional leaderboard: sign in with email or Google to compare points with other students
+- Session-end reminders, even when the app is in the background
+- Share your progress as a card with friends
+- Available in English and Turkish
+
+QUICK ANSWERS
+Is Study Cafe free? Yes. It is free and supported by ads. An optional rewarded ad gives bonus points.
+Do I need an account? No. The timer, cafe, streaks, sounds and statistics work without one. An account is only needed for the leaderboard.
+Who is it for? Students preparing for exams, people doing deep work, and anyone who wants a simple focus timer for studying or working.
+Which languages are supported? English and Turkish.
+How do I delete my account? Open Profile > Delete Account, or follow https://cynorra.github.io/studycafe/delete-account.html
+
+Privacy policy: https://cynorra.github.io/studycafe/privacy.html
+Contact: eren.gp54@gmail.com

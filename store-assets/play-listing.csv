@@ -1,49 +1,51 @@
 Language,Title,Short description,Full description
-en-US,Study Cafe: Pomodoro Timer,"Cozy pomodoro focus timer: earn points, build streaks, furnish your cafe.","Study Cafe turns focused studying into a cozy habit. Start a pomodoro, stay on task, take a break, and watch your virtual cafe grow.
+en-US,Study Cafe: Pomodoro Timer,"Pomodoro focus timer & study timer. Earn points, keep streaks, grow your cafe.","Study Cafe is a free Pomodoro timer and study timer for Android. Focus for 25 minutes, take a 5-minute break, and earn points that grow your own virtual cafe. It is made for students, remote workers and anyone who wants to stay focused and build a daily study habit.
 
-HOW IT WORKS
-- Pick a focus session, then enjoy a short break. Every few rounds you get a longer one.
-- Earn points for every finished session and break.
-- Spend points on items that decorate your virtual cafe.
-- Keep your daily streak alive and unlock achievements.
+WHAT IS THE POMODORO TECHNIQUE?
+The Pomodoro technique splits work into short focus sessions with breaks in between. In Study Cafe a focus session lasts 25 minutes, a short break lasts 5 minutes, and after every 4 focus sessions you get a 15-minute long break. The timer switches between them for you.
 
-FEATURES
-- Pomodoro timer with focus, short break and long break sessions
-- Ambient sounds for studying
-- Points, daily streaks and achievements
-- A virtual cafe you decorate with the points you earn
-- Statistics that show how much you studied
-- Optional account: sign in with email or Google to appear on the leaderboard and back up your progress
-- Share your progress as a card with friends
+WHY STUDY CAFE?
+- Focus timer with automatic focus, short break and long break sessions
+- Points for every finished session, spent on items that decorate your virtual cafe
+- Daily streaks and achievements that reward consistent studying
+- Calming ambient sounds while you study: rain, fireplace and brown noise
+- Statistics: see your study time by week, month and all time
+- Optional leaderboard: sign in with email or Google to compare points with other students
 - Session-end reminders, even when the app is in the background
-- English and Turkish
+- Share your progress as a card with friends
+- Available in English and Turkish
 
-PRIVACY AND ADS
-Study Cafe is free and supported by ads. Watch an optional rewarded ad for bonus points. You can use the app without an account, and you can delete your account and its cloud data any time from Profile > Delete Account, or on our website.
+QUICK ANSWERS
+Is Study Cafe free? Yes. It is free and supported by ads. An optional rewarded ad gives bonus points.
+Do I need an account? No. The timer, cafe, streaks, sounds and statistics work without one. An account is only needed for the leaderboard.
+Who is it for? Students preparing for exams, people doing deep work, and anyone who wants a simple focus timer for studying or working.
+Which languages are supported? English and Turkish.
+How do I delete my account? Open Profile > Delete Account, or follow https://cynorra.github.io/studycafe/delete-account.html
 
 Privacy policy: https://cynorra.github.io/studycafe/privacy.html
 Contact: eren.gp54@gmail.com"
-tr-TR,Study Cafe: Pomodoro Sayacı,"Rahat bir pomodoro zamanlayıcı: puan kazan, seri yap, kafeni döşe.","Study Cafe, odaklanarak ders çalışmayı keyifli bir alışkanlığa dönüştürür. Bir pomodoro başlat, işine odaklan, mola ver ve sanal kafenin büyüdüğünü izle.
+tr-TR,Study Cafe: Pomodoro Sayacı,"Pomodoro odaklanma ve ders çalışma sayacı. Puan kazan, seri yap, kafeni büyüt.","Study Cafe, Android için ücretsiz bir pomodoro sayacı ve ders çalışma zamanlayıcısıdır. 25 dakika odaklan, 5 dakika mola ver ve kazandığın puanlarla kendi sanal kafeni büyüt. Öğrenciler, uzaktan çalışanlar ve odaklanmak, günlük çalışma alışkanlığı kazanmak isteyen herkes için tasarlandı.
 
-NASIL ÇALIŞIR
-- Bir odaklanma seansı seç, ardından kısa bir mola ver. Birkaç turda bir daha uzun bir mola gelir.
-- Biten her seans ve mola için puan kazan.
-- Puanlarınla sanal kafeni süsleyen öğeler al.
-- Günlük serini koru ve başarımların kilidini aç.
+POMODORO TEKNİĞİ NEDİR?
+Pomodoro tekniği, işi aralarda molalar olan kısa odaklanma seanslarına böler. Study Cafe'de bir odaklanma seansı 25 dakika, kısa mola 5 dakika sürer; her 4 odaklanma seansından sonra 15 dakikalık uzun mola gelir. Sayaç seanslar arasında senin yerine geçiş yapar.
 
-ÖZELLİKLER
-- Odaklanma, kısa mola ve uzun mola seanslı pomodoro zamanlayıcı
-- Ders çalışırken dinleyebileceğin ortam sesleri
-- Puanlar, günlük seriler ve başarımlar
-- Kazandığın puanlarla döşediğin sanal bir kafe
-- Ne kadar çalıştığını gösteren istatistikler
-- İsteğe bağlı hesap: e-posta veya Google ile giriş yap, liderlik tablosunda yer al ve ilerlemeni yedekle
-- İlerlemeni kart olarak arkadaşlarınla paylaş
+NEDEN STUDY CAFE?
+- Odaklanma, kısa mola ve uzun mola seanslarını otomatik değiştiren sayaç
+- Biten her seans için puan; puanlarla sanal kafeni süsleyen öğeler al
+- Düzenli çalışmayı ödüllendiren günlük seriler ve başarımlar
+- Çalışırken sakinleştiren ortam sesleri: yağmur, şömine ve kahverengi gürültü
+- İstatistikler: çalışma süreni haftalık, aylık ve tüm zamanlar için gör
+- İsteğe bağlı liderlik tablosu: e-posta veya Google ile giriş yap, puanlarını diğer öğrencilerle karşılaştır
 - Uygulama arka plandayken bile seans sonu hatırlatıcıları
-- Türkçe ve İngilizce
+- İlerlemeni kart olarak arkadaşlarınla paylaş
+- Türkçe ve İngilizce dil desteği
 
-GİZLİLİK VE REKLAMLAR
-Study Cafe ücretsizdir ve reklamlarla desteklenir. İsteğe bağlı ödüllü reklam izleyerek bonus puan kazanabilirsin. Uygulamayı hesap açmadan kullanabilirsin; hesabını ve bulut verilerini istediğin zaman Profil > Hesabı Sil bölümünden veya web sitemizden silebilirsin.
+KISA CEVAPLAR
+Study Cafe ücretsiz mi? Evet. Ücretsizdir ve reklamlarla desteklenir. İsteğe bağlı ödüllü reklam bonus puan verir.
+Hesap açmam gerekir mi? Hayır. Sayaç, kafe, seriler, sesler ve istatistikler hesapsız çalışır. Hesap yalnızca liderlik tablosu için gerekir.
+Kimler için? Sınavlara hazırlanan öğrenciler, derin çalışma yapanlar ve ders çalışmak ya da çalışmak için basit bir odaklanma sayacı isteyen herkes.
+Hangi diller destekleniyor? Türkçe ve İngilizce.
+Hesabımı nasıl silerim? Profil > Hesabı Sil bölümünden veya https://cynorra.github.io/studycafe/delete-account-tr.html adresinden.
 
 Gizlilik politikası: https://cynorra.github.io/studycafe/privacy-tr.html
 İletişim: eren.gp54@gmail.com"
