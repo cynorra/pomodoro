@@ -5,10 +5,10 @@ part 'cafe_item.g.dart';
 @collection
 class CafeItem {
   Id id = Isar.autoIncrement;
-  
+
   @Index(unique: true)
   late String itemId;
-  
+
   late String nameTr;
   late String nameEn;
   late int cost;

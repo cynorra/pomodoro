@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/notification_service.dart';
+import '../../social/presentation/social_providers.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/state/locale_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -25,7 +26,7 @@ class SettingsScreen extends ConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -59,6 +60,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
             ),
             const _NotificationsTile(),
+            const _FocusStatusTile(),
             const _AdPrivacyTile(),
           ],
         ),
@@ -68,6 +70,53 @@ class SettingsScreen extends ConsumerWidget {
 
   bool _isValidLocale(Locale locale) {
     return locale.languageCode == 'tr' || locale.languageCode == 'en';
+  }
+}
+
+/// Opt-in switch: while on, friends can see this user is focusing and send
+/// treats. Off by default because it shares the display name and session end.
+class _FocusStatusTile extends ConsumerWidget {
+  const _FocusStatusTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final on = ref.watch(focusStatusProvider);
+    final signedIn = ref.watch(signedInProvider);
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SettingsTile(
+            icon: Icons.local_cafe_outlined,
+            title: l10n.focusStatusTitle,
+            trailing: Switch(
+              value: on,
+              onChanged: (value) {
+                if (value && !signedIn) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.focusStatusSignIn)),
+                  );
+                  return;
+                }
+                ref.read(focusStatusProvider.notifier).set(value);
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
+            child: Text(
+              l10n.focusStatusHelp,
+              style: ZyraTypography.labelSmall.copyWith(
+                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

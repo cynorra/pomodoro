@@ -116,8 +116,7 @@ class AdService {
     _focusSessionsSinceAd++;
     if (_focusSessionsSinceAd < _focusSessionsPerInterstitial) return;
     final last = _lastInterstitialAt;
-    if (last != null &&
-        DateTime.now().difference(last) < _minInterstitialGap) {
+    if (last != null && DateTime.now().difference(last) < _minInterstitialGap) {
       return;
     }
     final ad = _interstitialAd;

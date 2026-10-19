@@ -20,7 +20,8 @@ class CafePurchaseService {
   }) async {
     try {
       final isar = DatabaseService.instance;
-      final item = await isar.cafeItems.filter().itemIdEqualTo(itemId).findFirst();
+      final item =
+          await isar.cafeItems.filter().itemIdEqualTo(itemId).findFirst();
 
       if (item == null) {
         return PurchaseResult.itemNotFound;

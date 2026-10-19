@@ -10,6 +10,7 @@ import '../../../core/data/services/cafe_purchase_service.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../monetization/presentation/native_ad_card.dart';
 import '../../monetization/presentation/rewarded_ad_button.dart';
+import '../../social/presentation/send_treat_sheet.dart';
 import 'cafe_notifier.dart';
 
 class VirtualCafeScreen extends ConsumerStatefulWidget {
@@ -71,6 +72,16 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: const RewardedAdButton(),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: OutlinedButton.icon(
+                  onPressed: () => showSendTreatSheet(context),
+                  icon: const Icon(Icons.card_giftcard_rounded),
+                  label: Text(l10n.sendTreat),
+                ),
               ),
             ),
             SliverPadding(

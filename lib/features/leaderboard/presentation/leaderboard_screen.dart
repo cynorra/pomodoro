@@ -106,8 +106,7 @@ class LeaderboardScreen extends ConsumerWidget {
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemCount: list.length > 3 ? list.length - 3 : 0,
-                  itemBuilder: (context, index) =>
-                      _LeaderboardTile(
+                  itemBuilder: (context, index) => _LeaderboardTile(
                     entry: list[index + 3],
                     onMore: () => _showActions(context, ref, list[index + 3]),
                   ),
@@ -183,7 +182,8 @@ Future<void> _showActions(
     ),
   );
   if (reason == null) return;
-  final ok = await ModerationService.reportPlayer(uid: entry.uid, reason: reason);
+  final ok =
+      await ModerationService.reportPlayer(uid: entry.uid, reason: reason);
   messenger.showSnackBar(
     SnackBar(content: Text(ok ? l10n.reportSent : l10n.reportFailed)),
   );

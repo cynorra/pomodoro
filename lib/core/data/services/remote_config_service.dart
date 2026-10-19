@@ -60,6 +60,8 @@ class RemoteConfigService {
         max: 1000,
         fallback: 2,
       );
-  static bool get enableAmbientSounds => _remoteConfig.getBool('enable_ambient_sounds');
-  static bool get showMotivationMessages => _remoteConfig.getBool('show_motivation_messages');
+  static bool get enableAmbientSounds =>
+      _remoteConfig.getBool('enable_ambient_sounds');
+  static bool get showMotivationMessages =>
+      _remoteConfig.getBool('show_motivation_messages');
 }

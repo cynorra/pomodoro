@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../../features/social/data/gift_api.dart';
 import '../../../features/pomodoro/domain/pomodoro_rules.dart';
 import '../../utils/global_exception_handler.dart';
 
@@ -68,7 +69,8 @@ class AuthService {
   static bool _googleInitialized = false;
 
   static bool get signedInWithGoogle =>
-      _auth.currentUser?.providerData.any((p) => p.providerId == 'google.com') ??
+      _auth.currentUser?.providerData
+          .any((p) => p.providerId == 'google.com') ??
       false;
 
   /// Shows the Google account picker and returns a Firebase credential.
@@ -124,6 +126,8 @@ class AuthService {
 
   static Future<void> signOut() async {
     try {
+      // Stop advertising a running focus session before the account goes away.
+      await FirebaseGiftApi().stopFocus();
       if (_googleInitialized) await GoogleSignIn.instance.signOut();
       await _auth.signOut();
     } catch (e, stack) {
@@ -152,6 +156,7 @@ class AuthService {
         await user.reauthenticateWithCredential(credential);
       }
 
+      await _deleteSocialData(user.uid);
       await _firestore.collection('leaderboard').doc(user.uid).delete();
       await _firestore.collection('users').doc(user.uid).delete();
       await user.delete();
@@ -162,7 +167,7 @@ class AuthService {
       return AuthResult.error('delete-failed');
     } on FirebaseAuthException catch (e) {
       GlobalExceptionHandler.logError(e, e.stackTrace, 'Delete account failed');
-      
+
       if (e.code == 'requires-recent-login') {
         return AuthResult.error('requires-recent-login');
       }
@@ -171,6 +176,21 @@ class AuthService {
       GlobalExceptionHandler.logError(e, stack, 'Delete account failed');
       return AuthResult.error('delete-failed');
     }
+  }
+
+  /// Removes the focus status and the treats sent to this account. Failures
+  /// here must not block deleting the account itself.
+  static Future<void> _deleteSocialData(String uid) async {
+    try {
+      await _firestore.collection('presence').doc(uid).delete();
+      final gifts = await _firestore
+          .collection('gifts')
+          .where('toUid', isEqualTo: uid)
+          .get();
+      for (final gift in gifts.docs) {
+        await gift.reference.delete();
+      }
+    } catch (_) {}
   }
 
   static Future<AuthResult> sendPasswordReset(String email) async {
@@ -230,5 +250,6 @@ class AuthResult {
   static const cancelled = 'cancelled';
 
   static final success = AuthResult._(isSuccess: true);
-  static AuthResult error(String message) => AuthResult._(isSuccess: false, errorMessage: message);
+  static AuthResult error(String message) =>
+      AuthResult._(isSuccess: false, errorMessage: message);
 }

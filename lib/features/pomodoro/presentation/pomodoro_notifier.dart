@@ -16,6 +16,7 @@ import '../../../core/data/state/achievement_event_notifier.dart';
 import '../../../core/data/services/haptic_service.dart';
 import '../../../core/data/services/notification_service.dart';
 import '../../../core/utils/global_exception_handler.dart';
+import '../../social/presentation/social_providers.dart';
 import '../domain/pomodoro_rules.dart';
 import '../domain/pomodoro_state.dart';
 
@@ -103,17 +104,29 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       _timer = null;
       _deadline = null;
       unawaited(NotificationService.cancelSessionEnd());
+      _clearPresence();
       state = state.copyWith(isRunning: false);
     } else {
       if (state.remainingSeconds <= 0) return;
       state = state.copyWith(isRunning: true);
       _startTimer();
+      _publishPresence();
       unawaited(
         NotificationService.requestPermissionIfNeeded()
             .then((_) => state.isRunning ? _scheduleEndNotification() : null),
       );
     }
   }
+
+  /// Lets friends who are allowed to see it know a focus session is running.
+  void _publishPresence() {
+    if (state.sessionType != SessionType.focus) return;
+    final endsAt =
+        DateTime.now().add(Duration(seconds: state.remainingSeconds));
+    unawaited(publishFocusStatus(ref, endsAt));
+  }
+
+  void _clearPresence() => unawaited(clearFocusStatus(ref));
 
   /// Stops the timer and puts the current session back to its full length.
   /// No points are given for an unfinished session.
@@ -123,6 +136,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
     _timer = null;
     _deadline = null;
     unawaited(NotificationService.cancelSessionEnd());
+    _clearPresence();
     state = state.copyWith(
       isRunning: false,
       remainingSeconds: _getDuration(state.sessionType) * 60,
@@ -162,6 +176,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       _deadline = null;
 
       unawaited(NotificationService.cancelSessionEnd());
+      _clearPresence();
       _checkDailyReset();
 
       final isFocus = state.sessionType == SessionType.focus;

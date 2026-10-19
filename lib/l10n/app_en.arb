@@ -139,6 +139,136 @@
   "notificationsOnHelp": "Study Cafe tells you when a focus session or a break ends. To change this, open your phone's Settings > Apps > Study Cafe > Notifications.",
   "notificationsOffHelp": "Notifications are turned off. To get a reminder when a session ends, open your phone's Settings > Apps > Study Cafe > Notifications and turn them on.",
   "shareAction": "Share",
+  "inviteYourCode": "Your invite code",
+  "inviteMessageWithCode": "Start focusing with Study Cafe! Use my code {code} to get +100 points: {link}",
+  "@inviteMessageWithCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteEnterCodeTitle": "Have a friend's code?",
+  "inviteCodeHint": "Invite code",
+  "inviteRedeem": "Redeem",
+  "inviteRedeemed": "🎉 Code accepted! +{points} points",
+  "@inviteRedeemed": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "inviteCodeInvalid": "That code is not valid. Codes have 6 letters and numbers.",
+  "inviteCodeOwn": "You can't use your own code.",
+  "inviteCodeAlready": "You have already used an invite code.",
+  "inviteCodeNotFound": "We couldn't find that code.",
+  "inviteSignInRequired": "Log in to get your invite code and earn points.",
+  "inviteRewardEarned": "🎉 {count, plural, =1{A friend joined} other{{count} friends joined}} with your code! +{points} points",
+  "@inviteRewardEarned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "itemEspresso": "Espresso",
+  "itemGreenTea": "Green Tea",
+  "itemCheesecake": "Cheesecake",
+  "giftReceived": "{name} sent you {item}",
+  "@giftReceived": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "giftToastMany": "{count} new treats from friends 🎁",
+  "@giftToastMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "giftToastView": "View",
+  "giftsEmpty": "No treats yet. When a friend sends you one, it will show up here.",
+  "giftsClearAll": "Clear all",
+  "giftsClearConfirm": "Remove all notifications?",
+  "timeJustNow": "Just now",
+  "timeMinutesAgo": "{count} min ago",
+  "@timeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeHoursAgo": "{count} h ago",
+  "@timeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeDaysAgo": "{count} d ago",
+  "@timeDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sendTreat": "Send a treat",
+  "sendTreatTitle": "Send a treat to a friend",
+  "sendTreatChoose": "Choose a treat",
+  "sendTreatCost": "{cost} points",
+  "@sendTreatCost": {
+    "placeholders": {
+      "cost": {
+        "type": "int"
+      }
+    }
+  },
+  "sendTreatFriends": "Focusing right now",
+  "sendTreatInfo": "Only friends who are in a focus session right now can receive treats.",
+  "sendTreatNobody": "Nobody is focusing right now. Check back in a bit!",
+  "sendTreatMinLeft": "{minutes} min left",
+  "@sendTreatMinLeft": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "sendTreatSend": "Send",
+  "sendTreatSent": "{emoji} Sent to {name}!",
+  "@sendTreatSent": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sendTreatUnavailable": "They just stopped focusing, or you already sent them a treat a moment ago.",
+  "sendTreatSignIn": "Log in to send treats to friends.",
+  "sendTreatRefresh": "Refresh",
+  "focusStatusTitle": "Show when I'm focusing",
+  "focusStatusHelp": "Friends can send you treats while a focus session is running. Other users can see your display name and when your session ends.",
+  "focusStatusSignIn": "Log in to turn this on.",
   "authErrorGeneric": "An error occurred",
   "authSignInFailed": "Could not sign in",
   "authSignUpFailed": "Could not sign up",
@@ -230,10 +360,10 @@
       }
     }
   },
-  "inviteBonus": "Studying is better together. Share Study Cafe with your friends!",
-  "inviteStep1": "Share the link with your friend",
-  "inviteStep2": "Your friend downloads the app",
-  "inviteStep3": "Study together and keep each other motivated!",
+  "inviteBonus": "You get +200 points for every friend who joins with your code, and they get +100!",
+  "inviteStep1": "Share your invite code with a friend",
+  "inviteStep2": "They sign up and enter your code on this screen",
+  "inviteStep3": "You get +200 points and they get +100!",
   "inviteMessage": "Start focusing with Study Cafe! {link}",
   "@inviteMessage": {
     "placeholders": {

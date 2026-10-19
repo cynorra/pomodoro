@@ -47,10 +47,8 @@ class StreakService {
 
         if (diff == 0) return;
 
-        stats.currentStreak =
-            diff == 1 ? stats.currentStreak + 1 : 1;
-        stats.longestStreak =
-            max(stats.longestStreak, stats.currentStreak);
+        stats.currentStreak = diff == 1 ? stats.currentStreak + 1 : 1;
+        stats.longestStreak = max(stats.longestStreak, stats.currentStreak);
         stats.lastStudyDate = nowUtc;
         stats.isUtcMigrated = true;
 
@@ -68,7 +66,10 @@ class StreakService {
       if (user == null) return;
       final stats =
           await DatabaseService.instance.userStats.where().findFirst();
-      await FirebaseFirestore.instance.collection('leaderboard').doc(user.uid).set({
+      await FirebaseFirestore.instance
+          .collection('leaderboard')
+          .doc(user.uid)
+          .set({
         'currentStreak': stats == null
             ? 0
             : effectiveStreak(

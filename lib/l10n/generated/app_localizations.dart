@@ -830,6 +830,252 @@ abstract class AppLocalizations {
   /// **'Share'**
   String get shareAction;
 
+  /// No description provided for @inviteYourCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Your invite code'**
+  String get inviteYourCode;
+
+  /// No description provided for @inviteMessageWithCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Start focusing with Study Cafe! Use my code {code} to get +100 points: {link}'**
+  String inviteMessageWithCode(String code, String link);
+
+  /// No description provided for @inviteEnterCodeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a friend\'s code?'**
+  String get inviteEnterCodeTitle;
+
+  /// No description provided for @inviteCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code'**
+  String get inviteCodeHint;
+
+  /// No description provided for @inviteRedeem.
+  ///
+  /// In en, this message translates to:
+  /// **'Redeem'**
+  String get inviteRedeem;
+
+  /// No description provided for @inviteRedeemed.
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 Code accepted! +{points} points'**
+  String inviteRedeemed(int points);
+
+  /// No description provided for @inviteCodeInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'That code is not valid. Codes have 6 letters and numbers.'**
+  String get inviteCodeInvalid;
+
+  /// No description provided for @inviteCodeOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'You can\'t use your own code.'**
+  String get inviteCodeOwn;
+
+  /// No description provided for @inviteCodeAlready.
+  ///
+  /// In en, this message translates to:
+  /// **'You have already used an invite code.'**
+  String get inviteCodeAlready;
+
+  /// No description provided for @inviteCodeNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t find that code.'**
+  String get inviteCodeNotFound;
+
+  /// No description provided for @inviteSignInRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to get your invite code and earn points.'**
+  String get inviteSignInRequired;
+
+  /// No description provided for @inviteRewardEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 {count, plural, =1{A friend joined} other{{count} friends joined}} with your code! +{points} points'**
+  String inviteRewardEarned(int count, int points);
+
+  /// No description provided for @itemEspresso.
+  ///
+  /// In en, this message translates to:
+  /// **'Espresso'**
+  String get itemEspresso;
+
+  /// No description provided for @itemGreenTea.
+  ///
+  /// In en, this message translates to:
+  /// **'Green Tea'**
+  String get itemGreenTea;
+
+  /// No description provided for @itemCheesecake.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheesecake'**
+  String get itemCheesecake;
+
+  /// No description provided for @giftReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} sent you {item}'**
+  String giftReceived(String name, String item);
+
+  /// No description provided for @giftToastMany.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} new treats from friends 🎁'**
+  String giftToastMany(int count);
+
+  /// No description provided for @giftToastView.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get giftToastView;
+
+  /// No description provided for @giftsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No treats yet. When a friend sends you one, it will show up here.'**
+  String get giftsEmpty;
+
+  /// No description provided for @giftsClearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get giftsClearAll;
+
+  /// No description provided for @giftsClearConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove all notifications?'**
+  String get giftsClearConfirm;
+
+  /// No description provided for @timeJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get timeJustNow;
+
+  /// No description provided for @timeMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min ago'**
+  String timeMinutesAgo(int count);
+
+  /// No description provided for @timeHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} h ago'**
+  String timeHoursAgo(int count);
+
+  /// No description provided for @timeDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} d ago'**
+  String timeDaysAgo(int count);
+
+  /// No description provided for @sendTreat.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a treat'**
+  String get sendTreat;
+
+  /// No description provided for @sendTreatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a treat to a friend'**
+  String get sendTreatTitle;
+
+  /// No description provided for @sendTreatChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a treat'**
+  String get sendTreatChoose;
+
+  /// No description provided for @sendTreatCost.
+  ///
+  /// In en, this message translates to:
+  /// **'{cost} points'**
+  String sendTreatCost(int cost);
+
+  /// No description provided for @sendTreatFriends.
+  ///
+  /// In en, this message translates to:
+  /// **'Focusing right now'**
+  String get sendTreatFriends;
+
+  /// No description provided for @sendTreatInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Only friends who are in a focus session right now can receive treats.'**
+  String get sendTreatInfo;
+
+  /// No description provided for @sendTreatNobody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is focusing right now. Check back in a bit!'**
+  String get sendTreatNobody;
+
+  /// No description provided for @sendTreatMinLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min left'**
+  String sendTreatMinLeft(int minutes);
+
+  /// No description provided for @sendTreatSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get sendTreatSend;
+
+  /// No description provided for @sendTreatSent.
+  ///
+  /// In en, this message translates to:
+  /// **'{emoji} Sent to {name}!'**
+  String sendTreatSent(String emoji, String name);
+
+  /// No description provided for @sendTreatUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'They just stopped focusing, or you already sent them a treat a moment ago.'**
+  String get sendTreatUnavailable;
+
+  /// No description provided for @sendTreatSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to send treats to friends.'**
+  String get sendTreatSignIn;
+
+  /// No description provided for @sendTreatRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get sendTreatRefresh;
+
+  /// No description provided for @focusStatusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show when I\'m focusing'**
+  String get focusStatusTitle;
+
+  /// No description provided for @focusStatusHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Friends can send you treats while a focus session is running. Other users can see your display name and when your session ends.'**
+  String get focusStatusHelp;
+
+  /// No description provided for @focusStatusSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to turn this on.'**
+  String get focusStatusSignIn;
+
   /// No description provided for @authErrorGeneric.
   ///
   /// In en, this message translates to:
@@ -1115,25 +1361,25 @@ abstract class AppLocalizations {
   /// No description provided for @inviteBonus.
   ///
   /// In en, this message translates to:
-  /// **'Studying is better together. Share Study Cafe with your friends!'**
+  /// **'You get +200 points for every friend who joins with your code, and they get +100!'**
   String get inviteBonus;
 
   /// No description provided for @inviteStep1.
   ///
   /// In en, this message translates to:
-  /// **'Share the link with your friend'**
+  /// **'Share your invite code with a friend'**
   String get inviteStep1;
 
   /// No description provided for @inviteStep2.
   ///
   /// In en, this message translates to:
-  /// **'Your friend downloads the app'**
+  /// **'They sign up and enter your code on this screen'**
   String get inviteStep2;
 
   /// No description provided for @inviteStep3.
   ///
   /// In en, this message translates to:
-  /// **'Study together and keep each other motivated!'**
+  /// **'You get +200 points and they get +100!'**
   String get inviteStep3;
 
   /// No description provided for @inviteMessage.

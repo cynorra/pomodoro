@@ -34,8 +34,7 @@ class AchievementsScreen extends ConsumerWidget {
       ),
       body: achievementsAsync.when(
         data: (achievements) {
-          final unlocked =
-              achievements.where((a) => a.isUnlocked).length;
+          final unlocked = achievements.where((a) => a.isUnlocked).length;
           final total = achievements.length;
 
           return CustomScrollView(
@@ -54,8 +53,7 @@ class AchievementsScreen extends ConsumerWidget {
               SliverPadding(
                 padding: const EdgeInsets.all(16.0),
                 sliver: SliverGrid(
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
@@ -191,8 +189,8 @@ class _AchievementCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withValues(alpha: 
-          achievement.isUnlocked ? 0.7 : 0.4,
+        color: ZyraColors.surface.withValues(
+          alpha: achievement.isUnlocked ? 0.7 : 0.4,
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
@@ -248,8 +246,7 @@ class _AchievementCard extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              if (achievement.isUnlocked &&
-                  achievement.unlockedAt != null) ...[
+              if (achievement.isUnlocked && achievement.unlockedAt != null) ...[
                 const SizedBox(height: 8),
                 Text(
                   _formatDate(

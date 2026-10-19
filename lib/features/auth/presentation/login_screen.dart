@@ -159,7 +159,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     decoration: BoxDecoration(
                       color: Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
+                      border:
+                          Border.all(color: Colors.red.withValues(alpha: 0.3)),
                     ),
                     child: Text(
                       authErrorText(context.l10n, authState.errorMessage),
@@ -195,7 +196,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 OutlinedButton.icon(
                   onPressed: authState.status == AuthStatus.loading
                       ? null
-                      : () => ref.read(authProvider.notifier).signInWithGoogle(),
+                      : () =>
+                          ref.read(authProvider.notifier).signInWithGoogle(),
                   icon: const Icon(Icons.account_circle_outlined),
                   label: Text(l10n.continueWithGoogle),
                   style: OutlinedButton.styleFrom(
@@ -240,7 +242,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () => _openUrl(AuthService.privacyPolicyUrl(l10n.localeName)),
+                      onPressed: () => _openUrl(
+                          AuthService.privacyPolicyUrl(l10n.localeName)),
                       child: Text(
                         l10n.privacyPolicy,
                         style: ZyraTypography.labelSmall.copyWith(
@@ -250,7 +253,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     const SizedBox(width: 16),
                     TextButton(
-                      onPressed: () => _openUrl(AuthService.termsOfServiceUrl(l10n.localeName)),
+                      onPressed: () => _openUrl(
+                          AuthService.termsOfServiceUrl(l10n.localeName)),
                       child: Text(
                         l10n.termsOfService,
                         style: ZyraTypography.labelSmall.copyWith(
@@ -331,4 +335,3 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 }
-

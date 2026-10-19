@@ -28,33 +28,27 @@ class HelpScreen extends StatelessWidget {
         children: [
           _FaqItem(
             question: context.l10n.faqPomodoroQ,
-            answer:
-                context.l10n.faqPomodoroA,
+            answer: context.l10n.faqPomodoroA,
           ),
           _FaqItem(
             question: context.l10n.faqPointsQ,
-            answer:
-                context.l10n.faqPointsA,
+            answer: context.l10n.faqPointsA,
           ),
           _FaqItem(
             question: context.l10n.faqCafeQ,
-            answer:
-                context.l10n.faqCafeA,
+            answer: context.l10n.faqCafeA,
           ),
           _FaqItem(
             question: context.l10n.faqStreakQ,
-            answer:
-                context.l10n.faqStreakA,
+            answer: context.l10n.faqStreakA,
           ),
           _FaqItem(
             question: context.l10n.faqDataQ,
-            answer:
-                context.l10n.faqDataA,
+            answer: context.l10n.faqDataA,
           ),
           _FaqItem(
             question: context.l10n.faqDeleteQ,
-            answer:
-                context.l10n.faqDeleteA,
+            answer: context.l10n.faqDeleteA,
           ),
           const SizedBox(height: 24),
           Container(
@@ -88,16 +82,16 @@ class HelpScreen extends StatelessWidget {
                     Expanded(
                       child: _LinkButton(
                         label: context.l10n.privacyPolicy,
-                        onTap: () =>
-                            _launchUrl(AuthService.privacyPolicyUrl(context.l10n.localeName)),
+                        onTap: () => _launchUrl(AuthService.privacyPolicyUrl(
+                            context.l10n.localeName)),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: _LinkButton(
                         label: context.l10n.termsOfService,
-                        onTap: () =>
-                            _launchUrl(AuthService.termsOfServiceUrl(context.l10n.localeName)),
+                        onTap: () => _launchUrl(AuthService.termsOfServiceUrl(
+                            context.l10n.localeName)),
                       ),
                     ),
                   ],

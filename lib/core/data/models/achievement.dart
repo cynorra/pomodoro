@@ -5,10 +5,10 @@ part 'achievement.g.dart';
 @collection
 class Achievement {
   Id id = Isar.autoIncrement;
-  
+
   @Index(unique: true)
   late String achievementId;
-  
+
   late String nameTr;
   late String nameEn;
   late String descriptionTr;

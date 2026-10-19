@@ -10,6 +10,9 @@ import '../../../core/ui/widgets/confetti_widget.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../pomodoro/presentation/pomodoro_widget.dart';
 import '../../monetization/presentation/rewarded_ad_button.dart';
+import '../../social/domain/referral_rules.dart';
+import '../../social/presentation/notifications_screen.dart';
+import '../../social/presentation/social_providers.dart';
 import 'widgets/share_button.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -37,6 +40,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         });
       },
     );
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _collectReferralRewards(),
+    );
+  }
+
+  Future<void> _collectReferralRewards() async {
+    final friends = await claimReferralRewards(ref);
+    if (friends > 0 && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)
+                .inviteRewardEarned(friends, friends * referralReferrerBonus),
+          ),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   @override
@@ -219,41 +241,72 @@ class _TopHeader extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          decoration: BoxDecoration(
-            color: ZyraColors.primary.withValues(alpha: 0.15),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: ZyraColors.primary.withValues(alpha: 0.3),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.stars_rounded,
-                color: ZyraColors.primary,
-                size: 18,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                '$totalPoints',
-                style: ZyraTypography.titleMedium.copyWith(
-                  color: ZyraColors.primary,
-                  fontWeight: FontWeight.bold,
+        Flexible(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: ZyraColors.primary.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: ZyraColors.primary.withValues(alpha: 0.3),
                 ),
               ),
-            ],
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.stars_rounded,
+                    color: ZyraColors.primary,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '$totalPoints',
+                    style: ZyraTypography.titleMedium.copyWith(
+                      color: ZyraColors.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
+        const _BellButton(),
         ShareButton(
           minutesStudied: totalMinutes,
           pointsEarned: totalPoints,
           sessionType: 'focus',
         ),
       ],
+    );
+  }
+}
+
+/// Bell that opens the treats inbox, with a badge for unread ones.
+class _BellButton extends ConsumerWidget {
+  const _BellButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final unseen = ref.watch(unseenGiftCountProvider);
+    return IconButton(
+      tooltip: AppLocalizations.of(context).notifications,
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const NotificationsScreen()),
+      ),
+      icon: Badge(
+        isLabelVisible: unseen > 0,
+        label: Text('$unseen'),
+        child: const Icon(
+          Icons.notifications_none_rounded,
+          color: ZyraColors.primary,
+        ),
+      ),
     );
   }
 }

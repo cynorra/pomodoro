@@ -21,25 +21,25 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final _storage = const FlutterSecureStorage();
 
   List<_OnboardingPage> _pages(BuildContext context) => [
-    _OnboardingPage(
-      icon: Icons.timer_rounded,
-      title: context.l10n.onboardFocusTitle,
-      description: context.l10n.onboardFocusBody,
-      color: ZyraColors.primary,
-    ),
-    _OnboardingPage(
-      icon: Icons.coffee_rounded,
-      title: context.l10n.onboardEarnTitle,
-      description: context.l10n.onboardEarnBody,
-      color: ZyraColors.secondary,
-    ),
-    _OnboardingPage(
-      icon: Icons.emoji_events_rounded,
-      title: context.l10n.onboardAchieveTitle,
-      description: context.l10n.onboardAchieveBody,
-      color: Colors.orange,
-    ),
-  ];
+        _OnboardingPage(
+          icon: Icons.timer_rounded,
+          title: context.l10n.onboardFocusTitle,
+          description: context.l10n.onboardFocusBody,
+          color: ZyraColors.primary,
+        ),
+        _OnboardingPage(
+          icon: Icons.coffee_rounded,
+          title: context.l10n.onboardEarnTitle,
+          description: context.l10n.onboardEarnBody,
+          color: ZyraColors.secondary,
+        ),
+        _OnboardingPage(
+          icon: Icons.emoji_events_rounded,
+          title: context.l10n.onboardAchieveTitle,
+          description: context.l10n.onboardAchieveBody,
+          color: Colors.orange,
+        ),
+      ];
 
   @override
   void dispose() {
@@ -91,47 +91,49 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       padding: EdgeInsets.all(compact ? 16 : 32),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
-                          minHeight: constraints.maxHeight - (compact ? 32 : 64),
+                          minHeight:
+                              constraints.maxHeight - (compact ? 32 : 64),
                         ),
                         child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: context.scaled(compact ? 100 : 160),
-                          height: context.scaled(compact ? 100 : 160),
-                          decoration: BoxDecoration(
-                            color: page.color.withValues(alpha: 0.15),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: page.color.withValues(alpha: 0.3),
-                              width: 2,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: context.scaled(compact ? 100 : 160),
+                              height: context.scaled(compact ? 100 : 160),
+                              decoration: BoxDecoration(
+                                color: page.color.withValues(alpha: 0.15),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: page.color.withValues(alpha: 0.3),
+                                  width: 2,
+                                ),
+                              ),
+                              child: Icon(
+                                page.icon,
+                                color: page.color,
+                                size: context.scaled(compact ? 50 : 80),
+                              ),
                             ),
-                          ),
-                          child: Icon(
-                            page.icon,
-                            color: page.color,
-                            size: context.scaled(compact ? 50 : 80),
-                          ),
+                            SizedBox(height: compact ? 20 : 48),
+                            Text(
+                              page.title,
+                              style: ZyraTypography.headlineLarge.copyWith(
+                                color: page.color,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              page.description,
+                              style: ZyraTypography.bodyMedium.copyWith(
+                                color:
+                                    ZyraColors.onSurface.withValues(alpha: 0.7),
+                                height: 1.5,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                        SizedBox(height: compact ? 20 : 48),
-                        Text(
-                          page.title,
-                          style: ZyraTypography.headlineLarge.copyWith(
-                            color: page.color,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          page.description,
-                          style: ZyraTypography.bodyMedium.copyWith(
-                            color: ZyraColors.onSurface.withValues(alpha: 0.7),
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
                       ),
                     ),
                   );

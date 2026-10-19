@@ -64,7 +64,8 @@ class AchievementService {
 
   static Future<List<Achievement>> checkAndUnlockAchievements() async {
     try {
-      final stats = await DatabaseService.instance.userStats.where().findFirst();
+      final stats =
+          await DatabaseService.instance.userStats.where().findFirst();
       if (stats == null) return [];
 
       // Breaks are not study sessions.

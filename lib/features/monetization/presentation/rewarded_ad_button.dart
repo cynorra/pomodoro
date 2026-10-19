@@ -34,7 +34,8 @@ class RewardedAdButton extends ConsumerWidget {
               ),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: ZyraColors.primary.withValues(alpha: isReady ? 0.5 : 0.2),
+                color:
+                    ZyraColors.primary.withValues(alpha: isReady ? 0.5 : 0.2),
                 width: 1.5,
               ),
             ),
@@ -75,7 +76,8 @@ class RewardedAdButton extends ConsumerWidget {
                 ),
                 Icon(
                   isReady ? Icons.arrow_forward : Icons.hourglass_empty,
-                  color: ZyraColors.primary.withValues(alpha: isReady ? 1 : 0.5),
+                  color:
+                      ZyraColors.primary.withValues(alpha: isReady ? 1 : 0.5),
                 ),
               ],
             ),

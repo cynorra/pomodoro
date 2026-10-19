@@ -387,6 +387,158 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareAction => 'Paylaş';
 
   @override
+  String get inviteYourCode => 'Davet kodun';
+
+  @override
+  String inviteMessageWithCode(String code, String link) {
+    return 'Study Cafe ile odaklanmaya başla! Benim kodumu $code kullan, +100 puan kazan: $link';
+  }
+
+  @override
+  String get inviteEnterCodeTitle => 'Bir arkadaşının kodu var mı?';
+
+  @override
+  String get inviteCodeHint => 'Davet kodu';
+
+  @override
+  String get inviteRedeem => 'Kullan';
+
+  @override
+  String inviteRedeemed(int points) {
+    return '🎉 Kod kabul edildi! +$points puan';
+  }
+
+  @override
+  String get inviteCodeInvalid =>
+      'Bu kod geçerli değil. Kodlar 6 harf ve rakamdan oluşur.';
+
+  @override
+  String get inviteCodeOwn => 'Kendi kodunu kullanamazsın.';
+
+  @override
+  String get inviteCodeAlready => 'Zaten bir davet kodu kullandın.';
+
+  @override
+  String get inviteCodeNotFound => 'Bu kodu bulamadık.';
+
+  @override
+  String get inviteSignInRequired =>
+      'Davet kodunu almak ve puan kazanmak için giriş yap.';
+
+  @override
+  String inviteRewardEarned(int count, int points) {
+    return '🎉 Kodunla $count arkadaşın katıldı! +$points puan';
+  }
+
+  @override
+  String get itemEspresso => 'Espresso';
+
+  @override
+  String get itemGreenTea => 'Yeşil Çay';
+
+  @override
+  String get itemCheesecake => 'Cheesecake';
+
+  @override
+  String giftReceived(String name, String item) {
+    return '$name sana $item gönderdi';
+  }
+
+  @override
+  String giftToastMany(int count) {
+    return 'Arkadaşlarından $count yeni ikram 🎁';
+  }
+
+  @override
+  String get giftToastView => 'Gör';
+
+  @override
+  String get giftsEmpty =>
+      'Henüz ikram yok. Bir arkadaşın sana gönderdiğinde burada görünür.';
+
+  @override
+  String get giftsClearAll => 'Tümünü temizle';
+
+  @override
+  String get giftsClearConfirm => 'Tüm bildirimler silinsin mi?';
+
+  @override
+  String get timeJustNow => 'Az önce';
+
+  @override
+  String timeMinutesAgo(int count) {
+    return '$count dk önce';
+  }
+
+  @override
+  String timeHoursAgo(int count) {
+    return '$count sa önce';
+  }
+
+  @override
+  String timeDaysAgo(int count) {
+    return '$count gün önce';
+  }
+
+  @override
+  String get sendTreat => 'İkram gönder';
+
+  @override
+  String get sendTreatTitle => 'Bir arkadaşa ikram gönder';
+
+  @override
+  String get sendTreatChoose => 'Bir ikram seç';
+
+  @override
+  String sendTreatCost(int cost) {
+    return '$cost puan';
+  }
+
+  @override
+  String get sendTreatFriends => 'Şu an odaklananlar';
+
+  @override
+  String get sendTreatInfo =>
+      'İkramı yalnızca şu an odak seansında olan arkadaşlar alabilir.';
+
+  @override
+  String get sendTreatNobody =>
+      'Şu an kimse odaklanmıyor. Biraz sonra tekrar bak!';
+
+  @override
+  String sendTreatMinLeft(int minutes) {
+    return '$minutes dk kaldı';
+  }
+
+  @override
+  String get sendTreatSend => 'Gönder';
+
+  @override
+  String sendTreatSent(String emoji, String name) {
+    return '$emoji $name adlı kişiye gönderildi!';
+  }
+
+  @override
+  String get sendTreatUnavailable =>
+      'Odaklanmayı az önce bıraktı ya da ona kısa süre önce bir ikram göndermiştin.';
+
+  @override
+  String get sendTreatSignIn => 'Arkadaşlarına ikram göndermek için giriş yap.';
+
+  @override
+  String get sendTreatRefresh => 'Yenile';
+
+  @override
+  String get focusStatusTitle => 'Odaklandığımı göster';
+
+  @override
+  String get focusStatusHelp =>
+      'Odak seansın sürerken arkadaşların sana ikram gönderebilir. Diğer kullanıcılar görünen adını ve seansının ne zaman biteceğini görür.';
+
+  @override
+  String get focusStatusSignIn => 'Açmak için giriş yap.';
+
+  @override
   String get authErrorGeneric => 'Bir hata oluştu';
 
   @override
@@ -542,16 +694,16 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get inviteBonus =>
-      'Birlikte çalışmak daha keyifli. Study Cafe\'yi arkadaşlarınla paylaş!';
+      'Kodunla katılan her arkadaş için +200 puan kazanırsın, arkadaşın da +100 puan kazanır!';
 
   @override
-  String get inviteStep1 => 'Linki arkadaşınla paylaş';
+  String get inviteStep1 => 'Davet kodunu bir arkadaşınla paylaş';
 
   @override
-  String get inviteStep2 => 'Arkadaşın uygulamayı indirsin';
+  String get inviteStep2 => 'Arkadaşın kayıt olup kodunu bu ekrana girer';
 
   @override
-  String get inviteStep3 => 'Birlikte çalışın, birbirinizi motive edin!';
+  String get inviteStep3 => 'Sen +200, arkadaşın +100 puan kazanır!';
 
   @override
   String inviteMessage(String link) {

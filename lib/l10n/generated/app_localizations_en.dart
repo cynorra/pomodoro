@@ -387,6 +387,164 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareAction => 'Share';
 
   @override
+  String get inviteYourCode => 'Your invite code';
+
+  @override
+  String inviteMessageWithCode(String code, String link) {
+    return 'Start focusing with Study Cafe! Use my code $code to get +100 points: $link';
+  }
+
+  @override
+  String get inviteEnterCodeTitle => 'Have a friend\'s code?';
+
+  @override
+  String get inviteCodeHint => 'Invite code';
+
+  @override
+  String get inviteRedeem => 'Redeem';
+
+  @override
+  String inviteRedeemed(int points) {
+    return '🎉 Code accepted! +$points points';
+  }
+
+  @override
+  String get inviteCodeInvalid =>
+      'That code is not valid. Codes have 6 letters and numbers.';
+
+  @override
+  String get inviteCodeOwn => 'You can\'t use your own code.';
+
+  @override
+  String get inviteCodeAlready => 'You have already used an invite code.';
+
+  @override
+  String get inviteCodeNotFound => 'We couldn\'t find that code.';
+
+  @override
+  String get inviteSignInRequired =>
+      'Log in to get your invite code and earn points.';
+
+  @override
+  String inviteRewardEarned(int count, int points) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count friends joined',
+      one: 'A friend joined',
+    );
+    return '🎉 $_temp0 with your code! +$points points';
+  }
+
+  @override
+  String get itemEspresso => 'Espresso';
+
+  @override
+  String get itemGreenTea => 'Green Tea';
+
+  @override
+  String get itemCheesecake => 'Cheesecake';
+
+  @override
+  String giftReceived(String name, String item) {
+    return '$name sent you $item';
+  }
+
+  @override
+  String giftToastMany(int count) {
+    return '$count new treats from friends 🎁';
+  }
+
+  @override
+  String get giftToastView => 'View';
+
+  @override
+  String get giftsEmpty =>
+      'No treats yet. When a friend sends you one, it will show up here.';
+
+  @override
+  String get giftsClearAll => 'Clear all';
+
+  @override
+  String get giftsClearConfirm => 'Remove all notifications?';
+
+  @override
+  String get timeJustNow => 'Just now';
+
+  @override
+  String timeMinutesAgo(int count) {
+    return '$count min ago';
+  }
+
+  @override
+  String timeHoursAgo(int count) {
+    return '$count h ago';
+  }
+
+  @override
+  String timeDaysAgo(int count) {
+    return '$count d ago';
+  }
+
+  @override
+  String get sendTreat => 'Send a treat';
+
+  @override
+  String get sendTreatTitle => 'Send a treat to a friend';
+
+  @override
+  String get sendTreatChoose => 'Choose a treat';
+
+  @override
+  String sendTreatCost(int cost) {
+    return '$cost points';
+  }
+
+  @override
+  String get sendTreatFriends => 'Focusing right now';
+
+  @override
+  String get sendTreatInfo =>
+      'Only friends who are in a focus session right now can receive treats.';
+
+  @override
+  String get sendTreatNobody =>
+      'Nobody is focusing right now. Check back in a bit!';
+
+  @override
+  String sendTreatMinLeft(int minutes) {
+    return '$minutes min left';
+  }
+
+  @override
+  String get sendTreatSend => 'Send';
+
+  @override
+  String sendTreatSent(String emoji, String name) {
+    return '$emoji Sent to $name!';
+  }
+
+  @override
+  String get sendTreatUnavailable =>
+      'They just stopped focusing, or you already sent them a treat a moment ago.';
+
+  @override
+  String get sendTreatSignIn => 'Log in to send treats to friends.';
+
+  @override
+  String get sendTreatRefresh => 'Refresh';
+
+  @override
+  String get focusStatusTitle => 'Show when I\'m focusing';
+
+  @override
+  String get focusStatusHelp =>
+      'Friends can send you treats while a focus session is running. Other users can see your display name and when your session ends.';
+
+  @override
+  String get focusStatusSignIn => 'Log in to turn this on.';
+
+  @override
   String get authErrorGeneric => 'An error occurred';
 
   @override
@@ -544,16 +702,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inviteBonus =>
-      'Studying is better together. Share Study Cafe with your friends!';
+      'You get +200 points for every friend who joins with your code, and they get +100!';
 
   @override
-  String get inviteStep1 => 'Share the link with your friend';
+  String get inviteStep1 => 'Share your invite code with a friend';
 
   @override
-  String get inviteStep2 => 'Your friend downloads the app';
+  String get inviteStep2 => 'They sign up and enter your code on this screen';
 
   @override
-  String get inviteStep3 => 'Study together and keep each other motivated!';
+  String get inviteStep3 => 'You get +200 points and they get +100!';
 
   @override
   String inviteMessage(String link) {

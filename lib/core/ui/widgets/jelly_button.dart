@@ -25,7 +25,8 @@ class JellyButton extends StatefulWidget {
   State<JellyButton> createState() => _JellyButtonState();
 }
 
-class _JellyButtonState extends State<JellyButton> with SingleTickerProviderStateMixin {
+class _JellyButtonState extends State<JellyButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 

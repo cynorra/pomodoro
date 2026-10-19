@@ -101,7 +101,9 @@ class _NavItem extends StatelessWidget {
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? ZyraColors.primary.withValues(alpha: 0.15) : Colors.transparent,
+          color: isSelected
+              ? ZyraColors.primary.withValues(alpha: 0.15)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -109,7 +111,9 @@ class _NavItem extends StatelessWidget {
           children: [
             Icon(
               isSelected ? selectedIcon : icon,
-              color: isSelected ? ZyraColors.primary : ZyraColors.onSurface.withValues(alpha: 0.5),
+              color: isSelected
+                  ? ZyraColors.primary
+                  : ZyraColors.onSurface.withValues(alpha: 0.5),
               size: 24,
             ),
             const SizedBox(height: 4),
@@ -118,7 +122,9 @@ class _NavItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                color: isSelected ? ZyraColors.primary : ZyraColors.onSurface.withValues(alpha: 0.5),
+                color: isSelected
+                    ? ZyraColors.primary
+                    : ZyraColors.onSurface.withValues(alpha: 0.5),
               ),
             ),
           ],

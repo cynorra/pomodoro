@@ -54,16 +54,16 @@ class DatabaseService {
   static Future<void> _migrateData() async {
     await _isar.writeTxn(() async {
       final stats = await _isar.userStats.where().findFirst();
-      
+
       if (stats != null) {
-          if (stats.lastStudyDate != null) {
-            stats.lastStudyDate = stats.lastStudyDate!.toUtc();
-          }
-        
+        if (stats.lastStudyDate != null) {
+          stats.lastStudyDate = stats.lastStudyDate!.toUtc();
+        }
+
         if (stats.lifetimePointsEarned == 0 && stats.totalPoints > 0) {
           stats.lifetimePointsEarned = stats.totalPoints;
         }
-        
+
         await _isar.userStats.put(stats);
       }
     });

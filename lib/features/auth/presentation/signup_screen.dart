@@ -158,7 +158,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     decoration: BoxDecoration(
                       color: Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
+                      border:
+                          Border.all(color: Colors.red.withValues(alpha: 0.3)),
                     ),
                     child: Text(
                       authErrorText(context.l10n, authState.errorMessage),
@@ -167,10 +168,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     ),
                   ),
                 JellyButton(
-                  onPressed: _agreedToTerms &&
-                          authState.status != AuthStatus.loading
-                      ? _handleSignup
-                      : null,
+                  onPressed:
+                      _agreedToTerms && authState.status != AuthStatus.loading
+                          ? _handleSignup
+                          : null,
                   label: authState.status == AuthStatus.loading
                       ? context.l10n.signingUp
                       : (l10n.signUp),

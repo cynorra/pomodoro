@@ -35,6 +35,102 @@ service cloud.firestore {
       allow delete: if request.auth != null && request.auth.uid == uid;
     }
 
+    // Invite codes: anyone signed in can look a code up by id (never list them);
+    // only the owner creates their own code, and codes are never changed.
+    match /invite_codes/{code} {
+      allow get: if request.auth != null;
+      allow list: if false;
+      allow create: if request.auth != null
+        && code.matches('^[A-HJ-NP-Z2-9]{6}$')
+        && request.resource.data.keys().hasOnly(['ownerUid'])
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Referrals: one per invited account (the id is the invited user's uid).
+    // The invitee creates it; the inviter may only flip `claimed` to true once.
+    match /referrals/{inviteeUid} {
+      allow create: if request.auth != null
+        && request.auth.uid == inviteeUid
+        && request.resource.data.keys().hasOnly(
+             ['referrerUid', 'code', 'claimed', 'createdAt'])
+        && request.resource.data.keys().hasAll(
+             ['referrerUid', 'code', 'claimed', 'createdAt'])
+        && request.resource.data.referrerUid is string
+        && request.resource.data.referrerUid != request.auth.uid
+        && request.resource.data.claimed == false
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.code.matches('^[A-HJ-NP-Z2-9]{6}$')
+        && get(/databases/$(database)/documents/invite_codes/$(request.resource.data.code)).data.ownerUid
+             == request.resource.data.referrerUid;
+      allow get: if request.auth != null
+        && (request.auth.uid == inviteeUid
+            || request.auth.uid == resource.data.referrerUid);
+      allow list: if request.auth != null
+        && request.auth.uid == resource.data.referrerUid;
+      allow update: if request.auth != null
+        && request.auth.uid == resource.data.referrerUid
+        && resource.data.claimed == false
+        && request.resource.data.claimed == true
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['claimed']);
+      allow delete: if false;
+    }
+
+    // "Focusing now": a user who opted in publishes one document while a focus
+    // session runs. It always expires on its own (endsAt is at most 3 hours
+    // away) and the owner removes it when the session stops.
+    match /presence/{uid} {
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name', 'endsAt', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['name', 'endsAt', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.endsAt is timestamp
+        && request.resource.data.endsAt > request.time
+        && request.resource.data.endsAt <= request.time + duration.value(3, 'h')
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if request.auth != null && request.auth.uid == uid;
+      allow get: if request.auth != null;
+      allow list: if request.auth != null && request.query.limit <= 30;
+    }
+
+    // Treats between friends. Predefined items only (no free text). The
+    // recipient must be focusing right now, and the document id encodes a
+    // 10-minute slot, so one sender can send one treat per friend per slot.
+    match /gifts/{giftId} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(
+             ['fromUid', 'fromName', 'toUid', 'itemId', 'seen', 'slot', 'createdAt'])
+        && request.resource.data.keys().hasAll(
+             ['fromUid', 'fromName', 'toUid', 'itemId', 'seen', 'slot', 'createdAt'])
+        && request.resource.data.fromUid == request.auth.uid
+        && request.resource.data.toUid is string
+        && request.resource.data.toUid != request.auth.uid
+        && request.resource.data.fromName is string
+        && request.resource.data.fromName.size() >= 1
+        && request.resource.data.fromName.size() <= 40
+        && request.resource.data.itemId in ['coffee_espresso', 'tea_green', 'cake_cheese']
+        && request.resource.data.seen == false
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.slot == int(request.time.toMillis() / 600000)
+        && giftId == request.auth.uid + '_' + request.resource.data.toUid + '_'
+             + string(request.resource.data.slot)
+        && exists(/databases/$(database)/documents/presence/$(request.resource.data.toUid))
+        && get(/databases/$(database)/documents/presence/$(request.resource.data.toUid)).data.endsAt
+             > request.time;
+      allow get, list: if request.auth != null
+        && request.auth.uid == resource.data.toUid;
+      allow update: if request.auth != null
+        && request.auth.uid == resource.data.toUid
+        && resource.data.seen == false
+        && request.resource.data.seen == true
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['seen']);
+      allow delete: if request.auth != null
+        && request.auth.uid == resource.data.toUid;
+    }
+
     // Player reports: write-only for signed-in users, one per reporter and
     // player (the document id encodes both), never readable from the app.
     match /reports/{reportId} {

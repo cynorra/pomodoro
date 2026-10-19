@@ -15,8 +15,7 @@ class ShareCardCapture {
       if (renderObject is! RenderRepaintBoundary) return null;
 
       final image = await renderObject.toImage(pixelRatio: 3.0);
-      final byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       image.dispose();
 
       if (byteData == null) return null;
