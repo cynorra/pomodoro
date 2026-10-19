@@ -12,7 +12,7 @@ Pomodoro tekniği, işi aralarda molalar olan kısa odaklanma seanslarına böle
 
 NEDEN STUDY CAFE?
 - Odaklanma, kısa mola ve uzun mola seanslarını otomatik değiştiren sayaç
-- Biten her seans için puan; puanlarla sanal kafeni süsleyen öğeler al
+- Biten her seans için puan; puanlarla sanal kafen için espresso, yeşil çay ve cheesecake al
 - Düzenli çalışmayı ödüllendiren günlük seriler ve başarımlar
 - Çalışırken sakinleştiren ortam sesleri: yağmur, şömine ve kahverengi gürültü
 - İstatistikler: çalışma süreni haftalık, aylık ve tüm zamanlar için gör

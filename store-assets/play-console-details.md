@@ -37,10 +37,10 @@ Full texts: `listing-en-US.txt`, `listing-tr-TR.txt`, `play-listing.csv` (same f
 ## Release notes (first release)
 ```
 <en-US>
-First release of Study Cafe: a cozy pomodoro timer with points, daily streaks, achievements and a virtual cafe you decorate. Available in English and Turkish.
+First release of Study Cafe: a cozy pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
 </en-US>
 <tr-TR>
-Study Cafe'nin ilk sürümü: puan, günlük seri, başarım ve süsleyebileceğin sanal bir kafe içeren rahat bir pomodoro zamanlayıcı. Türkçe ve İngilizce dilleriyle.
+Study Cafe'nin ilk sürümü: puan, günlük seri, başarım ve ikramlarla doldurabileceğin sanal bir kafe içeren rahat bir pomodoro zamanlayıcı. Türkçe ve İngilizce dilleriyle.
 </tr-TR>
 ```
 

@@ -12,7 +12,7 @@ The Pomodoro technique splits work into short focus sessions with breaks in betw
 
 WHY STUDY CAFE?
 - Focus timer with automatic focus, short break and long break sessions
-- Points for every finished session, spent on items that decorate your virtual cafe
+- Points for every finished session, spent on treats for your virtual cafe: espresso, green tea and cheesecake
 - Daily streaks and achievements that reward consistent studying
 - Calming ambient sounds while you study: rain, fireplace and brown noise
 - Statistics: see your study time by week, month and all time

@@ -62,7 +62,7 @@ UI: a large circular countdown ring with a thick gold progress arc and a faint t
 ```
 SCREEN: the Cafe tab.
 Headline: "Earn points. Grow your cafe."
-UI: title "Virtual Cafe" with a small speaker icon at the top right; a gold button "Watch Ad +50 Points" under the title; below it a 2-column grid of rounded item cards showing cafe decor (a ceramic coffee cup, a potted plant, a warm lamp, a small bookshelf), each with a clean flat illustration and a small gold point cost. Two items look unlocked, the rest look available.
+UI: title "Virtual Cafe" with a small speaker icon at the top right; a gold button "Watch Ad +50 Points" under the title; below it a 2-column grid with EXACTLY three rounded item cards, no others: a large ☕ emoji with "Espresso" and a gold "50 pts" tag, a large 🍵 emoji with "Green Tea" and "30 pts", a large 🍰 emoji with "Cheesecake" and "100 pts". Nothing else in the grid; leave the rest of the screen calm and empty.
 ```
 
 ### Screen 3: Sounds
@@ -145,6 +145,38 @@ Apps that ship tablet screenshots rank better in large-screen recommendations.
 3. No "free", "best", "#1", prices, ratings, awards or competitor logos.
 4. All seven images share the same background, type and layout grid. If one drifts, regenerate it with: "Match the style, layout grid and typography of the previous images exactly."
 5. Export as PNG at 1080x1920 (upscale if Gemini returns smaller), under 8 MB each.
+
+## Review of the first generated set (2026-10-19)
+
+Processed files are in `store-assets/final/` (phones 1080x1920, feature graphic 1024x500). Accuracy check against the real app:
+
+| Image | Verdict | Why |
+|---|---|---|
+| phone 1 "Your late-night focus cafe" | Do not use | Shows features the app does not have: "Tonight's Order", "Rainy Night Cafe", "Dark Roast Lo-Fi", a Focus Goal bar, a Skip button, "Session 1 of 4". Misleading. |
+| phone 2 "Focus 25. Rest 5." | Use | Matches the real timer screen. |
+| phone 3 "Earn points. Grow your cafe." | Regenerate | Shows decor items (lamp, fern, bookshelf). The real cafe has exactly three treats: Espresso 50, Green Tea 30, Cheesecake 100. |
+| phone 4 "Calming study sounds" | Use | Rain, Brown Noise, Fireplace are the real options. |
+| phone 5 "Build daily streaks" | Check | Badge names are real (3 Day Streak, First 100 Points, Focus Master, Point Hunter). Zoom in: "Focus Master" is "Complete 10 sessions" in the app, not hours. |
+| phone 6 "See your study time" | Use | Matches the stats screen. |
+| phone 7 "Share your progress" | Optional fix | The screen behind the share sheet shows tabs the app does not have. |
+| feature graphic | Fix text | "Ambience: Rain & Lo-Fi" is wrong, Lo-Fi is not shipped. Use "Rain & Fireplace". |
+
+### Replacement prompt for phone 3 (paste after the master prompt)
+```
+SCREEN: the Cafe tab.
+Headline: "Earn points. Grow your cafe."
+UI: title "Virtual Cafe" with a small speaker icon at the top right; a gold button "Watch Ad +50 Points" under the title; below it a 2-column grid with EXACTLY three rounded item cards, no others: a large ☕ emoji with "Espresso" and a gold "50 pts" tag, a large 🍵 emoji with "Green Tea" and "30 pts", a large 🍰 emoji with "Cheesecake" and "100 pts". Nothing else in the grid; leave the rest of the screen calm and empty.
+```
+
+### Replacement for phone 1 (the new hero, use the real timer screen with the streak)
+```
+SCREEN: the Focus tab.
+Headline: "Stay in the flow"
+UI: a large circular countdown ring with a thick gold progress arc, big time "18:42" in white, the label "Deep Focus" in gold, a wide gold "Start" button and a smaller outlined "Reset" button. Top row: a "🔥 3-day streak" chip on the left and a points total on the right. No other cards, goals or widgets.
+```
+
+### Feature graphic text fix
+Edit the existing image with Gemini, or regenerate with the same prompt: "Same image, but change the third card's text to 'Rain & Fireplace' and keep everything else identical."
 
 ## Appendix: Turkish headlines (only for a Turkish listing set)
 
