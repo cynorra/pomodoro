@@ -13,7 +13,7 @@ Everything decided for the store listing and the Play Console forms (as of 2026-
 | App or game | App |
 | Free or paid | Free |
 | Category | Productivity (Verimlilik) |
-| Tags (max 5) | Clock, alarm and timer (Saat, alarm ve zamanlayıcı) / Productivity (Verimlilik) / Study guide (Çalışma kılavuzu) / Personal development (Kişisel gelişim) / Calendar (Takvim): see the open item below |
+| Tags (max 5) | Clock, alarm and timer (Saat, alarm ve zamanlayıcı) / Productivity (Verimlilik) / Study guide (Çalışma kılavuzu) / Personal development (Kişisel gelişim). The Calendar (Takvim) tag was removed because the app has no calendar. |
 | Contact email | eren.gp54@gmail.com |
 | Developer website | https://cynorra.github.io (must be the root; app-ads.txt is served from it) |
 | Privacy policy (EN) | https://cynorra.github.io/studycafe/privacy.html |
@@ -89,6 +89,5 @@ Not collected: precise location, contacts, photos, files, audio, financial info,
 3. Tag a new release so CI builds it.
 
 ## Open items
-- Tag "Calendar" (Takvim) was added but the app has no calendar feature: build one (month view of studied days) or remove the tag.
 - Phone and tablet screenshots (Gemini prompts file).
 - Coffee shop and lo-fi sounds: add licensed `coffee_shop.mp3` / `lofi_beats.mp3` to `assets/sounds/` to show them in the sound picker (they are hidden until the files exist).
