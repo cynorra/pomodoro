@@ -20,6 +20,16 @@ class VirtualCafeScreen extends ConsumerStatefulWidget {
 }
 
 class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
+  Set<String> _bundledSounds = {};
+
+  @override
+  void initState() {
+    super.initState();
+    AudioService.bundledSounds().then((sounds) {
+      if (mounted) setState(() => _bundledSounds = sounds);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final cafeItemsAsync = ref.watch(cafeItemsProvider);
@@ -37,19 +47,20 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
         ),
         centerTitle: true,
         actions: [
-          Semantics(
-            button: true,
-            label: l10n.selectAmbientSound,
-            child: IconButton(
-              icon: Icon(
-                currentSound != null ? Icons.volume_up : Icons.volume_off,
-                color: ZyraColors.primary,
+          if (_bundledSounds.isNotEmpty)
+            Semantics(
+              button: true,
+              label: l10n.selectAmbientSound,
+              child: IconButton(
+                icon: Icon(
+                  currentSound != null ? Icons.volume_up : Icons.volume_off,
+                  color: ZyraColors.primary,
+                ),
+                onPressed: () {
+                  _showSoundSelector();
+                },
               ),
-              onPressed: () {
-                _showSoundSelector();
-              },
             ),
-          ),
         ],
       ),
       body: cafeItemsAsync.when(
@@ -116,6 +127,17 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
     );
   }
 
+  List<({String file, String icon, String label})> _soundChoices(
+    AppLocalizations l10n,
+  ) =>
+      [
+        (file: 'rain.mp3', icon: '🌧️', label: l10n.rain),
+        (file: 'brown_noise.mp3', icon: '🎧', label: l10n.brownNoise),
+        (file: 'fireplace.mp3', icon: '🔥', label: l10n.fireplace),
+        (file: 'coffee_shop.mp3', icon: '☕', label: l10n.coffeeShop),
+        (file: 'lofi_beats.mp3', icon: '🎵', label: l10n.lofiBeats),
+      ];
+
   void _showSoundSelector() {
     final l10n = AppLocalizations.of(context);
     final currentSound = AudioService.currentSound;
@@ -141,30 +163,14 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SoundOption(
-              icon: '🌧️',
-              label: l10n.rain,
-              isSelected: currentSound == 'rain.mp3',
-              onTap: () => _selectSound('rain.mp3', sheetContext),
-            ),
-            _SoundOption(
-              icon: '☕',
-              label: l10n.coffeeShop,
-              isSelected: currentSound == 'coffee_shop.mp3',
-              onTap: () => _selectSound('coffee_shop.mp3', sheetContext),
-            ),
-            _SoundOption(
-              icon: '🔥',
-              label: l10n.fireplace,
-              isSelected: currentSound == 'fireplace.mp3',
-              onTap: () => _selectSound('fireplace.mp3', sheetContext),
-            ),
-            _SoundOption(
-              icon: '🎵',
-              label: l10n.lofiBeats,
-              isSelected: currentSound == 'lofi_beats.mp3',
-              onTap: () => _selectSound('lofi_beats.mp3', sheetContext),
-            ),
+            for (final sound in _soundChoices(l10n))
+              if (_bundledSounds.contains(sound.file))
+                _SoundOption(
+                  icon: sound.icon,
+                  label: sound.label,
+                  isSelected: currentSound == sound.file,
+                  onTap: () => _selectSound(sound.file, sheetContext),
+                ),
             const SizedBox(height: 12),
             TextButton(
               onPressed: () => Navigator.pop(sheetContext),

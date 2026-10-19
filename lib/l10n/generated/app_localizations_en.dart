@@ -195,6 +195,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rain => 'Rain';
 
   @override
+  String get brownNoise => 'Brown Noise';
+
+  @override
   String get coffeeShop => 'Coffee Shop';
 
   @override

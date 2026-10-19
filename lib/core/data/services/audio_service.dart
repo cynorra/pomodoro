@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
 import '../../utils/global_exception_handler.dart';
 
 class AudioService {
@@ -6,6 +7,22 @@ class AudioService {
   static bool _isPlaying = false;
   static bool _isProcessing = false;
   static String? _currentSoundFile;
+
+  /// File names under assets/sounds that are bundled with the app. The sound
+  /// picker only offers these, so an option never silently does nothing.
+  static Future<Set<String>> bundledSounds() async {
+    try {
+      final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+      const prefix = 'assets/sounds/';
+      return {
+        for (final asset in manifest.listAssets())
+          if (asset.startsWith(prefix) && asset.length > prefix.length)
+            asset.substring(prefix.length),
+      };
+    } catch (_) {
+      return {};
+    }
+  }
 
   static Future<bool> isSoundAvailable(String soundFile) async {
     try {

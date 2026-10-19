@@ -196,6 +196,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get rain => 'Yağmur';
 
   @override
+  String get brownNoise => 'Kahverengi Gürültü';
+
+  @override
   String get coffeeShop => 'Kahve Dükkanı';
 
   @override

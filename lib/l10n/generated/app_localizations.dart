@@ -464,6 +464,12 @@ abstract class AppLocalizations {
   /// **'Rain'**
   String get rain;
 
+  /// No description provided for @brownNoise.
+  ///
+  /// In en, this message translates to:
+  /// **'Brown Noise'**
+  String get brownNoise;
+
   /// No description provided for @coffeeShop.
   ///
   /// In en, this message translates to:
