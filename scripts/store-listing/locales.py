@@ -1,0 +1,92 @@
+# The 87 locale codes the Play Console import asks for (see ~/.claude/play-store-listing-csv-format.md)
+ALL_LOCALES = [
+    'af', 'am', 'ar', 'az-AZ', 'be', 'bg', 'bn-BD', 'ca', 'cs-CZ', 'da-DK', 'de-DE', 'el-GR',
+    'en-AU', 'en-CA', 'en-GB', 'en-IN', 'en-SG', 'en-US', 'en-ZA', 'es-419', 'es-ES', 'es-US',
+    'et', 'eu-ES', 'fa', 'fa-AE', 'fa-AF', 'fa-IR', 'fi-FI', 'fil', 'fr-CA', 'fr-FR', 'gl-ES',
+    'gu', 'hi-IN', 'hr', 'hu-HU', 'hy-AM', 'id', 'is-IS', 'it-IT', 'iw-IL', 'ja-JP', 'ka-GE',
+    'kk', 'km-KH', 'kn-IN', 'ko-KR', 'ky-KG', 'lo-LA', 'lt', 'lv', 'mk-MK', 'ml-IN', 'mn-MN',
+    'mr-IN', 'ms', 'ms-MY', 'my-MM', 'ne-NP', 'nl-NL', 'no-NO', 'pa', 'pl-PL', 'pt-BR', 'pt-PT',
+    'rm', 'ro', 'ru-RU', 'si-LK', 'sk', 'sl', 'sq', 'sr', 'sv-SE', 'sw', 'ta-IN', 'te-IN', 'th',
+    'tr-TR', 'uk', 'ur', 'vi', 'zh-CN', 'zh-HK', 'zh-TW', 'zu',
+]
+
+# locale -> key of the natively translated entry (content_native.py; 'en' and 'tr' come from listing files)
+NATIVE_OF = {
+    'en-US': 'en', 'en-AU': 'en', 'en-CA': 'en', 'en-GB': 'en', 'en-IN': 'en', 'en-SG': 'en', 'en-ZA': 'en',
+    'tr-TR': 'tr',
+    'de-DE': 'de', 'es-ES': 'es', 'es-419': 'es', 'es-US': 'es', 'fr-FR': 'fr', 'fr-CA': 'fr',
+    'it-IT': 'it', 'pt-BR': 'pt-BR', 'pt-PT': 'pt-PT', 'ru-RU': 'ru', 'uk': 'uk', 'pl-PL': 'pl',
+    'nl-NL': 'nl', 'sv-SE': 'sv', 'da-DK': 'da', 'no-NO': 'no', 'fi-FI': 'fi', 'cs-CZ': 'cs',
+    'hu-HU': 'hu', 'ro': 'ro', 'el-GR': 'el', 'bg': 'bg', 'hr': 'hr', 'ar': 'ar',
+    'fa': 'fa', 'fa-AE': 'fa', 'fa-AF': 'fa', 'fa-IR': 'fa', 'iw-IL': 'he', 'hi-IN': 'hi',
+    'bn-BD': 'bn', 'ur': 'ur', 'id': 'id', 'ms': 'ms', 'ms-MY': 'ms', 'vi': 'vi', 'th': 'th',
+    'fil': 'fil', 'ja-JP': 'ja', 'ko-KR': 'ko', 'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'zh-HK': 'zh-TW',
+}
+
+# Locales without a full native translation: own short description (<= 80), English title,
+# and the full text of the nearest natively translated language (EN when nothing is close).
+OWN_SHORT = {
+    'af': ('Pomodoro-timer en studietimer: verdien punte, bou reekse, laat jou kafee groei.', 'en'),
+    'am': ('የፖሞዶሮ እና የጥናት ሰዓት ቆጣሪ፡ ነጥብ ያግኙ፣ ተከታታይነት ይጠብቁ፣ ካፌዎን ያሳድጉ።', 'en'),
+    'az-AZ': ('Pomodoro və dərs taymeri: xal qazan, seriya saxla, kafeni böyüt.', 'tr'),
+    'be': ('Таймер Памадора для вучобы: збірай ачкі, трымай серыі, развівай кафэ.', 'ru'),
+    'ca': ("Temporitzador Pomodoro i d'estudi: guanya punts, fes ratxes, fes créixer el cafè.", 'es'),
+    'et': ('Pomodoro ja õppetaimer: kogu punkte, hoia sarju, kasvata oma kohvikut.', 'en'),
+    'eu-ES': ('Pomodoro eta ikasketa tenporizadorea: lortu puntuak, mantendu serieak, hazi kafetegia.', 'es'),
+    'gl-ES': ('Temporizador Pomodoro e de estudo: gaña puntos, fai series, fai medrar o teu café.', 'es'),
+    'gu': ('પોમોડોરો અને સ્ટડી ટાઈમર: પોઈન્ટ કમાઓ, સ્ટ્રીક બનાવો, તમારું કૅફે વધારો.', 'hi'),
+    'hy-AM': ('Պոմոդորո և ուսումնական ժամաչափ՝ վաստակիր միավորներ, պահիր շարքերը, մեծացրու սրճարանդ։', 'en'),
+    'is-IS': ('Pomodoro- og námstímamælir: safnaðu stigum, haltu röðum, stækkaðu kaffihúsið þitt.', 'en'),
+    'ka-GE': ('პომოდოროს და სწავლის ტაიმერი: მოიგე ქულები, შეინარჩუნე სერია, გააზარდე კაფე.', 'en'),
+    'kk': ('Помодоро және оқу таймері: ұпай жина, серияны сақта, кафеңді өсір.', 'ru'),
+    'km-KH': ('កម្មវិធីកំណត់ម៉ោង Pomodoro និងរៀន៖ ទទួលពិន្ទុ រក្សាស៊េរី ពង្រីកហាងកាហ្វេរបស់អ្នក។', 'en'),
+    'kn-IN': ('ಪೊಮೊಡೊರೊ ಮತ್ತು ಅಧ್ಯಯನ ಟೈಮರ್: ಅಂಕ ಗಳಿಸಿ, ಸ್ಟ್ರೀಕ್ ಉಳಿಸಿ, ನಿಮ್ಮ ಕೆಫೆ ಬೆಳೆಸಿ.', 'en'),
+    'ky-KG': ('Помодоро жана окуу таймери: упай топто, сериясын сакта, кафеңди өстүр.', 'ru'),
+    'lo-LA': ('ຕົວຈັບເວລາ Pomodoro ແລະການຮຽນ: ສະສົມຄະແນນ ຮັກສາສະຕຣີກ ແລະຂະຫຍາຍຄາເຟຂອງທ່ານ.', 'en'),
+    'lt': ('Pomodoro ir mokymosi laikmatis: rink taškus, tęsk serijas, augink savo kavinę.', 'en'),
+    'lv': ('Pomodoro un mācību taimeris: krāj punktus, saglabā sērijas, izaudzē savu kafejnīcu.', 'en'),
+    'mk-MK': ('Помодоро и тајмер за учење: собирај поени, одржувај серии, развиј го кафулето.', 'bg'),
+    'ml-IN': ('പോമോഡോറോ & പഠന ടൈമർ: പോയിന്റ് നേടൂ, സ്ട്രീക്ക് നിലനിർത്തൂ, നിങ്ങളുടെ കഫേ വളർത്തൂ.', 'en'),
+    'mn-MN': ('Помодоро ба сургалтын таймер: оноо цуглуул, цувралаа хадгал, кафегаа өсгө.', 'en'),
+    'mr-IN': ('पोमोडोरो आणि अभ्यास टायमर: गुण मिळवा, स्ट्रीक टिकवा, तुमचा कॅफे वाढवा.', 'hi'),
+    'my-MM': ('Pomodoro နှင့် လေ့လာမှု တိုင်မာ- ရမှတ်ရယူပါ၊ ဆက်တိုက်မှတ်တမ်းထားပါ၊ ကော်ဖီဆိုင်ကို ကြီးထွားစေပါ။', 'en'),
+    'ne-NP': ('पोमोडोरो र अध्ययन टाइमर: अंक कमाउनुहोस्, स्ट्रिक कायम राख्नुहोस्, क्याफे बढाउनुहोस्।', 'hi'),
+    'pa': ('ਪੋਮੋਡੋਰੋ ਅਤੇ ਸਟੱਡੀ ਟਾਈਮਰ: ਪੁਆਇੰਟ ਕਮਾਓ, ਸਟ੍ਰੀਕ ਬਣਾਓ, ਆਪਣਾ ਕੈਫੇ ਵਧਾਓ।', 'hi'),
+    'rm': ('Pomodoro timer app & study timer. Earn points, keep streaks, grow your cafe.', 'de'),
+    'si-LK': ('පොමොඩෝරෝ සහ අධ්‍යයන ටයිමරය: ලකුණු උපයන්න, ස්ට්‍රීක් රකින්න, කැෆේ වර්ධනය කරන්න.', 'en'),
+    'sk': ('Pomodoro a študijný časovač: zbieraj body, drž série, rozvíjaj svoju kaviareň.', 'cs'),
+    'sl': ('Pomodoro in učni časovnik: zbiraj točke, ohranjaj serije, razvijaj svojo kavarno.', 'hr'),
+    'sq': ('Kohëmatës Pomodoro dhe studimi: fito pikë, mbaj serinë, rrit kafenenë tënde.', 'en'),
+    'sr': ('Помодоро и тајмер за учење: сакупљај бодове, одржавај низове, развиј свој кафић.', 'hr'),
+    'sw': ('Kipima muda cha Pomodoro na masomo: pata pointi, dumisha mfululizo, kuza mkahawa.', 'en'),
+    'ta-IN': ('போமோடோரோ & படிப்பு டைமர்: புள்ளிகள் பெறுங்கள், தொடர்ச்சியை வைத்திருங்கள், உங்கள் கஃபேவை வளர்க்கவும்.', 'en'),
+    'te-IN': ('పొమోడోరో & స్టడీ టైమర్: పాయింట్లు సంపాదించండి, స్ట్రీక్ కొనసాగించండి, మీ కేఫ్‌ను పెంచండి.', 'en'),
+    'zu': ('Isibali sikhathi se-Pomodoro nesokufunda: thola amaphuzu, gcina uchungechunge, khulisa ikhefi.', 'en'),
+}
+
+
+# Shorts that were over 80 code points in the first draft; these replace the originals.
+# Keys are native keys (content_native.py) or locale codes (OWN_SHORT).
+SHORT_FIX = {
+    'fi': "Pomodoro- ja opiskeluajastin: kerää pisteitä, rakenna putkia, kasvata kahvilaa.",
+    'hu': "Pomodoro és tanulási időzítő: gyűjts pontot, tarts sorozatot, növeszd a kávézód.",
+    'it': "Timer Pomodoro e studio: guadagna punti, tieni le serie, fai crescere il caffè.",
+    'pt-PT': "Temporizador Pomodoro e de estudo: ganhe pontos, crie séries, cresça o café.",
+    'ro': "Pomodoro și timer de studiu: câștigă puncte, ține serii, dezvoltă cafeneaua.",
+    'fil': "Pomodoro & study timer: kumita ng points, ituloy ang streak, palaguin ang cafe.",
+    'ca': "Temporitzador Pomodoro d'estudi: guanya punts, fes ratxes, fes créixer el cafè.",
+    'eu-ES': "Pomodoro tenporizadorea: lortu puntuak, mantendu serieak, hazi zure kafetegia.",
+    'gl-ES': "Temporizador Pomodoro e de estudo: gaña puntos, fai series, fai medrar o café.",
+    'hy-AM': "Պոմոդորո և ուսումնական ժամաչափ՝ վաստակիր միավորներ, պահիր շարքերը։",
+    'is-IS': "Pomodoro- og námstímamælir: safnaðu stigum, haltu röðum, stækkaðu kaffihúsið.",
+    'km-KH': "កម្មវិធីកំណត់ម៉ោង Pomodoro និងរៀន៖ ទទួលពិន្ទុ រក្សាស៊េរី ពង្រីកហាងកាហ្វេ។",
+    'lv': "Pomodoro un mācību taimeris: krāj punktus, saglabā sērijas, izaudzē kafejnīcu.",
+    'ml-IN': "പോമോഡോറോ & പഠന ടൈമർ: പോയിന്റ് നേടൂ, സ്ട്രീക്ക് നിലനിർത്തൂ, കഫേ വളർത്തൂ.",
+    'my-MM': "Pomodoro တိုင်မာ- ရမှတ်ရယူပါ၊ ဆက်တိုက်မှတ်တမ်းထားပါ။",
+    'ne-NP': "पोमोडोरो टाइमर: अंक कमाउनुहोस्, स्ट्रिक राख्नुहोस्, क्याफे बढाउनुहोस्।",
+    'sl': "Pomodoro in učni časovnik: zbiraj točke, ohranjaj serije, razvij svojo kavarno.",
+    'sw': "Kipima muda cha Pomodoro: pata pointi, dumisha mfululizo, kuza mkahawa wako.",
+    'ta-IN': "போமோடோரோ டைமர்: புள்ளிகள் பெறுங்கள், ஸ்ட்ரீக் வைத்திருங்கள், கஃபே வளர்க்கவும்.",
+    'te-IN': "పొమోడోరో టైమర్: పాయింట్లు సంపాదించండి, స్ట్రీక్ ఉంచండి, మీ కేఫ్‌ను పెంచండి.",
+    'zu': "Isibali se-Pomodoro: thola amaphuzu, gcina uchungechunge, khulisa ikhefi lakho.",
+}
