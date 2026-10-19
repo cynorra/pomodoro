@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../../../core/data/services/notification_service.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/state/locale_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -32,7 +33,9 @@ class SettingsScreen extends ConsumerWidget {
               icon: Icons.language_rounded,
               title: l10n.language,
               trailing: DropdownButton<Locale>(
-                value: _isValidLocale(currentLocale) ? currentLocale : const Locale('en'),
+                value: _isValidLocale(currentLocale)
+                    ? currentLocale
+                    : const Locale('en'),
                 dropdownColor: ZyraColors.surface,
                 underline: const SizedBox.shrink(),
                 style: ZyraTypography.titleMedium.copyWith(
@@ -55,6 +58,7 @@ class SettingsScreen extends ConsumerWidget {
                 },
               ),
             ),
+            const _NotificationsTile(),
             const _AdPrivacyTile(),
           ],
         ),
@@ -64,6 +68,88 @@ class SettingsScreen extends ConsumerWidget {
 
   bool _isValidLocale(Locale locale) {
     return locale.languageCode == 'tr' || locale.languageCode == 'en';
+  }
+}
+
+/// Shows whether session-end notifications are allowed and lets the user ask
+/// for the permission again. Android only lets the app ask while the system
+/// has not blocked it, so when it stays off the dialog explains where to turn
+/// it on.
+class _NotificationsTile extends StatefulWidget {
+  const _NotificationsTile();
+
+  @override
+  State<_NotificationsTile> createState() => _NotificationsTileState();
+}
+
+class _NotificationsTileState extends State<_NotificationsTile> {
+  bool? _enabled;
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  Future<void> _refresh() async {
+    final enabled = await NotificationService.notificationsEnabled();
+    if (mounted) setState(() => _enabled = enabled);
+  }
+
+  Future<void> _onTap() async {
+    final l10n = AppLocalizations.of(context);
+    if (_enabled == true) {
+      await _showHelp(l10n.notificationsOnHelp);
+      return;
+    }
+    await NotificationService.requestPermissionIfNeeded();
+    await _refresh();
+    if (_enabled != true && mounted) {
+      await _showHelp(l10n.notificationsOffHelp);
+    }
+  }
+
+  Future<void> _showHelp(String text) {
+    final l10n = AppLocalizations.of(context);
+    return showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: ZyraColors.surface,
+        content: Text(text),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.close),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final on = _enabled == true;
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: _SettingsTile(
+        icon: on
+            ? Icons.notifications_active_outlined
+            : Icons.notifications_off_outlined,
+        title: l10n.notifications,
+        trailing: TextButton(
+          onPressed: _enabled == null ? null : _onTap,
+          child: Text(
+            on ? l10n.notificationsOn : l10n.notificationsOff,
+            style: ZyraTypography.titleMedium.copyWith(
+              color: on
+                  ? ZyraColors.primary
+                  : ZyraColors.onSurface.withValues(alpha: 0.6),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

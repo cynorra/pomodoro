@@ -122,7 +122,8 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () async {
-                  final uri = Uri.parse(AuthService.accountDeletionWebUrl(context.l10n.localeName));
+                  final uri = Uri.parse(AuthService.accountDeletionWebUrl(
+                      context.l10n.localeName));
                   if (await canLaunchUrl(uri)) {
                     await launchUrl(uri);
                   }

@@ -56,8 +56,7 @@ class ProfileScreen extends ConsumerWidget {
             _ProfileCard(
               displayName: authState.userDisplayName ?? context.l10n.guestName,
               email: authState.userEmail ?? context.l10n.notSignedIn,
-              isAuthenticated:
-                  authState.status == AuthStatus.authenticated,
+              isAuthenticated: authState.status == AuthStatus.authenticated,
             ),
             const SizedBox(height: 16),
             streakAsync.when(
@@ -356,7 +355,6 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-
 class _MenuItem extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -396,7 +394,8 @@ class _MenuItem extends StatelessWidget {
                 ),
                 Icon(
                   Icons.chevron_right,
-                  color: textColor ?? ZyraColors.onSurface.withValues(alpha: 0.4),
+                  color:
+                      textColor ?? ZyraColors.onSurface.withValues(alpha: 0.4),
                 ),
               ],
             ),

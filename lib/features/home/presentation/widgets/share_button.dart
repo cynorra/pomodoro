@@ -85,26 +85,8 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
                     },
                   ),
                   _ShareOption(
-                    icon: Icons.camera_alt,
-                    label: 'Instagram',
-                    color: const Color(0xFFE4405F),
-                    onTap: () async {
-                      Navigator.pop(context);
-                      await _shareToInstagram();
-                    },
-                  ),
-                  _ShareOption(
-                    icon: Icons.music_note,
-                    label: 'TikTok',
-                    color: Colors.black,
-                    onTap: () async {
-                      Navigator.pop(context);
-                      await _shareToTikTok();
-                    },
-                  ),
-                  _ShareOption(
                     icon: Icons.share,
-                    label: context.l10n.other,
+                    label: l10n.shareAction,
                     color: ZyraColors.primary,
                     onTap: () async {
                       Navigator.pop(context);
@@ -140,9 +122,8 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
   }
 
   Future<void> _shareToWhatsApp(int totalPoints, int streak) async {
-    final text = _buildShareText(totalPoints, streak);
-    final file = await ShareCardCapture.capture(_cardKey);
-    await ShareService.shareToWhatsApp(text: text, image: file);
+    await ShareService.shareToWhatsApp(
+        text: _buildShareText(totalPoints, streak));
     _rewardViralShare();
   }
 
@@ -158,43 +139,6 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
         ),
       );
     }
-  }
-
-  Future<void> _shareToInstagram() async {
-    final l10n = context.l10n;
-    final file = await ShareCardCapture.capture(_cardKey);
-    if (file == null) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.shareCardFailed)),
-        );
-      }
-      return;
-    }
-    await ShareService.shareToInstagramStories(
-      imageFile: file,
-      caption: l10n.shareCaption,
-    );
-    _rewardViralShare();
-  }
-
-  Future<void> _shareToTikTok() async {
-    final l10n = context.l10n;
-    final file = await ShareCardCapture.capture(_cardKey);
-    if (file == null) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.shareCardFailed)),
-        );
-      }
-      return;
-    }
-    await ShareService.shareToTikTok(
-      videoOrImage: file,
-      text: l10n.shareCaptionWithLink(ShareService.getAppStoreLink()),
-      subject: l10n.shareSubject,
-    );
-    _rewardViralShare();
   }
 
   Future<void> _shareGeneral(int totalPoints, int streak) async {

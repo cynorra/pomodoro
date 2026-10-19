@@ -134,6 +134,11 @@
       }
     }
   },
+  "notificationsOn": "On",
+  "notificationsOff": "Off",
+  "notificationsOnHelp": "Study Cafe tells you when a focus session or a break ends. To change this, open your phone's Settings > Apps > Study Cafe > Notifications.",
+  "notificationsOffHelp": "Notifications are turned off. To get a reminder when a session ends, open your phone's Settings > Apps > Study Cafe > Notifications and turn them on.",
+  "shareAction": "Share",
   "authErrorGeneric": "An error occurred",
   "authSignInFailed": "Could not sign in",
   "authSignUpFailed": "Could not sign up",

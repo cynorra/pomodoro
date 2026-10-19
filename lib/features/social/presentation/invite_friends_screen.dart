@@ -131,18 +131,8 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   },
                 ),
                 _ShareIconButton(
-                  icon: Icons.camera_alt,
-                  label: 'Instagram',
-                  color: const Color(0xFFE4405F),
-                  onTap: () {
-                    ShareService.shareGeneral(
-                      text: context.l10n.inviteMessage(inviteLink),
-                    );
-                  },
-                ),
-                _ShareIconButton(
                   icon: Icons.share,
-                  label: context.l10n.other,
+                  label: context.l10n.shareAction,
                   color: ZyraColors.primary,
                   onTap: () {
                     ShareService.shareGeneral(

@@ -370,6 +370,23 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get notificationsOn => 'Açık';
+
+  @override
+  String get notificationsOff => 'Kapalı';
+
+  @override
+  String get notificationsOnHelp =>
+      'Study Cafe, odak seansı veya mola bittiğinde seni uyarır. Değiştirmek için telefonunun Ayarlar > Uygulamalar > Study Cafe > Bildirimler bölümüne git.';
+
+  @override
+  String get notificationsOffHelp =>
+      'Bildirimler kapalı. Seans bittiğinde hatırlatma almak için telefonunun Ayarlar > Uygulamalar > Study Cafe > Bildirimler bölümünden aç.';
+
+  @override
+  String get shareAction => 'Paylaş';
+
+  @override
   String get authErrorGeneric => 'Bir hata oluştu';
 
   @override

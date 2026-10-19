@@ -800,6 +800,36 @@ abstract class AppLocalizations {
   /// **'{value}h'**
   String hoursShort(String value);
 
+  /// No description provided for @notificationsOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get notificationsOn;
+
+  /// No description provided for @notificationsOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get notificationsOff;
+
+  /// No description provided for @notificationsOnHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Study Cafe tells you when a focus session or a break ends. To change this, open your phone\'s Settings > Apps > Study Cafe > Notifications.'**
+  String get notificationsOnHelp;
+
+  /// No description provided for @notificationsOffHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are turned off. To get a reminder when a session ends, open your phone\'s Settings > Apps > Study Cafe > Notifications and turn them on.'**
+  String get notificationsOffHelp;
+
+  /// No description provided for @shareAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareAction;
+
   /// No description provided for @authErrorGeneric.
   ///
   /// In en, this message translates to:

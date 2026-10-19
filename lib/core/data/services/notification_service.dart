@@ -74,6 +74,9 @@ class NotificationService {
     _initialized = true;
   }
 
+  /// Whether the OS currently lets the app show notifications.
+  static Future<bool> notificationsEnabled() => _isPermitted();
+
   static Future<bool> _isPermitted() async {
     try {
       if (Platform.isAndroid) {

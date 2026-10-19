@@ -370,6 +370,23 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get notificationsOn => 'On';
+
+  @override
+  String get notificationsOff => 'Off';
+
+  @override
+  String get notificationsOnHelp =>
+      'Study Cafe tells you when a focus session or a break ends. To change this, open your phone\'s Settings > Apps > Study Cafe > Notifications.';
+
+  @override
+  String get notificationsOffHelp =>
+      'Notifications are turned off. To get a reminder when a session ends, open your phone\'s Settings > Apps > Study Cafe > Notifications and turn them on.';
+
+  @override
+  String get shareAction => 'Share';
+
+  @override
   String get authErrorGeneric => 'An error occurred';
 
   @override

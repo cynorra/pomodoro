@@ -18,61 +18,21 @@ class ShareService {
     );
   }
 
-  static Future<void> shareToWhatsApp({
-    required String text,
-    File? image,
-  }) async {
+  /// Opens WhatsApp directly with [text]; falls back to the system share sheet
+  /// when WhatsApp is not installed. Images cannot be attached to this link,
+  /// use [shareGeneral] for the progress card.
+  static Future<void> shareToWhatsApp({required String text}) async {
     try {
-      if (image != null) {
-        await _share(text: text, files: [image]);
+      final uri =
+          Uri.parse('whatsapp://send?text=${Uri.encodeComponent(text)}');
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else {
-        final whatsappUri = Uri.parse('whatsapp://send?text=${Uri.encodeComponent(text)}');
-        if (await canLaunchUrl(whatsappUri)) {
-          await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
-        } else {
-          await _share(text: text);
-        }
+        await _share(text: text);
       }
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'WhatsApp share failed');
       await _share(text: text);
-    }
-  }
-
-  static Future<void> shareToInstagramStories({
-    required File imageFile,
-    required String caption,
-    String? backgroundTopColor,
-    String? backgroundBottomColor,
-  }) async {
-    try {
-      if (Platform.isIOS) {
-        final uri = Uri.parse('instagram-stories://share');
-        if (await canLaunchUrl(uri)) {
-          await _share(files: [imageFile]);
-        } else {
-          await launchUrl(
-            Uri.parse('https://apps.apple.com/app/instagram/id389801252'),
-            mode: LaunchMode.externalApplication,
-          );
-        }
-      } else {
-        await _share(text: caption, files: [imageFile]);
-      }
-    } catch (e, stack) {
-      GlobalExceptionHandler.logError(e, stack, 'Instagram share failed');
-    }
-  }
-
-  static Future<void> shareToTikTok({
-    required File videoOrImage,
-    required String text,
-    required String subject,
-  }) async {
-    try {
-      await _share(text: text, subject: subject, files: [videoOrImage]);
-    } catch (e, stack) {
-      GlobalExceptionHandler.logError(e, stack, 'TikTok share failed');
     }
   }
 
