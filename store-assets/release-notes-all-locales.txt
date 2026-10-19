@@ -1,0 +1,261 @@
+<en-US>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</en-US>
+<af>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</af>
+<am>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</am>
+<ar>
+الإصدار الأول من Study Cafe: مؤقت بومودورو دافئ مع نقاط وتتابع يومي وإنجازات ومقهى افتراضي تملؤه بالأطايب. متوفر بالإنجليزية والتركية.
+</ar>
+<az-AZ>
+Study Cafe'nin ilk sürümü: puan, günlük seri, başarım ve ikramlarla doldurabileceğin sanal bir kafe içeren rahat bir pomodoro zamanlayıcı. Türkçe ve İngilizce dilleriyle.
+</az-AZ>
+<be>
+Первая версия Study Cafe: уютный помодоро-таймер с очками, ежедневными сериями, достижениями и виртуальным кафе, которое вы наполняете угощениями. Доступно на английском и турецком языках.
+</be>
+<bg>
+Първа версия на Study Cafe: уютен помодоро таймер с точки, ежедневни серии, постижения и виртуално кафене, което пълниш с вкусотии. Налично на английски и турски.
+</bg>
+<bn-BD>
+Study Cafe-এর প্রথম সংস্করণ: পয়েন্ট, দৈনিক স্ট্রিক, অর্জন এবং খাবারে ভরানো ভার্চুয়াল ক্যাফেসহ আরামদায়ক পোমোডোরো টাইমার। ইংরেজি ও তুর্কি ভাষায় পাওয়া যায়।
+</bn-BD>
+<ca>
+Primera versión de Study Cafe: un temporizador Pomodoro acogedor con puntos, rachas diarias, logros y un café virtual que llenas de delicias. Disponible en inglés y turco.
+</ca>
+<cs-CZ>
+První verze Study Cafe: útulný časovač Pomodoro s body, denními sériemi, úspěchy a virtuální kavárnou, kterou plníš pochoutkami. K dispozici v angličtině a turečtině.
+</cs-CZ>
+<da-DK>
+Første version af Study Cafe: en hyggelig Pomodoro-timer med point, daglige serier, præstationer og en virtuel café, du fylder med lækkerier. Fås på engelsk og tyrkisk.
+</da-DK>
+<de-DE>
+Erste Version von Study Cafe: ein gemütlicher Pomodoro-Timer mit Punkten, täglichen Serien, Erfolgen und einem virtuellen Café, das du mit Köstlichkeiten füllst. Verfügbar auf Englisch und Türkisch.
+</de-DE>
+<el-GR>
+Πρώτη έκδοση του Study Cafe: ένα ζεστό χρονόμετρο Pomodoro με πόντους, καθημερινά σερί, επιτεύγματα και ένα εικονικό καφέ που γεμίζεις με λιχουδιές. Διαθέσιμο στα αγγλικά και τα τουρκικά.
+</el-GR>
+<en-AU>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</en-AU>
+<en-CA>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</en-CA>
+<en-GB>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</en-GB>
+<en-IN>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</en-IN>
+<en-SG>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</en-SG>
+<en-ZA>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</en-ZA>
+<es-419>
+Primera versión de Study Cafe: un temporizador Pomodoro acogedor con puntos, rachas diarias, logros y un café virtual que llenas de delicias. Disponible en inglés y turco.
+</es-419>
+<es-ES>
+Primera versión de Study Cafe: un temporizador Pomodoro acogedor con puntos, rachas diarias, logros y un café virtual que llenas de delicias. Disponible en inglés y turco.
+</es-ES>
+<es-US>
+Primera versión de Study Cafe: un temporizador Pomodoro acogedor con puntos, rachas diarias, logros y un café virtual que llenas de delicias. Disponible en inglés y turco.
+</es-US>
+<et>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</et>
+<eu-ES>
+Primera versión de Study Cafe: un temporizador Pomodoro acogedor con puntos, rachas diarias, logros y un café virtual que llenas de delicias. Disponible en inglés y turco.
+</eu-ES>
+<fa>
+نسخه‌ی اول Study Cafe: یک تایمر پومودورو دنج با امتیاز، تداوم روزانه، دستاوردها و یک کافه‌ی مجازی که با خوراکی‌ها پرش می‌کنی. به زبان‌های انگلیسی و ترکی.
+</fa>
+<fa-AE>
+نسخه‌ی اول Study Cafe: یک تایمر پومودورو دنج با امتیاز، تداوم روزانه، دستاوردها و یک کافه‌ی مجازی که با خوراکی‌ها پرش می‌کنی. به زبان‌های انگلیسی و ترکی.
+</fa-AE>
+<fa-AF>
+نسخه‌ی اول Study Cafe: یک تایمر پومودورو دنج با امتیاز، تداوم روزانه، دستاوردها و یک کافه‌ی مجازی که با خوراکی‌ها پرش می‌کنی. به زبان‌های انگلیسی و ترکی.
+</fa-AF>
+<fa-IR>
+نسخه‌ی اول Study Cafe: یک تایمر پومودورو دنج با امتیاز، تداوم روزانه، دستاوردها و یک کافه‌ی مجازی که با خوراکی‌ها پرش می‌کنی. به زبان‌های انگلیسی و ترکی.
+</fa-IR>
+<fi-FI>
+Study Cafen ensimmäinen versio: viihtyisä Pomodoro-ajastin, jossa on pisteitä, päivittäisiä putkia, saavutuksia ja virtuaalinen kahvila, jonka täytät herkuilla. Saatavilla englanniksi ja turkiksi.
+</fi-FI>
+<fil>
+Unang release ng Study Cafe: maaliwalas na Pomodoro timer na may points, araw-araw na streak, achievements, at virtual cafe na pupunuin mo ng pagkain. Available sa English at Turkish.
+</fil>
+<fr-CA>
+Première version de Study Cafe : un minuteur Pomodoro chaleureux avec points, séries quotidiennes, succès et un café virtuel à garnir de gourmandises. Disponible en anglais et en turc.
+</fr-CA>
+<fr-FR>
+Première version de Study Cafe : un minuteur Pomodoro chaleureux avec points, séries quotidiennes, succès et un café virtuel à garnir de gourmandises. Disponible en anglais et en turc.
+</fr-FR>
+<gl-ES>
+Primera versión de Study Cafe: un temporizador Pomodoro acogedor con puntos, rachas diarias, logros y un café virtual que llenas de delicias. Disponible en inglés y turco.
+</gl-ES>
+<gu>
+Study Cafe का पहला संस्करण: पॉइंट, रोज़ाना स्ट्रीक, उपलब्धियों और ऐसे वर्चुअल कैफ़े वाला आरामदायक पोमोडोरो टाइमर, जिसे आप स्वादिष्ट चीज़ों से भरते हैं। अंग्रेज़ी और तुर्की में उपलब्ध।
+</gu>
+<hi-IN>
+Study Cafe का पहला संस्करण: पॉइंट, रोज़ाना स्ट्रीक, उपलब्धियों और ऐसे वर्चुअल कैफ़े वाला आरामदायक पोमोडोरो टाइमर, जिसे आप स्वादिष्ट चीज़ों से भरते हैं। अंग्रेज़ी और तुर्की में उपलब्ध।
+</hi-IN>
+<hr>
+Prva verzija Study Cafea: ugodan Pomodoro timer s bodovima, dnevnim nizovima, postignućima i virtualnim kafićem koji puniš đakonijama. Dostupno na engleskom i turskom.
+</hr>
+<hu-HU>
+A Study Cafe első verziója: hangulatos Pomodoro időzítő pontokkal, napi sorozatokkal, eredményekkel és egy virtuális kávézóval, amelyet finomságokkal töltesz meg. Angolul és törökül érhető el.
+</hu-HU>
+<hy-AM>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</hy-AM>
+<id>
+Rilis pertama Study Cafe: timer Pomodoro yang nyaman dengan poin, streak harian, pencapaian, dan kafe virtual yang kamu isi dengan sajian. Tersedia dalam bahasa Inggris dan Turki.
+</id>
+<is-IS>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</is-IS>
+<it-IT>
+Prima versione di Study Cafe: un accogliente timer Pomodoro con punti, serie giornaliere, obiettivi e un caffè virtuale da riempire di delizie. Disponibile in inglese e turco.
+</it-IT>
+<iw-IL>
+הגרסה הראשונה של Study Cafe: טיימר פומודורו חמים עם נקודות, רצפים יומיים, הישגים ובית קפה וירטואלי שממלאים בפינוקים. זמין באנגלית ובטורקית.
+</iw-IL>
+<ja-JP>
+Study Cafeの初回リリース：ポイント、毎日の連続記録、実績、そしておいしいものを並べるバーチャルカフェを備えた、居心地のよいポモドーロタイマーです。英語とトルコ語に対応。
+</ja-JP>
+<ka-GE>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</ka-GE>
+<kk>
+Первая версия Study Cafe: уютный помодоро-таймер с очками, ежедневными сериями, достижениями и виртуальным кафе, которое вы наполняете угощениями. Доступно на английском и турецком языках.
+</kk>
+<km-KH>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</km-KH>
+<kn-IN>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</kn-IN>
+<ko-KR>
+Study Cafe 첫 출시: 포인트, 매일 연속 기록, 업적, 맛있는 메뉴로 채우는 가상 카페를 갖춘 아늑한 포모도로 타이머입니다. 영어와 터키어를 지원합니다.
+</ko-KR>
+<ky-KG>
+Первая версия Study Cafe: уютный помодоро-таймер с очками, ежедневными сериями, достижениями и виртуальным кафе, которое вы наполняете угощениями. Доступно на английском и турецком языках.
+</ky-KG>
+<lo-LA>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</lo-LA>
+<lt>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</lt>
+<lv>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</lv>
+<mk-MK>
+Първа версия на Study Cafe: уютен помодоро таймер с точки, ежедневни серии, постижения и виртуално кафене, което пълниш с вкусотии. Налично на английски и турски.
+</mk-MK>
+<ml-IN>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</ml-IN>
+<mn-MN>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</mn-MN>
+<mr-IN>
+Study Cafe का पहला संस्करण: पॉइंट, रोज़ाना स्ट्रीक, उपलब्धियों और ऐसे वर्चुअल कैफ़े वाला आरामदायक पोमोडोरो टाइमर, जिसे आप स्वादिष्ट चीज़ों से भरते हैं। अंग्रेज़ी और तुर्की में उपलब्ध।
+</mr-IN>
+<ms>
+Keluaran pertama Study Cafe: pemasa Pomodoro yang selesa dengan mata, streak harian, pencapaian dan kafe maya yang anda isi dengan hidangan. Tersedia dalam bahasa Inggeris dan Turki.
+</ms>
+<ms-MY>
+Keluaran pertama Study Cafe: pemasa Pomodoro yang selesa dengan mata, streak harian, pencapaian dan kafe maya yang anda isi dengan hidangan. Tersedia dalam bahasa Inggeris dan Turki.
+</ms-MY>
+<my-MM>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</my-MM>
+<ne-NP>
+Study Cafe का पहला संस्करण: पॉइंट, रोज़ाना स्ट्रीक, उपलब्धियों और ऐसे वर्चुअल कैफ़े वाला आरामदायक पोमोडोरो टाइमर, जिसे आप स्वादिष्ट चीज़ों से भरते हैं। अंग्रेज़ी और तुर्की में उपलब्ध।
+</ne-NP>
+<nl-NL>
+Eerste versie van Study Cafe: een gezellige Pomodoro-timer met punten, dagelijkse reeksen, prestaties en een virtueel café dat je vult met lekkernijen. Beschikbaar in het Engels en Turks.
+</nl-NL>
+<no-NO>
+Første versjon av Study Cafe: en koselig Pomodoro-timer med poeng, daglige rekker, prestasjoner og en virtuell kafé du fyller med godsaker. Tilgjengelig på engelsk og tyrkisk.
+</no-NO>
+<pa>
+Study Cafe का पहला संस्करण: पॉइंट, रोज़ाना स्ट्रीक, उपलब्धियों और ऐसे वर्चुअल कैफ़े वाला आरामदायक पोमोडोरो टाइमर, जिसे आप स्वादिष्ट चीज़ों से भरते हैं। अंग्रेज़ी और तुर्की में उपलब्ध।
+</pa>
+<pl-PL>
+Pierwsza wersja Study Cafe: przytulny timer Pomodoro z punktami, codziennymi seriami, osiągnięciami i wirtualną kawiarnią, którą zapełniasz przysmakami. Dostępna po angielsku i turecku.
+</pl-PL>
+<pt-BR>
+Primeira versão do Study Cafe: um timer Pomodoro aconchegante com pontos, sequências diárias, conquistas e um café virtual que você enche de delícias. Disponível em inglês e turco.
+</pt-BR>
+<pt-PT>
+Primeira versão do Study Cafe: um temporizador Pomodoro acolhedor com pontos, séries diárias, conquistas e um café virtual que enche de iguarias. Disponível em inglês e turco.
+</pt-PT>
+<rm>
+Erste Version von Study Cafe: ein gemütlicher Pomodoro-Timer mit Punkten, täglichen Serien, Erfolgen und einem virtuellen Café, das du mit Köstlichkeiten füllst. Verfügbar auf Englisch und Türkisch.
+</rm>
+<ro>
+Prima versiune Study Cafe: un temporizator Pomodoro primitor cu puncte, serii zilnice, realizări și o cafenea virtuală pe care o umpli cu bunătăți. Disponibilă în engleză și turcă.
+</ro>
+<ru-RU>
+Первая версия Study Cafe: уютный помодоро-таймер с очками, ежедневными сериями, достижениями и виртуальным кафе, которое вы наполняете угощениями. Доступно на английском и турецком языках.
+</ru-RU>
+<si-LK>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</si-LK>
+<sk>
+První verze Study Cafe: útulný časovač Pomodoro s body, denními sériemi, úspěchy a virtuální kavárnou, kterou plníš pochoutkami. K dispozici v angličtině a turečtině.
+</sk>
+<sl>
+Prva verzija Study Cafea: ugodan Pomodoro timer s bodovima, dnevnim nizovima, postignućima i virtualnim kafićem koji puniš đakonijama. Dostupno na engleskom i turskom.
+</sl>
+<sq>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</sq>
+<sr>
+Prva verzija Study Cafea: ugodan Pomodoro timer s bodovima, dnevnim nizovima, postignućima i virtualnim kafićem koji puniš đakonijama. Dostupno na engleskom i turskom.
+</sr>
+<sv-SE>
+Första versionen av Study Cafe: en mysig Pomodoro-timer med poäng, dagliga streaks, prestationer och ett virtuellt kafé som du fyller med godsaker. Finns på engelska och turkiska.
+</sv-SE>
+<sw>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</sw>
+<ta-IN>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</ta-IN>
+<te-IN>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</te-IN>
+<th>
+Study Cafe เวอร์ชันแรก: ตัวจับเวลาโพโมโดโรแสนอบอุ่น มีแต้ม สตรีครายวัน ความสำเร็จ และคาเฟ่เสมือนที่คุณเติมเต็มด้วยของอร่อย มีภาษาอังกฤษและตุรกี
+</th>
+<tr-TR>
+Study Cafe'nin ilk sürümü: puan, günlük seri, başarım ve ikramlarla doldurabileceğin sanal bir kafe içeren rahat bir pomodoro zamanlayıcı. Türkçe ve İngilizce dilleriyle.
+</tr-TR>
+<uk>
+Перша версія Study Cafe: затишний помодоро-таймер з балами, щоденними серіями, досягненнями та віртуальним кафе, яке ви наповнюєте смаколиками. Доступно англійською та турецькою.
+</uk>
+<ur>
+Study Cafe کا پہلا ورژن: پوائنٹس، روزانہ اسٹریک، کامیابیوں اور ایسے ورچوئل کیفے کے ساتھ آرام دہ پومودورو ٹائمر جسے آپ لذیذ چیزوں سے بھرتے ہیں۔ انگریزی اور ترکی میں دستیاب۔
+</ur>
+<vi>
+Phiên bản đầu tiên của Study Cafe: bộ hẹn giờ Pomodoro ấm cúng với điểm, chuỗi ngày, thành tích và quán cà phê ảo bạn lấp đầy bằng món ngon. Có tiếng Anh và tiếng Thổ Nhĩ Kỳ.
+</vi>
+<zh-CN>
+Study Cafe 首次发布：温馨的番茄钟，包含积分、每日连续记录、成就，以及可用美食装满的虚拟咖啡馆。支持英语和土耳其语。
+</zh-CN>
+<zh-HK>
+Study Cafe 首次發布：溫馨的番茄鐘，包含積分、每日連續紀錄、成就，以及可用美食裝滿的虛擬咖啡館。支援英文與土耳其文。
+</zh-HK>
+<zh-TW>
+Study Cafe 首次發布：溫馨的番茄鐘，包含積分、每日連續紀錄、成就，以及可用美食裝滿的虛擬咖啡館。支援英文與土耳其文。
+</zh-TW>
+<zu>
+First release of Study Cafe: a cozy Pomodoro timer with points, daily streaks, achievements and a virtual cafe you stock with treats. Available in English and Turkish.
+</zu>
