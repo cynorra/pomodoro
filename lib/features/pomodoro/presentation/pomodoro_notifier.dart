@@ -9,6 +9,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../core/data/state/streak_notifier.dart';
 import '../../../core/data/services/streak_service.dart';
 import '../../../core/data/services/achievement_service.dart';
+import '../../../core/data/services/ad_service.dart';
 import '../../../core/data/services/analytics_service.dart';
 import '../../../core/data/services/remote_config_service.dart';
 import '../../../core/data/state/achievement_event_notifier.dart';
@@ -197,7 +198,10 @@ class PomodoroNotifier extends Notifier<PomodoroState>
         pointsEarned: pointsEarned,
       );
 
-      if (isFocus) _completedFocusSessions++;
+      if (isFocus) {
+        _completedFocusSessions++;
+        unawaited(AdService.onFocusSessionCompleted());
+      }
       final nextSessionType = _determineNextSessionType(isFocus);
       final nextDuration = _getDuration(nextSessionType);
 

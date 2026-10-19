@@ -11,6 +11,7 @@ class RewardedAdButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (!AdService.hasRewardedAdUnit) return const SizedBox.shrink();
     final l10n = AppLocalizations.of(context);
     final isReady = AdService.isRewardedAdReady;
 

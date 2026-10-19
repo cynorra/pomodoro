@@ -8,6 +8,7 @@ import '../../../core/data/state/user_notifier.dart';
 import '../../../core/data/services/audio_service.dart';
 import '../../../core/data/services/cafe_purchase_service.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../monetization/presentation/native_ad_card.dart';
 import '../../monetization/presentation/rewarded_ad_button.dart';
 import 'cafe_notifier.dart';
 
@@ -79,6 +80,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
                 ),
               ),
             ),
+            const SliverToBoxAdapter(child: NativeAdCard()),
           ],
         ),
         loading: () => Padding(

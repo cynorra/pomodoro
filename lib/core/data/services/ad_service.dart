@@ -1,14 +1,30 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../utils/global_exception_handler.dart';
 
 class AdService {
+  static const _focusSessionsPerInterstitial = 3;
+  static const _minInterstitialGap = Duration(minutes: 5);
+
   static RewardedAd? _rewardedAd;
+  static InterstitialAd? _interstitialAd;
+  static int _focusSessionsSinceAd = 0;
+  static DateTime? _lastInterstitialAt;
   static bool _isInitialized = false;
 
   static String get bannerAdUnitId => kDebugMode
       ? 'ca-app-pub-3940256099942544/6300978111'
-      : 'ca-app-pub-GERCEK-ID/GERCEK-UNIT';
+      : 'ca-app-pub-4674211063760769/7365067197';
+
+  static String get interstitialAdUnitId => kDebugMode
+      ? 'ca-app-pub-3940256099942544/1033173712'
+      : 'ca-app-pub-4674211063760769/1556627735';
+
+  static String get nativeAdUnitId => kDebugMode
+      ? 'ca-app-pub-3940256099942544/2247696110'
+      : 'ca-app-pub-4674211063760769/9799658844';
 
   static String get rewardedAdUnitId => kDebugMode
       ? 'ca-app-pub-3940256099942544/5224354917'
@@ -19,6 +35,8 @@ class AdService {
   static bool get hasBannerAdUnit =>
       kDebugMode || !bannerAdUnitId.contains('GERCEK');
 
+  static bool get hasRewardedAdUnit => _hasRewardedAdUnit;
+
   static bool get _hasRewardedAdUnit =>
       kDebugMode || !rewardedAdUnitId.contains('GERCEK');
 
@@ -28,9 +46,66 @@ class AdService {
     try {
       await MobileAds.instance.initialize();
       _isInitialized = true;
+      unawaited(_loadInterstitialAd());
       if (_hasRewardedAdUnit) await _loadRewardedAd();
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'AdMob init failed');
+    }
+  }
+
+  static Future<void> _loadInterstitialAd() async {
+    try {
+      await InterstitialAd.load(
+        adUnitId: interstitialAdUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) => _interstitialAd = ad,
+          onAdFailedToLoad: (error) {
+            debugPrint('Interstitial ad load failed: ${error.message}');
+            _interstitialAd = null;
+          },
+        ),
+      );
+    } catch (e, stack) {
+      GlobalExceptionHandler.logError(e, stack, 'Load interstitial ad failed');
+    }
+  }
+
+  /// Called after every completed focus session; shows an interstitial on
+  /// every [_focusSessionsPerInterstitial]th one, at most once per
+  /// [_minInterstitialGap], so the ad never interrupts a running timer.
+  static Future<void> onFocusSessionCompleted() async {
+    _focusSessionsSinceAd++;
+    if (_focusSessionsSinceAd < _focusSessionsPerInterstitial) return;
+    final last = _lastInterstitialAt;
+    if (last != null &&
+        DateTime.now().difference(last) < _minInterstitialGap) {
+      return;
+    }
+    final ad = _interstitialAd;
+    if (ad == null) {
+      unawaited(_loadInterstitialAd());
+      return;
+    }
+    _interstitialAd = null;
+    _focusSessionsSinceAd = 0;
+    _lastInterstitialAt = DateTime.now();
+    ad.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        ad.dispose();
+        _loadInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        ad.dispose();
+        _loadInterstitialAd();
+      },
+    );
+    try {
+      await ad.show();
+    } catch (e, stack) {
+      GlobalExceptionHandler.logError(e, stack, 'Show interstitial ad failed');
+      ad.dispose();
+      unawaited(_loadInterstitialAd());
     }
   }
 
