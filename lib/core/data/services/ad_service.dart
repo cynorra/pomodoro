@@ -28,7 +28,7 @@ class AdService {
 
   static String get rewardedAdUnitId => kDebugMode
       ? 'ca-app-pub-3940256099942544/5224354917'
-      : 'ca-app-pub-GERCEK-ID/GERCEK-UNIT';
+      : 'ca-app-pub-4674211063760769/8433027271';
 
   // Release builds ship with placeholder ad unit IDs until real ones are set;
   // loading ads with them would only produce failed requests.
