@@ -118,9 +118,9 @@ class AuthService {
     }
   }
 
-  static String get accountDeletionWebUrl => 'https://cynora.com/delete-account';
-  static String get privacyPolicyUrl => 'https://cynora.com/privacy';
-  static String get termsOfServiceUrl => 'https://cynora.com/terms';
+  static String get accountDeletionWebUrl => 'https://cynorra.github.io/studycafe/delete-account.html';
+  static String get privacyPolicyUrl => 'https://cynorra.github.io/studycafe/privacy.html';
+  static String get termsOfServiceUrl => 'https://cynorra.github.io/studycafe/terms.html';
 
   static String _mapAuthError(String code) {
     switch (code) {

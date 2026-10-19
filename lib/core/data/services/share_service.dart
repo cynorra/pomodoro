@@ -93,9 +93,11 @@ class ShareService {
   }
 
   static String generateInviteLink({String? referralCode}) {
-    final base = 'https://cynora.page.link/invite';
+    // Firebase Dynamic Links is shut down, so invites point straight at the
+    // store listing; Play's `referrer` parameter carries the code.
+    final base = getAppStoreLink();
     if (referralCode != null) {
-      return '$base?ref=$referralCode';
+      return '$base&referrer=${Uri.encodeComponent('ref=$referralCode')}';
     }
     return base;
   }

@@ -76,7 +76,7 @@ class HelpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  context.l10n.contactUs('support@cynora.com'),
+                  context.l10n.contactUs('eren.gp54@gmail.com'),
                   style: ZyraTypography.bodyMedium.copyWith(
                     color: ZyraColors.onSurface,
                   ),
@@ -88,7 +88,7 @@ class HelpScreen extends StatelessWidget {
                       child: _LinkButton(
                         label: context.l10n.privacyPolicy,
                         onTap: () =>
-                            _launchUrl('https://cynora.com/privacy'),
+                            _launchUrl('https://cynorra.github.io/studycafe/privacy.html'),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -96,7 +96,7 @@ class HelpScreen extends StatelessWidget {
                       child: _LinkButton(
                         label: context.l10n.termsOfService,
                         onTap: () =>
-                            _launchUrl('https://cynora.com/terms'),
+                            _launchUrl('https://cynorra.github.io/studycafe/terms.html'),
                       ),
                     ),
                   ],
