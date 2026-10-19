@@ -11,7 +11,7 @@ import csv, io, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from content_native import NATIVE          # noqa: E402
-from locales import ALL_LOCALES, NATIVE_OF, OWN_SHORT, SHORT_FIX   # noqa: E402
+from locales import ALL_LOCALES, NATIVE_OF, OWN_SHORT, SHORT_FIX, TITLE_FIX   # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(HERE))
 SA = os.path.join(ROOT, 'store-assets')
@@ -19,7 +19,7 @@ EMAIL = 'eren.gp54@gmail.com'
 PRIV = 'https://cynorra.github.io/studycafe/privacy.html'
 PRIV_TR = 'https://cynorra.github.io/studycafe/privacy-tr.html'
 ENGLISH_TITLE = 'Study Cafe: Pomodoro Timer'
-LIMITS = (30, 80, 4000)
+LIMITS = (28, 78, 3900)   # Play allows 30 / 80 / 4000; keep a 2-char margin (3900 for the full text)
 
 
 def read_listing(name):
@@ -47,7 +47,7 @@ def build():
     entries = {'en': dict(title=en[0], short=en[1], full=en[2]),
                'tr': dict(title=tr[0], short=tr[1], full=tr[2])}
     for key, e in NATIVE.items():
-        entries[key] = dict(title=e['title'], short=SHORT_FIX.get(key, e['short']),
+        entries[key] = dict(title=TITLE_FIX.get(key, e['title']), short=SHORT_FIX.get(key, e['short']),
                             full=assemble(e, PRIV_TR if key == 'tr' else PRIV))
 
     rows, notes = [], []

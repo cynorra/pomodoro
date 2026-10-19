@@ -90,3 +90,29 @@ SHORT_FIX = {
     'te-IN': "పొమోడోరో టైమర్: పాయింట్లు సంపాదించండి, స్ట్రీక్ ఉంచండి, మీ కేఫ్‌ను పెంచండి.",
     'zu': "Isibali se-Pomodoro: thola amaphuzu, gcina uchungechunge, khulisa ikhefi lakho.",
 }
+
+
+# Second pass: keep every short description at <= 78 and every title at <= 28 code points,
+# so an off-by-one in how Play counts characters can never reject the import.
+SHORT_FIX.update({
+    'fr': "Minuteur Pomodoro et d'étude : gagnez des points et gardez vos séries.",
+    'hr': "Pomodoro i timer za učenje: skupljaj bodove, održavaj nizove, razvij kafić.",
+    'hu': "Pomodoro tanulási időzítő: gyűjts pontot, tarts sorozatot, növeszd a kávézód.",
+    'nl': "Pomodoro- en studietimer: verdien punten, bouw reeksen, laat je café groeien.",
+    'sr': "Помодоро и тајмер за учење: сакупљај бодове, одржавај низове, развиј кафић.",
+    'af': "Pomodoro-timer en studietimer: verdien punte, bou reekse, laat kafee groei.",
+    'ca': "Temporitzador Pomodoro d'estudi: guanya punts, fes ratxes, creix el cafè.",
+    'el': "Pomodoro και χρονόμετρο μελέτης: κέρδισε πόντους, κράτα σερί, χτίσε το καφέ.",
+    'es': "Pomodoro y temporizador de estudio: gana puntos, haz rachas, crece tu café.",
+    'fi': "Pomodoro- ja opiskeluajastin: kerää pisteitä, pidä putki, kasvata kahvilaa.",
+    'fil': "Pomodoro study timer: kumita ng points, ituloy ang streak, palaguin ang cafe.",
+    'it': "Timer Pomodoro e studio: guadagna punti, mantieni le serie, crea il tuo caffè.",
+    'pt-BR': "Timer Pomodoro e de estudo: ganhe pontos, crie sequências, cresça seu café.",
+    'sl': "Pomodoro in učni časovnik: zbiraj točke, ohranjaj serije, razvij kavarno.",
+    'zu': "Isibali se-Pomodoro: thola amaphuzu, gcina uchungechunge, khulisa ikhefi.",
+})
+
+# Titles that were at the 30 limit.
+TITLE_FIX = {
+    'th': 'Study Cafe: จับเวลาโพโมโดโร',
+}
