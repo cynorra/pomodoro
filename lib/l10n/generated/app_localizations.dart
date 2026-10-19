@@ -710,6 +710,12 @@ abstract class AppLocalizations {
   /// **'Google sign-in failed. Please try again.'**
   String get authGoogleSignInFailed;
 
+  /// No description provided for @adPrivacySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Ad privacy settings'**
+  String get adPrivacySettings;
+
   /// No description provided for @authErrorGeneric.
   ///
   /// In en, this message translates to:

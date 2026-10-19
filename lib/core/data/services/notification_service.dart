@@ -1,10 +1,12 @@
-import 'dart:ui' show PlatformDispatcher;
+import 'dart:ui' show Color, PlatformDispatcher;
 import 'dart:io' show Platform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
 
 class NotificationService {
+  static const _accent = Color(0xFFD4AF37);
+
   // Channel names show up in Android's notification settings, outside the
   // app's own localization, so they follow the device language.
   static bool get _isTr => PlatformDispatcher.instance.locale.languageCode == 'tr';
@@ -26,7 +28,7 @@ class NotificationService {
 
     tz_data.initializeTimeZones();
 
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings = AndroidInitializationSettings('@drawable/ic_stat_notification');
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
@@ -114,7 +116,8 @@ class NotificationService {
       channelDescription: _sessionChannelDesc,
       importance: Importance.high,
       priority: Priority.high,
-      icon: '@mipmap/ic_launcher',
+        color: _accent,
+      icon: '@drawable/ic_stat_notification',
     );
 
     const iosDetails = DarwinNotificationDetails(
@@ -149,6 +152,7 @@ class NotificationService {
         channelDescription: _breakChannelDesc,
         importance: Importance.max,
         priority: Priority.high,
+        color: _accent,
       ),
       iOS: DarwinNotificationDetails(),
     );
@@ -188,6 +192,7 @@ class NotificationService {
             channelDescription: _sessionChannelDesc,
             importance: Importance.high,
             priority: Priority.high,
+        color: _accent,
           ),
           iOS: DarwinNotificationDetails(),
         ),

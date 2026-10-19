@@ -112,6 +112,7 @@
   "continueWithGoogle": "Google ile devam et",
   "orDivider": "veya",
   "authGoogleSignInFailed": "Google ile giriş başarısız. Lütfen tekrar dene.",
+  "adPrivacySettings": "Reklam gizlilik ayarları",
   "authErrorGeneric": "Bir hata oluştu",
   "authSignInFailed": "Giriş yapılamadı",
   "authSignUpFailed": "Kayıt yapılamadı",

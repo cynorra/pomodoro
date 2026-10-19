@@ -322,6 +322,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Google sign-in failed. Please try again.';
 
   @override
+  String get adPrivacySettings => 'Ad privacy settings';
+
+  @override
   String get authErrorGeneric => 'An error occurred';
 
   @override

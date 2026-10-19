@@ -40,15 +40,53 @@ class AdService {
   static bool get _hasRewardedAdUnit =>
       kDebugMode || !rewardedAdUnitId.contains('GERCEK');
 
+  static final Completer<bool> _adsReady = Completer<bool>();
+
+  /// Completes once consent has been handled: true when ads may be requested.
+  static Future<bool> get adsReady => _adsReady.future;
+
+  static void _finishReady(bool ok) {
+    if (!_adsReady.isCompleted) _adsReady.complete(ok);
+  }
+
+  /// Runs Google's User Messaging Platform flow (GDPR/UK consent form when
+  /// the user's region requires one).
+  static Future<void> _gatherConsent() async {
+    final done = Completer<void>();
+    ConsentInformation.instance.requestConsentInfoUpdate(
+      ConsentRequestParameters(),
+      () async {
+        try {
+          await ConsentForm.loadAndShowConsentFormIfRequired((_) {});
+        } catch (e, stack) {
+          GlobalExceptionHandler.logError(e, stack, 'Consent form failed');
+        }
+        if (!done.isCompleted) done.complete();
+      },
+      (error) {
+        debugPrint('Consent info update failed: ${error.message}');
+        if (!done.isCompleted) done.complete();
+      },
+    );
+    await done.future;
+  }
+
   static Future<void> initialize() async {
     if (_isInitialized) return;
 
     try {
+      await _gatherConsent();
+      if (!await ConsentInformation.instance.canRequestAds()) {
+        _finishReady(false);
+        return;
+      }
       await MobileAds.instance.initialize();
       _isInitialized = true;
+      _finishReady(true);
       unawaited(_loadInterstitialAd());
       if (_hasRewardedAdUnit) await _loadRewardedAd();
     } catch (e, stack) {
+      _finishReady(false);
       GlobalExceptionHandler.logError(e, stack, 'AdMob init failed');
     }
   }

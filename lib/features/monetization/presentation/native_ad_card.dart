@@ -13,11 +13,16 @@ class _NativeAdCardState extends State<NativeAdCard> {
   NativeAd? _ad;
   bool _loaded = false;
   bool _disposed = false;
+  bool _started = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_ad == null) _load();
+    if (_started) return;
+    _started = true;
+    AdService.adsReady.then((ok) {
+      if (ok && !_disposed) _load();
+    });
   }
 
   void _load() {

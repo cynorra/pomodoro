@@ -44,15 +44,13 @@ void main() async {
         onTimeout: () {},
       ),
     );
-    unawaited(
-      AdService.initialize().timeout(
-        const Duration(seconds: 3),
-        onTimeout: () {},
-      ),
-    );
     unawaited(NotificationService.initialize());
     unawaited(AchievementService.seedDefaultAchievements());
     unawaited(AnalyticsService.logAppOpen());
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => unawaited(AdService.initialize()),
+    );
 
     runApp(
       ProviderScope(

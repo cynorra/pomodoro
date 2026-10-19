@@ -322,6 +322,9 @@ class AppLocalizationsTr extends AppLocalizations {
       'Google ile giriş başarısız. Lütfen tekrar dene.';
 
   @override
+  String get adPrivacySettings => 'Reklam gizlilik ayarları';
+
+  @override
   String get authErrorGeneric => 'Bir hata oluştu';
 
   @override

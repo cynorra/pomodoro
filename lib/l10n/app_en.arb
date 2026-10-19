@@ -112,6 +112,7 @@
   "continueWithGoogle": "Continue with Google",
   "orDivider": "or",
   "authGoogleSignInFailed": "Google sign-in failed. Please try again.",
+  "adPrivacySettings": "Ad privacy settings",
   "authErrorGeneric": "An error occurred",
   "authSignInFailed": "Could not sign in",
   "authSignUpFailed": "Could not sign up",

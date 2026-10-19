@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/state/locale_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -31,7 +32,7 @@ class SettingsScreen extends ConsumerWidget {
               icon: Icons.language_rounded,
               title: l10n.language,
               trailing: DropdownButton<Locale>(
-                value: _isValidLocale(currentLocale) ? currentLocale : const Locale('tr'),
+                value: _isValidLocale(currentLocale) ? currentLocale : const Locale('en'),
                 dropdownColor: ZyraColors.surface,
                 underline: const SizedBox.shrink(),
                 style: ZyraTypography.titleMedium.copyWith(
@@ -54,14 +55,53 @@ class SettingsScreen extends ConsumerWidget {
                 },
               ),
             ),
+            const _AdPrivacyTile(),
           ],
         ),
       ),
     );
   }
-  
+
   bool _isValidLocale(Locale locale) {
     return locale.languageCode == 'tr' || locale.languageCode == 'en';
+  }
+}
+
+/// Entry point to Google's ad-consent form; only shown where the consent
+/// framework says users must be able to revisit their choice.
+class _AdPrivacyTile extends StatelessWidget {
+  const _AdPrivacyTile();
+
+  Future<bool> _required() async {
+    try {
+      return await ConsentInformation.instance
+              .getPrivacyOptionsRequirementStatus() ==
+          PrivacyOptionsRequirementStatus.required;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return FutureBuilder<bool>(
+      future: _required(),
+      builder: (context, snapshot) {
+        if (snapshot.data != true) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: _SettingsTile(
+            icon: Icons.privacy_tip_outlined,
+            title: l10n.adPrivacySettings,
+            trailing: IconButton(
+              icon: const Icon(Icons.chevron_right_rounded),
+              onPressed: () => ConsentForm.showPrivacyOptionsForm((_) {}),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

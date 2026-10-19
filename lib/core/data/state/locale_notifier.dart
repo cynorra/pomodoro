@@ -1,3 +1,5 @@
+import 'dart:ui' show PlatformDispatcher;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -20,10 +22,12 @@ class LocaleNotifier extends Notifier<Locale> {
     try {
       final code = await _storage.read(key: _key);
       if (code == 'tr') return const Locale('tr');
-      return const Locale('en');
-    } catch (_) {
-      return const Locale('en');
-    }
+      if (code == 'en') return const Locale('en');
+    } catch (_) {}
+    // Nothing chosen yet: Turkish devices get Turkish, everything else English.
+    return PlatformDispatcher.instance.locale.languageCode == 'tr'
+        ? const Locale('tr')
+        : const Locale('en');
   }
 
   Future<void> setLocale(Locale locale) async {
