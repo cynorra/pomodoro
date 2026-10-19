@@ -34,7 +34,8 @@ void main() {
 
   group('buildChartBuckets', () {
     test('week: always 7 daily bars ending today', () {
-      final b = buildChartBuckets(sessions: [], filter: StatsFilter.week, now: now);
+      final b =
+          buildChartBuckets(sessions: [], filter: StatsFilter.week, now: now);
       expect(b.length, 7);
       expect(b.first.start, DateTime(2026, 6, 4));
       expect(b.last.start, DateTime(2026, 6, 10));
@@ -75,7 +76,8 @@ void main() {
     });
 
     test('month: 5 bars of 6 days covering the last 30 days exactly', () {
-      final b = buildChartBuckets(sessions: [], filter: StatsFilter.month, now: now);
+      final b =
+          buildChartBuckets(sessions: [], filter: StatsFilter.month, now: now);
       expect(b.length, 5);
       expect(b.first.start, DateTime(2026, 5, 12));
       expect(b[1].start, DateTime(2026, 5, 18));
@@ -96,7 +98,8 @@ void main() {
     });
 
     test('allTime: last 6 calendar months, oldest first', () {
-      final b = buildChartBuckets(sessions: [], filter: StatsFilter.allTime, now: now);
+      final b = buildChartBuckets(
+          sessions: [], filter: StatsFilter.allTime, now: now);
       expect(b.map((x) => x.start).toList(), [
         DateTime(2026, 1, 1),
         DateTime(2026, 2, 1),
@@ -117,7 +120,9 @@ void main() {
       expect(b.last.start, DateTime(2026, 2, 1));
     });
 
-    test('allTime: sessions are grouped by month and old ones are ignored by the chart', () {
+    test(
+        'allTime: sessions are grouped by month and old ones are ignored by the chart',
+        () {
       final b = buildChartBuckets(
         sessions: [
           focus(DateTime(2026, 6, 1), 25),
@@ -134,7 +139,10 @@ void main() {
     });
 
     test('the bar count never depends on how much history exists', () {
-      final many = [for (var i = 0; i < 400; i++) focus(DateTime(2026, 6, 10).subtract(Duration(days: i)), 25)];
+      final many = [
+        for (var i = 0; i < 400; i++)
+          focus(DateTime(2026, 6, 10).subtract(Duration(days: i)), 25)
+      ];
       for (final f in StatsFilter.values) {
         final n = buildChartBuckets(sessions: many, filter: f, now: now).length;
         expect(n, lessThanOrEqualTo(7));

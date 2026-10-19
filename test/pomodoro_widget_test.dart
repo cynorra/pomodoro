@@ -45,7 +45,8 @@ Future<_FakePomodoro> _pump(
         locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const Scaffold(body: SingleChildScrollView(child: PomodoroWidget())),
+        home: const Scaffold(
+            body: SingleChildScrollView(child: PomodoroWidget())),
       ),
     ),
   );
@@ -54,7 +55,8 @@ Future<_FakePomodoro> _pump(
 }
 
 void main() {
-  testWidgets('shows the time, the session label and Start / Reset', (tester) async {
+  testWidgets('shows the time, the session label and Start / Reset',
+      (tester) async {
     await _pump(tester, state: const PomodoroState(remainingSeconds: 25 * 60));
     expect(find.text('25:00'), findsOneWidget);
     expect(find.text('Deep Focus'), findsOneWidget);
@@ -63,7 +65,8 @@ void main() {
   });
 
   testWidgets('formats minutes and seconds with leading zeros', (tester) async {
-    await _pump(tester, state: const PomodoroState(remainingSeconds: 5 * 60 + 7));
+    await _pump(tester,
+        state: const PomodoroState(remainingSeconds: 5 * 60 + 7));
     expect(find.text('05:07'), findsOneWidget);
   });
 
@@ -79,7 +82,8 @@ void main() {
   testWidgets('break sessions get their own labels', (tester) async {
     await _pump(
       tester,
-      state: const PomodoroState(remainingSeconds: 300, sessionType: SessionType.shortBreak),
+      state: const PomodoroState(
+          remainingSeconds: 300, sessionType: SessionType.shortBreak),
     );
     expect(find.text('Cafe Break'), findsOneWidget);
   });
@@ -87,7 +91,8 @@ void main() {
   testWidgets('long break label', (tester) async {
     await _pump(
       tester,
-      state: const PomodoroState(remainingSeconds: 900, sessionType: SessionType.longBreak),
+      state: const PomodoroState(
+          remainingSeconds: 900, sessionType: SessionType.longBreak),
     );
     expect(find.text('Long Break'), findsOneWidget);
   });
@@ -114,9 +119,15 @@ void main() {
     expect(find.text('Başlat'), findsOneWidget);
   });
 
-  for (final size in const [Size(320, 480), Size(390, 844), Size(844, 390), Size(800, 1280)]) {
+  for (final size in const [
+    Size(320, 480),
+    Size(390, 844),
+    Size(844, 390),
+    Size(800, 1280)
+  ]) {
     for (final locale in const [Locale('en'), Locale('tr')]) {
-      testWidgets('fits at ${size.width.toInt()}x${size.height.toInt()} (${locale.languageCode})',
+      testWidgets(
+          'fits at ${size.width.toInt()}x${size.height.toInt()} (${locale.languageCode})',
           (tester) async {
         await _pump(
           tester,

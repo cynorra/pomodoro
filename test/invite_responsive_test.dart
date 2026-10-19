@@ -14,7 +14,8 @@ void main() {
 
   for (final locale in const [Locale('en'), Locale('tr')]) {
     for (final entry in sizes.entries) {
-      testWidgets('invite friends fits on ${entry.key} (${locale.languageCode})',
+      testWidgets(
+          'invite friends fits on ${entry.key} (${locale.languageCode})',
           (tester) async {
         tester.view.physicalSize = entry.value;
         tester.view.devicePixelRatio = 1.0;

@@ -328,52 +328,59 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 60,
-                        child: Text(
-                          widget.item.iconCode,
-                          style: const TextStyle(fontSize: 48),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        name,
-                        style: ZyraTypography.titleMedium.copyWith(
-                          color: ZyraColors.onSurface,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: ZyraColors.primary.withValues(alpha: 0.2),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          '${widget.item.cost} ${l10n.points}',
-                          style: ZyraTypography.labelLarge.copyWith(
-                            color: ZyraColors.primary,
+                  padding: const EdgeInsets.all(12.0),
+                  // Scale the content down to whatever the grid cell offers, so the
+                  // card never overflows on narrow phones or with large system fonts.
+                  child: Center(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height: 60,
+                            child: Text(
+                              widget.item.iconCode,
+                              style: const TextStyle(fontSize: 48),
+                            ),
                           ),
-                        ),
-                      ),
-                      if (widget.item.isOwned) ...[
-                        const SizedBox(height: 8),
-                        Text(
-                          '${l10n.inventory}: ${widget.item.quantity}',
-                          style: ZyraTypography.labelSmall.copyWith(
-                            color: ZyraColors.secondary,
+                          const SizedBox(height: 12),
+                          Text(
+                            name,
+                            style: ZyraTypography.titleMedium.copyWith(
+                              color: ZyraColors.onSurface,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                        ),
-                      ]
-                    ],
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: ZyraColors.primary.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              '${widget.item.cost} ${l10n.points}',
+                              style: ZyraTypography.labelLarge.copyWith(
+                                color: ZyraColors.primary,
+                              ),
+                            ),
+                          ),
+                          if (widget.item.isOwned) ...[
+                            const SizedBox(height: 8),
+                            Text(
+                              '${l10n.inventory}: ${widget.item.quantity}',
+                              style: ZyraTypography.labelSmall.copyWith(
+                                color: ZyraColors.secondary,
+                              ),
+                            ),
+                          ]
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
