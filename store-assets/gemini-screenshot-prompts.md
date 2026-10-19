@@ -71,3 +71,36 @@ Repeat the same seven prompts but replace the format line with: "Create a 16:10 
 
 ## Suggested upload order
 1 Focus timer, 2 Cafe, 5 Ambient sounds, 3 Achievements, 4 Statistics, 6 Leaderboard, 7 Share.
+
+---
+
+# App icon prompt (Gemini)
+
+Goal: one 1024x1024 PNG, full-bleed square (no rounded corners, no border, no transparency). It is used as the Play Store icon (512x512) and, after processing, as the Android launcher icon (adaptive, round and square masks). Hand me the PNG and I convert it into all Android sizes.
+
+**Hard rules for the result**
+- Square 1:1, 1024x1024, the background fills every pixel to the edges (Android crops it with a circle/squircle mask).
+- The whole subject (cup + ring + steam) must sit inside the central 60% of the image; nothing important within 20% of any edge.
+- One clear focal object, readable as a 48x48 thumbnail. No text, letters, numbers, watermark, border, or UI.
+- Brand palette: deep espresso black (#14100D to #0A0705) background, rich gold (#D4AF37, highlights #FFF1BC, shadows #9C6F14), optional tiny purple (#9D76C1) rim light.
+
+**Main prompt**
+```
+Design a premium mobile app icon, 1024x1024, 1:1, full-bleed square with no rounded corners and no border. Concept: a cozy study cafe focus timer. Centered subject: a elegant gold coffee cup on a saucer with two soft curls of steam, enclosed by a thin glowing circular timer ring that is about 80% complete (a gap at the upper left, rounded ends). Style: modern 2026 premium app icon, soft 3D glass-and-metal feel with a polished gold gradient (highlights #FFF1BC, mid #D4AF37, shadows #9C6F14), gentle inner glow and a warm golden bloom behind the cup, subtle specular highlights, very clean edges. Background: smooth deep espresso-black radial gradient (#2A1D10 centre to #0A0705 edges) with a faint diagonal sheen, no patterns, no objects. Composition: the whole subject sits in the central 60% of the canvas with generous empty space around it, symmetric and balanced, strong silhouette that stays readable at 48x48 pixels. High contrast, sharp, no noise. Do NOT include any text, letters, numbers, logo, watermark, border, rounded-corner frame, drop shadow outside the subject, people, extra objects, or a phone mockup.
+```
+
+**Variant B (softer, "clay 3D")**
+```
+Same concept and layout as above but rendered as a friendly soft 3D clay/ceramic style: a chunky rounded gold-glazed coffee cup with a small saucer and two steam wisps inside a thick glowing gold timer ring, soft studio lighting, smooth rounded forms, warm golden rim light on a deep espresso-black gradient background. Keep the subject inside the central 60%, no text, no border, full-bleed square 1024x1024.
+```
+
+**Variant C (minimal flat, best for tiny sizes)**
+```
+Minimal flat app icon, 1024x1024 full-bleed square. A single bold gold (#D4AF37) coffee cup silhouette with two steam curls, enclosed in a thick gold circular timer ring with a small gap, on a solid deep espresso (#14100D) background with a very soft warm glow behind the cup. Flat vector look, thick shapes, huge contrast, readable at 48x48. Subject inside the central 60%. No text, no border, no gradients except the soft glow.
+```
+
+**Check before sending it to me**
+1. Looks good as a tiny thumbnail (zoom out to about 48 px): the cup and ring must still read.
+2. Nothing important near the edges (a circular crop must not cut anything).
+3. No letters or garbled pseudo-text anywhere.
+4. Same style family as the feature graphic (use the same image as a reference when you generate it).
