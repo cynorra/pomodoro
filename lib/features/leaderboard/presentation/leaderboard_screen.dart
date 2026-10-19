@@ -20,15 +20,18 @@ final _leaderboardProvider =
       .limit(50)
       .get();
 
+  // Documents are client-written, so read every field defensively: one
+  // malformed entry must not break the list for everyone.
+  String textOf(Object? v) => v is String ? v.trim() : '';
+  int numberOf(Object? v) => v is num ? v.toInt() : 0;
+
   return [
     for (var i = 0; i < snapshot.docs.length; i++)
       _LeaderboardEntry(
         rank: i + 1,
-        name: (snapshot.docs[i].data()['displayName'] as String?)?.trim() ??
-            '',
-        points: (snapshot.docs[i].data()['totalPoints'] as num?)?.toInt() ?? 0,
-        streak:
-            (snapshot.docs[i].data()['currentStreak'] as num?)?.toInt() ?? 0,
+        name: textOf(snapshot.docs[i].data()['displayName']),
+        points: numberOf(snapshot.docs[i].data()['totalPoints']),
+        streak: numberOf(snapshot.docs[i].data()['currentStreak']),
         avatar: i < _rankAvatars.length ? _rankAvatars[i] : '🏅',
         isCurrentUser: snapshot.docs[i].id == currentUid,
       ),
