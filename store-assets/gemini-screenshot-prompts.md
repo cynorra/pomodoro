@@ -128,13 +128,22 @@ Optional variant with a phone: add at the end, "On the far right add one floatin
 
 ## 5. Tablet screenshots (optional)
 
-Use the same master prompt and screen blocks, but replace the first line with:
+Play has separate upload slots for **7-inch** and **10-inch** tablets. They are optional, but apps that ship them (4 or more at 1080 px+) are favoured in large-screen recommendations. Min 320 px, max 3840 px per side, PNG or JPEG without alpha.
+
+| Slot | Portrait | Landscape |
+|---|---|---|
+| 7-inch tablet | 1200 x 1920 | 1920 x 1200 |
+| 10-inch tablet | 1600 x 2560 | 2560 x 1600 |
+
+**Important:** on tablets the real app keeps a phone-width column (content is capped at 600 dp and centered). The screenshot must show exactly that. Do NOT invent a two-column or wide tablet layout, Play treats that as misleading.
+
+Use the same master prompt and the same screen blocks, but replace the first line (format) with:
 
 ```
-Create a Google Play Store tablet screenshot, landscape 16:10, 1920x1200 px, same style. Put the headline on the left third and the frameless app screen on the right two thirds, using a wider two-column layout for cards.
+Create a Google Play Store tablet screenshot, landscape 16:10, 2560x1600 px, same brand style. Put the headline on the left third, vertically centered, large. On the right two thirds place the same phone-width app screen (about 600 dp wide, exactly as on a phone, frameless, rounded corners, soft gold glow) centered, with calm espresso-black space on both sides. Do not stretch or redesign the UI, do not add extra columns or panels.
 ```
 
-Apps that ship tablet screenshots rank better in large-screen recommendations.
+For the 7-inch slot, resize the same images to 1920x1200. One set of landscape images can be uploaded to both slots.
 
 ---
 
