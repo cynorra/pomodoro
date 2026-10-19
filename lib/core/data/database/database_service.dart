@@ -120,7 +120,7 @@ class DatabaseService {
     return await _isar.writeTxn(() async {
       final item =
           await _isar.cafeItems.filter().itemIdEqualTo(itemId).findFirst();
-      if (item == null) return false;
+      if (item == null || item.isOwned) return false;
 
       if (userCurrentPoints >= item.cost) {
         item.isOwned = true;

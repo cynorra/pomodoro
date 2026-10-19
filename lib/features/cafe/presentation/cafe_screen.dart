@@ -268,6 +268,13 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
 
           if (!mounted) return;
 
+          // The list holds copies of the stored items; reload it so the card
+          // shows the new owned state.
+          if (result == PurchaseResult.success ||
+              result == PurchaseResult.alreadyOwned) {
+            ref.invalidate(cafeItemsProvider);
+          }
+
           if (result == PurchaseResult.insufficientPoints) {
             messenger.showSnackBar(
               SnackBar(
