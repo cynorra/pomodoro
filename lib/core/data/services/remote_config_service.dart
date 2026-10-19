@@ -1,4 +1,5 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import '../../../features/pomodoro/domain/pomodoro_rules.dart';
 import '../../utils/global_exception_handler.dart';
 
 class RemoteConfigService {
@@ -29,11 +30,36 @@ class RemoteConfigService {
     }
   }
 
-  static int get focusDuration => _remoteConfig.getInt('pomodoro_focus_duration');
-  static int get shortBreakDuration => _remoteConfig.getInt('pomodoro_short_break_duration');
-  static int get longBreakDuration => _remoteConfig.getInt('pomodoro_long_break_duration');
-  static int get pointsPerFocus => _remoteConfig.getInt('points_per_focus_session');
-  static int get pointsPerBreak => _remoteConfig.getInt('points_per_break_session');
+  static int get focusDuration => clampConfig(
+        _remoteConfig.getInt('pomodoro_focus_duration'),
+        min: 1,
+        max: 180,
+        fallback: 25,
+      );
+  static int get shortBreakDuration => clampConfig(
+        _remoteConfig.getInt('pomodoro_short_break_duration'),
+        min: 1,
+        max: 60,
+        fallback: 5,
+      );
+  static int get longBreakDuration => clampConfig(
+        _remoteConfig.getInt('pomodoro_long_break_duration'),
+        min: 1,
+        max: 120,
+        fallback: 15,
+      );
+  static int get pointsPerFocus => clampConfig(
+        _remoteConfig.getInt('points_per_focus_session'),
+        min: 0,
+        max: 1000,
+        fallback: 10,
+      );
+  static int get pointsPerBreak => clampConfig(
+        _remoteConfig.getInt('points_per_break_session'),
+        min: 0,
+        max: 1000,
+        fallback: 2,
+      );
   static bool get enableAmbientSounds => _remoteConfig.getBool('enable_ambient_sounds');
   static bool get showMotivationMessages => _remoteConfig.getBool('show_motivation_messages');
 }

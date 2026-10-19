@@ -359,6 +359,17 @@ class AppLocalizationsTr extends AppLocalizations {
   String get showHiddenPlayers => 'Gizlenen oyuncuları göster';
 
   @override
+  String get monthlyChart => 'Son 30 Gün';
+
+  @override
+  String get allTimeChart => 'Son 6 Ay';
+
+  @override
+  String hoursShort(String value) {
+    return '${value}sa';
+  }
+
+  @override
   String get authErrorGeneric => 'Bir hata oluştu';
 
   @override

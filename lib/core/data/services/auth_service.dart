@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../../features/pomodoro/domain/pomodoro_rules.dart';
 import '../../utils/global_exception_handler.dart';
 
 class AuthService {
@@ -21,10 +22,11 @@ class AuthService {
         password: password,
       );
 
-      await credential.user?.updateDisplayName(displayName);
+      final name = leaderboardName(displayName, maxLength: 30);
+      await credential.user?.updateDisplayName(name);
 
       await _firestore.collection('users').doc(credential.user?.uid).set({
-        'displayName': displayName,
+        'displayName': name,
         'email': email,
         'createdAt': FieldValue.serverTimestamp(),
         'totalPoints': 0,
@@ -93,7 +95,7 @@ class AuthService {
       final user = result.user;
       if (user != null && (result.additionalUserInfo?.isNewUser ?? false)) {
         await _firestore.collection('users').doc(user.uid).set({
-          'displayName': user.displayName ?? '',
+          'displayName': leaderboardName(user.displayName, maxLength: 30),
           'email': user.email ?? '',
           'createdAt': FieldValue.serverTimestamp(),
           'totalPoints': 0,

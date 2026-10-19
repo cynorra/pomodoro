@@ -42,39 +42,65 @@ class PomodoroWidget extends ConsumerWidget {
             const SizedBox(height: 24),
             _TimerDisplay(remainingSeconds: state.remainingSeconds),
             const SizedBox(height: 32),
-            Semantics(
-              button: true,
-              label: state.isRunning
-                  ? (l10n.pauseTimer)
-                  : (l10n.startTimer),
-              child: GestureDetector(
-                onTapUp: (_) => notifier.toggleTimer(),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 48,
-                    vertical: 16,
-                  ),
-                  decoration: BoxDecoration(
-                    color: ZyraColors.primary,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: ZyraColors.primary.withValues(alpha: 0.3),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
+            Wrap(
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 12,
+              runSpacing: 12,
+              children: [
+                Semantics(
+                  button: true,
+                  label: state.isRunning ? l10n.pauseTimer : l10n.startTimer,
+                  child: GestureDetector(
+                    onTapUp: (_) => notifier.toggleTimer(),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 16,
                       ),
-                    ],
-                  ),
-                  child: Text(
-                    state.isRunning
-                        ? (l10n.pause)
-                        : (l10n.start),
-                    style: ZyraTypography.labelLarge.copyWith(
-                      color: ZyraColors.onPrimary,
+                      decoration: BoxDecoration(
+                        color: ZyraColors.primary,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: ZyraColors.primary.withValues(alpha: 0.3),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        state.isRunning ? l10n.pause : l10n.start,
+                        style: ZyraTypography.labelLarge.copyWith(
+                          color: ZyraColors.onPrimary,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                Semantics(
+                  button: true,
+                  label: l10n.reset,
+                  child: OutlinedButton(
+                    onPressed: notifier.resetTimer,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: ZyraColors.primary,
+                      side: const BorderSide(color: ZyraColors.primary),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: Text(
+                      l10n.reset,
+                      style: ZyraTypography.labelLarge,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

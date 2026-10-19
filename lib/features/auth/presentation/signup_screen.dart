@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/jelly_button.dart';
@@ -64,6 +65,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: _nameController,
+                  inputFormatters: [LengthLimitingTextInputFormatter(30)],
                   decoration: InputDecoration(
                     labelText: l10n.displayName,
                     prefixIcon: const Icon(Icons.person_outlined),
@@ -72,7 +74,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     ),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return context.l10n.nameRequired;
                     }
                     return null;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/ui/zyra_theme.dart';
+import '../../../../core/data/services/daily_bonus_service.dart';
 import '../../../../core/data/services/share_service.dart';
 import '../../../../core/data/services/share_card_generator.dart';
 import '../../../../core/data/services/share_card_capture.dart';
@@ -145,7 +146,8 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
     _rewardViralShare();
   }
 
-  void _rewardViralShare() {
+  Future<void> _rewardViralShare() async {
+    if (!await DailyBonusService.claimShareBonus() || !mounted) return;
     ref.read(userProvider.notifier).addPoints(25);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(

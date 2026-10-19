@@ -67,7 +67,11 @@ class AchievementService {
       final stats = await DatabaseService.instance.userStats.where().findFirst();
       if (stats == null) return [];
 
-      final totalSessions = await DatabaseService.instance.studySessions.count();
+      // Breaks are not study sessions.
+      final totalSessions = await DatabaseService.instance.studySessions
+          .filter()
+          .sessionTypeEqualTo('focus')
+          .count();
       final achievements =
           await DatabaseService.instance.achievements.where().findAll();
       final newlyUnlocked = <Achievement>[];

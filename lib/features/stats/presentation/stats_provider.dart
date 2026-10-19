@@ -2,8 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar_community/isar.dart';
 import '../../../core/data/database/database_service.dart';
 import '../../../core/data/models/study_session.dart';
+import 'chart_buckets.dart';
+import 'stats_filter.dart';
 
-enum StatsFilter { week, month, allTime }
+export 'stats_filter.dart';
 
 class StatsFilterNotifier extends Notifier<StatsFilter> {
   @override
@@ -18,24 +20,11 @@ final selectedFilterProvider =
 final statsDataProvider = FutureProvider<List<StudySession>>((ref) async {
   final filter = ref.watch(selectedFilterProvider);
 
-  final now = DateTime.now();
-  DateTime startDate;
-
-  switch (filter) {
-    case StatsFilter.week:
-      startDate = now.subtract(const Duration(days: 7));
-      break;
-    case StatsFilter.month:
-      startDate = now.subtract(const Duration(days: 30));
-      break;
-    case StatsFilter.allTime:
-      startDate = DateTime(2020);
-      break;
-  }
+  final startDate = statsWindowStart(filter, DateTime.now());
 
   final all = await DatabaseService.instance.studySessions
       .filter()
-      .dateGreaterThan(startDate)
+      .dateGreaterThan(startDate, include: true)
       .sortByDateDesc()
       .findAll();
 

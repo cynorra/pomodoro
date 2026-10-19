@@ -9,7 +9,8 @@ class NotificationService {
 
   // Channel names show up in Android's notification settings, outside the
   // app's own localization, so they follow the device language.
-  static bool get _isTr => PlatformDispatcher.instance.locale.languageCode == 'tr';
+  static bool get _isTr =>
+      PlatformDispatcher.instance.locale.languageCode == 'tr';
   static String get _sessionChannelName =>
       _isTr ? 'Pomodoro Bildirimleri' : 'Pomodoro Notifications';
   static String get _sessionChannelDesc =>
@@ -28,7 +29,8 @@ class NotificationService {
 
     tz_data.initializeTimeZones();
 
-    const androidSettings = AndroidInitializationSettings('@drawable/ic_stat_notification');
+    const androidSettings =
+        AndroidInitializationSettings('@drawable/ic_stat_notification');
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
@@ -116,7 +118,7 @@ class NotificationService {
       channelDescription: _sessionChannelDesc,
       importance: Importance.high,
       priority: Priority.high,
-        color: _accent,
+      color: _accent,
       icon: '@drawable/ic_stat_notification',
     );
 
@@ -192,7 +194,7 @@ class NotificationService {
             channelDescription: _sessionChannelDesc,
             importance: Importance.high,
             priority: Priority.high,
-        color: _accent,
+            color: _accent,
           ),
           iOS: DarwinNotificationDetails(),
         ),

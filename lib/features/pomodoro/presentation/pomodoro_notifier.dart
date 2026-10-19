@@ -16,6 +16,7 @@ import '../../../core/data/state/achievement_event_notifier.dart';
 import '../../../core/data/services/haptic_service.dart';
 import '../../../core/data/services/notification_service.dart';
 import '../../../core/utils/global_exception_handler.dart';
+import '../domain/pomodoro_rules.dart';
 import '../domain/pomodoro_state.dart';
 
 final pomodoroProvider = NotifierProvider<PomodoroNotifier, PomodoroState>(
@@ -48,20 +49,15 @@ class PomodoroNotifier extends Notifier<PomodoroState>
 
   void _checkDailyReset() {
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final lastReset = DateTime(
-      _lastResetDate.year,
-      _lastResetDate.month,
-      _lastResetDate.day,
-    );
-
-    if (today.difference(lastReset).inDays > 0) {
+    if (calendarDaysBetween(_lastResetDate, now) > 0) {
       _completedFocusSessions = 0;
       _lastResetDate = now;
     }
   }
 
   @override
+  // `state` is already the notifier's own state here, so the parameter keeps its name.
+  // ignore: avoid_renaming_method_parameters
   void didChangeAppLifecycleState(AppLifecycleState lifecycle) {
     if (lifecycle == AppLifecycleState.paused) {
       _timer?.cancel();
@@ -117,6 +113,20 @@ class PomodoroNotifier extends Notifier<PomodoroState>
             .then((_) => state.isRunning ? _scheduleEndNotification() : null),
       );
     }
+  }
+
+  /// Stops the timer and puts the current session back to its full length.
+  /// No points are given for an unfinished session.
+  void resetTimer() {
+    if (_isCompletingSession) return;
+    _timer?.cancel();
+    _timer = null;
+    _deadline = null;
+    unawaited(NotificationService.cancelSessionEnd());
+    state = state.copyWith(
+      isRunning: false,
+      remainingSeconds: _getDuration(state.sessionType) * 60,
+    );
   }
 
   void _startTimer() {
@@ -175,7 +185,9 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       await DatabaseService.saveSession(session);
 
       await ref.read(userProvider.notifier).addPoints(pointsEarned);
-      await ref.read(userProvider.notifier).addStudyMinutes(minutesStudied);
+      if (isFocus) {
+        await ref.read(userProvider.notifier).addStudyMinutes(minutesStudied);
+      }
 
       if (isFocus) {
         await StreakService.updateStreakOnSessionComplete();
@@ -221,14 +233,10 @@ class PomodoroNotifier extends Notifier<PomodoroState>
     }
   }
 
-  SessionType _determineNextSessionType(bool wasFocus) {
-    if (!wasFocus) return SessionType.focus;
-
-    if (_completedFocusSessions % 4 == 0) {
-      return SessionType.longBreak;
-    }
-    return SessionType.shortBreak;
-  }
+  SessionType _determineNextSessionType(bool wasFocus) => nextSessionType(
+        wasFocus: wasFocus,
+        completedFocusSessions: _completedFocusSessions,
+      );
 
   int _getDuration(SessionType type) {
     switch (type) {

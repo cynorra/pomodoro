@@ -1,8 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import 'chart_buckets.dart';
 import 'stats_provider.dart';
 import '../../../l10n/l10n_extension.dart';
 import '../../../core/ui/responsive.dart';
@@ -54,7 +56,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: _WeeklyChart(filter: selectedFilter),
+              child: _ActivityChart(filter: selectedFilter),
             ),
           ),
           SliverToBoxAdapter(
@@ -295,29 +297,31 @@ class _SummaryCard extends StatelessWidget {
   }
 }
 
-class _WeeklyChart extends ConsumerWidget {
+class _ActivityChart extends ConsumerWidget {
   final StatsFilter filter;
 
-  const _WeeklyChart({required this.filter});
+  const _ActivityChart({required this.filter});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final sessionsAsync = ref.watch(statsDataProvider);
 
+    final decoration = BoxDecoration(
+      color: ZyraColors.surface.withValues(alpha: 0.5),
+      borderRadius: BorderRadius.circular(24),
+      border: Border.all(
+        color: ZyraColors.primary.withValues(alpha: 0.2),
+        width: 1.5,
+      ),
+    );
+
     return sessionsAsync.when(
       data: (sessions) {
         if (sessions.isEmpty) {
           return Container(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: ZyraColors.surface.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                color: ZyraColors.primary.withValues(alpha: 0.2),
-                width: 1.5,
-              ),
-            ),
+            decoration: decoration,
             child: Center(
               child: Column(
                 children: [
@@ -339,82 +343,64 @@ class _WeeklyChart extends ConsumerWidget {
           );
         }
 
-        final now = DateTime.now();
-        final dayCount = switch (filter) {
-          StatsFilter.week => 7,
-          StatsFilter.month => 30,
-          StatsFilter.allTime => 90,
-        };
+        final buckets = buildChartBuckets(
+          sessions: sessions,
+          filter: filter,
+          now: DateTime.now(),
+        );
+        final maxMinutes = buckets.fold<int>(
+          0,
+          (best, b) => b.minutes > best ? b.minutes : best,
+        );
+        final locale = Localizations.localeOf(context).toString();
+        final dayNames = _getDayNames(l10n);
 
-        final today = DateTime(now.year, now.month, now.day);
-        final weekData = <_DayData>[];
-
-        for (int i = dayCount - 1; i >= 0; i--) {
-          final day = DateTime(today.year, today.month, today.day - i);
-          final dayStart = DateTime(day.year, day.month, day.day);
-          final dayEnd = dayStart.add(const Duration(days: 1));
-
-          final daySessions = sessions.where((s) {
-            final sessionDate = DateTime(
-              s.date.year,
-              s.date.month,
-              s.date.day,
-            );
-            return sessionDate.isAtSameMomentAs(dayStart) ||
-                (sessionDate.isAfter(dayStart) &&
-                    sessionDate.isBefore(dayEnd));
-          });
-
-          final totalMinutes = daySessions.fold<int>(
-            0,
-            (sum, s) => sum + (s.durationSeconds ~/ 60),
-          );
-
-          weekData.add(_DayData(
-            dayIndex: day.weekday,
-            minutes: totalMinutes,
-          ));
+        String labelOf(ChartBucket bucket) {
+          switch (filter) {
+            case StatsFilter.week:
+              return dayNames[bucket.start.weekday - 1];
+            case StatsFilter.month:
+              return DateFormat.MMMd(locale).format(bucket.start);
+            case StatsFilter.allTime:
+              return DateFormat.MMM(locale).format(bucket.start);
+          }
         }
 
-        final dayNames = _getDayNames(l10n);
-        final maxMinutes = weekData.isEmpty
-            ? 1
-            : weekData.map((d) => d.minutes).reduce(
-                (a, b) => a > b ? a : b,
-              );
+        final title = switch (filter) {
+          StatsFilter.week => l10n.weeklyChart,
+          StatsFilter.month => l10n.monthlyChart,
+          StatsFilter.allTime => l10n.allTimeChart,
+        };
 
         return Container(
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: ZyraColors.surface.withValues(alpha: 0.5),
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: ZyraColors.primary.withValues(alpha: 0.2),
-              width: 1.5,
-            ),
-          ),
+          decoration: decoration,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.weeklyChart,
+                title,
                 style: ZyraTypography.titleMedium.copyWith(
                   color: ZyraColors.onSurface,
                 ),
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: (context.screenSize.height * 0.25).clamp(150.0, 260.0).toDouble(),
+                height: (context.screenSize.height * 0.28)
+                    .clamp(190.0, 280.0)
+                    .toDouble(),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: weekData.map((data) {
-                    return _BarChartItem(
-                      day: dayNames[data.dayIndex - 1],
-                      minutes: data.minutes,
-                      maxMinutes: maxMinutes,
-                    );
-                  }).toList(),
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (final bucket in buckets)
+                      Expanded(
+                        child: _BarChartItem(
+                          label: labelOf(bucket),
+                          minutes: bucket.minutes,
+                          maxMinutes: maxMinutes,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ],
@@ -444,63 +430,90 @@ class _WeeklyChart extends ConsumerWidget {
   }
 }
 
-class _DayData {
-  final int dayIndex;
-  final int minutes;
-  const _DayData({required this.dayIndex, required this.minutes});
-}
-
+/// One bar. It takes whatever width and height its slot gives it, so the chart
+/// can never overflow, whether it shows 5, 6 or 7 bars and on any screen size.
 class _BarChartItem extends StatelessWidget {
-  final String day;
+  final String label;
   final int minutes;
   final int maxMinutes;
 
   const _BarChartItem({
-    required this.day,
+    required this.label,
     required this.minutes,
     required this.maxMinutes,
   });
 
+  String _amount(BuildContext context) {
+    final l10n = context.l10n;
+    if (minutes < 60) return l10n.minutesShort(minutes);
+    return l10n.hoursShort((minutes / 60).toStringAsFixed(1));
+  }
+
   @override
   Widget build(BuildContext context) {
+    const labelsHeight = 44.0;
     final heightFactor = maxMinutes > 0 ? minutes / maxMinutes : 0.0;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 600),
-          curve: Curves.easeOutCubic,
-          width: context.scaled(28),
-          height: context.scaled(150) * heightFactor,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ZyraColors.primary.withValues(alpha: 0.8),
-                ZyraColors.secondary.withValues(alpha: 0.8),
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final barArea =
+            (constraints.maxHeight - labelsHeight).clamp(0.0, 400.0).toDouble();
+        final barWidth = (constraints.maxWidth * 0.62)
+            .clamp(8.0, context.scaled(36))
+            .toDouble();
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeOutCubic,
+              width: barWidth,
+              height: barArea * heightFactor,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    ZyraColors.primary.withValues(alpha: 0.8),
+                    ZyraColors.secondary.withValues(alpha: 0.8),
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          context.l10n.minutesShort(minutes),
-          style: ZyraTypography.labelSmall.copyWith(
-            color: ZyraColors.onSurface.withValues(alpha: 0.6),
-            fontSize: 10,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          day,
-          style: ZyraTypography.labelSmall.copyWith(
-            color: ZyraColors.onSurface,
-          ),
-        ),
-      ],
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 14,
+              width: constraints.maxWidth,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  _amount(context),
+                  style: ZyraTypography.labelSmall.copyWith(
+                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
+                    fontSize: 10,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
+            SizedBox(
+              height: 18,
+              width: constraints.maxWidth,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  label,
+                  style: ZyraTypography.labelSmall.copyWith(
+                    color: ZyraColors.onSurface,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

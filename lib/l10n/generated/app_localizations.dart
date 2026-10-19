@@ -782,6 +782,24 @@ abstract class AppLocalizations {
   /// **'Show hidden players'**
   String get showHiddenPlayers;
 
+  /// No description provided for @monthlyChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 30 Days'**
+  String get monthlyChart;
+
+  /// No description provided for @allTimeChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 6 Months'**
+  String get allTimeChart;
+
+  /// No description provided for @hoursShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}h'**
+  String hoursShort(String value);
+
   /// No description provided for @authErrorGeneric.
   ///
   /// In en, this message translates to:

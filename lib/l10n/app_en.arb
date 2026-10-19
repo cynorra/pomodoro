@@ -124,6 +124,16 @@
   "reportFailed": "Could not send the report. You may have already reported this player.",
   "playerHidden": "Player hidden",
   "showHiddenPlayers": "Show hidden players",
+  "monthlyChart": "Last 30 Days",
+  "allTimeChart": "Last 6 Months",
+  "hoursShort": "{value}h",
+  "@hoursShort": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "authErrorGeneric": "An error occurred",
   "authSignInFailed": "Could not sign in",
   "authSignUpFailed": "Could not sign up",

@@ -359,6 +359,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get showHiddenPlayers => 'Show hidden players';
 
   @override
+  String get monthlyChart => 'Last 30 Days';
+
+  @override
+  String get allTimeChart => 'Last 6 Months';
+
+  @override
+  String hoursShort(String value) {
+    return '${value}h';
+  }
+
+  @override
   String get authErrorGeneric => 'An error occurred';
 
   @override

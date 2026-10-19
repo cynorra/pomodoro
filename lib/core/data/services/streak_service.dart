@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:isar_community/isar.dart';
 import '../database/database_service.dart';
 import '../models/user_stats.dart';
+import '../../../features/pomodoro/domain/pomodoro_rules.dart';
 import '../../utils/global_exception_handler.dart';
 
 class StreakService {
@@ -15,11 +16,6 @@ class StreakService {
 
         final nowUtc = DateTime.now().toUtc();
         final localNow = DateTime.now();
-        final today = DateTime(
-          localNow.year,
-          localNow.month,
-          localNow.day,
-        );
 
         if (stats == null) {
           await DatabaseService.instance.userStats.put(
@@ -46,13 +42,8 @@ class StreakService {
 
         final stored = stats.lastStudyDate!;
         final lastLocal = stored.isUtc ? stored.toLocal() : stored;
-        final lastDay = DateTime(
-          lastLocal.year,
-          lastLocal.month,
-          lastLocal.day,
-        );
-
-        final diff = today.difference(lastDay).inDays;
+        // Calendar-day arithmetic: a 23 or 25 hour DST day is still one day.
+        final diff = calendarDaysBetween(lastLocal, localNow);
 
         if (diff == 0) return;
 
@@ -78,7 +69,13 @@ class StreakService {
       final stats =
           await DatabaseService.instance.userStats.where().findFirst();
       await FirebaseFirestore.instance.collection('leaderboard').doc(user.uid).set({
-        'currentStreak': stats?.currentStreak ?? 0,
+        'currentStreak': stats == null
+            ? 0
+            : effectiveStreak(
+                storedStreak: stats.currentStreak,
+                lastStudy: stats.lastStudyDate,
+                now: DateTime.now(),
+              ),
         'longestStreak': stats?.longestStreak ?? 0,
       }, SetOptions(merge: true));
     } catch (_) {}
@@ -88,7 +85,13 @@ class StreakService {
     try {
       final stats =
           await DatabaseService.instance.userStats.where().findFirst();
-      return stats?.currentStreak ?? 0;
+      if (stats == null) return 0;
+      // A streak that was not continued yesterday or today is already over.
+      return effectiveStreak(
+        storedStreak: stats.currentStreak,
+        lastStudy: stats.lastStudyDate,
+        now: DateTime.now(),
+      );
     } catch (_) {
       return 0;
     }
