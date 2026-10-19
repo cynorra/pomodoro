@@ -144,7 +144,7 @@ class _ConfettiPainter extends CustomPainter {
     final paint = Paint();
 
     for (var p in particles) {
-      paint.color = p.color.withOpacity(opacity);
+      paint.color = p.color.withValues(alpha: opacity);
       canvas.drawCircle(
         Offset(p.x * size.width, p.y * size.height),
         p.size,

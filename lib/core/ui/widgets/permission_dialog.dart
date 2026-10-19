@@ -27,7 +27,7 @@ class PermissionDialog extends StatelessWidget {
           color: ZyraColors.surface,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withValues(alpha: 0.1),
           ),
         ),
         child: Column(
@@ -37,7 +37,7 @@ class PermissionDialog extends StatelessWidget {
               width: 56,
               height: 56,
               decoration: BoxDecoration(
-                color: ZyraColors.primary.withOpacity(0.15),
+                color: ZyraColors.primary.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -59,7 +59,7 @@ class PermissionDialog extends StatelessWidget {
             Text(
               description,
               style: ZyraTypography.bodyMedium.copyWith(
-                color: ZyraColors.onSurface.withOpacity(0.7),
+                color: ZyraColors.onSurface.withValues(alpha: 0.7),
               ),
               textAlign: TextAlign.center,
             ),
@@ -81,7 +81,7 @@ class PermissionDialog extends StatelessWidget {
                 child: Text(
                   context.l10n.notNow,
                   style: TextStyle(
-                    color: ZyraColors.onSurface.withOpacity(0.5),
+                    color: ZyraColors.onSurface.withValues(alpha: 0.5),
                   ),
                 ),
               ),

@@ -88,12 +88,12 @@ class _JellyButtonState extends State<JellyButton> with SingleTickerProviderStat
           height: widget.height,
           width: widget.width ?? double.infinity,
           decoration: BoxDecoration(
-            color: isEnabled ? bg : bg.withOpacity(0.4),
+            color: isEnabled ? bg : bg.withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(16),
             boxShadow: isEnabled
                 ? [
                     BoxShadow(
-                      color: bg.withOpacity(0.3),
+                      color: bg.withValues(alpha: 0.3),
                       blurRadius: 16,
                       offset: const Offset(0, 6),
                     ),
@@ -111,7 +111,7 @@ class _JellyButtonState extends State<JellyButton> with SingleTickerProviderStat
               Text(
                 widget.label,
                 style: ZyraTypography.labelLarge.copyWith(
-                  color: isEnabled ? fg : fg.withOpacity(0.6),
+                  color: isEnabled ? fg : fg.withValues(alpha: 0.6),
                   fontWeight: FontWeight.bold,
                 ),
               ),

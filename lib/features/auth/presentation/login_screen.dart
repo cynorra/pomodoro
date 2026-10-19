@@ -80,7 +80,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Text(
                   l10n.appTitle,
                   style: ZyraTypography.bodyMedium.copyWith(
-                    color: ZyraColors.onSurface.withOpacity(0.6),
+                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -157,9 +157,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     padding: const EdgeInsets.all(12),
                     margin: const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
+                      color: Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.red.withOpacity(0.3)),
+                      border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
                     ),
                     child: Text(
                       authErrorText(context.l10n, authState.errorMessage),
@@ -184,7 +184,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       child: Text(
                         l10n.orDivider,
                         style: ZyraTypography.labelSmall.copyWith(
-                          color: ZyraColors.onSurface.withOpacity(0.6),
+                          color: ZyraColors.onSurface.withValues(alpha: 0.6),
                         ),
                       ),
                     ),
@@ -230,20 +230,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: Text(
                     context.l10n.continueAsGuest,
                     style: ZyraTypography.labelLarge.copyWith(
-                      color: ZyraColors.onSurface.withOpacity(0.6),
+                      color: ZyraColors.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                 ),
                 const SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     TextButton(
                       onPressed: () => _openUrl(AuthService.privacyPolicyUrl),
                       child: Text(
                         l10n.privacyPolicy,
                         style: ZyraTypography.labelSmall.copyWith(
-                          color: ZyraColors.onSurface.withOpacity(0.6),
+                          color: ZyraColors.onSurface.withValues(alpha: 0.6),
                         ),
                       ),
                     ),
@@ -253,7 +254,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       child: Text(
                         l10n.termsOfService,
                         style: ZyraTypography.labelSmall.copyWith(
-                          color: ZyraColors.onSurface.withOpacity(0.6),
+                          color: ZyraColors.onSurface.withValues(alpha: 0.6),
                         ),
                       ),
                     ),

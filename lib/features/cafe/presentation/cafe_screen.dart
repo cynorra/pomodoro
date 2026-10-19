@@ -95,12 +95,12 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
             itemCount: 6,
             itemBuilder: (context, index) => Container(
               decoration: BoxDecoration(
-                color: ZyraColors.surface.withOpacity(0.3),
+                color: ZyraColors.surface.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Shimmer.fromColors(
                 baseColor: ZyraColors.surface,
-                highlightColor: ZyraColors.primary.withOpacity(0.1),
+                highlightColor: ZyraColors.primary.withValues(alpha: 0.1),
                 child: Container(color: Colors.white),
               ),
             ),
@@ -171,7 +171,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
               child: Text(
                 l10n.close,
                 style: ZyraTypography.labelLarge.copyWith(
-                  color: ZyraColors.onSurface.withOpacity(0.6),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.6),
                 ),
               ),
             ),
@@ -197,9 +197,10 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
   }
 
   Future<void> _selectSound(String soundFile, BuildContext sheetContext) async {
+    final navigator = Navigator.of(sheetContext);
     try {
       await AudioService.playAmbient(soundFile);
-      Navigator.pop(sheetContext);
+      navigator.pop();
       if (mounted) setState(() {});
     } catch (e) {
       if (mounted) {
@@ -252,6 +253,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
           }
 
           final userState = ref.read(userProvider);
+          final messenger = ScaffoldMessenger.of(context);
           final result = await CafePurchaseService.purchase(
             itemId: widget.item.itemId,
             userPoints: userState.totalPoints,
@@ -261,7 +263,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
           if (!mounted) return;
 
           if (result == PurchaseResult.insufficientPoints) {
-            ScaffoldMessenger.of(context).showSnackBar(
+            messenger.showSnackBar(
               SnackBar(
                 content: Text(
                   l10n.insufficientPoints,
@@ -274,7 +276,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
               ),
             );
           } else if (result == PurchaseResult.success) {
-            ScaffoldMessenger.of(context).showSnackBar(
+            messenger.showSnackBar(
               SnackBar(
                 content: Text(
                   l10n.purchaseSuccess,
@@ -299,12 +301,12 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: ZyraColors.surface.withOpacity(0.7),
+              color: ZyraColors.surface.withValues(alpha: 0.7),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: widget.item.isOwned
-                    ? ZyraColors.primary.withOpacity(0.5)
-                    : ZyraColors.secondary.withOpacity(0.3),
+                    ? ZyraColors.primary.withValues(alpha: 0.5)
+                    : ZyraColors.secondary.withValues(alpha: 0.3),
                 width: 1.5,
               ),
             ),
@@ -339,7 +341,7 @@ class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: ZyraColors.primary.withOpacity(0.2),
+                          color: ZyraColors.primary.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(

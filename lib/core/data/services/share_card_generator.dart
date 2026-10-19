@@ -35,7 +35,7 @@ class ShareCardGenerator {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    ZyraColors.primary.withOpacity(0.3),
+                    ZyraColors.primary.withValues(alpha: 0.3),
                     Colors.transparent,
                   ],
                 ),
@@ -52,7 +52,7 @@ class ShareCardGenerator {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    ZyraColors.secondary.withOpacity(0.2),
+                    ZyraColors.secondary.withValues(alpha: 0.2),
                     Colors.transparent,
                   ],
                 ),
@@ -165,7 +165,7 @@ class ShareCardGenerator {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    Colors.orange.withOpacity(0.3),
+                    Colors.orange.withValues(alpha: 0.3),
                     Colors.transparent,
                   ],
                 ),
@@ -263,10 +263,10 @@ class _StatBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
-          color: Colors.white.withOpacity(0.2),
+          color: Colors.white.withValues(alpha: 0.2),
           width: 1,
         ),
       ),

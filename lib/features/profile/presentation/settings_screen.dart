@@ -81,10 +81,10 @@ class _SettingsTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(0.5),
+        color: ZyraColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: ZyraColors.onSurface.withOpacity(0.1),
+          color: ZyraColors.onSurface.withValues(alpha: 0.1),
         ),
       ),
       child: Row(

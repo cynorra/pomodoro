@@ -71,7 +71,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 child: Text(
                   context.l10n.onboardSkip,
                   style: ZyraTypography.labelLarge.copyWith(
-                    color: ZyraColors.onSurface.withOpacity(0.6),
+                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ),
@@ -100,10 +100,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           width: context.scaled(compact ? 100 : 160),
                           height: context.scaled(compact ? 100 : 160),
                           decoration: BoxDecoration(
-                            color: page.color.withOpacity(0.15),
+                            color: page.color.withValues(alpha: 0.15),
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: page.color.withOpacity(0.3),
+                              color: page.color.withValues(alpha: 0.3),
                               width: 2,
                             ),
                           ),
@@ -125,7 +125,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         Text(
                           page.description,
                           style: ZyraTypography.bodyMedium.copyWith(
-                            color: ZyraColors.onSurface.withOpacity(0.7),
+                            color: ZyraColors.onSurface.withValues(alpha: 0.7),
                             height: 1.5,
                           ),
                           textAlign: TextAlign.center,
@@ -149,7 +149,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   decoration: BoxDecoration(
                     color: _currentPage == index
                         ? ZyraColors.primary
-                        : ZyraColors.onSurface.withOpacity(0.3),
+                        : ZyraColors.onSurface.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),

@@ -81,7 +81,7 @@ class _AnimatedSplashOverlayState extends State<AnimatedSplashOverlay>
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: ZyraColors.primary.withOpacity(0.4),
+                            color: ZyraColors.primary.withValues(alpha: 0.4),
                             blurRadius: 30,
                             spreadRadius: 4,
                           ),
@@ -107,7 +107,7 @@ class _AnimatedSplashOverlayState extends State<AnimatedSplashOverlay>
                     Text(
                       context.l10n.splashTagline,
                       style: ZyraTypography.bodyMedium.copyWith(
-                        color: ZyraColors.onSurface.withOpacity(0.6),
+                        color: ZyraColors.onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   ],

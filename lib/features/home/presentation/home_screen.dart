@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -134,7 +133,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             color: ZyraColors.surface,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
-              color: ZyraColors.primary.withOpacity(0.3),
+              color: ZyraColors.primary.withValues(alpha: 0.3),
               width: 1.5,
             ),
           ),
@@ -198,10 +197,10 @@ class _TopHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.orange.withOpacity(0.15),
+            color: Colors.orange.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: Colors.orange.withOpacity(0.3),
+              color: Colors.orange.withValues(alpha: 0.3),
             ),
           ),
           child: Row(
@@ -223,10 +222,10 @@ class _TopHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: ZyraColors.primary.withOpacity(0.15),
+            color: ZyraColors.primary.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: ZyraColors.primary.withOpacity(0.3),
+              color: ZyraColors.primary.withValues(alpha: 0.3),
             ),
           ),
           child: Row(
@@ -269,10 +268,10 @@ class _MotivationCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(0.5),
+        color: ZyraColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: ZyraColors.onSurface.withOpacity(0.1),
+          color: ZyraColors.onSurface.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -298,7 +297,7 @@ class _MotivationCard extends StatelessWidget {
           Text(
             l10n.motivationText,
             style: ZyraTypography.bodyMedium.copyWith(
-              color: ZyraColors.onSurface.withOpacity(0.8),
+              color: ZyraColors.onSurface.withValues(alpha: 0.8),
               height: 1.5,
             ),
           ),

@@ -1,9 +1,23 @@
+import 'dart:ui' show PlatformDispatcher;
 import 'dart:io' show Platform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
 
 class NotificationService {
+  // Channel names show up in Android's notification settings, outside the
+  // app's own localization, so they follow the device language.
+  static bool get _isTr => PlatformDispatcher.instance.locale.languageCode == 'tr';
+  static String get _sessionChannelName =>
+      _isTr ? 'Pomodoro Bildirimleri' : 'Pomodoro Notifications';
+  static String get _sessionChannelDesc =>
+      _isTr ? 'Seans bittiğinde bildirim' : 'Notification when a session ends';
+  static String get _breakChannelName =>
+      _isTr ? 'Mola Hatırlatıcıları' : 'Break Reminders';
+  static String get _breakChannelDesc => _isTr
+      ? 'Mola zamanı geldiğinde bildirim'
+      : 'Notification when it is time for a break';
+
   static final _plugin = FlutterLocalNotificationsPlugin();
   static bool _initialized = false;
 
@@ -28,10 +42,10 @@ class NotificationService {
     );
 
     if (Platform.isAndroid) {
-      const channel = AndroidNotificationChannel(
+      final channel = AndroidNotificationChannel(
         'pomodoro_channel',
-        'Pomodoro Notifications',
-        description: 'Notification when a session ends',
+        _sessionChannelName,
+        description: _sessionChannelDesc,
         importance: Importance.high,
       );
 
@@ -40,10 +54,10 @@ class NotificationService {
               AndroidFlutterLocalNotificationsPlugin>()
           ?.createNotificationChannel(channel);
 
-      const breakChannel = AndroidNotificationChannel(
+      final breakChannel = AndroidNotificationChannel(
         'break_channel',
-        'Break Reminders',
-        description: 'Notification when it is time for a break',
+        _breakChannelName,
+        description: _breakChannelDesc,
         importance: Importance.max,
       );
 
@@ -94,10 +108,10 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-    const androidDetails = AndroidNotificationDetails(
+    final androidDetails = AndroidNotificationDetails(
       'pomodoro_channel',
-      'Pomodoro Notifications',
-      channelDescription: 'Notification when a session ends',
+      _sessionChannelName,
+      channelDescription: _sessionChannelDesc,
       importance: Importance.high,
       priority: Priority.high,
       icon: '@mipmap/ic_launcher',
@@ -113,7 +127,7 @@ class NotificationService {
       id: 0,
       title: title,
       body: body,
-      notificationDetails: const NotificationDetails(
+      notificationDetails: NotificationDetails(
         android: androidDetails,
         iOS: iosDetails,
       ),
@@ -128,11 +142,11 @@ class NotificationService {
     final scheduledTime =
         tz.TZDateTime.now(tz.local).add(Duration(minutes: delayMinutes));
 
-    final notificationDetails = const NotificationDetails(
+    final notificationDetails = NotificationDetails(
       android: AndroidNotificationDetails(
         'break_channel',
-        'Break Reminders',
-        channelDescription: 'Notification when it is time for a break',
+        _breakChannelName,
+        channelDescription: _breakChannelDesc,
         importance: Importance.max,
         priority: Priority.high,
       ),
@@ -167,11 +181,11 @@ class NotificationService {
         title: title,
         body: body,
         scheduledDate: tz.TZDateTime.now(tz.local).add(delay),
-        notificationDetails: const NotificationDetails(
+        notificationDetails: NotificationDetails(
           android: AndroidNotificationDetails(
             'pomodoro_channel',
-            'Pomodoro Notifications',
-            channelDescription: 'Notification when a session ends',
+            _sessionChannelName,
+            channelDescription: _sessionChannelDesc,
             importance: Importance.high,
             priority: Priority.high,
           ),

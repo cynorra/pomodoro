@@ -110,10 +110,10 @@ class _ProgressHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(0.6),
+        color: ZyraColors.surface.withValues(alpha: 0.6),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: ZyraColors.primary.withOpacity(0.3),
+          color: ZyraColors.primary.withValues(alpha: 0.3),
           width: 1.5,
         ),
       ),
@@ -145,7 +145,7 @@ class _ProgressHeader extends StatelessWidget {
               Container(
                 height: 8,
                 decoration: BoxDecoration(
-                  color: ZyraColors.onSurface.withOpacity(0.1),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: FractionallySizedBox(
@@ -191,14 +191,14 @@ class _AchievementCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(
+        color: ZyraColors.surface.withValues(alpha: 
           achievement.isUnlocked ? 0.7 : 0.4,
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: achievement.isUnlocked
-              ? ZyraColors.primary.withOpacity(0.5)
-              : ZyraColors.onSurface.withOpacity(0.1),
+              ? ZyraColors.primary.withValues(alpha: 0.5)
+              : ZyraColors.onSurface.withValues(alpha: 0.1),
           width: 1.5,
         ),
       ),
@@ -214,8 +214,8 @@ class _AchievementCard extends StatelessWidget {
                 height: 64,
                 decoration: BoxDecoration(
                   color: achievement.isUnlocked
-                      ? ZyraColors.primary.withOpacity(0.2)
-                      : ZyraColors.onSurface.withOpacity(0.05),
+                      ? ZyraColors.primary.withValues(alpha: 0.2)
+                      : ZyraColors.onSurface.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Center(
@@ -225,7 +225,7 @@ class _AchievementCard extends StatelessWidget {
                       fontSize: 32,
                       color: achievement.isUnlocked
                           ? null
-                          : ZyraColors.onSurface.withOpacity(0.3),
+                          : ZyraColors.onSurface.withValues(alpha: 0.3),
                     ),
                   ),
                 ),
@@ -236,7 +236,7 @@ class _AchievementCard extends StatelessWidget {
                 style: ZyraTypography.titleMedium.copyWith(
                   color: achievement.isUnlocked
                       ? ZyraColors.primary
-                      : ZyraColors.onSurface.withOpacity(0.5),
+                      : ZyraColors.onSurface.withValues(alpha: 0.5),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -244,7 +244,7 @@ class _AchievementCard extends StatelessWidget {
               Text(
                 description,
                 style: ZyraTypography.labelSmall.copyWith(
-                  color: ZyraColors.onSurface.withOpacity(0.6),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.6),
                 ),
                 textAlign: TextAlign.center,
               ),

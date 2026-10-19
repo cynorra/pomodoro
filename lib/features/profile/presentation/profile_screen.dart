@@ -216,13 +216,13 @@ class _ProfileCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            ZyraColors.primary.withOpacity(0.15),
-            ZyraColors.secondary.withOpacity(0.15),
+            ZyraColors.primary.withValues(alpha: 0.15),
+            ZyraColors.secondary.withValues(alpha: 0.15),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: ZyraColors.primary.withOpacity(0.3),
+          color: ZyraColors.primary.withValues(alpha: 0.3),
           width: 1.5,
         ),
       ),
@@ -256,7 +256,7 @@ class _ProfileCard extends StatelessWidget {
                 Text(
                   email,
                   style: ZyraTypography.bodyMedium.copyWith(
-                    color: ZyraColors.onSurface.withOpacity(0.6),
+                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ],
@@ -295,7 +295,7 @@ class _StatsGrid extends StatelessWidget {
         Expanded(
           child: _StatCard(
             icon: Icons.timer_outlined,
-            value: '${(totalMinutes / 60).toStringAsFixed(1)}',
+            value: (totalMinutes / 60).toStringAsFixed(1),
             label: context.l10n.hours,
             color: ZyraColors.secondary,
           ),
@@ -334,7 +334,7 @@ class _StatCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: ZyraColors.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [
@@ -347,7 +347,7 @@ class _StatCard extends StatelessWidget {
           Text(
             label,
             style: ZyraTypography.labelSmall.copyWith(
-              color: ZyraColors.onSurface.withOpacity(0.6),
+              color: ZyraColors.onSurface.withValues(alpha: 0.6),
             ),
           ),
         ],
@@ -375,7 +375,7 @@ class _MenuItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Material(
-        color: ZyraColors.surface.withOpacity(0.5),
+        color: ZyraColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
@@ -396,7 +396,7 @@ class _MenuItem extends StatelessWidget {
                 ),
                 Icon(
                   Icons.chevron_right,
-                  color: textColor ?? ZyraColors.onSurface.withOpacity(0.4),
+                  color: textColor ?? ZyraColors.onSurface.withValues(alpha: 0.4),
                 ),
               ],
             ),

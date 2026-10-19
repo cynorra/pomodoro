@@ -28,13 +28,13 @@ class RewardedAdButton extends ConsumerWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  ZyraColors.primary.withOpacity(isReady ? 0.2 : 0.1),
-                  ZyraColors.secondary.withOpacity(isReady ? 0.2 : 0.1),
+                  ZyraColors.primary.withValues(alpha: isReady ? 0.2 : 0.1),
+                  ZyraColors.secondary.withValues(alpha: isReady ? 0.2 : 0.1),
                 ],
               ),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: ZyraColors.primary.withOpacity(isReady ? 0.5 : 0.2),
+                color: ZyraColors.primary.withValues(alpha: isReady ? 0.5 : 0.2),
                 width: 1.5,
               ),
             ),
@@ -44,7 +44,7 @@ class RewardedAdButton extends ConsumerWidget {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: ZyraColors.primary.withOpacity(0.2),
+                    color: ZyraColors.primary.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(
@@ -75,7 +75,7 @@ class RewardedAdButton extends ConsumerWidget {
                 ),
                 Icon(
                   isReady ? Icons.arrow_forward : Icons.hourglass_empty,
-                  color: ZyraColors.primary.withOpacity(isReady ? 1 : 0.5),
+                  color: ZyraColors.primary.withValues(alpha: isReady ? 1 : 0.5),
                 ),
               ],
             ),

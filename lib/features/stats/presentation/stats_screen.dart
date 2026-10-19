@@ -85,7 +85,7 @@ class _FilterSelector extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(0.5),
+        color: ZyraColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -151,7 +151,7 @@ class _FilterButtonState extends State<_FilterButton> {
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
               color: widget.isSelected
-                  ? ZyraColors.primary.withOpacity(0.2)
+                  ? ZyraColors.primary.withValues(alpha: 0.2)
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(12),
               border: widget.isSelected
@@ -164,7 +164,7 @@ class _FilterButtonState extends State<_FilterButton> {
               style: ZyraTypography.labelLarge.copyWith(
                 color: widget.isSelected
                     ? ZyraColors.primary
-                    : ZyraColors.onSurface.withOpacity(0.6),
+                    : ZyraColors.onSurface.withValues(alpha: 0.6),
               ),
             ),
           ),
@@ -201,7 +201,7 @@ class _SummaryCards extends ConsumerWidget {
             Expanded(
               child: _SummaryCard(
                 icon: Icons.timer_outlined,
-                value: '${(totalMinutes / 60).toStringAsFixed(1)}',
+                value: (totalMinutes / 60).toStringAsFixed(1),
                 unit: l10n.hours,
                 color: ZyraColors.primary,
               ),
@@ -258,10 +258,10 @@ class _SummaryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(0.6),
+        color: ZyraColors.surface.withValues(alpha: 0.6),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: color.withOpacity(0.3),
+          color: color.withValues(alpha: 0.3),
           width: 1.5,
         ),
       ),
@@ -284,7 +284,7 @@ class _SummaryCard extends StatelessWidget {
               Text(
                 unit,
                 style: ZyraTypography.labelSmall.copyWith(
-                  color: ZyraColors.onSurface.withOpacity(0.7),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -311,10 +311,10 @@ class _WeeklyChart extends ConsumerWidget {
           return Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: ZyraColors.surface.withOpacity(0.5),
+              color: ZyraColors.surface.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(24),
               border: Border.all(
-                color: ZyraColors.primary.withOpacity(0.2),
+                color: ZyraColors.primary.withValues(alpha: 0.2),
                 width: 1.5,
               ),
             ),
@@ -330,7 +330,7 @@ class _WeeklyChart extends ConsumerWidget {
                   Text(
                     context.l10n.noStudyData,
                     style: ZyraTypography.bodyMedium.copyWith(
-                      color: ZyraColors.onSurface.withOpacity(0.6),
+                      color: ZyraColors.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                 ],
@@ -386,10 +386,10 @@ class _WeeklyChart extends ConsumerWidget {
         return Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: ZyraColors.surface.withOpacity(0.5),
+            color: ZyraColors.surface.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
-              color: ZyraColors.primary.withOpacity(0.2),
+              color: ZyraColors.primary.withValues(alpha: 0.2),
               width: 1.5,
             ),
           ),
@@ -476,8 +476,8 @@ class _BarChartItem extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                ZyraColors.primary.withOpacity(0.8),
-                ZyraColors.secondary.withOpacity(0.8),
+                ZyraColors.primary.withValues(alpha: 0.8),
+                ZyraColors.secondary.withValues(alpha: 0.8),
               ],
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
@@ -489,7 +489,7 @@ class _BarChartItem extends StatelessWidget {
         Text(
           context.l10n.minutesShort(minutes),
           style: ZyraTypography.labelSmall.copyWith(
-            color: ZyraColors.onSurface.withOpacity(0.6),
+            color: ZyraColors.onSurface.withValues(alpha: 0.6),
             fontSize: 10,
           ),
         ),
@@ -533,10 +533,10 @@ class _AchievementBadges extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(0.5),
+        color: ZyraColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: ZyraColors.secondary.withOpacity(0.2),
+          color: ZyraColors.secondary.withValues(alpha: 0.2),
           width: 1.5,
         ),
       ),
@@ -585,7 +585,7 @@ class _BadgeItem extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: ZyraColors.primary.withOpacity(0.2),
+            color: ZyraColors.primary.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
@@ -610,7 +610,7 @@ class _BadgeItem extends StatelessWidget {
               Text(
                 description,
                 style: ZyraTypography.bodyMedium.copyWith(
-                  color: ZyraColors.onSurface.withOpacity(0.6),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.6),
                 ),
               ),
             ],

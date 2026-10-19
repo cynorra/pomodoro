@@ -219,5 +219,5 @@ class AuthResult {
   static const cancelled = 'cancelled';
 
   static final success = AuthResult._(isSuccess: true);
-  static error(String message) => AuthResult._(isSuccess: false, errorMessage: message);
+  static AuthResult error(String message) => AuthResult._(isSuccess: false, errorMessage: message);
 }

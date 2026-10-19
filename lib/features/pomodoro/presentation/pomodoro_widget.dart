@@ -59,7 +59,7 @@ class PomodoroWidget extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: ZyraColors.primary.withOpacity(0.3),
+                        color: ZyraColors.primary.withValues(alpha: 0.3),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),

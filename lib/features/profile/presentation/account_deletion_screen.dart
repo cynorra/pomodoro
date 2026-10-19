@@ -59,7 +59,7 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               Text(
                 context.l10n.deleteIrreversible,
                 style: ZyraTypography.bodyMedium.copyWith(
-                  color: ZyraColors.onSurface.withOpacity(0.7),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.7),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -108,14 +108,14 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
                     : context.l10n.deleteAccountPermanently,
                 backgroundColor: _confirmed
                     ? Colors.redAccent
-                    : Colors.redAccent.withOpacity(0.5),
+                    : Colors.redAccent.withValues(alpha: 0.5),
                 textColor: Colors.white,
               ),
               const SizedBox(height: 16),
               Text(
                 context.l10n.deleteWebHint,
                 style: ZyraTypography.bodyMedium.copyWith(
-                  color: ZyraColors.onSurface.withOpacity(0.6),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.6),
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -44,13 +44,13 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    ZyraColors.primary.withOpacity(0.15),
-                    ZyraColors.secondary.withOpacity(0.15),
+                    ZyraColors.primary.withValues(alpha: 0.15),
+                    ZyraColors.secondary.withValues(alpha: 0.15),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(
-                  color: ZyraColors.primary.withOpacity(0.3),
+                  color: ZyraColors.primary.withValues(alpha: 0.3),
                   width: 1.5,
                 ),
               ),
@@ -73,7 +73,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                   Text(
                     context.l10n.inviteBonus,
                     style: ZyraTypography.bodyMedium.copyWith(
-                      color: ZyraColors.onSurface.withOpacity(0.7),
+                      color: ZyraColors.onSurface.withValues(alpha: 0.7),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -87,7 +87,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                 color: ZyraColors.surface,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: ZyraColors.onSurface.withOpacity(0.2),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.2),
                 ),
               ),
               child: Row(
@@ -96,7 +96,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                     child: Text(
                       inviteLink,
                       style: ZyraTypography.bodyMedium.copyWith(
-                        color: ZyraColors.onSurface.withOpacity(0.8),
+                        color: ZyraColors.onSurface.withValues(alpha: 0.8),
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -156,7 +156,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: ZyraColors.surface.withOpacity(0.5),
+                color: ZyraColors.surface.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(

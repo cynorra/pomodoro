@@ -118,7 +118,7 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
                 child: Text(
                   l10n.close,
                   style: ZyraTypography.labelLarge.copyWith(
-                    color: ZyraColors.onSurface.withOpacity(0.6),
+                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ),
@@ -159,36 +159,38 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
   }
 
   Future<void> _shareToInstagram() async {
+    final l10n = context.l10n;
     final file = await ShareCardCapture.capture(_cardKey);
     if (file == null) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.shareCardFailed)),
+          SnackBar(content: Text(l10n.shareCardFailed)),
         );
       }
       return;
     }
     await ShareService.shareToInstagramStories(
       imageFile: file,
-      caption: context.l10n.shareCaption,
+      caption: l10n.shareCaption,
     );
     _rewardViralShare();
   }
 
   Future<void> _shareToTikTok() async {
+    final l10n = context.l10n;
     final file = await ShareCardCapture.capture(_cardKey);
     if (file == null) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.shareCardFailed)),
+          SnackBar(content: Text(l10n.shareCardFailed)),
         );
       }
       return;
     }
     await ShareService.shareToTikTok(
       videoOrImage: file,
-      text: context.l10n.shareCaptionWithLink(ShareService.getAppStoreLink()),
-      subject: context.l10n.shareSubject,
+      text: l10n.shareCaptionWithLink(ShareService.getAppStoreLink()),
+      subject: l10n.shareSubject,
     );
     _rewardViralShare();
   }

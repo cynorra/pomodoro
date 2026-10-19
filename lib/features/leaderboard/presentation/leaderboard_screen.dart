@@ -110,7 +110,7 @@ class _Message extends StatelessWidget {
           Text(
             text,
             style: ZyraTypography.bodyMedium.copyWith(
-              color: ZyraColors.onSurface.withOpacity(0.7),
+              color: ZyraColors.onSurface.withValues(alpha: 0.7),
             ),
           ),
           if (actionLabel != null)
@@ -200,8 +200,8 @@ class _PodiumItem extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                _color.withOpacity(0.8),
-                _color.withOpacity(0.3),
+                _color.withValues(alpha: 0.8),
+                _color.withValues(alpha: 0.3),
               ],
             ),
             borderRadius: const BorderRadius.vertical(
@@ -235,13 +235,13 @@ class _LeaderboardTile extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: entry.isCurrentUser
-            ? ZyraColors.primary.withOpacity(0.15)
-            : ZyraColors.surface.withOpacity(0.5),
+            ? ZyraColors.primary.withValues(alpha: 0.15)
+            : ZyraColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: entry.isCurrentUser
               ? ZyraColors.primary
-              : ZyraColors.onSurface.withOpacity(0.1),
+              : ZyraColors.onSurface.withValues(alpha: 0.1),
           width: entry.isCurrentUser ? 2 : 1,
         ),
       ),
@@ -251,7 +251,7 @@ class _LeaderboardTile extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: ZyraColors.onSurface.withOpacity(0.1),
+              color: ZyraColors.onSurface.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Center(
@@ -282,7 +282,7 @@ class _LeaderboardTile extends StatelessWidget {
                 Text(
                   context.l10n.streakDays(entry.streak),
                   style: ZyraTypography.labelSmall.copyWith(
-                    color: ZyraColors.onSurface.withOpacity(0.6),
+                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ],

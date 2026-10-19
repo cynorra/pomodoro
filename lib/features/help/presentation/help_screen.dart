@@ -59,10 +59,10 @@ class HelpScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: ZyraColors.surface.withOpacity(0.5),
+              color: ZyraColors.surface.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: ZyraColors.primary.withOpacity(0.3),
+                color: ZyraColors.primary.withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -138,10 +138,10 @@ class _FaqItemState extends State<_FaqItem> {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withOpacity(0.5),
+        color: ZyraColors.surface.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: ZyraColors.onSurface.withOpacity(0.1),
+          color: ZyraColors.onSurface.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -176,7 +176,7 @@ class _FaqItemState extends State<_FaqItem> {
               child: Text(
                 widget.answer,
                 style: ZyraTypography.bodyMedium.copyWith(
-                  color: ZyraColors.onSurface.withOpacity(0.7),
+                  color: ZyraColors.onSurface.withValues(alpha: 0.7),
                   height: 1.5,
                 ),
               ),
@@ -204,7 +204,7 @@ class _LinkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: ZyraColors.primary.withOpacity(0.15),
+      color: ZyraColors.primary.withValues(alpha: 0.15),
       borderRadius: BorderRadius.circular(8),
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
