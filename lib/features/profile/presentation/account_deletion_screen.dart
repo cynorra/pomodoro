@@ -148,16 +148,22 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
 
     if (!result.isSuccess && result.errorMessage == 'requires-recent-login') {
       if (!mounted) return;
-      setState(() => _isLoading = false);
+      if (AuthService.signedInWithGoogle) {
+        result = await ref
+            .read(authProvider.notifier)
+            .deleteAccount(reauthWithGoogle: true);
+      } else {
+        setState(() => _isLoading = false);
 
-      final credentials = await _showReAuthDialog();
-      if (credentials == null) return;
+        final credentials = await _showReAuthDialog();
+        if (credentials == null) return;
 
-      setState(() => _isLoading = true);
-      result = await ref.read(authProvider.notifier).deleteAccount(
-            email: credentials.$1,
-            password: credentials.$2,
-          );
+        setState(() => _isLoading = true);
+        result = await ref.read(authProvider.notifier).deleteAccount(
+              email: credentials.$1,
+              password: credentials.$2,
+            );
+      }
     }
 
     if (!mounted) return;

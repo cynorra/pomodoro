@@ -23,6 +23,8 @@ String authErrorText(AppLocalizations l10n, String? code) {
       return l10n.authSignInFailed;
     case 'sign-up-failed':
       return l10n.authSignUpFailed;
+    case 'google-sign-in-failed':
+      return l10n.authGoogleSignInFailed;
     case 'generic':
       return l10n.authErrorGeneric;
     default:

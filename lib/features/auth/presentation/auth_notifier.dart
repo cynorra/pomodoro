@@ -33,6 +33,17 @@ class AuthNotifier extends Notifier<AuthState> {
     return result;
   }
 
+  Future<AuthResult> signInWithGoogle() async {
+    state = AuthState.loading();
+    final result = await AuthService.signInWithGoogle();
+    if (!result.isSuccess) {
+      state = result.errorMessage == AuthResult.cancelled
+          ? AuthState.unauthenticated()
+          : AuthState.error(result.errorMessage ?? 'sign-in-failed');
+    }
+    return result;
+  }
+
   Future<AuthResult> signUp({
     required String email,
     required String password,
@@ -55,9 +66,17 @@ class AuthNotifier extends Notifier<AuthState> {
     state = AuthState.unauthenticated();
   }
 
-  Future<AuthResult> deleteAccount({String? email, String? password}) async {
+  Future<AuthResult> deleteAccount({
+    String? email,
+    String? password,
+    bool reauthWithGoogle = false,
+  }) async {
     state = AuthState.loading();
-    final result = await AuthService.deleteAccount(email: email, password: password);
+    final result = await AuthService.deleteAccount(
+      email: email,
+      password: password,
+      reauthWithGoogle: reauthWithGoogle,
+    );
     if (result.isSuccess) {
       state = AuthState.unauthenticated();
     } else {

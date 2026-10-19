@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../core/data/services/auth_service.dart';
@@ -175,6 +176,36 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       : (l10n.login),
                 ),
                 const SizedBox(height: 16),
+                Row(
+                  children: [
+                    const Expanded(child: Divider()),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Text(
+                        l10n.orDivider,
+                        style: ZyraTypography.labelSmall.copyWith(
+                          color: ZyraColors.onSurface.withOpacity(0.6),
+                        ),
+                      ),
+                    ),
+                    const Expanded(child: Divider()),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                OutlinedButton.icon(
+                  onPressed: authState.status == AuthStatus.loading
+                      ? null
+                      : () => ref.read(authProvider.notifier).signInWithGoogle(),
+                  icon: const Icon(Icons.account_circle_outlined),
+                  label: Text(l10n.continueWithGoogle),
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(52),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -208,7 +239,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => _openUrl(AuthService.privacyPolicyUrl),
                       child: Text(
                         l10n.privacyPolicy,
                         style: ZyraTypography.labelSmall.copyWith(
@@ -218,7 +249,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     const SizedBox(width: 16),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => _openUrl(AuthService.termsOfServiceUrl),
                       child: Text(
                         l10n.termsOfService,
                         style: ZyraTypography.labelSmall.copyWith(
@@ -234,6 +265,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _openUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
 
   void _handleLogin() {

@@ -312,6 +312,16 @@ class AppLocalizationsTr extends AppLocalizations {
       'Çok fazla deneme. Lütfen sonra tekrar deneyin';
 
   @override
+  String get continueWithGoogle => 'Google ile devam et';
+
+  @override
+  String get orDivider => 'veya';
+
+  @override
+  String get authGoogleSignInFailed =>
+      'Google ile giriş başarısız. Lütfen tekrar dene.';
+
+  @override
   String get authErrorGeneric => 'Bir hata oluştu';
 
   @override

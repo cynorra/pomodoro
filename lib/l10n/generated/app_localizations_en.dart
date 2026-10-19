@@ -312,6 +312,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Too many attempts. Please try again later';
 
   @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get orDivider => 'or';
+
+  @override
+  String get authGoogleSignInFailed =>
+      'Google sign-in failed. Please try again.';
+
+  @override
   String get authErrorGeneric => 'An error occurred';
 
   @override

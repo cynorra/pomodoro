@@ -692,6 +692,24 @@ abstract class AppLocalizations {
   /// **'Too many attempts. Please try again later'**
   String get authErrorTooManyRequests;
 
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @orDivider.
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get orDivider;
+
+  /// No description provided for @authGoogleSignInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in failed. Please try again.'**
+  String get authGoogleSignInFailed;
+
   /// No description provided for @authErrorGeneric.
   ///
   /// In en, this message translates to:
