@@ -476,16 +476,17 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get inviteBonus => 'Her davet ettiğin arkadaş için +200 puan kazan!';
+  String get inviteBonus =>
+      'Birlikte çalışmak daha keyifli. Study Cafe\'yi arkadaşlarınla paylaş!';
 
   @override
   String get inviteStep1 => 'Linki arkadaşınla paylaş';
 
   @override
-  String get inviteStep2 => 'Arkadaşın uygulamayı indirip kayıt olsun';
+  String get inviteStep2 => 'Arkadaşın uygulamayı indirsin';
 
   @override
-  String get inviteStep3 => 'İkiniz de +200 puan kazanın!';
+  String get inviteStep3 => 'Birlikte çalışın, birbirinizi motive edin!';
 
   @override
   String inviteMessage(String link) {

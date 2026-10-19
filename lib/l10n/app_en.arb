@@ -203,10 +203,10 @@
       }
     }
   },
-  "inviteBonus": "Earn +200 points for every friend you invite!",
+  "inviteBonus": "Studying is better together. Share Study Cafe with your friends!",
   "inviteStep1": "Share the link with your friend",
-  "inviteStep2": "Your friend downloads the app and signs up",
-  "inviteStep3": "You both earn +200 points!",
+  "inviteStep2": "Your friend downloads the app",
+  "inviteStep3": "Study together and keep each other motivated!",
   "inviteMessage": "Start focusing with Study Cafe! {link}",
   "@inviteMessage": {
     "placeholders": {

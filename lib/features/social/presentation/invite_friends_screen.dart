@@ -33,7 +33,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -152,7 +152,7 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
                 ),
               ],
             ),
-            const Spacer(),
+            const SizedBox(height: 24),
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(

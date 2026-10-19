@@ -995,7 +995,7 @@ abstract class AppLocalizations {
   /// No description provided for @inviteBonus.
   ///
   /// In en, this message translates to:
-  /// **'Earn +200 points for every friend you invite!'**
+  /// **'Studying is better together. Share Study Cafe with your friends!'**
   String get inviteBonus;
 
   /// No description provided for @inviteStep1.
@@ -1007,13 +1007,13 @@ abstract class AppLocalizations {
   /// No description provided for @inviteStep2.
   ///
   /// In en, this message translates to:
-  /// **'Your friend downloads the app and signs up'**
+  /// **'Your friend downloads the app'**
   String get inviteStep2;
 
   /// No description provided for @inviteStep3.
   ///
   /// In en, this message translates to:
-  /// **'You both earn +200 points!'**
+  /// **'Study together and keep each other motivated!'**
   String get inviteStep3;
 
   /// No description provided for @inviteMessage.
