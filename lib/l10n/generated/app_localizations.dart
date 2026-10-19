@@ -716,6 +716,66 @@ abstract class AppLocalizations {
   /// **'Ad privacy settings'**
   String get adPrivacySettings;
 
+  /// No description provided for @reportPlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Report player'**
+  String get reportPlayer;
+
+  /// No description provided for @hidePlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide this player'**
+  String get hidePlayer;
+
+  /// No description provided for @reportReasonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are you reporting this player?'**
+  String get reportReasonTitle;
+
+  /// No description provided for @reportReasonName.
+  ///
+  /// In en, this message translates to:
+  /// **'Inappropriate name'**
+  String get reportReasonName;
+
+  /// No description provided for @reportReasonCheating.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheating'**
+  String get reportReasonCheating;
+
+  /// No description provided for @reportReasonOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get reportReasonOther;
+
+  /// No description provided for @reportSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks. We will review this report.'**
+  String get reportSent;
+
+  /// No description provided for @reportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send the report. You may have already reported this player.'**
+  String get reportFailed;
+
+  /// No description provided for @playerHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'Player hidden'**
+  String get playerHidden;
+
+  /// No description provided for @showHiddenPlayers.
+  ///
+  /// In en, this message translates to:
+  /// **'Show hidden players'**
+  String get showHiddenPlayers;
+
   /// No description provided for @authErrorGeneric.
   ///
   /// In en, this message translates to:

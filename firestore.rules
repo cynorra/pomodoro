@@ -34,5 +34,22 @@ service cloud.firestore {
         && boundedInt(request.resource.data, 'longestStreak', 100000);
       allow delete: if request.auth != null && request.auth.uid == uid;
     }
+
+    // Player reports: write-only for signed-in users, one per reporter and
+    // player (the document id encodes both), never readable from the app.
+    match /reports/{reportId} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(
+             ['reportedUid', 'reporterUid', 'reason', 'createdAt'])
+        && request.resource.data.keys().hasAll(
+             ['reportedUid', 'reporterUid', 'reason', 'createdAt'])
+        && request.resource.data.reporterUid == request.auth.uid
+        && request.resource.data.reportedUid is string
+        && request.resource.data.reportedUid.size() <= 128
+        && reportId == request.auth.uid + '_' + request.resource.data.reportedUid
+        && request.resource.data.reason in ['inappropriateName', 'cheating', 'other']
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
   }
 }

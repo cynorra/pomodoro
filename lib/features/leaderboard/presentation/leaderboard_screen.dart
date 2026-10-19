@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/data/services/moderation_service.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/l10n_extension.dart';
 import '../../../core/ui/responsive.dart';
@@ -25,18 +26,26 @@ final _leaderboardProvider =
   String textOf(Object? v) => v is String ? v.trim() : '';
   int numberOf(Object? v) => v is num ? v.toInt() : 0;
 
+  final hidden = await ModerationService.hiddenPlayers();
+  final docs = snapshot.docs.where((d) => !hidden.contains(d.id)).toList();
+
   return [
-    for (var i = 0; i < snapshot.docs.length; i++)
+    for (var i = 0; i < docs.length; i++)
       _LeaderboardEntry(
+        uid: docs[i].id,
         rank: i + 1,
-        name: textOf(snapshot.docs[i].data()['displayName']),
-        points: numberOf(snapshot.docs[i].data()['totalPoints']),
-        streak: numberOf(snapshot.docs[i].data()['currentStreak']),
+        name: textOf(docs[i].data()['displayName']),
+        points: numberOf(docs[i].data()['totalPoints']),
+        streak: numberOf(docs[i].data()['currentStreak']),
         avatar: i < _rankAvatars.length ? _rankAvatars[i] : '🏅',
-        isCurrentUser: snapshot.docs[i].id == currentUid,
+        isCurrentUser: docs[i].id == currentUid,
       ),
   ];
 });
+
+final _hiddenCountProvider = FutureProvider.autoDispose<int>(
+  (ref) async => (await ModerationService.hiddenPlayers()).length,
+);
 
 class LeaderboardScreen extends ConsumerWidget {
   const LeaderboardScreen({super.key});
@@ -56,6 +65,18 @@ class LeaderboardScreen extends ConsumerWidget {
           style: ZyraTypography.headlineMedium,
         ),
         centerTitle: true,
+        actions: [
+          if ((ref.watch(_hiddenCountProvider).value ?? 0) > 0)
+            IconButton(
+              tooltip: context.l10n.showHiddenPlayers,
+              icon: const Icon(Icons.visibility_outlined),
+              onPressed: () async {
+                await ModerationService.showAllPlayers();
+                ref.invalidate(_leaderboardProvider);
+                ref.invalidate(_hiddenCountProvider);
+              },
+            ),
+        ],
       ),
       body: entries.when(
         loading: () => const Center(
@@ -76,14 +97,20 @@ class LeaderboardScreen extends ConsumerWidget {
           }
           return Column(
             children: [
-              _TopThreePodium(entries: list.take(3).toList()),
+              _TopThreePodium(
+                entries: list.take(3).toList(),
+                onMore: (e) => _showActions(context, ref, e),
+              ),
               const SizedBox(height: 16),
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemCount: list.length > 3 ? list.length - 3 : 0,
                   itemBuilder: (context, index) =>
-                      _LeaderboardTile(entry: list[index + 3]),
+                      _LeaderboardTile(
+                    entry: list[index + 3],
+                    onMore: () => _showActions(context, ref, list[index + 3]),
+                  ),
                 ),
               ),
             ],
@@ -92,6 +119,74 @@ class LeaderboardScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+Future<void> _showActions(
+  BuildContext context,
+  WidgetRef ref,
+  _LeaderboardEntry entry,
+) async {
+  if (entry.isCurrentUser) return;
+  final l10n = context.l10n;
+  final messenger = ScaffoldMessenger.of(context);
+  final action = await showModalBottomSheet<String>(
+    context: context,
+    backgroundColor: ZyraColors.surface,
+    builder: (sheetContext) => SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.flag_outlined),
+            title: Text(l10n.reportPlayer),
+            onTap: () => Navigator.pop(sheetContext, 'report'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.visibility_off_outlined),
+            title: Text(l10n.hidePlayer),
+            onTap: () => Navigator.pop(sheetContext, 'hide'),
+          ),
+        ],
+      ),
+    ),
+  );
+  if (action == null || !context.mounted) return;
+
+  if (action == 'hide') {
+    await ModerationService.hidePlayer(entry.uid);
+    ref.invalidate(_leaderboardProvider);
+    ref.invalidate(_hiddenCountProvider);
+    messenger.showSnackBar(SnackBar(content: Text(l10n.playerHidden)));
+    return;
+  }
+
+  final reason = await showDialog<ReportReason>(
+    context: context,
+    builder: (dialogContext) => SimpleDialog(
+      backgroundColor: ZyraColors.surface,
+      title: Text(l10n.reportReasonTitle),
+      children: [
+        SimpleDialogOption(
+          onPressed: () =>
+              Navigator.pop(dialogContext, ReportReason.inappropriateName),
+          child: Text(l10n.reportReasonName),
+        ),
+        SimpleDialogOption(
+          onPressed: () => Navigator.pop(dialogContext, ReportReason.cheating),
+          child: Text(l10n.reportReasonCheating),
+        ),
+        SimpleDialogOption(
+          onPressed: () => Navigator.pop(dialogContext, ReportReason.other),
+          child: Text(l10n.reportReasonOther),
+        ),
+      ],
+    ),
+  );
+  if (reason == null) return;
+  final ok = await ModerationService.reportPlayer(uid: entry.uid, reason: reason);
+  messenger.showSnackBar(
+    SnackBar(content: Text(ok ? l10n.reportSent : l10n.reportFailed)),
+  );
 }
 
 class _Message extends StatelessWidget {
@@ -123,8 +218,9 @@ class _Message extends StatelessWidget {
 
 class _TopThreePodium extends StatelessWidget {
   final List<_LeaderboardEntry> entries;
+  final ValueChanged<_LeaderboardEntry> onMore;
 
-  const _TopThreePodium({required this.entries});
+  const _TopThreePodium({required this.entries, required this.onMore});
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +232,24 @@ class _TopThreePodium extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _PodiumItem(entry: entries[1], height: context.scaled(120), order: 2),
-          _PodiumItem(entry: entries[0], height: context.scaled(160), order: 1),
-          _PodiumItem(entry: entries[2], height: context.scaled(100), order: 3),
+          _PodiumItem(
+            entry: entries[1],
+            height: context.scaled(120),
+            order: 2,
+            onMore: () => onMore(entries[1]),
+          ),
+          _PodiumItem(
+            entry: entries[0],
+            height: context.scaled(160),
+            order: 1,
+            onMore: () => onMore(entries[0]),
+          ),
+          _PodiumItem(
+            entry: entries[2],
+            height: context.scaled(100),
+            order: 3,
+            onMore: () => onMore(entries[2]),
+          ),
         ],
       ),
     );
@@ -149,11 +260,13 @@ class _PodiumItem extends StatelessWidget {
   final _LeaderboardEntry entry;
   final double height;
   final int order;
+  final VoidCallback onMore;
 
   const _PodiumItem({
     required this.entry,
     required this.height,
     required this.order,
+    required this.onMore,
   });
 
   Color get _color {
@@ -183,6 +296,16 @@ class _PodiumItem extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
+        if (!entry.isCurrentUser)
+          IconButton(
+            tooltip: context.l10n.reportPlayer,
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 32, minHeight: 28),
+            iconSize: 18,
+            icon: const Icon(Icons.more_horiz),
+            onPressed: onMore,
+          ),
         const SizedBox(height: 4),
         Text(
           context.l10n.pointsCount(entry.points),
@@ -225,8 +348,9 @@ class _PodiumItem extends StatelessWidget {
 
 class _LeaderboardTile extends StatelessWidget {
   final _LeaderboardEntry entry;
+  final VoidCallback onMore;
 
-  const _LeaderboardTile({required this.entry});
+  const _LeaderboardTile({required this.entry, required this.onMore});
 
   @override
   Widget build(BuildContext context) {
@@ -295,6 +419,13 @@ class _LeaderboardTile extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          if (!entry.isCurrentUser)
+            IconButton(
+              tooltip: context.l10n.reportPlayer,
+              visualDensity: VisualDensity.compact,
+              icon: const Icon(Icons.more_vert, size: 20),
+              onPressed: onMore,
+            ),
         ],
       ),
     );
@@ -302,6 +433,7 @@ class _LeaderboardTile extends StatelessWidget {
 }
 
 class _LeaderboardEntry {
+  final String uid;
   final int rank;
   final String name;
   final int points;
@@ -310,6 +442,7 @@ class _LeaderboardEntry {
   final bool isCurrentUser;
 
   const _LeaderboardEntry({
+    required this.uid,
     required this.rank,
     required this.name,
     required this.points,

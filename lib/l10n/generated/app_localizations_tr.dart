@@ -325,6 +325,37 @@ class AppLocalizationsTr extends AppLocalizations {
   String get adPrivacySettings => 'Reklam gizlilik ayarları';
 
   @override
+  String get reportPlayer => 'Oyuncuyu bildir';
+
+  @override
+  String get hidePlayer => 'Bu oyuncuyu gizle';
+
+  @override
+  String get reportReasonTitle => 'Bu oyuncuyu neden bildiriyorsun?';
+
+  @override
+  String get reportReasonName => 'Uygunsuz isim';
+
+  @override
+  String get reportReasonCheating => 'Hile';
+
+  @override
+  String get reportReasonOther => 'Diğer';
+
+  @override
+  String get reportSent => 'Teşekkürler. Bildirimi inceleyeceğiz.';
+
+  @override
+  String get reportFailed =>
+      'Bildirim gönderilemedi. Bu oyuncuyu daha önce bildirmiş olabilirsin.';
+
+  @override
+  String get playerHidden => 'Oyuncu gizlendi';
+
+  @override
+  String get showHiddenPlayers => 'Gizlenen oyuncuları göster';
+
+  @override
   String get authErrorGeneric => 'Bir hata oluştu';
 
   @override

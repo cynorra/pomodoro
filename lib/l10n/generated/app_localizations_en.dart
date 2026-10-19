@@ -325,6 +325,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adPrivacySettings => 'Ad privacy settings';
 
   @override
+  String get reportPlayer => 'Report player';
+
+  @override
+  String get hidePlayer => 'Hide this player';
+
+  @override
+  String get reportReasonTitle => 'Why are you reporting this player?';
+
+  @override
+  String get reportReasonName => 'Inappropriate name';
+
+  @override
+  String get reportReasonCheating => 'Cheating';
+
+  @override
+  String get reportReasonOther => 'Other';
+
+  @override
+  String get reportSent => 'Thanks. We will review this report.';
+
+  @override
+  String get reportFailed =>
+      'Could not send the report. You may have already reported this player.';
+
+  @override
+  String get playerHidden => 'Player hidden';
+
+  @override
+  String get showHiddenPlayers => 'Show hidden players';
+
+  @override
   String get authErrorGeneric => 'An error occurred';
 
   @override

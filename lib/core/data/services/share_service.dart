@@ -4,27 +4,38 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../utils/global_exception_handler.dart';
 
 class ShareService {
+  static Future<void> _share({
+    String? text,
+    String? subject,
+    List<File> files = const [],
+  }) async {
+    await SharePlus.instance.share(
+      ShareParams(
+        text: text,
+        subject: subject,
+        files: files.isEmpty ? null : [for (final f in files) XFile(f.path)],
+      ),
+    );
+  }
+
   static Future<void> shareToWhatsApp({
     required String text,
     File? image,
   }) async {
     try {
       if (image != null) {
-        await Share.shareXFiles(
-          [XFile(image.path)],
-          text: text,
-        );
+        await _share(text: text, files: [image]);
       } else {
         final whatsappUri = Uri.parse('whatsapp://send?text=${Uri.encodeComponent(text)}');
         if (await canLaunchUrl(whatsappUri)) {
           await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
         } else {
-          await Share.share(text);
+          await _share(text: text);
         }
       }
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'WhatsApp share failed');
-      await Share.share(text);
+      await _share(text: text);
     }
   }
 
@@ -38,7 +49,7 @@ class ShareService {
       if (Platform.isIOS) {
         final uri = Uri.parse('instagram-stories://share');
         if (await canLaunchUrl(uri)) {
-          await Share.shareXFiles([XFile(imageFile.path)]);
+          await _share(files: [imageFile]);
         } else {
           await launchUrl(
             Uri.parse('https://apps.apple.com/app/instagram/id389801252'),
@@ -46,10 +57,7 @@ class ShareService {
           );
         }
       } else {
-        await Share.shareXFiles(
-          [XFile(imageFile.path)],
-          text: caption,
-        );
+        await _share(text: caption, files: [imageFile]);
       }
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'Instagram share failed');
@@ -62,11 +70,7 @@ class ShareService {
     required String subject,
   }) async {
     try {
-      await Share.shareXFiles(
-        [XFile(videoOrImage.path)],
-        text: text,
-        subject: subject,
-      );
+      await _share(text: text, subject: subject, files: [videoOrImage]);
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'TikTok share failed');
     }
@@ -79,13 +83,9 @@ class ShareService {
   }) async {
     try {
       if (images != null && images.isNotEmpty) {
-        await Share.shareXFiles(
-          images.map((f) => XFile(f.path)).toList(),
-          text: text,
-          subject: subject,
-        );
+        await _share(text: text, subject: subject, files: images);
       } else {
-        await Share.share(text, subject: subject);
+        await _share(text: text, subject: subject);
       }
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'General share failed');

@@ -5,6 +5,7 @@ import 'package:cynora_focus/features/auth/presentation/auth_notifier.dart';
 import 'package:cynora_focus/features/auth/presentation/auth_state.dart';
 import 'package:cynora_focus/features/auth/presentation/login_screen.dart';
 import 'package:cynora_focus/features/auth/presentation/signup_screen.dart';
+import 'package:cynora_focus/features/help/presentation/help_screen.dart';
 import 'package:cynora_focus/features/profile/presentation/settings_screen.dart';
 import 'package:cynora_focus/l10n/generated/app_localizations.dart';
 
@@ -26,6 +27,7 @@ void main() {
     'login': () => const LoginScreen(),
     'signup': () => const SignupScreen(),
     'settings': () => const SettingsScreen(),
+    'help': () => const HelpScreen(),
   };
 
   for (final screen in screens.entries) {
