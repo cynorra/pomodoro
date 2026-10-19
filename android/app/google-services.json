@@ -51,6 +51,14 @@
           }
         },
         {
+          "client_id": "1089152291243-pt4dqdhtvmlatpbf3o5k8b876s7thb65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cynora.studycafe.pomodoro",
+            "certificate_hash": "b10dd59bc393ea30ef97dbaa19420412a18c8c03"
+          }
+        },
+        {
           "client_id": "1089152291243-l6dh7daev03ehq8vdvvlj6rl16cis0el.apps.googleusercontent.com",
           "client_type": 3
         }
