@@ -13,40 +13,73 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   BannerAd? _ad;
   bool _loaded = false;
   bool _disposed = false;
+  bool _isLoading = false;
+  AdSize? _adSize;
 
   @override
-  void initState() {
-    super.initState();
-    if (AdService.hasBannerAdUnit) {
-      AdService.adsReady.then((ok) {
-        if (ok && !_disposed) _load();
-      });
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isLoading && _ad == null && AdService.hasBannerAdUnit) {
+      _loadAdaptiveBanner();
     }
   }
 
-  void _load() {
+  Future<void> _loadAdaptiveBanner() async {
+    _isLoading = true;
+    final ready = await AdService.adsReady;
+    if (!ready || _disposed || !mounted) {
+      _isLoading = false;
+      return;
+    }
+
+    final mediaQuery = MediaQuery.of(context);
+    final width = mediaQuery.size.width.truncate();
+    final orientation = mediaQuery.orientation;
+
+    AdSize? size;
+    try {
+      size = await AdSize.getLargeAnchoredAdaptiveBannerAdSizeWithOrientation(
+        orientation,
+        width,
+      );
+    } catch (_) {
+      size = null;
+    }
+
+    size ??= AdSize.banner;
+
+    if (_disposed || !mounted) return;
+
     final ad = BannerAd(
       adUnitId: AdService.bannerAdUnitId,
-      size: AdSize.banner,
+      size: size,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (loaded) {
-          if (_disposed) {
+          if (_disposed || !mounted) {
             loaded.dispose();
             return;
           }
           setState(() {
             _ad = loaded as BannerAd;
+            _adSize = size;
             _loaded = true;
           });
         },
         onAdFailedToLoad: (failed, error) {
+          // Kod 3 (no fill) veya herhangi bir yükleme hatasında sessizce dispose et
           failed.dispose();
-          if (!_disposed) setState(() => _loaded = false);
+          if (!_disposed && mounted) {
+            setState(() {
+              _loaded = false;
+              _ad = null;
+            });
+          }
         },
       ),
     );
-    ad.load();
+
+    await ad.load();
   }
 
   @override
@@ -60,9 +93,22 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   @override
   Widget build(BuildContext context) {
     final ad = _ad;
-    if (!_loaded || ad == null) {
+    final size = _adSize;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Silent fail: Reklam yüklenmediğinde veya no-fill durumunda ekran kayması / boş kutu olmadan null/SizedBox.shrink döner
+    if (!_loaded || ad == null || size == null) {
       return const SizedBox.shrink();
     }
-    return SizedBox(height: 50, child: AdWidget(ad: ad));
+
+    return Container(
+      constraints: BoxConstraints(maxWidth: screenWidth),
+      clipBehavior: Clip.hardEdge,
+      decoration: const BoxDecoration(),
+      alignment: Alignment.center,
+      width: size.width.toDouble(),
+      height: size.height.toDouble(),
+      child: AdWidget(ad: ad),
+    );
   }
 }

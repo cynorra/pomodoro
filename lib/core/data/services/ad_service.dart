@@ -14,21 +14,11 @@ class AdService {
   static DateTime? _lastInterstitialAt;
   static bool _isInitialized = false;
 
-  static String get bannerAdUnitId => kDebugMode
-      ? 'ca-app-pub-3940256099942544/6300978111'
-      : 'ca-app-pub-4674211063760769/7365067197';
-
-  static String get interstitialAdUnitId => kDebugMode
-      ? 'ca-app-pub-3940256099942544/1033173712'
-      : 'ca-app-pub-4674211063760769/1556627735';
-
-  static String get nativeAdUnitId => kDebugMode
-      ? 'ca-app-pub-3940256099942544/2247696110'
-      : 'ca-app-pub-4674211063760769/9799658844';
-
-  static String get rewardedAdUnitId => kDebugMode
-      ? 'ca-app-pub-3940256099942544/5224354917'
-      : 'ca-app-pub-4674211063760769/8433027271';
+  // Sadece resmi canlı AdMob ID'leri (Test / DEV ID'leri kesinlikle kullanılmaz)
+  static const String bannerAdUnitId = 'ca-app-pub-4674211063760769/7365067197';
+  static const String interstitialAdUnitId = 'ca-app-pub-4674211063760769/1556627735';
+  static const String nativeAdUnitId = 'ca-app-pub-4674211063760769/9799658844';
+  static const String rewardedAdUnitId = 'ca-app-pub-4674211063760769/8433027271';
 
   // Release builds ship with placeholder ad unit IDs until real ones are set;
   // loading ads with them would only produce failed requests.
