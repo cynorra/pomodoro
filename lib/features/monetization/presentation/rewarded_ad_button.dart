@@ -12,8 +12,14 @@ class RewardedAdButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (!AdService.hasRewardedAdUnit) return const SizedBox.shrink();
+    return ValueListenableBuilder<bool>(
+      valueListenable: AdService.rewardedReady,
+      builder: (context, isReady, _) => _buildButton(context, ref, isReady),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, WidgetRef ref, bool isReady) {
     final l10n = AppLocalizations.of(context);
-    final isReady = AdService.isRewardedAdReady;
 
     return Semantics(
       button: true,

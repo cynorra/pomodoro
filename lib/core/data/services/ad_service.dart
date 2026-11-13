@@ -8,7 +8,16 @@ class AdService {
   static const _focusSessionsPerInterstitial = 3;
   static const _minInterstitialGap = Duration(minutes: 5);
 
-  static RewardedAd? _rewardedAd;
+  static RewardedAd? _rewardedAdInstance;
+
+  /// Lets the UI react when a rewarded ad becomes (un)available.
+  static final ValueNotifier<bool> rewardedReady = ValueNotifier<bool>(false);
+
+  static RewardedAd? get _rewardedAd => _rewardedAdInstance;
+  static set _rewardedAd(RewardedAd? ad) {
+    _rewardedAdInstance = ad;
+    rewardedReady.value = ad != null;
+  }
   static InterstitialAd? _interstitialAd;
   static int _focusSessionsSinceAd = 0;
   static DateTime? _lastInterstitialAt;

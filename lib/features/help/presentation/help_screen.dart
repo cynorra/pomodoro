@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/data/services/auth_service.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../../core/utils/url_opener.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../l10n/l10n_extension.dart';
@@ -104,12 +104,7 @@ class HelpScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
+  Future<void> _launchUrl(String url) => openExternalUrl(url);
 }
 
 class _FaqItem extends StatefulWidget {

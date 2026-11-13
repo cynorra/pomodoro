@@ -1,7 +1,7 @@
 name: cynora_focus
 description: "Study Cafe: Pomodoro Timer - gamified focus and study timer with a virtual cafe."
 publish_to: 'none'
-version: 1.0.6+21
+version: 1.0.7+22
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

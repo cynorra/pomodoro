@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../../core/utils/url_opener.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../core/data/services/auth_service.dart';
@@ -122,11 +122,8 @@ class _AccountDeletionScreenState extends ConsumerState<AccountDeletionScreen> {
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () async {
-                  final uri = Uri.parse(AuthService.accountDeletionWebUrl(
+                  await openExternalUrl(AuthService.accountDeletionWebUrl(
                       context.l10n.localeName));
-                  if (await canLaunchUrl(uri)) {
-                    await launchUrl(uri);
-                  }
                 },
                 child: Text(
                   AuthService.accountDeletionWebUrl(context.l10n.localeName),

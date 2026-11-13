@@ -14,6 +14,8 @@ import '../../achievements/presentation/achievements_screen.dart';
 import '../../help/presentation/help_screen.dart';
 import '../../social/presentation/invite_friends_screen.dart';
 import '../../../l10n/l10n_extension.dart';
+import '../../../core/utils/url_opener.dart';
+import '../../../core/data/services/auth_service.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -121,12 +123,14 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.policy_outlined,
               title: l10n.privacyPolicy,
-              onTap: () {},
+              onTap: () => openExternalUrl(
+                  AuthService.privacyPolicyUrl(l10n.localeName)),
             ),
             _MenuItem(
               icon: Icons.description_outlined,
               title: l10n.termsOfService,
-              onTap: () {},
+              onTap: () => openExternalUrl(
+                  AuthService.termsOfServiceUrl(l10n.localeName)),
             ),
             const SizedBox(height: 16),
             if (authState.status == AuthStatus.authenticated) ...[
