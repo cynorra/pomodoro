@@ -262,5 +262,16 @@
   "onboardSkip": "Atla",
   "splashTagline": "Oyunlaştırılmış Çalışma Kafesi",
   "rewardedAdHint": "+50 puan kazan",
-  "minutesShort": "{count}dk"
+  "minutesShort": "{count}dk",
+  "consentTitle": "Study Cafe’yi geliştirmemize yardım edin",
+  "consentBody": "İzin verirseniz Study Cafe anonim kullanım istatistikleri ve çökme raporları toplar (Google Firebase Analytics ve Crashlytics). Bunlar hangi ekranların kullanıldığı, cihaz modeliniz, Android sürümünüz ve bir uygulama örneği kimliği gibi bilgileri içerir; adınızı, e-postanızı veya çalışma içeriğinizi asla içermez. Bu veriler Türkiye dışındaki Google sunucularında işlenir. Siz seçene kadar hiçbir şey toplanmaz.",
+  "consentFootnote": "Hangi seçeneği seçerseniz seçin tüm özellikler çalışmaya devam eder. Seçiminizi istediğiniz zaman Ayarlar’dan değiştirebilirsiniz. Reklamlar ayrıca Google AdMob tarafından yönetilir.",
+  "consentAccept": "İzin ver",
+  "consentDecline": "İzin verme",
+  "consentPrivacyLink": "Gizlilik politikasını oku",
+  "analyticsConsentTitle": "Anonim kullanım ve çökme verileri",
+  "analyticsConsentHelp": "Sorunları düzeltmemize yardımcı olur. Kapalıyken hiçbir şey gönderilmez.",
+  "exportData": "Verilerimi dışa aktar",
+  "exportDataHelp": "İlerlemenizin ve hesap bilgilerinizin bir kopyasını JSON dosyası olarak kaydeder.",
+  "exportDataFailed": "Verileriniz dışa aktarılamadı."
 }

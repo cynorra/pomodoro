@@ -3,6 +3,7 @@ import '../../utils/global_exception_handler.dart';
 import '../database/database_service.dart';
 import 'audio_service.dart';
 import 'notification_service.dart';
+import 'privacy_consent_service.dart';
 
 /// Removes everything the app stored on this device for the user. Used when an
 /// account is deleted so no study history, points or social choices stay behind.
@@ -30,6 +31,9 @@ class LocalDataService {
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'Secure storage wipe failed');
     }
+
+    // The stored consent is gone, so stop collecting until it is given again.
+    await PrivacyConsentService.apply(false);
 
     try {
       await DatabaseService.clearAllData();

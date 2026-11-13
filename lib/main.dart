@@ -7,6 +7,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'firebase_options.dart';
 import 'core/utils/global_exception_handler.dart';
 import 'core/data/services/analytics_service.dart';
+import 'core/data/services/privacy_consent_service.dart';
+import 'features/onboarding/presentation/consent_screen.dart';
 import 'core/data/services/remote_config_service.dart';
 import 'core/data/services/notification_service.dart';
 import 'core/data/services/audio_service.dart';
@@ -33,6 +35,7 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
+    await PrivacyConsentService.applyStored();
     GlobalExceptionHandler.initialize();
     await DatabaseService.initialize();
 
@@ -83,12 +86,19 @@ class StudyCafeApp extends ConsumerStatefulWidget {
 class _StudyCafeAppState extends ConsumerState<StudyCafeApp> {
   bool _showSplash = true;
   bool _showOnboarding = false;
+  bool _needsConsent = false;
   final _storage = const FlutterSecureStorage();
 
   @override
   void initState() {
     super.initState();
     _checkOnboarding();
+    _checkConsent();
+  }
+
+  Future<void> _checkConsent() async {
+    final choice = await PrivacyConsentService.read();
+    if (mounted && choice == null) setState(() => _needsConsent = true);
   }
 
   Future<void> _checkOnboarding() async {
@@ -115,6 +125,12 @@ class _StudyCafeAppState extends ConsumerState<StudyCafeApp> {
       initialScreen = AnimatedSplashOverlay(
         onComplete: () {
           if (mounted) setState(() => _showSplash = false);
+        },
+      );
+    } else if (_needsConsent) {
+      initialScreen = ConsentScreen(
+        onDone: () {
+          if (mounted) setState(() => _needsConsent = false);
         },
       );
     } else if (_showOnboarding) {

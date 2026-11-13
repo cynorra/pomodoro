@@ -846,4 +846,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String minutesShort(int count) {
     return '${count}m';
   }
+
+  @override
+  String get consentTitle => 'Help us improve Study Cafe';
+
+  @override
+  String get consentBody =>
+      'With your permission, Study Cafe collects anonymous usage statistics and crash reports (Google Firebase Analytics and Crashlytics). They include things like which screens are used, your device model and Android version, and an app instance ID. They never include your name, email or study content. This data is processed on Google servers outside Türkiye. Nothing is collected until you choose.';
+
+  @override
+  String get consentFootnote =>
+      'Either choice keeps every feature working. You can change it any time in Settings. Ads are handled separately by Google AdMob.';
+
+  @override
+  String get consentAccept => 'Allow';
+
+  @override
+  String get consentDecline => 'Do not allow';
+
+  @override
+  String get consentPrivacyLink => 'Read the privacy policy';
+
+  @override
+  String get analyticsConsentTitle => 'Anonymous usage and crash data';
+
+  @override
+  String get analyticsConsentHelp =>
+      'Helps us fix problems. Off means nothing is sent.';
+
+  @override
+  String get exportData => 'Export my data';
+
+  @override
+  String get exportDataHelp =>
+      'Saves a copy of your progress and account details as a JSON file.';
+
+  @override
+  String get exportDataFailed => 'Could not export your data.';
 }

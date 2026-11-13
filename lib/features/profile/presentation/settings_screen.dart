@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/notification_service.dart';
+import '../../../core/data/services/privacy_consent_service.dart';
+import '../../../core/data/services/data_export_service.dart';
 import '../../social/presentation/social_providers.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/state/locale_notifier.dart';
@@ -61,7 +63,9 @@ class SettingsScreen extends ConsumerWidget {
             ),
             const _NotificationsTile(),
             const _FocusStatusTile(),
+            const _AnalyticsConsentTile(),
             const _AdPrivacyTile(),
+            const _ExportDataTile(),
           ],
         ),
       ),
@@ -275,6 +279,103 @@ class _SettingsTile extends StatelessWidget {
             ),
           ),
           trailing,
+        ],
+      ),
+    );
+  }
+}
+
+/// Switch for anonymous usage and crash data; off means nothing is sent.
+class _AnalyticsConsentTile extends StatefulWidget {
+  const _AnalyticsConsentTile();
+
+  @override
+  State<_AnalyticsConsentTile> createState() => _AnalyticsConsentTileState();
+}
+
+class _AnalyticsConsentTileState extends State<_AnalyticsConsentTile> {
+  bool _on = false;
+
+  @override
+  void initState() {
+    super.initState();
+    PrivacyConsentService.read().then((v) {
+      if (mounted) setState(() => _on = v == true);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SettingsTile(
+            icon: Icons.insights_outlined,
+            title: l10n.analyticsConsentTitle,
+            trailing: Switch(
+              value: _on,
+              onChanged: (value) async {
+                setState(() => _on = value);
+                await PrivacyConsentService.save(value);
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
+            child: Text(
+              l10n.analyticsConsentHelp,
+              style: ZyraTypography.labelSmall.copyWith(
+                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Lets the user take a machine-readable copy of their data.
+class _ExportDataTile extends StatelessWidget {
+  const _ExportDataTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SettingsTile(
+            icon: Icons.download_outlined,
+            title: l10n.exportData,
+            trailing: IconButton(
+              icon: const Icon(Icons.chevron_right_rounded),
+              onPressed: () async {
+                final messenger = ScaffoldMessenger.of(context);
+                try {
+                  await DataExportService.exportAndShare();
+                } catch (_) {
+                  messenger.showSnackBar(
+                    SnackBar(content: Text(l10n.exportDataFailed)),
+                  );
+                }
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
+            child: Text(
+              l10n.exportDataHelp,
+              style: ZyraTypography.labelSmall.copyWith(
+                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+          ),
         ],
       ),
     );

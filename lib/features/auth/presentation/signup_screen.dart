@@ -9,6 +9,8 @@ import 'auth_notifier.dart';
 import 'auth_state.dart';
 import '../../../l10n/l10n_extension.dart';
 import 'auth_error_text.dart';
+import '../../../core/data/services/auth_service.dart';
+import '../../../core/utils/url_opener.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
@@ -149,7 +151,22 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 24),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () => openExternalUrl(
+                          AuthService.privacyPolicyUrl(l10n.localeName)),
+                      child: Text(l10n.privacyPolicy),
+                    ),
+                    TextButton(
+                      onPressed: () => openExternalUrl(
+                          AuthService.termsOfServiceUrl(l10n.localeName)),
+                      child: Text(l10n.termsOfService),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
                 if (authState.status == AuthStatus.error &&
                     authState.errorMessage != null)
                   Container(

@@ -1615,6 +1615,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count}m'**
   String minutesShort(int count);
+
+  /// No description provided for @consentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us improve Study Cafe'**
+  String get consentTitle;
+
+  /// No description provided for @consentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'With your permission, Study Cafe collects anonymous usage statistics and crash reports (Google Firebase Analytics and Crashlytics). They include things like which screens are used, your device model and Android version, and an app instance ID. They never include your name, email or study content. This data is processed on Google servers outside Türkiye. Nothing is collected until you choose.'**
+  String get consentBody;
+
+  /// No description provided for @consentFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Either choice keeps every feature working. You can change it any time in Settings. Ads are handled separately by Google AdMob.'**
+  String get consentFootnote;
+
+  /// No description provided for @consentAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get consentAccept;
+
+  /// No description provided for @consentDecline.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not allow'**
+  String get consentDecline;
+
+  /// No description provided for @consentPrivacyLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the privacy policy'**
+  String get consentPrivacyLink;
+
+  /// No description provided for @analyticsConsentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Anonymous usage and crash data'**
+  String get analyticsConsentTitle;
+
+  /// No description provided for @analyticsConsentHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Helps us fix problems. Off means nothing is sent.'**
+  String get analyticsConsentHelp;
+
+  /// No description provided for @exportData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export my data'**
+  String get exportData;
+
+  /// No description provided for @exportDataHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Saves a copy of your progress and account details as a JSON file.'**
+  String get exportDataHelp;
+
+  /// No description provided for @exportDataFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not export your data.'**
+  String get exportDataFailed;
 }
 
 class _AppLocalizationsDelegate

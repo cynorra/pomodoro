@@ -65,15 +65,15 @@ Most features work without an account (tap "Continue as guest" on the login scre
 The account lives in the production Firebase project (pomodoro-app-d3068). Keep it until the review passes.
 
 ## Data safety form (suggested answers, verify against the final build)
-Data is encrypted in transit (HTTPS). Users can request deletion (URL above). Account data is optional.
+Data is encrypted in transit (HTTPS). Users can request deletion (URL above) and can delete in the app; Settings also has a data export and an analytics consent switch. Account data is optional.
 
 | Data type | Collected | Shared | Purpose |
 |---|---|---|---|
 | Email address | Yes (only if the user creates an account) | No (Firebase acts as service provider) | Account management, app functionality |
 | Name (display name; Google account name when using Google sign-in) | Yes (optional) | Shown to other users on the leaderboard | Account management, app functionality |
 | User IDs (Firebase uid) | Yes (account) | No | Account management, app functionality |
-| App interactions (points, sessions, streaks; analytics events) | Yes | No | App functionality, analytics |
-| Crash logs and diagnostics | Yes | No | Analytics (Firebase Crashlytics) |
+| App interactions (points, sessions, streaks; analytics events) | Yes (analytics events only if the user allows them on the first-launch consent screen; off by default) | No | App functionality, analytics |
+| Crash logs and diagnostics | Yes (only if the user allows it; off by default) | No | Analytics (Firebase Crashlytics) |
 | Device or other IDs (advertising ID) | Yes | Yes, with Google (AdMob) | Advertising |
 | Approximate location (derived from IP by the ads SDK) | Declare as Google's AdMob disclosure guide advises | Yes, with Google (AdMob) | Advertising |
 

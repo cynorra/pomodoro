@@ -28,7 +28,6 @@ class AuthService {
 
       await _firestore.collection('users').doc(credential.user?.uid).set({
         'displayName': name,
-        'email': email,
         'createdAt': FieldValue.serverTimestamp(),
         'totalPoints': 0,
         'totalStudyMinutes': 0,
@@ -98,7 +97,6 @@ class AuthService {
       if (user != null && (result.additionalUserInfo?.isNewUser ?? false)) {
         await _firestore.collection('users').doc(user.uid).set({
           'displayName': leaderboardName(user.displayName, maxLength: 30),
-          'email': user.email ?? '',
           'createdAt': FieldValue.serverTimestamp(),
           'totalPoints': 0,
           'totalStudyMinutes': 0,

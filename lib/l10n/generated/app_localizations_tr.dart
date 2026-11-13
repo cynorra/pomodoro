@@ -838,4 +838,41 @@ class AppLocalizationsTr extends AppLocalizations {
   String minutesShort(int count) {
     return '${count}dk';
   }
+
+  @override
+  String get consentTitle => 'Study Cafe’yi geliştirmemize yardım edin';
+
+  @override
+  String get consentBody =>
+      'İzin verirseniz Study Cafe anonim kullanım istatistikleri ve çökme raporları toplar (Google Firebase Analytics ve Crashlytics). Bunlar hangi ekranların kullanıldığı, cihaz modeliniz, Android sürümünüz ve bir uygulama örneği kimliği gibi bilgileri içerir; adınızı, e-postanızı veya çalışma içeriğinizi asla içermez. Bu veriler Türkiye dışındaki Google sunucularında işlenir. Siz seçene kadar hiçbir şey toplanmaz.';
+
+  @override
+  String get consentFootnote =>
+      'Hangi seçeneği seçerseniz seçin tüm özellikler çalışmaya devam eder. Seçiminizi istediğiniz zaman Ayarlar’dan değiştirebilirsiniz. Reklamlar ayrıca Google AdMob tarafından yönetilir.';
+
+  @override
+  String get consentAccept => 'İzin ver';
+
+  @override
+  String get consentDecline => 'İzin verme';
+
+  @override
+  String get consentPrivacyLink => 'Gizlilik politikasını oku';
+
+  @override
+  String get analyticsConsentTitle => 'Anonim kullanım ve çökme verileri';
+
+  @override
+  String get analyticsConsentHelp =>
+      'Sorunları düzeltmemize yardımcı olur. Kapalıyken hiçbir şey gönderilmez.';
+
+  @override
+  String get exportData => 'Verilerimi dışa aktar';
+
+  @override
+  String get exportDataHelp =>
+      'İlerlemenizin ve hesap bilgilerinizin bir kopyasını JSON dosyası olarak kaydeder.';
+
+  @override
+  String get exportDataFailed => 'Verileriniz dışa aktarılamadı.';
 }
