@@ -44,7 +44,10 @@ service cloud.firestore {
         && code.matches('^[A-HJ-NP-Z2-9]{6}$')
         && request.resource.data.keys().hasOnly(['ownerUid'])
         && request.resource.data.ownerUid == request.auth.uid;
-      allow update, delete: if false;
+      allow update: if false;
+      // Owners may remove their own code (account deletion).
+      allow delete: if request.auth != null
+        && resource.data.ownerUid == request.auth.uid;
     }
 
     // Referrals: one per invited account (the id is the invited user's uid).
@@ -73,7 +76,9 @@ service cloud.firestore {
         && resource.data.claimed == false
         && request.resource.data.claimed == true
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['claimed']);
-      allow delete: if false;
+      // The invited user may remove their own record (account deletion).
+      allow delete: if request.auth != null
+        && request.auth.uid == inviteeUid;
     }
 
     // "Focusing now": a user who opted in publishes one document while a focus
@@ -121,14 +126,18 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/presence/$(request.resource.data.toUid)).data.endsAt
              > request.time;
       allow get, list: if request.auth != null
-        && request.auth.uid == resource.data.toUid;
+        && (request.auth.uid == resource.data.toUid
+            || request.auth.uid == resource.data.fromUid);
       allow update: if request.auth != null
         && request.auth.uid == resource.data.toUid
         && resource.data.seen == false
         && request.resource.data.seen == true
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['seen']);
+      // Recipients clear their inbox; senders can remove what they sent
+      // (account deletion).
       allow delete: if request.auth != null
-        && request.auth.uid == resource.data.toUid;
+        && (request.auth.uid == resource.data.toUid
+            || request.auth.uid == resource.data.fromUid);
     }
 
     // Player reports: write-only for signed-in users, one per reporter and

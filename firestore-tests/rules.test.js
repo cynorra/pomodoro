@@ -126,7 +126,8 @@ describe('invite_codes', () => {
     await seed((db) => setDoc(doc(db, 'invite_codes/ABC234'), { ownerUid: 'a' }));
     await assertFails(setDoc(doc(as('b'), 'invite_codes/ABC234'), { ownerUid: 'b' }));
     await assertFails(updateDoc(doc(as('a'), 'invite_codes/ABC234'), { ownerUid: 'b' }));
-    await assertFails(deleteDoc(doc(as('a'), 'invite_codes/ABC234')));
+    await assertFails(deleteDoc(doc(as('b'), 'invite_codes/ABC234')));
+    await assertSucceeds(deleteDoc(doc(as('a'), 'invite_codes/ABC234'))); // owner, account deletion
   });
 });
 
@@ -193,10 +194,10 @@ describe('referrals', () => {
     await assertFails(updateDoc(doc(as('inviter'), 'referrals/friend'), { claimed: true })); // already claimed
     await assertFails(updateDoc(doc(as('inviter'), 'referrals/friend'), { claimed: false }));
   });
-  test('the invitee cannot claim for the inviter, nor delete anything', async () => {
+  test('the invitee cannot claim for the inviter; only the invitee can delete the record', async () => {
     await seedReferral();
     await assertFails(updateDoc(doc(as('friend'), 'referrals/friend'), { claimed: true }));
-    await assertFails(deleteDoc(doc(as('friend'), 'referrals/friend')));
     await assertFails(deleteDoc(doc(as('inviter'), 'referrals/friend')));
+    await assertSucceeds(deleteDoc(doc(as('friend'), 'referrals/friend'))); // invitee, account deletion
   });
 });

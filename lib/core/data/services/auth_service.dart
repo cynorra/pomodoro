@@ -178,19 +178,38 @@ class AuthService {
     }
   }
 
-  /// Removes the focus status and the treats sent to this account. Failures
-  /// here must not block deleting the account itself.
+  /// Removes everything social tied to this account: focus status, treats sent
+  /// to and from it, its invite code and its referral record. Each step is
+  /// independent and a failure must not block deleting the account itself.
   static Future<void> _deleteSocialData(String uid) async {
-    try {
-      await _firestore.collection('presence').doc(uid).delete();
-      final gifts = await _firestore
-          .collection('gifts')
-          .where('toUid', isEqualTo: uid)
+    Future<void> step(Future<void> Function() action) async {
+      try {
+        await action();
+      } catch (_) {}
+    }
+
+    await step(() => _firestore.collection('presence').doc(uid).delete());
+    for (final field in const ['toUid', 'fromUid']) {
+      await step(() async {
+        final gifts = await _firestore
+            .collection('gifts')
+            .where(field, isEqualTo: uid)
+            .get();
+        for (final gift in gifts.docs) {
+          await gift.reference.delete();
+        }
+      });
+    }
+    await step(() async {
+      final codes = await _firestore
+          .collection('invite_codes')
+          .where('ownerUid', isEqualTo: uid)
           .get();
-      for (final gift in gifts.docs) {
-        await gift.reference.delete();
+      for (final code in codes.docs) {
+        await code.reference.delete();
       }
-    } catch (_) {}
+    });
+    await step(() => _firestore.collection('referrals').doc(uid).delete());
   }
 
   static Future<AuthResult> sendPasswordReset(String email) async {

@@ -1,6 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/data/services/auth_service.dart';
 import 'auth_state.dart';
+import '../../../core/data/services/local_data_service.dart';
+import '../../../core/data/state/streak_notifier.dart';
+import '../../../core/data/state/user_notifier.dart';
+import '../../achievements/presentation/achievements_screen.dart';
+import '../../cafe/presentation/cafe_notifier.dart';
+import '../../social/presentation/social_providers.dart';
+import '../../stats/presentation/stats_provider.dart';
 
 final authProvider =
     NotifierProvider<AuthNotifier, AuthState>(AuthNotifier.new);
@@ -78,6 +85,14 @@ class AuthNotifier extends Notifier<AuthState> {
       reauthWithGoogle: reauthWithGoogle,
     );
     if (result.isSuccess) {
+      await LocalDataService.wipe();
+      ref.read(userProvider.notifier).reset();
+      ref.invalidate(streakProvider);
+      ref.invalidate(cafeItemsProvider);
+      ref.invalidate(achievementsProvider);
+      ref.invalidate(statsDataProvider);
+      ref.invalidate(focusStatusProvider);
+      ref.invalidate(hiddenSendersProvider);
       state = AuthState.unauthenticated();
     } else {
       state = AuthState.error(result.errorMessage ?? 'delete-failed');

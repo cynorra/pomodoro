@@ -107,6 +107,14 @@ class DatabaseService {
     }
   }
 
+  /// Deletes everything stored on the device (sessions, stats, badges, owned
+  /// cafe items) and restores the default cafe menu.
+  static Future<void> clearAllData() async {
+    await _isar.writeTxn(() => _isar.clear());
+    _seeded = false;
+    await _seedDefaultData();
+  }
+
   static Future<void> saveSession(StudySession session) async {
     await _isar.writeTxn(() async {
       await _isar.studySessions.put(session);

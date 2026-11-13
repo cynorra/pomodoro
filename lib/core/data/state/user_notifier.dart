@@ -18,6 +18,9 @@ class UserNotifier extends Notifier<UserState> {
   @override
   UserState build() => ref.watch(initialUserProvider);
 
+  /// Back to a fresh, empty profile (after the account and its data are gone).
+  void reset() => state = const UserState();
+
   Future<void> addPoints(int points) async {
     state = state.copyWith(totalPoints: state.totalPoints + points);
     await _persistStats(earned: points);

@@ -151,11 +151,13 @@ describe('gifts', () => {
       }),
     );
 
-  test('only the recipient reads their treats', async () => {
+  test('only the recipient and the sender read a treat', async () => {
     await seedGift();
     await assertSucceeds(getDoc(doc(as('sam'), `gifts/${id('mia', 'sam')}`)));
     await assertSucceeds(getDocs(query(collection(as('sam'), 'gifts'), where('toUid', '==', 'sam'))));
-    await assertFails(getDoc(doc(as('mia'), `gifts/${id('mia', 'sam')}`)));
+    await assertSucceeds(getDoc(doc(as('mia'), `gifts/${id('mia', 'sam')}`)));
+    await assertSucceeds(getDocs(query(collection(as('mia'), 'gifts'), where('fromUid', '==', 'mia'))));
+    await assertFails(getDocs(query(collection(as('eve'), 'gifts'), where('fromUid', '==', 'mia'))));
     await assertFails(getDoc(doc(as('eve'), `gifts/${id('mia', 'sam')}`)));
     await assertFails(getDocs(query(collection(as('eve'), 'gifts'), where('toUid', '==', 'sam'))));
     await assertFails(getDocs(collection(as('eve'), 'gifts')));
@@ -170,11 +172,12 @@ describe('gifts', () => {
     await assertFails(updateDoc(ref(), { seen: false }));
   });
 
-  test('the sender cannot edit or delete; the recipient can clear their inbox', async () => {
+  test('the sender cannot edit, but both sender and recipient can delete', async () => {
     await seedGift();
     await assertFails(updateDoc(doc(as('mia'), `gifts/${id('mia', 'sam')}`), { seen: true }));
-    await assertFails(deleteDoc(doc(as('mia'), `gifts/${id('mia', 'sam')}`)));
     await assertFails(deleteDoc(doc(as('eve'), `gifts/${id('mia', 'sam')}`)));
+    await assertSucceeds(deleteDoc(doc(as('mia'), `gifts/${id('mia', 'sam')}`))); // sender, account deletion
+    await seedGift();
     await assertSucceeds(deleteDoc(doc(as('sam'), `gifts/${id('mia', 'sam')}`)));
   });
 });
