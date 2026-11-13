@@ -273,5 +273,8 @@
   "analyticsConsentHelp": "Sorunları düzeltmemize yardımcı olur. Kapalıyken hiçbir şey gönderilmez.",
   "exportData": "Verilerimi dışa aktar",
   "exportDataHelp": "İlerlemenizin ve hesap bilgilerinizin bir kopyasını JSON dosyası olarak kaydeder.",
-  "exportDataFailed": "Verileriniz dışa aktarılamadı."
+  "exportDataFailed": "Verileriniz dışa aktarılamadı.",
+  "clearCache": "Önbelleği temizle",
+  "clearCacheHelp": "Paylaşım görselleri gibi geçici dosyaları siler. İlerlemeniz, puanlarınız ve ayarlarınız korunur.",
+  "cacheCleared": "Önbellek temizlendi."
 }

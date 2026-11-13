@@ -883,4 +883,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exportDataFailed => 'Could not export your data.';
+
+  @override
+  String get clearCache => 'Clear cache';
+
+  @override
+  String get clearCacheHelp =>
+      'Removes temporary files such as share images. Your progress, points and settings are kept.';
+
+  @override
+  String get cacheCleared => 'Cache cleared.';
 }

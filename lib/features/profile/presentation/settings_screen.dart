@@ -4,6 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/notification_service.dart';
 import '../../../core/data/services/privacy_consent_service.dart';
 import '../../../core/data/services/data_export_service.dart';
+import '../../../core/data/services/local_data_service.dart';
 import '../../social/presentation/social_providers.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/state/locale_notifier.dart';
@@ -66,6 +67,7 @@ class SettingsScreen extends ConsumerWidget {
             const _AnalyticsConsentTile(),
             const _AdPrivacyTile(),
             const _ExportDataTile(),
+            const _ClearCacheTile(),
           ],
         ),
       ),
@@ -371,6 +373,47 @@ class _ExportDataTile extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
             child: Text(
               l10n.exportDataHelp,
+              style: ZyraTypography.labelSmall.copyWith(
+                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Removes temporary files only; progress, points and settings are untouched.
+class _ClearCacheTile extends StatelessWidget {
+  const _ClearCacheTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SettingsTile(
+            icon: Icons.cleaning_services_outlined,
+            title: l10n.clearCache,
+            trailing: IconButton(
+              icon: const Icon(Icons.chevron_right_rounded),
+              onPressed: () async {
+                final messenger = ScaffoldMessenger.of(context);
+                await LocalDataService.clearCache();
+                messenger.showSnackBar(
+                  SnackBar(content: Text(l10n.cacheCleared)),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
+            child: Text(
+              l10n.clearCacheHelp,
               style: ZyraTypography.labelSmall.copyWith(
                 color: ZyraColors.onSurface.withValues(alpha: 0.6),
               ),

@@ -875,4 +875,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get exportDataFailed => 'Verileriniz dışa aktarılamadı.';
+
+  @override
+  String get clearCache => 'Önbelleği temizle';
+
+  @override
+  String get clearCacheHelp =>
+      'Paylaşım görselleri gibi geçici dosyaları siler. İlerlemeniz, puanlarınız ve ayarlarınız korunur.';
+
+  @override
+  String get cacheCleared => 'Önbellek temizlendi.';
 }

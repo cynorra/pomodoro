@@ -69,6 +69,9 @@ class DataExportService {
     final data = await buildExport();
     final dir = await getTemporaryDirectory();
     final file = File('${dir.path}/study-cafe-data.json');
+    // Sharing is asynchronous (the receiving app reads the file later), so the
+    // file is not deleted right away; it is replaced on the next export and
+    // removed by "Clear cache" and on account deletion.
     await file.writeAsString(const JsonEncoder.withIndent('  ').convert(data));
     await ShareService.shareGeneral(
       text: 'Study Cafe',

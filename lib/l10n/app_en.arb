@@ -441,5 +441,8 @@
   "analyticsConsentHelp": "Helps us fix problems. Off means nothing is sent.",
   "exportData": "Export my data",
   "exportDataHelp": "Saves a copy of your progress and account details as a JSON file.",
-  "exportDataFailed": "Could not export your data."
+  "exportDataFailed": "Could not export your data.",
+  "clearCache": "Clear cache",
+  "clearCacheHelp": "Removes temporary files such as share images. Your progress, points and settings are kept.",
+  "cacheCleared": "Cache cleared."
 }

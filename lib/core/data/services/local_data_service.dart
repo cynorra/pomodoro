@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../utils/global_exception_handler.dart';
 import '../database/database_service.dart';
 import 'audio_service.dart';
@@ -11,6 +13,31 @@ import 'privacy_consent_service.dart';
 class LocalDataService {
   static const _storage = FlutterSecureStorage();
   static const _keepKeys = ['onboarding_completed', 'selected_locale'];
+
+  /// Deletes temporary files (share cards, data exports, plugin caches).
+  /// Never touches the database or saved settings. Returns how many top-level
+  /// entries were removed.
+  static Future<int> clearCache({Iterable<Directory>? dirs}) async {
+    var removed = 0;
+    try {
+      dirs ??= <Directory>{
+        await getTemporaryDirectory(),
+        await getApplicationCacheDirectory(),
+      };
+      for (final dir in dirs) {
+        if (!await dir.exists()) continue;
+        await for (final entity in dir.list()) {
+          try {
+            await entity.delete(recursive: true);
+            removed++;
+          } catch (_) {}
+        }
+      }
+    } catch (e, stack) {
+      GlobalExceptionHandler.logError(e, stack, 'Clear cache failed');
+    }
+    return removed;
+  }
 
   static Future<void> wipe() async {
     try {
@@ -31,6 +58,8 @@ class LocalDataService {
     } catch (e, stack) {
       GlobalExceptionHandler.logError(e, stack, 'Secure storage wipe failed');
     }
+
+    await clearCache();
 
     // The stored consent is gone, so stop collecting until it is given again.
     await PrivacyConsentService.apply(false);

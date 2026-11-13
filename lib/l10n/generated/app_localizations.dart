@@ -1681,6 +1681,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not export your data.'**
   String get exportDataFailed;
+
+  /// No description provided for @clearCache.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear cache'**
+  String get clearCache;
+
+  /// No description provided for @clearCacheHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes temporary files such as share images. Your progress, points and settings are kept.'**
+  String get clearCacheHelp;
+
+  /// No description provided for @cacheCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'Cache cleared.'**
+  String get cacheCleared;
 }
 
 class _AppLocalizationsDelegate
