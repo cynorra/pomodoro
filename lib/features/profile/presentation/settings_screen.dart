@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/notification_service.dart';
+import '../../../core/data/services/reminder_service.dart';
 import '../../../core/data/services/privacy_consent_service.dart';
 import '../../../core/data/services/data_export_service.dart';
 import '../../../core/data/services/local_data_service.dart';
@@ -63,6 +64,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
             ),
             const _NotificationsTile(),
+            const _ReminderTile(),
             const _FocusStatusTile(),
             const _AnalyticsConsentTile(),
             const _AdPrivacyTile(),
@@ -203,6 +205,95 @@ class _NotificationsTileState extends State<_NotificationsTile> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Daily study reminder: an on/off switch and the time of day. Planned by
+/// [ReminderService]; it stays quiet on days the user already studied.
+class _ReminderTile extends StatefulWidget {
+  const _ReminderTile();
+
+  @override
+  State<_ReminderTile> createState() => _ReminderTileState();
+}
+
+class _ReminderTileState extends State<_ReminderTile> {
+  ReminderSettings? _settings;
+
+  @override
+  void initState() {
+    super.initState();
+    ReminderService.load().then((s) {
+      if (mounted) setState(() => _settings = s);
+    });
+  }
+
+  Future<void> _save(ReminderSettings next) async {
+    setState(() => _settings = next);
+    if (next.enabled) await NotificationService.requestPermissionIfNeeded();
+    await ReminderService.save(next);
+  }
+
+  Future<void> _pickTime(ReminderSettings current) async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: current.hour, minute: current.minute),
+    );
+    if (picked == null) return;
+    await _save(ReminderSettings(
+      enabled: true,
+      hour: picked.hour,
+      minute: picked.minute,
+    ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final current = _settings ?? const ReminderSettings();
+    final time = MaterialLocalizations.of(context).formatTimeOfDay(
+      TimeOfDay(hour: current.hour, minute: current.minute),
+    );
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SettingsTile(
+            icon: Icons.alarm_rounded,
+            title: l10n.reminderTitle,
+            trailing: Switch(
+              value: current.enabled,
+              onChanged: _settings == null
+                  ? null
+                  : (value) => _save(ReminderSettings(
+                        enabled: value,
+                        hour: current.hour,
+                        minute: current.minute,
+                      )),
+            ),
+          ),
+          if (current.enabled)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => _pickTime(current),
+                icon: const Icon(Icons.schedule_rounded, size: 18),
+                label: Text(l10n.reminderAt(time)),
+              ),
+            ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
+            child: Text(
+              l10n.reminderHelp,
+              style: ZyraTypography.labelSmall.copyWith(
+                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

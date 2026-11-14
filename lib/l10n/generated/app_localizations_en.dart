@@ -893,4 +893,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cacheCleared => 'Cache cleared.';
+
+  @override
+  String cafeBalance(int points) {
+    return 'Your balance: $points points';
+  }
+
+  @override
+  String cafeBoostDesc(String boost, int sessions) {
+    return 'Earn $boost points for your next $sessions focus sessions.';
+  }
+
+  @override
+  String get cafeShieldDesc =>
+      'Covers a missed day so your streak does not break. Used automatically.';
+
+  @override
+  String cafeOwned(int count) {
+    return 'Owned: $count';
+  }
+
+  @override
+  String cafeBuy(int cost) {
+    return 'Buy · $cost points';
+  }
+
+  @override
+  String get cafeUse => 'Use now';
+
+  @override
+  String cafeBoostStarted(String boost, int sessions) {
+    return 'Boost on! $boost points for your next $sessions focus sessions.';
+  }
+
+  @override
+  String get cafeBoostBusy =>
+      'A boost is already running. Use the next one when it ends.';
+
+  @override
+  String cafeBoostBanner(String boost, int sessions) {
+    return '$boost points · $sessions focus sessions left';
+  }
+
+  @override
+  String cafeShieldBanner(int count) {
+    return 'Streak shields: $count';
+  }
+
+  @override
+  String peopleFocusing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people are focusing right now',
+      one: '1 person is focusing right now',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sessionRewardPlain(int points) {
+    return '+$points points earned!';
+  }
+
+  @override
+  String sessionRewardBoost(int points, String boost) {
+    return '+$points points earned ($boost boost)!';
+  }
+
+  @override
+  String get reminderTitle => 'Daily study reminder';
+
+  @override
+  String get reminderHelp =>
+      'A friendly nudge at the time you choose. It is skipped on days you already studied.';
+
+  @override
+  String reminderAt(String time) {
+    return 'Reminder at $time';
+  }
 }

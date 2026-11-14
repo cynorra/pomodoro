@@ -3,6 +3,8 @@ import 'dart:io' show Platform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
+import 'notification_texts.dart';
+import 'reminder_rules.dart';
 
 class NotificationService {
   static const _accent = Color(0xFFD4AF37);
@@ -170,6 +172,115 @@ class NotificationService {
       notificationDetails: notificationDetails,
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
     );
+  }
+
+  static const _timerId = 3;
+  static const _reminderBaseId = 100;
+
+  /// Shows the running timer in the notification shade. The system counts the
+  /// time down itself (chronometer), so it stays correct with the app closed,
+  /// and the notification removes itself when the session ends.
+  static Future<void> showTimerRunning({
+    required String title,
+    required String body,
+    required DateTime endsAt,
+    required String channelName,
+  }) async {
+    try {
+      await initialize();
+      if (!await _isPermitted()) return;
+      final remaining = endsAt.difference(DateTime.now());
+      if (remaining <= Duration.zero) return;
+      await _plugin.show(
+        id: _timerId,
+        title: title,
+        body: body,
+        notificationDetails: NotificationDetails(
+          android: AndroidNotificationDetails(
+            'timer_channel',
+            channelName,
+            importance: Importance.low,
+            priority: Priority.low,
+            ongoing: true,
+            autoCancel: false,
+            onlyAlertOnce: true,
+            playSound: false,
+            enableVibration: false,
+            showWhen: true,
+            when: endsAt.millisecondsSinceEpoch,
+            usesChronometer: true,
+            chronometerCountDown: true,
+            timeoutAfter: remaining.inMilliseconds,
+            category: AndroidNotificationCategory.progress,
+            color: _accent,
+            icon: '@drawable/ic_stat_notification',
+          ),
+        ),
+      );
+    } catch (_) {}
+  }
+
+  static Future<void> cancelTimerRunning() async {
+    try {
+      await _plugin.cancel(id: _timerId);
+    } catch (_) {}
+  }
+
+  /// Schedules one study reminder per day for the next two weeks (a different
+  /// message each day), replacing earlier ones. Does nothing without the
+  /// notification permission.
+  static Future<void> scheduleDailyReminders({
+    required int hour,
+    required int minute,
+    required bool studiedToday,
+  }) async {
+    try {
+      await initialize();
+      await cancelDailyReminders();
+      if (!await _isPermitted()) return;
+      final texts = await NotificationTexts.load();
+      final times = reminderTimes(
+        now: DateTime.now(),
+        hour: hour,
+        minute: minute,
+        studiedToday: studiedToday,
+      );
+      for (var i = 0; i < times.length; i++) {
+        final at = times[i];
+        // Rotate the message by calendar day so it differs from day to day.
+        final dayNumber = DateTime.utc(at.year, at.month, at.day)
+            .difference(DateTime.utc(2024))
+            .inDays;
+        await _plugin.zonedSchedule(
+          id: _reminderBaseId + i,
+          title: 'Study Cafe',
+          body: texts.reminder(dayNumber),
+          // The exact instant is what matters, so it is built from UTC and
+          // does not depend on the time zone database being set up.
+          scheduledDate: tz.TZDateTime.from(at.toUtc(), tz.UTC),
+          notificationDetails: NotificationDetails(
+            android: AndroidNotificationDetails(
+              'reminder_channel',
+              texts.channelReminder,
+              importance: Importance.defaultImportance,
+              priority: Priority.defaultPriority,
+              color: _accent,
+              icon: '@drawable/ic_stat_notification',
+            ),
+            iOS: const DarwinNotificationDetails(),
+          ),
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        );
+      }
+    } catch (_) {}
+  }
+
+  static Future<void> cancelDailyReminders() async {
+    try {
+      for (var i = 0; i < reminderDaysAhead; i++) {
+        await _plugin.cancel(id: _reminderBaseId + i);
+      }
+    } catch (_) {}
   }
 
   static const _sessionEndId = 2;

@@ -1699,6 +1699,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cache cleared.'**
   String get cacheCleared;
+
+  /// No description provided for @cafeBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Your balance: {points} points'**
+  String cafeBalance(int points);
+
+  /// No description provided for @cafeBoostDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn {boost} points for your next {sessions} focus sessions.'**
+  String cafeBoostDesc(String boost, int sessions);
+
+  /// No description provided for @cafeShieldDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Covers a missed day so your streak does not break. Used automatically.'**
+  String get cafeShieldDesc;
+
+  /// No description provided for @cafeOwned.
+  ///
+  /// In en, this message translates to:
+  /// **'Owned: {count}'**
+  String cafeOwned(int count);
+
+  /// No description provided for @cafeBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy · {cost} points'**
+  String cafeBuy(int cost);
+
+  /// No description provided for @cafeUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Use now'**
+  String get cafeUse;
+
+  /// No description provided for @cafeBoostStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Boost on! {boost} points for your next {sessions} focus sessions.'**
+  String cafeBoostStarted(String boost, int sessions);
+
+  /// No description provided for @cafeBoostBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'A boost is already running. Use the next one when it ends.'**
+  String get cafeBoostBusy;
+
+  /// No description provided for @cafeBoostBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'{boost} points · {sessions} focus sessions left'**
+  String cafeBoostBanner(String boost, int sessions);
+
+  /// No description provided for @cafeShieldBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak shields: {count}'**
+  String cafeShieldBanner(int count);
+
+  /// No description provided for @peopleFocusing.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 person is focusing right now} other{{count} people are focusing right now}}'**
+  String peopleFocusing(int count);
+
+  /// No description provided for @sessionRewardPlain.
+  ///
+  /// In en, this message translates to:
+  /// **'+{points} points earned!'**
+  String sessionRewardPlain(int points);
+
+  /// No description provided for @sessionRewardBoost.
+  ///
+  /// In en, this message translates to:
+  /// **'+{points} points earned ({boost} boost)!'**
+  String sessionRewardBoost(int points, String boost);
+
+  /// No description provided for @reminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily study reminder'**
+  String get reminderTitle;
+
+  /// No description provided for @reminderHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'A friendly nudge at the time you choose. It is skipped on days you already studied.'**
+  String get reminderHelp;
+
+  /// No description provided for @reminderAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder at {time}'**
+  String reminderAt(String time);
 }
 
 class _AppLocalizationsDelegate

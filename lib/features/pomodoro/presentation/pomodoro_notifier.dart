@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/data/database/database_service.dart';
 import '../../../core/data/models/study_session.dart';
-import '../../../core/data/state/locale_notifier.dart';
 import '../../../core/data/state/user_notifier.dart';
-import '../../../l10n/generated/app_localizations.dart';
 import '../../../core/data/state/streak_notifier.dart';
 import '../../../core/data/services/streak_service.dart';
 import '../../../core/data/services/achievement_service.dart';
@@ -15,8 +13,12 @@ import '../../../core/data/services/remote_config_service.dart';
 import '../../../core/data/state/achievement_event_notifier.dart';
 import '../../../core/data/services/haptic_service.dart';
 import '../../../core/data/services/notification_service.dart';
+import '../../../core/data/services/notification_texts.dart';
+import '../../../core/data/services/reminder_service.dart';
 import '../../../core/utils/global_exception_handler.dart';
 import '../../social/presentation/social_providers.dart';
+import '../../cafe/domain/cafe_rules.dart';
+import '../../cafe/presentation/boost_notifier.dart';
 import '../domain/pomodoro_rules.dart';
 import '../domain/pomodoro_state.dart';
 
@@ -65,6 +67,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       _timer = null;
     } else if (lifecycle == AppLifecycleState.resumed) {
       _checkDailyReset();
+      unawaited(ReminderService.refresh());
 
       final deadline = _deadline;
       if (!state.isRunning || deadline == null || _isCompletingSession) {
@@ -86,13 +89,24 @@ class PomodoroNotifier extends Notifier<PomodoroState>
   int _secondsLeft(DateTime deadline) =>
       (deadline.difference(DateTime.now()).inMilliseconds + 999) ~/ 1000;
 
-  void _scheduleEndNotification() {
-    final l10n = lookupAppLocalizations(ref.read(localeProvider));
+  /// Shows the countdown in the notification shade and plans the end alert,
+  /// in the user's language (see [NotificationTexts]).
+  Future<void> _scheduleEndNotification() async {
+    final texts = await NotificationTexts.load();
+    // The timer may have been paused while the language was being read.
+    if (!state.isRunning) return;
     final isFocus = state.sessionType == SessionType.focus;
+    final remaining = Duration(seconds: state.remainingSeconds);
     unawaited(NotificationService.scheduleSessionEnd(
-      delay: Duration(seconds: state.remainingSeconds),
+      delay: remaining,
       title: 'Study Cafe',
-      body: isFocus ? l10n.notifFocusDone : l10n.notifBreakDone,
+      body: isFocus ? texts.focusDone : texts.breakDone,
+    ));
+    unawaited(NotificationService.showTimerRunning(
+      title: isFocus ? texts.timerFocus : texts.timerBreak,
+      body: texts.runningBody(_getDuration(state.sessionType)),
+      endsAt: DateTime.now().add(remaining),
+      channelName: texts.channelTimer,
     ));
   }
 
@@ -104,6 +118,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       _timer = null;
       _deadline = null;
       unawaited(NotificationService.cancelSessionEnd());
+      unawaited(NotificationService.cancelTimerRunning());
       _clearPresence();
       state = state.copyWith(isRunning: false);
     } else {
@@ -112,8 +127,12 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       _startTimer();
       _publishPresence();
       unawaited(
-        NotificationService.requestPermissionIfNeeded()
-            .then((_) => state.isRunning ? _scheduleEndNotification() : null),
+        NotificationService.requestPermissionIfNeeded().then((_) {
+          if (!state.isRunning) return null;
+          // The permission may have just been granted: plan the reminders too.
+          unawaited(ReminderService.refresh());
+          return _scheduleEndNotification();
+        }),
       );
     }
   }
@@ -136,6 +155,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
     _timer = null;
     _deadline = null;
     unawaited(NotificationService.cancelSessionEnd());
+    unawaited(NotificationService.cancelTimerRunning());
     _clearPresence();
     state = state.copyWith(
       isRunning: false,
@@ -176,13 +196,17 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       _deadline = null;
 
       unawaited(NotificationService.cancelSessionEnd());
+      unawaited(NotificationService.cancelTimerRunning());
       _clearPresence();
       _checkDailyReset();
 
       final isFocus = state.sessionType == SessionType.focus;
-      final pointsEarned = isFocus
+      final basePoints = isFocus
           ? RemoteConfigService.pointsPerFocus
           : RemoteConfigService.pointsPerBreak;
+      // A cafe boost multiplies the points of focus sessions only.
+      final boost = isFocus ? ref.read(activeBoostProvider) : null;
+      final pointsEarned = boostedPoints(basePoints, boost);
       final minutesStudied = isFocus
           ? RemoteConfigService.focusDuration
           : (state.sessionType == SessionType.shortBreak
@@ -202,6 +226,10 @@ class PomodoroNotifier extends Notifier<PomodoroState>
       await ref.read(userProvider.notifier).addPoints(pointsEarned);
       if (isFocus) {
         await ref.read(userProvider.notifier).addStudyMinutes(minutesStudied);
+      }
+
+      if (boost != null) {
+        await ref.read(activeBoostProvider.notifier).sessionUsed();
       }
 
       if (isFocus) {
@@ -236,7 +264,14 @@ class PomodoroNotifier extends Notifier<PomodoroState>
         isRunning: false,
         remainingSeconds: nextDuration * 60,
         sessionType: nextSessionType,
+        lastReward: SessionReward(
+          id: (state.lastReward?.id ?? 0) + 1,
+          points: pointsEarned,
+          boostPercent: boost?.percent ?? 0,
+          wasFocus: isFocus,
+        ),
       );
+      unawaited(ReminderService.refresh());
     } catch (e, stack) {
       GlobalExceptionHandler.logError(
         e,

@@ -11,6 +11,7 @@ import 'core/data/services/privacy_consent_service.dart';
 import 'features/onboarding/presentation/consent_screen.dart';
 import 'core/data/services/remote_config_service.dart';
 import 'core/data/services/notification_service.dart';
+import 'core/data/services/reminder_service.dart';
 import 'core/data/services/audio_service.dart';
 import 'core/data/services/achievement_service.dart';
 import 'core/data/services/ad_service.dart';
@@ -47,7 +48,8 @@ void main() async {
         onTimeout: () {},
       ),
     );
-    unawaited(NotificationService.initialize());
+    unawaited(NotificationService.initialize()
+        .then((_) => ReminderService.refresh()));
     unawaited(AchievementService.seedDefaultAchievements());
     unawaited(AnalyticsService.logAppOpen());
 

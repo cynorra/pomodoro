@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/glass_card.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../cafe/domain/cafe_rules.dart';
 import '../domain/pomodoro_state.dart';
 import 'pomodoro_notifier.dart';
 
@@ -14,6 +15,27 @@ class PomodoroWidget extends ConsumerWidget {
     final state = ref.watch(pomodoroProvider);
     final notifier = ref.read(pomodoroProvider.notifier);
     final l10n = AppLocalizations.of(context);
+
+    // Tell the user what the session they just finished paid out.
+    ref.listen<SessionReward?>(
+      pomodoroProvider.select((s) => s.lastReward),
+      (previous, reward) {
+        if (reward == null || reward.id == previous?.id) return;
+        if (!reward.wasFocus || reward.points <= 0) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              reward.boostPercent > 0
+                  ? l10n.sessionRewardBoost(
+                      reward.points, boostLabel(reward.boostPercent))
+                  : l10n.sessionRewardPlain(reward.points),
+            ),
+            backgroundColor: Colors.green.shade800,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      },
+    );
 
     String sessionLabel;
     switch (state.sessionType) {

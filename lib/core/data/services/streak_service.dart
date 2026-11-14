@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:isar_community/isar.dart';
 import '../database/database_service.dart';
+import '../models/cafe_item.dart';
 import '../models/user_stats.dart';
+import '../../../features/cafe/domain/cafe_rules.dart';
 import '../../../features/pomodoro/domain/pomodoro_rules.dart';
 import '../../utils/global_exception_handler.dart';
 
@@ -47,7 +49,22 @@ class StreakService {
 
         if (diff == 0) return;
 
-        stats.currentStreak = diff == 1 ? stats.currentStreak + 1 : 1;
+        // A streak shield in the cafe inventory covers each missed day.
+        final shield = await DatabaseService.instance.cafeItems
+            .filter()
+            .itemIdEqualTo(streakShieldId)
+            .findFirst();
+        final result = streakAfterSession(
+          storedStreak: stats.currentStreak,
+          daysSinceLast: diff,
+          shields: shield?.quantity ?? 0,
+        );
+        if (shield != null && result.shieldsUsed > 0) {
+          shield.quantity -= result.shieldsUsed;
+          shield.isOwned = shield.quantity > 0;
+          await DatabaseService.instance.cafeItems.put(shield);
+        }
+        stats.currentStreak = result.streak;
         stats.longestStreak = max(stats.longestStreak, stats.currentStreak);
         stats.lastStudyDate = nowUtc;
         stats.isUtcMigrated = true;
@@ -76,6 +93,7 @@ class StreakService {
                 storedStreak: stats.currentStreak,
                 lastStudy: stats.lastStudyDate,
                 now: DateTime.now(),
+                shields: await DatabaseService.itemQuantity(streakShieldId),
               ),
         'longestStreak': stats?.longestStreak ?? 0,
       }, SetOptions(merge: true));
@@ -92,6 +110,7 @@ class StreakService {
         storedStreak: stats.currentStreak,
         lastStudy: stats.lastStudyDate,
         now: DateTime.now(),
+        shields: await DatabaseService.itemQuantity(streakShieldId),
       );
     } catch (_) {
       return 0;

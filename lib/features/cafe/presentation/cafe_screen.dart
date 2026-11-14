@@ -1,16 +1,13 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/ui/zyra_theme.dart';
-import '../../../core/data/models/cafe_item.dart';
-import '../../../core/data/state/user_notifier.dart';
 import '../../../core/data/services/audio_service.dart';
-import '../../../core/data/services/cafe_purchase_service.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../monetization/presentation/native_ad_card.dart';
 import '../../monetization/presentation/rewarded_ad_button.dart';
 import '../../social/presentation/send_treat_sheet.dart';
+import 'cafe_item_widgets.dart';
 import 'cafe_notifier.dart';
 
 class VirtualCafeScreen extends ConsumerStatefulWidget {
@@ -68,9 +65,10 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
         data: (items) => CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
+            const SliverToBoxAdapter(child: CafeStatus()),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: const RewardedAdButton(),
               ),
             ),
@@ -96,7 +94,7 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     final item = items[index];
-                    return _CafeItemCard(item: item);
+                    return CafeItemCard(item: item);
                   },
                   childCount: items.length,
                 ),
@@ -236,170 +234,6 @@ class _VirtualCafeScreenState extends ConsumerState<VirtualCafeScreen> {
         );
       }
     }
-  }
-}
-
-class _CafeItemCard extends ConsumerStatefulWidget {
-  final CafeItem item;
-  const _CafeItemCard({required this.item});
-
-  @override
-  ConsumerState<_CafeItemCard> createState() => _CafeItemCardState();
-}
-
-class _CafeItemCardState extends ConsumerState<_CafeItemCard> {
-  bool _isPressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final isTr = l10n.localeName == 'tr';
-    final name = isTr ? widget.item.nameTr : widget.item.nameEn;
-
-    return Semantics(
-      button: true,
-      label: l10n.buyItem(name, widget.item.cost),
-      child: GestureDetector(
-        onTapDown: (_) => setState(() => _isPressed = true),
-        onTapUp: (_) async {
-          if (!mounted) return;
-          setState(() => _isPressed = false);
-
-          if (widget.item.isOwned) {
-            return;
-          }
-
-          final userState = ref.read(userProvider);
-          final messenger = ScaffoldMessenger.of(context);
-          final result = await CafePurchaseService.purchase(
-            itemId: widget.item.itemId,
-            userPoints: userState.totalPoints,
-            ref: ref,
-          );
-
-          if (!mounted) return;
-
-          // The list holds copies of the stored items; reload it so the card
-          // shows the new owned state.
-          if (result == PurchaseResult.success ||
-              result == PurchaseResult.alreadyOwned) {
-            ref.invalidate(cafeItemsProvider);
-          }
-
-          if (result == PurchaseResult.insufficientPoints) {
-            messenger.showSnackBar(
-              SnackBar(
-                content: Text(
-                  l10n.insufficientPoints,
-                ),
-                backgroundColor: Colors.red.shade900,
-                behavior: SnackBarBehavior.floating,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            );
-          } else if (result == PurchaseResult.success) {
-            messenger.showSnackBar(
-              SnackBar(
-                content: Text(
-                  l10n.purchaseSuccess,
-                ),
-                backgroundColor: Colors.green.shade900,
-                behavior: SnackBarBehavior.floating,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            );
-          }
-        },
-        onTapCancel: () => setState(() => _isPressed = false),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeOutCubic,
-          transform: Matrix4.diagonal3Values(
-            _isPressed ? 0.95 : 1.0,
-            _isPressed ? 0.95 : 1.0,
-            1.0,
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              color: ZyraColors.surface.withValues(alpha: 0.7),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: widget.item.isOwned
-                    ? ZyraColors.primary.withValues(alpha: 0.5)
-                    : ZyraColors.secondary.withValues(alpha: 0.3),
-                width: 1.5,
-              ),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  // Scale the content down to whatever the grid cell offers, so the
-                  // card never overflows on narrow phones or with large system fonts.
-                  child: Center(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            height: 60,
-                            child: Text(
-                              widget.item.iconCode,
-                              style: const TextStyle(fontSize: 48),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            name,
-                            style: ZyraTypography.titleMedium.copyWith(
-                              color: ZyraColors.onSurface,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: ZyraColors.primary.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              '${widget.item.cost} ${l10n.points}',
-                              style: ZyraTypography.labelLarge.copyWith(
-                                color: ZyraColors.primary,
-                              ),
-                            ),
-                          ),
-                          if (widget.item.isOwned) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              '${l10n.inventory}: ${widget.item.quantity}',
-                              style: ZyraTypography.labelSmall.copyWith(
-                                color: ZyraColors.secondary,
-                              ),
-                            ),
-                          ]
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
 

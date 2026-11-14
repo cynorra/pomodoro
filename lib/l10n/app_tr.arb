@@ -276,5 +276,21 @@
   "exportDataFailed": "Verileriniz dışa aktarılamadı.",
   "clearCache": "Önbelleği temizle",
   "clearCacheHelp": "Paylaşım görselleri gibi geçici dosyaları siler. İlerlemeniz, puanlarınız ve ayarlarınız korunur.",
-  "cacheCleared": "Önbellek temizlendi."
+  "cacheCleared": "Önbellek temizlendi.",
+  "cafeBalance": "Bakiyen: {points} puan",
+  "cafeBoostDesc": "Sonraki {sessions} odak seansında {boost} puan kazan.",
+  "cafeShieldDesc": "Kaçırdığın bir günü kapatır, serin bozulmaz. Otomatik kullanılır.",
+  "cafeOwned": "Sahip olduğun: {count}",
+  "cafeBuy": "Satın al · {cost} puan",
+  "cafeUse": "Şimdi kullan",
+  "cafeBoostStarted": "Güçlendirme açık! Sonraki {sessions} odak seansında {boost} puan.",
+  "cafeBoostBusy": "Zaten bir güçlendirme çalışıyor. Bitince bir sonrakini kullanabilirsin.",
+  "cafeBoostBanner": "{boost} puan · {sessions} odak seansı kaldı",
+  "cafeShieldBanner": "Seri kalkanı: {count}",
+  "peopleFocusing": "{count, plural, =1{Şu an 1 kişi odaklanıyor} other{Şu an {count} kişi odaklanıyor}}",
+  "sessionRewardPlain": "+{points} puan kazandın!",
+  "sessionRewardBoost": "+{points} puan kazandın ({boost} güçlendirme)!",
+  "reminderTitle": "Günlük çalışma hatırlatıcısı",
+  "reminderHelp": "Seçtiğin saatte nazik bir hatırlatma. O gün zaten çalıştıysan gönderilmez.",
+  "reminderAt": "Hatırlatma saati: {time}"
 }

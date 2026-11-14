@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../utils/global_exception_handler.dart';
+import 'remote_config_service.dart';
 
 class AdService {
   static const _focusSessionsPerInterstitial = 3;
@@ -83,7 +84,9 @@ class AdService {
       _isInitialized = true;
       _finishReady(true);
       unawaited(_loadInterstitialAd());
-      if (_hasRewardedAdUnit) await _loadRewardedAd();
+      if (_hasRewardedAdUnit && RemoteConfigService.enableRewardedAds) {
+        await _loadRewardedAd();
+      }
     } catch (e, stack) {
       _finishReady(false);
       GlobalExceptionHandler.logError(e, stack, 'AdMob init failed');

@@ -48,6 +48,12 @@ final _cafeItems = [
       nameEn: 'Cheesecake',
       cost: 100,
       iconCode: '🍰'),
+  CafeItem(
+      itemId: 'streak_shield',
+      nameTr: 'Kruvasan',
+      nameEn: 'Croissant',
+      cost: 60,
+      iconCode: '🥐'),
 ];
 
 final _achievements = [
@@ -153,11 +159,12 @@ void main() {
     expect(find.text('3'), findsWidgets);
   });
 
-  testWidgets('cafe lists exactly the three treats', (tester) async {
+  testWidgets('cafe lists the menu', (tester) async {
     await _pump(tester, const VirtualCafeScreen(),
         locale: const Locale('en'), size: const Size(390, 844));
     expect(find.text('Espresso'), findsOneWidget);
     expect(find.text('Green Tea'), findsOneWidget);
     expect(find.text('Cheesecake'), findsOneWidget);
+    expect(find.text('Croissant'), findsOneWidget);
   });
 }

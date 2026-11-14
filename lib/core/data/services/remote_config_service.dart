@@ -18,10 +18,13 @@ class RemoteConfigService {
         'pomodoro_focus_duration': 25,
         'pomodoro_short_break_duration': 5,
         'pomodoro_long_break_duration': 15,
-        'points_per_focus_session': 10,
+        'points_per_focus_session': 20,
         'points_per_break_session': 2,
         'enable_ambient_sounds': true,
         'show_motivation_messages': true,
+        // Off until there is an audience worth showing (see the cafe screen).
+        'enable_rewarded_ads': false,
+        'show_active_users': false,
       });
 
       await _remoteConfig.fetchAndActivate();
@@ -52,7 +55,7 @@ class RemoteConfigService {
         _remoteConfig.getInt('points_per_focus_session'),
         min: 0,
         max: 1000,
-        fallback: 10,
+        fallback: 20,
       );
   static int get pointsPerBreak => clampConfig(
         _remoteConfig.getInt('points_per_break_session'),
@@ -62,6 +65,23 @@ class RemoteConfigService {
       );
   static bool get enableAmbientSounds =>
       _remoteConfig.getBool('enable_ambient_sounds');
+  /// "Watch an ad, earn points". Off by default; flip it in Remote Config.
+  static bool get enableRewardedAds => _flag('enable_rewarded_ads');
+
+  /// Shows how many people are focusing right now on the cafe screen. Off by
+  /// default, because a count of 0 would only look bad while the app is new.
+  static bool get showActiveUsers => _flag('show_active_users');
+
+  /// Reads a feature flag; anything that goes wrong (Remote Config not ready,
+  /// not set up in tests) counts as "off".
+  static bool _flag(String key) {
+    try {
+      return _remoteConfig.getBool(key);
+    } catch (_) {
+      return false;
+    }
+  }
+
   static bool get showMotivationMessages =>
       _remoteConfig.getBool('show_motivation_messages');
 }

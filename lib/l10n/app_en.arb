@@ -444,5 +444,110 @@
   "exportDataFailed": "Could not export your data.",
   "clearCache": "Clear cache",
   "clearCacheHelp": "Removes temporary files such as share images. Your progress, points and settings are kept.",
-  "cacheCleared": "Cache cleared."
+  "cacheCleared": "Cache cleared.",
+  "cafeBalance": "Your balance: {points} points",
+  "@cafeBalance": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "cafeBoostDesc": "Earn {boost} points for your next {sessions} focus sessions.",
+  "@cafeBoostDesc": {
+    "placeholders": {
+      "boost": {
+        "type": "String"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "cafeShieldDesc": "Covers a missed day so your streak does not break. Used automatically.",
+  "cafeOwned": "Owned: {count}",
+  "@cafeOwned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cafeBuy": "Buy · {cost} points",
+  "@cafeBuy": {
+    "placeholders": {
+      "cost": {
+        "type": "int"
+      }
+    }
+  },
+  "cafeUse": "Use now",
+  "cafeBoostStarted": "Boost on! {boost} points for your next {sessions} focus sessions.",
+  "@cafeBoostStarted": {
+    "placeholders": {
+      "boost": {
+        "type": "String"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "cafeBoostBusy": "A boost is already running. Use the next one when it ends.",
+  "cafeBoostBanner": "{boost} points · {sessions} focus sessions left",
+  "@cafeBoostBanner": {
+    "placeholders": {
+      "boost": {
+        "type": "String"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "cafeShieldBanner": "Streak shields: {count}",
+  "@cafeShieldBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "peopleFocusing": "{count, plural, =1{1 person is focusing right now} other{{count} people are focusing right now}}",
+  "@peopleFocusing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionRewardPlain": "+{points} points earned!",
+  "@sessionRewardPlain": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionRewardBoost": "+{points} points earned ({boost} boost)!",
+  "@sessionRewardBoost": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      },
+      "boost": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderTitle": "Daily study reminder",
+  "reminderHelp": "A friendly nudge at the time you choose. It is skipped on days you already studied.",
+  "reminderAt": "Reminder at {time}",
+  "@reminderAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

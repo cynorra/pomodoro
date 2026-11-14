@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/services/ad_service.dart';
+import '../../../core/data/services/remote_config_service.dart';
 import '../../../core/data/state/user_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../l10n/l10n_extension.dart';
@@ -11,7 +12,9 @@ class RewardedAdButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (!AdService.hasRewardedAdUnit) return const SizedBox.shrink();
+    if (!AdService.hasRewardedAdUnit || !RemoteConfigService.enableRewardedAds) {
+      return const SizedBox.shrink();
+    }
     return ValueListenableBuilder<bool>(
       valueListenable: AdService.rewardedReady,
       builder: (context, isReady, _) => _buildButton(context, ref, isReady),

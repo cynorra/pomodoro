@@ -1,3 +1,4 @@
+import '../../cafe/domain/cafe_rules.dart';
 import 'pomodoro_state.dart';
 
 /// Pure rules behind the timer, streaks and bonuses. Kept free of Firebase,
@@ -26,15 +27,22 @@ int calendarDaysBetween(DateTime from, DateTime to) {
 
 /// The streak to show: the stored value while it is still alive (studied today
 /// or yesterday), otherwise 0, because a missed day has already broken it.
+///
+/// [shields] are streak shields in the cafe inventory; each one covers a
+/// missed day, so the streak stays alive while enough of them are left.
 int effectiveStreak({
   required int storedStreak,
   required DateTime? lastStudy,
   required DateTime now,
+  int shields = 0,
 }) {
   if (storedStreak <= 0) return 0;
   if (lastStudy == null) return storedStreak;
   final last = lastStudy.isUtc ? lastStudy.toLocal() : lastStudy;
-  return calendarDaysBetween(last, now) <= 1 ? storedStreak : 0;
+  return streakAlive(
+          daysSinceLast: calendarDaysBetween(last, now), shields: shields)
+      ? storedStreak
+      : 0;
 }
 
 /// Keeps a remotely configured number inside a sane range.

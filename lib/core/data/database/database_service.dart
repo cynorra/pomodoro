@@ -3,6 +3,7 @@ import 'package:isar_community/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import '../models/study_session.dart';
 import '../models/cafe_item.dart';
+import '../../../features/cafe/domain/cafe_rules.dart';
 import '../models/user_stats.dart';
 import '../models/achievement.dart';
 import '../../utils/global_exception_handler.dart';
@@ -76,35 +77,33 @@ class DatabaseService {
     await _seedDefaultCafeItems();
   }
 
+  /// Keeps the stored menu in line with [cafeCatalog]: adds new items and
+  /// refreshes names, icons and prices, but never touches what the user owns.
   static Future<void> _seedDefaultCafeItems() async {
-    final existing = await _isar.cafeItems.count();
-    if (existing == 0) {
-      await _isar.writeTxn(() async {
-        await _isar.cafeItems.putAll([
-          CafeItem(
-            itemId: 'coffee_espresso',
-            nameTr: 'Espresso',
-            nameEn: 'Espresso',
-            cost: 50,
-            iconCode: '☕',
-          ),
-          CafeItem(
-            itemId: 'tea_green',
-            nameTr: 'Yeşil Çay',
-            nameEn: 'Green Tea',
-            cost: 30,
-            iconCode: '🍵',
-          ),
-          CafeItem(
-            itemId: 'cake_cheese',
-            nameTr: 'Cheesecake',
-            nameEn: 'Cheesecake',
-            cost: 100,
-            iconCode: '🍰',
-          ),
-        ]);
-      });
-    }
+    await _isar.writeTxn(() async {
+      for (final entry in cafeCatalog) {
+        final stored = await _isar.cafeItems
+            .filter()
+            .itemIdEqualTo(entry.itemId)
+            .findFirst();
+        if (stored == null) {
+          await _isar.cafeItems.put(CafeItem(
+            itemId: entry.itemId,
+            nameTr: entry.nameTr,
+            nameEn: entry.nameEn,
+            cost: entry.cost,
+            iconCode: entry.icon,
+          ));
+        } else {
+          stored
+            ..nameTr = entry.nameTr
+            ..nameEn = entry.nameEn
+            ..cost = entry.cost
+            ..iconCode = entry.icon;
+          await _isar.cafeItems.put(stored);
+        }
+      }
+    });
   }
 
   /// Deletes everything stored on the device (sessions, stats, badges, owned
@@ -121,6 +120,8 @@ class DatabaseService {
     });
   }
 
+  /// Buys one more of [itemId]; items are consumables, so they can be bought
+  /// again and again. Returns false when the points do not cover it.
   static Future<bool> purchaseItem(
     String itemId,
     int userCurrentPoints,
@@ -128,7 +129,7 @@ class DatabaseService {
     return await _isar.writeTxn(() async {
       final item =
           await _isar.cafeItems.filter().itemIdEqualTo(itemId).findFirst();
-      if (item == null || item.isOwned) return false;
+      if (item == null) return false;
 
       if (userCurrentPoints >= item.cost) {
         item.isOwned = true;
@@ -139,6 +140,25 @@ class DatabaseService {
 
       return false;
     });
+  }
+
+  /// Takes one [itemId] out of the inventory; false when there is none.
+  static Future<bool> consumeItem(String itemId) async {
+    return await _isar.writeTxn(() async {
+      final item =
+          await _isar.cafeItems.filter().itemIdEqualTo(itemId).findFirst();
+      if (item == null || item.quantity <= 0) return false;
+      item.quantity -= 1;
+      item.isOwned = item.quantity > 0;
+      await _isar.cafeItems.put(item);
+      return true;
+    });
+  }
+
+  static Future<int> itemQuantity(String itemId) async {
+    final item =
+        await _isar.cafeItems.filter().itemIdEqualTo(itemId).findFirst();
+    return item?.quantity ?? 0;
   }
 
   static Future<({int points, int minutes})> readUserSnapshot() async {

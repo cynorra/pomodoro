@@ -885,4 +885,83 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get cacheCleared => 'Önbellek temizlendi.';
+
+  @override
+  String cafeBalance(int points) {
+    return 'Bakiyen: $points puan';
+  }
+
+  @override
+  String cafeBoostDesc(String boost, int sessions) {
+    return 'Sonraki $sessions odak seansında $boost puan kazan.';
+  }
+
+  @override
+  String get cafeShieldDesc =>
+      'Kaçırdığın bir günü kapatır, serin bozulmaz. Otomatik kullanılır.';
+
+  @override
+  String cafeOwned(int count) {
+    return 'Sahip olduğun: $count';
+  }
+
+  @override
+  String cafeBuy(int cost) {
+    return 'Satın al · $cost puan';
+  }
+
+  @override
+  String get cafeUse => 'Şimdi kullan';
+
+  @override
+  String cafeBoostStarted(String boost, int sessions) {
+    return 'Güçlendirme açık! Sonraki $sessions odak seansında $boost puan.';
+  }
+
+  @override
+  String get cafeBoostBusy =>
+      'Zaten bir güçlendirme çalışıyor. Bitince bir sonrakini kullanabilirsin.';
+
+  @override
+  String cafeBoostBanner(String boost, int sessions) {
+    return '$boost puan · $sessions odak seansı kaldı';
+  }
+
+  @override
+  String cafeShieldBanner(int count) {
+    return 'Seri kalkanı: $count';
+  }
+
+  @override
+  String peopleFocusing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Şu an $count kişi odaklanıyor',
+      one: 'Şu an 1 kişi odaklanıyor',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sessionRewardPlain(int points) {
+    return '+$points puan kazandın!';
+  }
+
+  @override
+  String sessionRewardBoost(int points, String boost) {
+    return '+$points puan kazandın ($boost güçlendirme)!';
+  }
+
+  @override
+  String get reminderTitle => 'Günlük çalışma hatırlatıcısı';
+
+  @override
+  String get reminderHelp =>
+      'Seçtiğin saatte nazik bir hatırlatma. O gün zaten çalıştıysan gönderilmez.';
+
+  @override
+  String reminderAt(String time) {
+    return 'Hatırlatma saati: $time';
+  }
 }
