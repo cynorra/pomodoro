@@ -3,6 +3,7 @@ import 'package:cynora_focus/core/data/services/notification_texts.dart';
 import 'package:cynora_focus/core/data/services/reminder_rules.dart';
 import 'package:cynora_focus/features/cafe/domain/cafe_rules.dart';
 import 'package:cynora_focus/features/pomodoro/domain/pomodoro_rules.dart';
+import 'package:cynora_focus/features/social/domain/referral_rules.dart';
 
 void main() {
   group('boosts', () {
@@ -102,6 +103,22 @@ void main() {
           effectiveStreak(
               storedStreak: 6, lastStudy: lastStudy, now: now, shields: 1),
           6);
+    });
+  });
+
+  group('install referrer', () {
+    test('the code is found in the referrer', () {
+      expect(inviteCodeFromReferrer('ref=ABC234'), 'ABC234');
+      expect(inviteCodeFromReferrer('utm_source=x&ref=abc234'), 'ABC234');
+      expect(inviteCodeFromReferrer('ref%3DABC234'), isNull);
+    });
+
+    test('anything else gives no code', () {
+      expect(inviteCodeFromReferrer(null), isNull);
+      expect(inviteCodeFromReferrer(''), isNull);
+      expect(inviteCodeFromReferrer('utm_source=google-play'), isNull);
+      expect(inviteCodeFromReferrer('ref=short'), isNull);
+      expect(inviteCodeFromReferrer('ref=ABC%'), isNull);
     });
   });
 

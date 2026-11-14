@@ -95,8 +95,8 @@ class _InviteFriendsScreenState extends ConsumerState<InviteFriendsScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final signedIn = ref.watch(signedInProvider);
-    final inviteLink = ShareService.generateInviteLink();
     final code = signedIn ? ref.watch(inviteCodeProvider).value : null;
+    final inviteLink = ShareService.generateInviteLink(referralCode: code);
     final redeemed =
         signedIn && (ref.watch(referralRedeemedProvider).value ?? false);
     final shareText = code == null

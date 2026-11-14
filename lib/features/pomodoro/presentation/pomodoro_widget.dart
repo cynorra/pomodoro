@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/glass_card.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../core/data/services/share_service.dart';
 import '../../cafe/domain/cafe_rules.dart';
+import '../../social/presentation/social_providers.dart';
 import '../domain/pomodoro_state.dart';
 import 'pomodoro_notifier.dart';
 
@@ -124,10 +126,35 @@ class PomodoroWidget extends ConsumerWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 12),
+            TextButton.icon(
+              onPressed: () => _inviteToFocus(ref, l10n),
+              icon: const Icon(Icons.group_add_rounded, size: 20),
+              label: Text(l10n.focusTogether),
+              style: TextButton.styleFrom(foregroundColor: ZyraColors.primary),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  /// "Let's do a pomodoro together": shares the store link, with the user's
+  /// invite code when they are signed in so the friend gets the bonus too.
+  Future<void> _inviteToFocus(WidgetRef ref, AppLocalizations l10n) async {
+    String? code;
+    if (ref.read(signedInProvider)) {
+      try {
+        code = await ref.read(inviteCodeProvider.future);
+      } catch (_) {
+        code = null;
+      }
+    }
+    final link = ShareService.generateInviteLink(referralCode: code);
+    final text = code == null
+        ? l10n.focusTogetherMessage(link)
+        : l10n.focusTogetherMessageWithCode(code, link);
+    await ShareService.shareGeneral(text: text);
   }
 }
 

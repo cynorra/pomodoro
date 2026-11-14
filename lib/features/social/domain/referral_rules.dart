@@ -49,6 +49,25 @@ String? normalizeInviteCode(String input) {
   return _validCode.hasMatch(cleaned) ? cleaned : null;
 }
 
+/// The invite code inside a Play install referrer such as `ref=ABC234` (it may
+/// sit among other parameters), or null when there is none.
+String? inviteCodeFromReferrer(String? referrer) {
+  if (referrer == null || referrer.isEmpty) return null;
+  for (final part in referrer.split('&')) {
+    final pair = part.split('=');
+    if (pair.length == 2 && pair[0] == 'ref') {
+      try {
+        return normalizeInviteCode(Uri.decodeComponent(pair[1]));
+      } on ArgumentError {
+        return null; // malformed escape such as a trailing %
+      } on FormatException {
+        return null;
+      }
+    }
+  }
+  return null;
+}
+
 /// How many more rewards an inviter may still collect.
 int remainingReferralRewards(int alreadyClaimed) =>
     (maxReferralRewards - alreadyClaimed).clamp(0, maxReferralRewards);

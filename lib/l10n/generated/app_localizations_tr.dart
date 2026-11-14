@@ -395,6 +395,19 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get focusTogether => 'Birlikte odaklan';
+
+  @override
+  String focusTogetherMessage(String link) {
+    return 'Gel beraber pomodoro yapalım! Study Cafe\'de bana katıl, birlikte odaklanalım: $link';
+  }
+
+  @override
+  String focusTogetherMessageWithCode(String code, String link) {
+    return 'Gel beraber pomodoro yapalım! Study Cafe\'de bana katıl, $code kodumu kullan +100 puan kazan, birlikte odaklanalım: $link';
+  }
+
+  @override
   String get inviteEnterCodeTitle => 'Bir arkadaşının kodu var mı?';
 
   @override

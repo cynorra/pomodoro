@@ -842,6 +842,24 @@ abstract class AppLocalizations {
   /// **'Start focusing with Study Cafe! Use my code {code} to get +100 points: {link}'**
   String inviteMessageWithCode(String code, String link);
 
+  /// No description provided for @focusTogether.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus together'**
+  String get focusTogether;
+
+  /// No description provided for @focusTogetherMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s do a Pomodoro together! Join me on Study Cafe and let\'s focus: {link}'**
+  String focusTogetherMessage(String link);
+
+  /// No description provided for @focusTogetherMessageWithCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s do a Pomodoro together! Join me on Study Cafe, use my code {code} for +100 points and let\'s focus: {link}'**
+  String focusTogetherMessageWithCode(String code, String link);
+
   /// No description provided for @inviteEnterCodeTitle.
   ///
   /// In en, this message translates to:

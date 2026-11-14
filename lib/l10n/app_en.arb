@@ -151,6 +151,26 @@
       }
     }
   },
+  "focusTogether": "Focus together",
+  "focusTogetherMessage": "Let's do a Pomodoro together! Join me on Study Cafe and let's focus: {link}",
+  "@focusTogetherMessage": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "focusTogetherMessageWithCode": "Let's do a Pomodoro together! Join me on Study Cafe, use my code {code} for +100 points and let's focus: {link}",
+  "@focusTogetherMessageWithCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
   "inviteEnterCodeTitle": "Have a friend's code?",
   "inviteCodeHint": "Invite code",
   "inviteRedeem": "Redeem",

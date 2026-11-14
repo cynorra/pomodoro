@@ -1,0 +1,6 @@
+<en-US>
+New: "Focus together" button on the timer lets you invite a friend to do a Pomodoro with you. A friend's invite code is now applied automatically when they install from your link, and your progress shares carry your code too. Plus the cafe boosts and streak shield, a countdown notification, and daily study reminders from the last update.
+</en-US>
+<tr-TR>
+Yeni: Zamanlayıcıdaki "Birlikte odaklan" düğmesiyle bir arkadaşını birlikte pomodoro yapmaya davet et. Arkadaşın linkinden kurulum yaptığında davet kodu artık otomatik uygulanıyor, ilerleme paylaşımların da kodunu taşıyor. Ayrıca önceki sürümdeki kafe güçlendirmeleri, seri kalkanı, geri sayım bildirimi ve günlük çalışma hatırlatıcıları da devam ediyor.
+</tr-TR>

@@ -1,0 +1,6 @@
+<en-US>
+The cafe is now useful! Spend your points on Green Tea, Espresso or Cheesecake to boost the points of your next focus sessions, or on a Croissant that protects your streak when you miss a day. New: a countdown notification with the minutes left, a daily study reminder (set the time in Settings), and a message showing the points you earn after each session.
+</en-US>
+<tr-TR>
+Kafe artık işe yarıyor! Puanlarını Yeşil Çay, Espresso veya Cheesecake'e harcayıp sonraki odak seanslarında daha çok puan kazan, ya da bir gün kaçırınca serini koruyan Kruvasan al. Yeni: kalan dakikayı gösteren geri sayım bildirimi, günlük çalışma hatırlatıcısı (saati Ayarlar'dan seç) ve her seanstan sonra kazandığın puanı gösteren mesaj.
+</tr-TR>

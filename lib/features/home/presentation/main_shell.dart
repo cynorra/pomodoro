@@ -25,6 +25,25 @@ class _MainShellState extends ConsumerState<MainShell> {
   /// Ids seen in the previous snapshot; null until the first one arrives.
   Set<String>? _knownGiftIds;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _useInstallCode());
+  }
+
+  /// A friend's code that came with the install link is used automatically.
+  Future<void> _useInstallCode() async {
+    final points = await redeemInstallReferral(ref);
+    if (points > 0 && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context).inviteRedeemed(points)),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
   static const _screens = [
     HomeScreen(),
     StatsScreen(),
@@ -87,6 +106,7 @@ class _MainShellState extends ConsumerState<MainShell> {
     );
     ref.listen<bool>(signedInProvider, (previous, signedIn) {
       if (!signedIn) _knownGiftIds = null;
+      if (signedIn && previous != true) _useInstallCode();
     });
 
     return Scaffold(

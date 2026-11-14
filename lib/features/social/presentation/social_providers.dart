@@ -7,6 +7,7 @@ import '../../../core/data/services/moderation_service.dart';
 import '../../../core/data/state/user_notifier.dart';
 import '../../auth/presentation/auth_notifier.dart';
 import '../data/gift_api.dart';
+import '../data/install_referral.dart';
 import '../data/referral_api.dart';
 import '../domain/gift_rules.dart';
 import '../domain/referral_rules.dart';
@@ -39,6 +40,31 @@ Future<int> claimReferralRewards(WidgetRef ref) async {
         .addPoints(friends * referralReferrerBonus);
   }
   return friends;
+}
+
+/// Uses the invite code that came with the install link, once the user is
+/// signed in. Returns the bonus points added (0 when nothing happened).
+Future<int> redeemInstallReferral(WidgetRef ref) async {
+  if (!ref.read(signedInProvider)) return 0;
+  final code = await InstallReferral.pendingCode();
+  if (code == null) return 0;
+  final result = await ref.read(referralApiProvider).redeem(code);
+  switch (result) {
+    case RedeemResult.success:
+      await InstallReferral.clear();
+      await ref.read(userProvider.notifier).addPoints(referralInviteeBonus);
+      ref.invalidate(referralRedeemedProvider);
+      return referralInviteeBonus;
+    case RedeemResult.invalid:
+    case RedeemResult.ownCode:
+    case RedeemResult.notFound:
+    case RedeemResult.alreadyRedeemed:
+      await InstallReferral.clear(); // can never work, stop trying
+    case RedeemResult.notSignedIn:
+    case RedeemResult.error:
+      break; // try again next time
+  }
+  return 0;
 }
 
 // ---------------------------------------------------------------------------

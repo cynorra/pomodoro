@@ -9,6 +9,7 @@ import '../../../../core/data/state/user_notifier.dart';
 import '../../../../core/data/state/streak_notifier.dart';
 import '../../../../l10n/generated/app_localizations.dart';
 import '../../../../l10n/l10n_extension.dart';
+import '../../../social/presentation/social_providers.dart';
 
 class ShareButton extends ConsumerStatefulWidget {
   final int minutesStudied;
@@ -33,7 +34,16 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.share_outlined, color: ZyraColors.primary),
-      onPressed: () => _showShareSheet(context),
+      onPressed: () async {
+        if (ref.read(signedInProvider)) {
+          try {
+            _inviteCode = await ref.read(inviteCodeProvider.future);
+          } catch (_) {
+            _inviteCode = null;
+          }
+        }
+        if (context.mounted) _showShareSheet(context);
+      },
     );
   }
 
@@ -112,12 +122,16 @@ class _ShareButtonState extends ConsumerState<ShareButton> {
     );
   }
 
+  /// The invite code of a signed-in user, fetched before the sheet opens so the
+  /// shared link can carry it.
+  String? _inviteCode;
+
   String _buildShareText(int totalPoints, int streak) {
     return context.l10n.shareSummary(
       widget.minutesStudied,
       streak,
       totalPoints,
-      ShareService.getAppStoreLink(),
+      ShareService.generateInviteLink(referralCode: _inviteCode),
     );
   }
 
