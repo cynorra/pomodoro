@@ -48,6 +48,7 @@ class DataExportService {
             'durationSeconds': s.durationSeconds,
             'pointsEarned': s.pointsEarned,
             'sessionType': s.sessionType,
+            'subject': s.subject,
           },
       ],
       'achievements': [

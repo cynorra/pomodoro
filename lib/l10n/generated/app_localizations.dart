@@ -1631,8 +1631,8 @@ abstract class AppLocalizations {
   /// No description provided for @minutesShort.
   ///
   /// In en, this message translates to:
-  /// **'{count}m'**
-  String minutesShort(int count);
+  /// **'{minutes} min'**
+  String minutesShort(int minutes);
 
   /// No description provided for @consentTitle.
   ///
@@ -1813,6 +1813,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reminder at {time}'**
   String reminderAt(String time);
+
+  /// No description provided for @dailyGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily goal'**
+  String get dailyGoalTitle;
+
+  /// No description provided for @dailyGoalProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} / {goal} min today'**
+  String dailyGoalProgress(int done, int goal);
+
+  /// No description provided for @dailyGoalReached.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal reached! Great work today.'**
+  String get dailyGoalReached;
+
+  /// No description provided for @dailyGoalChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change your daily goal'**
+  String get dailyGoalChange;
+
+  /// No description provided for @subjectPick.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a subject'**
+  String get subjectPick;
+
+  /// No description provided for @subjectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What are you studying?'**
+  String get subjectTitle;
+
+  /// No description provided for @subjectNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No subject'**
+  String get subjectNone;
+
+  /// No description provided for @subjectAddHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a subject (e.g. Math)'**
+  String get subjectAddHint;
+
+  /// No description provided for @statsBySubject.
+  ///
+  /// In en, this message translates to:
+  /// **'By subject'**
+  String get statsBySubject;
+
+  /// No description provided for @levelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {level}'**
+  String levelLabel(int level);
+
+  /// No description provided for @weeklyReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly report'**
+  String get weeklyReportTitle;
+
+  /// No description provided for @weeklyReportSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min focused over {days} days this week'**
+  String weeklyReportSummary(int minutes, int days);
+
+  /// No description provided for @weeklyReportChange.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% vs last week'**
+  String weeklyReportChange(int percent);
+
+  /// No description provided for @weeklyReportShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share report'**
+  String get weeklyReportShare;
+
+  /// No description provided for @weeklyReportMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'I studied {minutes} minutes this week with Study Cafe! {link}'**
+  String weeklyReportMessage(int minutes, String link);
+
+  /// No description provided for @weeklyCardCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'minutes this week'**
+  String get weeklyCardCaption;
+
+  /// No description provided for @weeklyCardDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Studied on {days} days'**
+  String weeklyCardDays(int days);
+
+  /// No description provided for @weeklyCardTop.
+  ///
+  /// In en, this message translates to:
+  /// **'Top subject: {subject}'**
+  String weeklyCardTop(String subject);
+
+  /// No description provided for @streakShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share streak'**
+  String get streakShare;
+
+  /// No description provided for @streakCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'MY STUDY STREAK'**
+  String get streakCardTitle;
+
+  /// No description provided for @streakCardCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{day in a row} other{days in a row}}'**
+  String streakCardCaption(int days);
+
+  /// No description provided for @streakMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}-day study streak on Study Cafe! Can you beat it? {link}'**
+  String streakMessage(int days, String link);
+
+  /// No description provided for @tasksTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasksTitle;
+
+  /// No description provided for @tasksAddHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a task'**
+  String get tasksAddHint;
+
+  /// No description provided for @tasksDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete task'**
+  String get tasksDelete;
+
+  /// No description provided for @roomTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Study room'**
+  String get roomTitle;
+
+  /// No description provided for @roomIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Study together with friends. Enter a friend’s invite code to join their room, or host your own and share your code.'**
+  String get roomIntro;
+
+  /// No description provided for @roomCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code (6 characters)'**
+  String get roomCodeHint;
+
+  /// No description provided for @roomCodeInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'A code has 6 characters.'**
+  String get roomCodeInvalid;
+
+  /// No description provided for @roomJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Join room'**
+  String get roomJoin;
+
+  /// No description provided for @roomHost.
+  ///
+  /// In en, this message translates to:
+  /// **'Host my room ({code})'**
+  String roomHost(String code);
+
+  /// No description provided for @roomJoinFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not join. Check the code and your connection.'**
+  String get roomJoinFailed;
+
+  /// No description provided for @roomSignInRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in to use study rooms.'**
+  String get roomSignInRequired;
+
+  /// No description provided for @roomCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Room {code}'**
+  String roomCodeLabel(String code);
+
+  /// No description provided for @roomLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave room'**
+  String get roomLeave;
+
+  /// No description provided for @roomInviteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Study with me on Study Cafe! Room code: {code} {link}'**
+  String roomInviteMessage(String code, String link);
+
+  /// No description provided for @roomActiveNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Active now'**
+  String get roomActiveNow;
+
+  /// No description provided for @roomActiveMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Active {minutes} min ago'**
+  String roomActiveMinutes(int minutes);
+
+  /// No description provided for @roomActiveHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Active {hours} h ago'**
+  String roomActiveHours(int hours);
+
+  /// No description provided for @roomActiveDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Active {days} d ago'**
+  String roomActiveDays(int days);
 }
 
 class _AppLocalizationsDelegate

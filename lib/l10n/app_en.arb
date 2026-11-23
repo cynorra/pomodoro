@@ -569,5 +569,173 @@
         "type": "String"
       }
     }
+  },
+  "dailyGoalTitle": "Daily goal",
+  "dailyGoalProgress": "{done} / {goal} min today",
+  "@dailyGoalProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyGoalReached": "Goal reached! Great work today.",
+  "dailyGoalChange": "Change your daily goal",
+  "subjectPick": "Choose a subject",
+  "subjectTitle": "What are you studying?",
+  "subjectNone": "No subject",
+  "subjectAddHint": "Add a subject (e.g. Math)",
+  "statsBySubject": "By subject",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "levelLabel": "Level {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyReportTitle": "Weekly report",
+  "weeklyReportSummary": "{minutes} min focused over {days} days this week",
+  "@weeklyReportSummary": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyReportChange": "{percent}% vs last week",
+  "@weeklyReportChange": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyReportShare": "Share report",
+  "weeklyReportMessage": "I studied {minutes} minutes this week with Study Cafe! {link}",
+  "@weeklyReportMessage": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "weeklyCardCaption": "minutes this week",
+  "weeklyCardDays": "Studied on {days} days",
+  "@weeklyCardDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "weeklyCardTop": "Top subject: {subject}",
+  "@weeklyCardTop": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "streakShare": "Share streak",
+  "streakCardTitle": "MY STUDY STREAK",
+  "streakCardCaption": "{days, plural, =1{day in a row} other{days in a row}}",
+  "@streakCardCaption": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakMessage": "{days}-day study streak on Study Cafe! Can you beat it? {link}",
+  "@streakMessage": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "tasksTitle": "Tasks",
+  "tasksAddHint": "Add a task",
+  "tasksDelete": "Delete task",
+  "roomTitle": "Study room",
+  "roomIntro": "Study together with friends. Enter a friend’s invite code to join their room, or host your own and share your code.",
+  "roomCodeHint": "Invite code (6 characters)",
+  "roomCodeInvalid": "A code has 6 characters.",
+  "roomJoin": "Join room",
+  "roomHost": "Host my room ({code})",
+  "@roomHost": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "roomJoinFailed": "Could not join. Check the code and your connection.",
+  "roomSignInRequired": "Log in to use study rooms.",
+  "roomCodeLabel": "Room {code}",
+  "@roomCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "roomLeave": "Leave room",
+  "roomInviteMessage": "Study with me on Study Cafe! Room code: {code} {link}",
+  "@roomInviteMessage": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "roomActiveNow": "Active now",
+  "roomActiveMinutes": "Active {minutes} min ago",
+  "@roomActiveMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "roomActiveHours": "Active {hours} h ago",
+  "@roomActiveHours": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "roomActiveDays": "Active {days} d ago",
+  "@roomActiveDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   }
 }

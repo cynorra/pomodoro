@@ -5,6 +5,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'notification_texts.dart';
 import 'reminder_rules.dart';
+import '../../../features/stats/domain/weekly_report.dart';
 
 class NotificationService {
   static const _accent = Color(0xFFD4AF37);
@@ -271,6 +272,52 @@ class NotificationService {
           ),
           androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
         );
+      }
+    } catch (_) {}
+  }
+
+  static const _weeklyBaseId = 200;
+  static const _weeklyCount = 4;
+
+  /// Schedules the "your weekly report is ready" nudge for the next Sundays at
+  /// 19:00. Refreshed every time the app starts, like the daily reminders.
+  static Future<void> scheduleWeeklyReports() async {
+    try {
+      await initialize();
+      await cancelWeeklyReports();
+      if (!await _isPermitted()) return;
+      final lang = await NotificationTexts.resolveLanguage();
+      final tr = lang == 'tr';
+      final times = nextSundays(DateTime.now(), count: _weeklyCount);
+      for (var i = 0; i < times.length; i++) {
+        await _plugin.zonedSchedule(
+          id: _weeklyBaseId + i,
+          title: 'Study Cafe',
+          body: tr
+              ? 'Haftalık çalışma raporun hazır. Bu hafta ne kadar çalıştın?'
+              : 'Your weekly study report is ready. See how your week went.',
+          scheduledDate: tz.TZDateTime.from(times[i].toUtc(), tz.UTC),
+          notificationDetails: NotificationDetails(
+            android: AndroidNotificationDetails(
+              'reminder_channel',
+              tr ? 'Hatırlatıcılar' : 'Reminders',
+              importance: Importance.defaultImportance,
+              priority: Priority.defaultPriority,
+              color: _accent,
+              icon: '@drawable/ic_stat_notification',
+            ),
+            iOS: const DarwinNotificationDetails(),
+          ),
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        );
+      }
+    } catch (_) {}
+  }
+
+  static Future<void> cancelWeeklyReports() async {
+    try {
+      for (var i = 0; i < _weeklyCount; i++) {
+        await _plugin.cancel(id: _weeklyBaseId + i);
       }
     } catch (_) {}
   }

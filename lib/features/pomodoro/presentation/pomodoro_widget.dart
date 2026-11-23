@@ -6,6 +6,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../core/data/services/share_service.dart';
 import '../../cafe/domain/cafe_rules.dart';
 import '../../social/presentation/social_providers.dart';
+import '../../subjects/presentation/subject_chip.dart';
 import '../domain/pomodoro_state.dart';
 import 'pomodoro_notifier.dart';
 
@@ -63,6 +64,10 @@ class PomodoroWidget extends ConsumerWidget {
                 color: ZyraColors.primary,
               ),
             ),
+            if (state.sessionType == SessionType.focus) ...[
+              const SizedBox(height: 12),
+              const SubjectChip(),
+            ],
             const SizedBox(height: 24),
             _TimerDisplay(remainingSeconds: state.remainingSeconds),
             const SizedBox(height: 32),

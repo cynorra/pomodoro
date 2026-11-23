@@ -19,6 +19,8 @@ import '../../../core/utils/global_exception_handler.dart';
 import '../../social/presentation/social_providers.dart';
 import '../../cafe/domain/cafe_rules.dart';
 import '../../cafe/presentation/boost_notifier.dart';
+import '../../subjects/presentation/subject_notifier.dart';
+import '../../room/data/room_api.dart';
 import '../domain/pomodoro_rules.dart';
 import '../domain/pomodoro_state.dart';
 
@@ -220,6 +222,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
         durationSeconds: minutesStudied * 60,
         pointsEarned: pointsEarned,
         sessionType: state.sessionType.name,
+        subject: isFocus ? ref.read(subjectProvider).selected : '',
       );
       await DatabaseService.saveSession(session);
 
@@ -272,6 +275,7 @@ class PomodoroNotifier extends Notifier<PomodoroState>
         ),
       );
       unawaited(ReminderService.refresh());
+      if (isFocus) unawaited(ref.read(roomApiProvider).touch());
     } catch (e, stack) {
       GlobalExceptionHandler.logError(
         e,

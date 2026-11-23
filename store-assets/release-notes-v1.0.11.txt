@@ -1,0 +1,6 @@
+<en-US>
+New: choose whether to share anonymous usage analytics, download a copy of your data, and clear the app cache from Settings. Deleting your account now also wipes all data stored on your device. Privacy policy and terms links are easier to find at sign-up, and the rewarded ad button now updates correctly.
+</en-US>
+<tr-TR>
+Yeni: anonim kullanım analitiğini paylaşıp paylaşmayacağını seç, verilerinin bir kopyasını indir ve Ayarlar'dan önbelleği temizle. Hesabını silmek artık cihazındaki tüm verileri de siler. Gizlilik politikası ve kullanım koşulları bağlantıları kayıt sırasında daha kolay bulunuyor, ödüllü reklam düğmesi de artık doğru güncelleniyor.
+</tr-TR>

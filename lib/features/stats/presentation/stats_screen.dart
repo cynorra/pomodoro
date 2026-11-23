@@ -6,6 +6,8 @@ import '../../../core/ui/zyra_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import 'chart_buckets.dart';
 import 'stats_provider.dart';
+import 'subject_breakdown.dart';
+import 'weekly_report_card.dart';
 import '../../../l10n/l10n_extension.dart';
 import '../../../core/ui/responsive.dart';
 
@@ -57,6 +59,18 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: _ActivityChart(filter: selectedFilter),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: WeeklyReportCard(),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: SubjectBreakdown(),
             ),
           ),
           SliverToBoxAdapter(

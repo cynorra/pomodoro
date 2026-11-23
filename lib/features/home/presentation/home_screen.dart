@@ -13,6 +13,8 @@ import '../../monetization/presentation/rewarded_ad_button.dart';
 import '../../social/domain/referral_rules.dart';
 import '../../social/presentation/notifications_screen.dart';
 import '../../social/presentation/social_providers.dart';
+import '../../tasks/presentation/tasks_card.dart';
+import 'daily_goal_card.dart';
 import 'widgets/share_button.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -102,6 +104,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: const PomodoroWidget()
                         .animate()
                         .fadeIn(delay: 200.ms, duration: 600.ms),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                    child: const DailyGoalCard(),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
+                    child: TasksCard(),
                   ),
                 ),
                 SliverToBoxAdapter(

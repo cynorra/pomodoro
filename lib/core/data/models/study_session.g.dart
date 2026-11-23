@@ -36,6 +36,11 @@ const StudySessionSchema = CollectionSchema(
       id: 3,
       name: r'sessionType',
       type: IsarType.string,
+    ),
+    r'subject': PropertySchema(
+      id: 4,
+      name: r'subject',
+      type: IsarType.string,
     )
   },
   estimateSize: _studySessionEstimateSize,
@@ -73,6 +78,7 @@ int _studySessionEstimateSize(
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.sessionType.length * 3;
+  bytesCount += 3 + object.subject.length * 3;
   return bytesCount;
 }
 
@@ -86,6 +92,7 @@ void _studySessionSerialize(
   writer.writeLong(offsets[1], object.durationSeconds);
   writer.writeLong(offsets[2], object.pointsEarned);
   writer.writeString(offsets[3], object.sessionType);
+  writer.writeString(offsets[4], object.subject);
 }
 
 StudySession _studySessionDeserialize(
@@ -99,6 +106,7 @@ StudySession _studySessionDeserialize(
     durationSeconds: reader.readLong(offsets[1]),
     pointsEarned: reader.readLong(offsets[2]),
     sessionType: reader.readString(offsets[3]),
+    subject: reader.readStringOrNull(offsets[4]) ?? '',
   );
   object.id = id;
   return object;
@@ -119,6 +127,8 @@ P _studySessionDeserializeProp<P>(
       return (reader.readLong(offset)) as P;
     case 3:
       return (reader.readString(offset)) as P;
+    case 4:
+      return (reader.readStringOrNull(offset) ?? '') as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -670,6 +680,142 @@ extension StudySessionQueryFilter
       ));
     });
   }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'subject',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'subject',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'subject',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'subject',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'subject',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'subject',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'subject',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'subject',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'subject',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterFilterCondition>
+      subjectIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'subject',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension StudySessionQueryObject
@@ -729,6 +875,18 @@ extension StudySessionQuerySortBy
       sortBySessionTypeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'sessionType', Sort.desc);
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterSortBy> sortBySubject() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subject', Sort.asc);
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterSortBy> sortBySubjectDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subject', Sort.desc);
     });
   }
 }
@@ -798,6 +956,18 @@ extension StudySessionQuerySortThenBy
       return query.addSortBy(r'sessionType', Sort.desc);
     });
   }
+
+  QueryBuilder<StudySession, StudySession, QAfterSortBy> thenBySubject() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subject', Sort.asc);
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QAfterSortBy> thenBySubjectDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subject', Sort.desc);
+    });
+  }
 }
 
 extension StudySessionQueryWhereDistinct
@@ -825,6 +995,13 @@ extension StudySessionQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'sessionType', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<StudySession, StudySession, QDistinct> distinctBySubject(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'subject', caseSensitive: caseSensitive);
     });
   }
 }
@@ -858,6 +1035,12 @@ extension StudySessionQueryProperty
   QueryBuilder<StudySession, String, QQueryOperations> sessionTypeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'sessionType');
+    });
+  }
+
+  QueryBuilder<StudySession, String, QQueryOperations> subjectProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'subject');
     });
   }
 }

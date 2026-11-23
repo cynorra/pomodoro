@@ -52,14 +52,23 @@ class ShareService {
     }
   }
 
-  static String generateInviteLink({String? referralCode}) {
+  static const storeDisplayName = 'Study Cafe on Google Play';
+
+  /// Store link for shares. Play's `referrer` parameter carries the invite code
+  /// and UTM tags (source/medium/campaign), so installs from each kind of share
+  /// can be told apart in Play Console.
+  static String generateInviteLink({String? referralCode, String? campaign}) {
     // Firebase Dynamic Links is shut down, so invites point straight at the
-    // store listing; Play's `referrer` parameter carries the code.
+    // store listing.
     final base = getAppStoreLink();
-    if (referralCode != null) {
-      return '$base&referrer=${Uri.encodeComponent('ref=$referralCode')}';
-    }
-    return base;
+    if (Platform.isIOS) return base;
+    final parts = <String>[
+      if (referralCode != null) 'ref=$referralCode',
+      'utm_source=studycafe_app',
+      'utm_medium=share',
+      'utm_campaign=${campaign ?? 'invite'}',
+    ];
+    return '$base&referrer=${Uri.encodeComponent(parts.join('&'))}';
   }
 
   static String getAppStoreLink() {

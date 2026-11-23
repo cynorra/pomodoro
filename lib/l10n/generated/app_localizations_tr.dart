@@ -848,8 +848,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get rewardedAdHint => '+50 puan kazan';
 
   @override
-  String minutesShort(int count) {
-    return '${count}dk';
+  String minutesShort(int minutes) {
+    return '$minutes dk';
   }
 
   @override
@@ -976,5 +976,162 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String reminderAt(String time) {
     return 'Hatırlatma saati: $time';
+  }
+
+  @override
+  String get dailyGoalTitle => 'Günlük hedef';
+
+  @override
+  String dailyGoalProgress(int done, int goal) {
+    return 'Bugün $done / $goal dk';
+  }
+
+  @override
+  String get dailyGoalReached => 'Hedefe ulaştın! Bugün harika çalıştın.';
+
+  @override
+  String get dailyGoalChange => 'Günlük hedefini değiştir';
+
+  @override
+  String get subjectPick => 'Ders seç';
+
+  @override
+  String get subjectTitle => 'Ne çalışıyorsun?';
+
+  @override
+  String get subjectNone => 'Ders yok';
+
+  @override
+  String get subjectAddHint => 'Ders ekle (örn. Matematik)';
+
+  @override
+  String get statsBySubject => 'Derse göre';
+
+  @override
+  String levelLabel(int level) {
+    return 'Seviye $level';
+  }
+
+  @override
+  String get weeklyReportTitle => 'Haftalık rapor';
+
+  @override
+  String weeklyReportSummary(int minutes, int days) {
+    return 'Bu hafta $days günde $minutes dk odaklandın';
+  }
+
+  @override
+  String weeklyReportChange(int percent) {
+    return 'Geçen haftaya göre %$percent';
+  }
+
+  @override
+  String get weeklyReportShare => 'Raporu paylaş';
+
+  @override
+  String weeklyReportMessage(int minutes, String link) {
+    return 'Bu hafta Study Cafe ile $minutes dakika çalıştım! $link';
+  }
+
+  @override
+  String get weeklyCardCaption => 'bu hafta dakika';
+
+  @override
+  String weeklyCardDays(int days) {
+    return '$days gün çalıştım';
+  }
+
+  @override
+  String weeklyCardTop(String subject) {
+    return 'En çok: $subject';
+  }
+
+  @override
+  String get streakShare => 'Seriyi paylaş';
+
+  @override
+  String get streakCardTitle => 'ÇALIŞMA SERİM';
+
+  @override
+  String streakCardCaption(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'gün üst üste',
+      one: 'gün üst üste',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakMessage(int days, String link) {
+    return 'Study Cafe’de $days günlük çalışma serim var! Geçebilir misin? $link';
+  }
+
+  @override
+  String get tasksTitle => 'Görevler';
+
+  @override
+  String get tasksAddHint => 'Görev ekle';
+
+  @override
+  String get tasksDelete => 'Görevi sil';
+
+  @override
+  String get roomTitle => 'Çalışma odası';
+
+  @override
+  String get roomIntro =>
+      'Arkadaşlarınla birlikte çalış. Bir arkadaşının davet koduyla odasına katıl ya da kendi odanı kur ve kodunu paylaş.';
+
+  @override
+  String get roomCodeHint => 'Davet kodu (6 karakter)';
+
+  @override
+  String get roomCodeInvalid => 'Kod 6 karakterden oluşur.';
+
+  @override
+  String get roomJoin => 'Odaya katıl';
+
+  @override
+  String roomHost(String code) {
+    return 'Kendi odamı kur ($code)';
+  }
+
+  @override
+  String get roomJoinFailed => 'Katılınamadı. Kodu ve bağlantını kontrol et.';
+
+  @override
+  String get roomSignInRequired => 'Çalışma odası için giriş yap.';
+
+  @override
+  String roomCodeLabel(String code) {
+    return 'Oda $code';
+  }
+
+  @override
+  String get roomLeave => 'Odadan ayrıl';
+
+  @override
+  String roomInviteMessage(String code, String link) {
+    return 'Study Cafe’de benimle çalış! Oda kodu: $code $link';
+  }
+
+  @override
+  String get roomActiveNow => 'Şu an aktif';
+
+  @override
+  String roomActiveMinutes(int minutes) {
+    return '$minutes dk önce aktifti';
+  }
+
+  @override
+  String roomActiveHours(int hours) {
+    return '$hours sa önce aktifti';
+  }
+
+  @override
+  String roomActiveDays(int days) {
+    return '$days gün önce aktifti';
   }
 }

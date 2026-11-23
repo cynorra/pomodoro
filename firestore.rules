@@ -101,6 +101,25 @@ service cloud.firestore {
       allow list: if request.auth != null && request.query.limit <= 30;
     }
 
+    // Study rooms: the room id is an existing invite code, members publish
+    // their name and last-active time only, and each user writes their own
+    // document. Lists are capped.
+    match /rooms/{code}/members/{uid} {
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && code.matches('^[A-HJ-NP-Z2-9]{6}$')
+        && exists(/databases/$(database)/documents/invite_codes/$(code))
+        && request.resource.data.keys().hasOnly(['name', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['name', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if request.auth != null && request.auth.uid == uid;
+      allow get: if request.auth != null;
+      allow list: if request.auth != null && request.query.limit <= 20;
+    }
+
     // Treats between friends. Predefined items only (no free text). The
     // recipient must be focusing right now, and the document id encodes a
     // 10-minute slot, so one sender can send one treat per friend per slot.

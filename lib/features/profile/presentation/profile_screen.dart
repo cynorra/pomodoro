@@ -10,6 +10,8 @@ import '../../auth/presentation/login_screen.dart';
 import '../../leaderboard/presentation/leaderboard_screen.dart';
 import 'account_deletion_screen.dart';
 import 'settings_screen.dart';
+import 'level_card.dart';
+import '../../room/presentation/room_screen.dart';
 import '../../achievements/presentation/achievements_screen.dart';
 import '../../help/presentation/help_screen.dart';
 import '../../social/presentation/invite_friends_screen.dart';
@@ -61,6 +63,8 @@ class ProfileScreen extends ConsumerWidget {
               isAuthenticated: authState.status == AuthStatus.authenticated,
             ),
             const SizedBox(height: 16),
+            const LevelCard(),
+            const SizedBox(height: 16),
             streakAsync.when(
               data: (streak) => _StatsGrid(
                 totalPoints: userState.totalPoints,
@@ -92,6 +96,18 @@ class ProfileScreen extends ConsumerWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) => const AchievementsScreen(),
+                  ),
+                );
+              },
+            ),
+            _MenuItem(
+              icon: Icons.groups_outlined,
+              title: l10n.roomTitle,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const RoomScreen(),
                   ),
                 );
               },

@@ -65,8 +65,10 @@ class ReminderService {
     final settings = await load();
     if (!settings.enabled) {
       await NotificationService.cancelDailyReminders();
+      await NotificationService.cancelWeeklyReports();
       return;
     }
+    await NotificationService.scheduleWeeklyReports();
     await NotificationService.scheduleDailyReminders(
       hour: settings.hour,
       minute: settings.minute,

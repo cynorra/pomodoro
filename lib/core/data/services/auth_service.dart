@@ -1,3 +1,4 @@
+import '../../../features/room/data/room_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -187,6 +188,7 @@ class AuthService {
     }
 
     await step(() => _firestore.collection('presence').doc(uid).delete());
+    await step(() => RoomApi().leave());
     for (final field in const ['toUid', 'fromUid']) {
       await step(() async {
         final gifts = await _firestore

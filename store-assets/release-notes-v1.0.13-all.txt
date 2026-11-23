@@ -1,0 +1,261 @@
+<en-US>
+New: "Focus together" button to invite a friend to a Pomodoro. A friend's invite code now applies automatically when they install from your link. Also: cafe boosts, streak shield, countdown notification and daily study reminders.
+</en-US>
+<af>
+Nuut: "Fokus saam"-knoppie om 'n vriend na 'n Pomodoro uit te nooi. 'n Vriend se uitnodigingskode word nou outomaties toegepas as hulle via jou skakel installeer. Ook: kafee-hupstote, streekskild, aftelkennisgewing en daaglikse studie-herinnerings.
+</af>
+<am>
+አዲስ፦ ጓደኛን ወደ ፖሞዶሮ ለመጋበዝ "አብረን እንተኩር" ቁልፍ። ጓደኛ በአገናኝህ ሲጭን የግብዣ ኮዱ በራስ-ሰር ይተገበራል። እንዲሁም፦ የካፌ ማበረታቻዎች፣ የተከታታይ ጋሻ፣ የቆጠራ ማሳወቂያ እና ዕለታዊ የጥናት ማስታወሻዎች።
+</am>
+<ar>
+جديد: زر "ركّزوا معًا" لدعوة صديق إلى جلسة بومودورو. يُطبَّق رمز دعوة الصديق تلقائيًا عند التثبيت من رابطك. أيضًا: معززات المقهى، درع السلسلة، إشعار العد التنازلي وتذكيرات دراسة يومية.
+</ar>
+<az-AZ>
+Yeni: Dostu Pomodoro-ya dəvət etmək üçün "Birlikdə fokuslan" düyməsi. Dost linkinizdən quraşdırdıqda dəvət kodu avtomatik tətbiq olunur. Həmçinin: kafe gücləndiriciləri, seriya qalxanı, geri sayım bildirişi və gündəlik dərs xatırlatmaları.
+</az-AZ>
+<be>
+Новае: кнопка «Фокус разам», каб запрасіць сябра на Pomodoro. Код запрашэння сябра ўжываецца аўтаматычна пры ўсталёўцы па вашай спасылцы. Таксама: бонусы кафэ, шчыт серыі, апавяшчэнне са зваротным адлікам і штодзённыя напамінкі пра вучобу.
+</be>
+<bg>
+Ново: бутон „Фокус заедно“ за покана на приятел към Pomodoro. Кодът за покана на приятел се прилага автоматично при инсталиране през твоята връзка. Също: бонуси от кафенето, щит за серията, известие с обратно броене и ежедневни напомняния за учене.
+</bg>
+<bn-BD>
+নতুন: বন্ধুকে পোমোডোরোতে আমন্ত্রণ জানাতে "একসাথে ফোকাস" বোতাম। বন্ধু আপনার লিংক থেকে ইনস্টল করলে আমন্ত্রণ কোড স্বয়ংক্রিয়ভাবে প্রয়োগ হয়। এছাড়াও: ক্যাফে বুস্ট, স্ট্রিক শিল্ড, কাউন্টডাউন নোটিফিকেশন ও দৈনিক পড়ার রিমাইন্ডার।
+</bn-BD>
+<ca>
+Novetat: botó «Concentra't junts» per convidar un amic a fer un Pomodoro. El codi d'invitació de l'amic s'aplica automàticament quan instal·la des del teu enllaç. A més: potenciadors de cafeteria, escut de ratxa, notificació de compte enrere i recordatoris d'estudi diaris.
+</ca>
+<cs-CZ>
+Novinka: tlačítko „Soustřeďme se spolu“ pro pozvání přítele na Pomodoro. Kód pozvánky přítele se použije automaticky, když si aplikaci nainstaluje z tvého odkazu. Dále: bonusy z kavárny, štít série, odpočítávací oznámení a denní připomínky učení.
+</cs-CZ>
+<da-DK>
+Nyt: knappen "Fokusér sammen" til at invitere en ven til en Pomodoro. Din vens invitationskode bruges nu automatisk, når vedkommende installerer fra dit link. Desuden: cafébooster, stribeskjold, nedtællingsnotifikation og daglige studiepåmindelser.
+</da-DK>
+<de-DE>
+Neu: Schaltfläche „Gemeinsam fokussieren“, um Freunde zu einem Pomodoro einzuladen. Der Einladungscode wird automatisch angewendet, wenn dein Freund über deinen Link installiert. Außerdem: Café-Boosts, Serienschild, Countdown-Benachrichtigung und tägliche Lernerinnerungen.
+</de-DE>
+<el-GR>
+Νέο: κουμπί «Συγκεντρωθείτε μαζί» για να προσκαλέσεις έναν φίλο σε Pomodoro. Ο κωδικός πρόσκλησης εφαρμόζεται αυτόματα όταν ο φίλος εγκαταστήσει από τον σύνδεσμό σου. Επίσης: ενισχύσεις καφέ, ασπίδα σερί, ειδοποίηση αντίστροφης μέτρησης και καθημερινές υπενθυμίσεις μελέτης.
+</el-GR>
+<en-AU>
+New: "Focus together" button to invite a friend to a Pomodoro. A friend's invite code now applies automatically when they install from your link. Also: cafe boosts, streak shield, countdown notification and daily study reminders.
+</en-AU>
+<en-CA>
+New: "Focus together" button to invite a friend to a Pomodoro. A friend's invite code now applies automatically when they install from your link. Also: cafe boosts, streak shield, countdown notification and daily study reminders.
+</en-CA>
+<en-GB>
+New: "Focus together" button to invite a friend to a Pomodoro. A friend's invite code now applies automatically when they install from your link. Also: cafe boosts, streak shield, countdown notification and daily study reminders.
+</en-GB>
+<en-IN>
+New: "Focus together" button to invite a friend to a Pomodoro. A friend's invite code now applies automatically when they install from your link. Also: cafe boosts, streak shield, countdown notification and daily study reminders.
+</en-IN>
+<en-SG>
+New: "Focus together" button to invite a friend to a Pomodoro. A friend's invite code now applies automatically when they install from your link. Also: cafe boosts, streak shield, countdown notification and daily study reminders.
+</en-SG>
+<en-ZA>
+New: "Focus together" button to invite a friend to a Pomodoro. A friend's invite code now applies automatically when they install from your link. Also: cafe boosts, streak shield, countdown notification and daily study reminders.
+</en-ZA>
+<es-419>
+Novedad: botón «Concentrarse juntos» para invitar a un amigo a un Pomodoro. El código de invitación se aplica automáticamente cuando tu amigo instala desde tu enlace. Además: potenciadores de la cafetería, escudo de racha, notificación de cuenta regresiva y recordatorios diarios de estudio.
+</es-419>
+<es-ES>
+Novedad: botón «Concentrarse juntos» para invitar a un amigo a un Pomodoro. El código de invitación se aplica automáticamente cuando tu amigo instala desde tu enlace. Además: potenciadores de la cafetería, escudo de racha, notificación de cuenta atrás y recordatorios diarios de estudio.
+</es-ES>
+<es-US>
+Novedad: botón «Concentrarse juntos» para invitar a un amigo a un Pomodoro. El código de invitación se aplica automáticamente cuando tu amigo instala desde tu enlace. Además: potenciadores de la cafetería, escudo de racha, notificación de cuenta regresiva y recordatorios diarios de estudio.
+</es-US>
+<et>
+Uus: nupp „Keskendume koos“, et kutsuda sõber Pomodoro'le. Sõbra kutsekood rakendub automaatselt, kui ta paigaldab su lingilt. Lisaks: kohvikuvõimendused, seeriakilp, tagasiloenduse teavitus ja igapäevased õppimismeeldetuletused.
+</et>
+<eu-ES>
+Berria: «Zentratu elkarrekin» botoia, lagun bat Pomodoro batera gonbidatzeko. Lagunaren gonbidapen-kodea automatikoki aplikatzen da zure estekatik instalatzen duenean. Gainera: kafetegiko indartzaileak, serie-ezkutua, atzerako kontaketa jakinarazpena eta eguneroko ikasketa-gogorarazpenak.
+</eu-ES>
+<fa>
+جدید: دکمه «با هم تمرکز کنیم» برای دعوت دوست به یک پومودورو. کد دعوت دوست هنگام نصب از لینک شما خودکار اعمال می‌شود. همچنین: تقویت‌کننده‌های کافه، سپر پیوستگی، اعلان شمارش معکوس و یادآور روزانه مطالعه.
+</fa>
+<fa-AE>
+جدید: دکمه «با هم تمرکز کنیم» برای دعوت دوست به یک پومودورو. کد دعوت دوست هنگام نصب از لینک شما خودکار اعمال می‌شود. همچنین: تقویت‌کننده‌های کافه، سپر پیوستگی، اعلان شمارش معکوس و یادآور روزانه مطالعه.
+</fa-AE>
+<fa-AF>
+جدید: دکمه «با هم تمرکز کنیم» برای دعوت دوست به یک پومودورو. کد دعوت دوست هنگام نصب از لینک شما خودکار اعمال می‌شود. همچنین: تقویت‌کننده‌های کافه، سپر پیوستگی، اعلان شمارش معکوس و یادآور روزانه مطالعه.
+</fa-AF>
+<fa-IR>
+جدید: دکمه «با هم تمرکز کنیم» برای دعوت دوست به یک پومودورو. کد دعوت دوست هنگام نصب از لینک شما خودکار اعمال می‌شود. همچنین: تقویت‌کننده‌های کافه، سپر پیوستگی، اعلان شمارش معکوس و یادآور روزانه مطالعه.
+</fa-IR>
+<fi-FI>
+Uutta: „Keskity yhdessä“ -painike, jolla kutsut ystävän Pomodoroon. Ystävän kutsukoodi otetaan automaattisesti käyttöön, kun hän asentaa linkistäsi. Lisäksi: kahvilan tehostukset, putkikilpi, laskuri-ilmoitus ja päivittäiset opiskelumuistutukset.
+</fi-FI>
+<fil>
+Bago: "Mag-focus nang sabay" na button para mag-imbita ng kaibigan sa Pomodoro. Awtomatikong gagamitin ang invite code ng kaibigan kapag nag-install siya mula sa link mo. Kasama rin: cafe boost, streak shield, countdown notification at pang-araw-araw na paalala sa pag-aaral.
+</fil>
+<fr-CA>
+Nouveau : bouton « Se concentrer ensemble » pour inviter un ami à un Pomodoro. Le code d'invitation de l'ami s'applique automatiquement quand il installe l'appli depuis ton lien. Aussi : boosts du café, bouclier de série, notification de compte à rebours et rappels d'étude quotidiens.
+</fr-CA>
+<fr-FR>
+Nouveau : bouton « Se concentrer ensemble » pour inviter un ami à un Pomodoro. Le code d'invitation de l'ami s'applique automatiquement quand il installe l'appli depuis ton lien. Aussi : boosts du café, bouclier de série, notification de compte à rebours et rappels d'étude quotidiens.
+</fr-FR>
+<gl-ES>
+Novidade: botón «Concentrarse xuntos» para convidar un amigo a un Pomodoro. O código de invitación aplícase automaticamente cando o teu amigo instala desde a túa ligazón. Ademais: potenciadores da cafetería, escudo de racha, notificación de conta atrás e lembretes diarios de estudo.
+</gl-ES>
+<gu>
+નવું: મિત્રને પોમોડોરોમાં આમંત્રિત કરવા "સાથે ફોકસ કરો" બટન. મિત્ર તમારી લિંકથી ઇન્સ્ટોલ કરે ત્યારે આમંત્રણ કોડ આપમેળે લાગુ થાય છે. ઉપરાંત: કાફે બૂસ્ટ, સ્ટ્રીક શિલ્ડ, કાઉન્ટડાઉન સૂચના અને દૈનિક અભ્યાસ રિમાઇન્ડર.
+</gu>
+<hi-IN>
+नया: दोस्त को पोमोडोरो में बुलाने के लिए "साथ में फोकस करें" बटन। दोस्त जब आपके लिंक से इंस्टॉल करता है तो उसका आमंत्रण कोड अपने-आप लग जाता है। साथ ही: कैफ़े बूस्ट, स्ट्रीक शील्ड, काउंटडाउन नोटिफ़िकेशन और रोज़ाना पढ़ाई के रिमाइंडर।
+</hi-IN>
+<hr>
+Novo: gumb „Fokusirajmo se zajedno” za pozivanje prijatelja na Pomodoro. Prijateljev kôd za pozivnicu primjenjuje se automatski kad instalira putem tvoje poveznice. Također: pojačanja iz kafića, štit niza, obavijest s odbrojavanjem i dnevni podsjetnici za učenje.
+</hr>
+<hu-HU>
+Újdonság: „Fókuszáljunk együtt” gomb, amellyel meghívhatsz egy barátot egy Pomodoróra. A barát meghívókódja automatikusan érvényesül, ha a te linkedről telepít. Emellett: kávézói erősítések, sorozatpajzs, visszaszámláló értesítés és napi tanulási emlékeztetők.
+</hu-HU>
+<hy-AM>
+Նոր՝ «Կենտրոնանանք միասին» կոճակ՝ ընկերոջը Pomodoro-ի հրավիրելու համար։ Ընկերոջ հրավերի կոդը ինքնաբերաբար կիրառվում է, երբ նա տեղադրում է քո հղումով։ Նաև՝ սրճարանի ուժեղացումներ, շարքի վահան, հետհաշվարկի ծանուցում և ամենօրյա ուսումնական հիշեցումներ։
+</hy-AM>
+<id>
+Baru: tombol "Fokus bersama" untuk mengundang teman ke sesi Pomodoro. Kode undangan teman kini diterapkan otomatis saat ia memasang lewat tautanmu. Juga: booster kafe, perisai streak, notifikasi hitung mundur, dan pengingat belajar harian.
+</id>
+<is-IS>
+Nýtt: hnappurinn „Einbeitum okkur saman“ til að bjóða vini í Pomodoro. Boðskóði vinar er nú notaður sjálfkrafa þegar hann setur upp af tenglinum þínum. Einnig: kaffihúsaaukar, runuskjöldur, niðurtalningartilkynning og daglegar námspáminningar.
+</is-IS>
+<it-IT>
+Novità: pulsante «Concentriamoci insieme» per invitare un amico a un Pomodoro. Il codice invito dell'amico viene applicato automaticamente quando installa dal tuo link. Inoltre: potenziamenti del caffè, scudo della serie, notifica con conto alla rovescia e promemoria di studio giornalieri.
+</it-IT>
+<iw-IL>
+חדש: כפתור "מתרכזים יחד" להזמנת חבר לפומודורו. קוד ההזמנה של החבר מוחל אוטומטית כשהוא מתקין מהקישור שלך. בנוסף: חיזוקי בית הקפה, מגן רצף, התראת ספירה לאחור ותזכורות לימוד יומיות.
+</iw-IL>
+<ja-JP>
+新機能：友だちをポモドーロに誘う「いっしょに集中」ボタン。友だちがあなたのリンクからインストールすると、招待コードが自動で適用されます。ほかにも、カフェのブースト、連続記録シールド、カウントダウン通知、毎日の勉強リマインダーがあります。
+</ja-JP>
+<ka-GE>
+ახალი: ღილაკი „ერთად ფოკუსი“ მეგობრის Pomodoro-ზე მოსაწვევად. მეგობრის მოსაწვევი კოდი ავტომატურად გამოიყენება, როცა ის შენი ბმულიდან დააინსტალირებს. ასევე: კაფეს გამაძლიერებლები, სერიის ფარი, უკუთვლის შეტყობინება და ყოველდღიური სასწავლო შეხსენებები.
+</ka-GE>
+<kk>
+Жаңалық: досты Pomodoro-ға шақыратын «Бірге зейін қояйық» түймесі. Дос сенің сілтемеңнен орнатқанда шақыру коды автоматты түрде қолданылады. Сондай-ақ: кафе күшейткіштері, серия қалқаны, кері санау хабарландыруы және күнделікті оқу еске салғыштары.
+</kk>
+<km-KH>
+ថ្មី៖ ប៊ូតុង "ផ្តោតអារម្មណ៍ជាមួយគ្នា" ដើម្បីអញ្ជើញមិត្តមក Pomodoro។ កូដអញ្ជើញរបស់មិត្តត្រូវបានប្រើដោយស្វ័យប្រវត្តិ នៅពេលគាត់ដំឡើងពីតំណរបស់អ្នក។ ក្រៅពីនេះ៖ ការជំរុញកាហ្វេ ខែលស៊េរី ការជូនដំណឹងរាប់ថយក្រោយ និងការរំលឹករៀនប្រចាំថ្ងៃ។
+</km-KH>
+<kn-IN>
+ಹೊಸದು: ಸ್ನೇಹಿತರನ್ನು ಪೊಮೊಡೊರೊಗೆ ಆಹ್ವಾನಿಸಲು "ಒಟ್ಟಿಗೆ ಗಮನಹರಿಸಿ" ಬಟನ್. ಸ್ನೇಹಿತರು ನಿಮ್ಮ ಲಿಂಕ್‌ನಿಂದ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದಾಗ ಆಹ್ವಾನ ಕೋಡ್ ತಾನಾಗಿ ಅನ್ವಯವಾಗುತ್ತದೆ. ಜೊತೆಗೆ: ಕೆಫೆ ಬೂಸ್ಟ್, ಸ್ಟ್ರೀಕ್ ಶೀಲ್ಡ್, ಕೌಂಟ್‌ಡೌನ್ ಅಧಿಸೂಚನೆ ಮತ್ತು ದೈನಂದಿನ ಅಧ್ಯಯನ ಜ್ಞಾಪನೆಗಳು.
+</kn-IN>
+<ko-KR>
+새 기능: 친구를 포모도로에 초대하는 "함께 집중" 버튼. 친구가 내 링크로 설치하면 초대 코드가 자동으로 적용됩니다. 그 밖에 카페 부스트, 연속 기록 보호막, 카운트다운 알림, 매일 공부 알림도 있어요.
+</ko-KR>
+<ky-KG>
+Жаңы: досту Pomodoro'го чакыруу үчүн «Бирге топтололу» баскычы. Дос сенин шилтемең аркылуу орноткондо чакыруу коду автоматтык түрдө колдонулат. Ошондой эле: кафе күчөткүчтөрү, серия калканы, тескери саноо билдирмеси жана күнүмдүк окуу эскертмелери.
+</ky-KG>
+<lo-LA>
+ໃໝ່: ປຸ່ມ "ຕັ້ງໃຈນຳກັນ" ເພື່ອເຊີນໝູ່ມາເຮັດ Pomodoro. ລະຫັດເຊີນຂອງໝູ່ຈະຖືກໃຊ້ອັດຕະໂນມັດເມື່ອຕິດຕັ້ງຈາກລິ້ງຂອງເຈົ້າ. ນອກຈາກນີ້: ຕົວຊ່ວຍຄາເຟ, ໂລ່ຕໍ່ເນື່ອງ, ການແຈ້ງເຕືອນນັບຖອຍຫຼັງ ແລະ ການເຕືອນຮຽນປະຈຳວັນ.
+</lo-LA>
+<lt>
+Nauja: mygtukas „Susitelkime kartu“, kuriuo gali pakviesti draugą į Pomodoro. Draugo kvietimo kodas pritaikomas automatiškai, kai jis įdiegia per tavo nuorodą. Taip pat: kavinės stiprinimai, serijos skydas, atvirkštinio skaičiavimo pranešimas ir kasdieniai mokymosi priminimai.
+</lt>
+<lv>
+Jaunums: poga „Koncentrējamies kopā“, lai uzaicinātu draugu uz Pomodoro. Drauga ielūguma kods tiek lietots automātiski, kad viņš instalē no tavas saites. Arī: kafejnīcas pastiprinājumi, sērijas vairogs, atpakaļskaitīšanas paziņojums un ikdienas mācību atgādinājumi.
+</lv>
+<mk-MK>
+Ново: копче „Фокусирајте се заедно“ за поканување пријател на Pomodoro. Кодот за покана на пријателот се применува автоматски кога ќе инсталира преку твојата врска. Исто така: засилувања од кафулето, штит за серија, известување со одбројување и дневни потсетници за учење.
+</mk-MK>
+<ml-IN>
+പുതിയത്: സുഹൃത്തിനെ പോമോഡോറോയിലേക്ക് ക്ഷണിക്കാൻ "ഒരുമിച്ച് ഫോക്കസ് ചെയ്യൂ" ബട്ടൺ. സുഹൃത്ത് നിങ്ങളുടെ ലിങ്കിൽ നിന്ന് ഇൻസ്റ്റാൾ ചെയ്യുമ്പോൾ ക്ഷണ കോഡ് തനിയെ പ്രയോഗിക്കും. കൂടാതെ: കഫേ ബൂസ്റ്റുകൾ, സ്ട്രീക്ക് ഷീൽഡ്, കൗണ്ട്ഡൗൺ അറിയിപ്പ്, ദിവസേനയുള്ള പഠന ഓർമ്മപ്പെടുത്തലുകൾ.
+</ml-IN>
+<mn-MN>
+Шинэ: найзаа Pomodoro-д урих "Хамт төвлөрье" товч. Найз таны холбоосоор суулгахад урилгын код автоматаар хэрэгжинэ. Мөн: кафены бооцууд, цувралын бамбай, буцаан тоолох мэдэгдэл болон өдөр тутмын хичээлийн сануулга.
+</mn-MN>
+<mr-IN>
+नवीन: मित्राला पोमोडोरोसाठी बोलावण्यासाठी "एकत्र फोकस करा" बटण. मित्राने तुमच्या लिंकवरून इंस्टॉल केल्यावर आमंत्रण कोड आपोआप लागू होतो. तसेच: कॅफे बूस्ट, स्ट्रीक शील्ड, काउंटडाउन सूचना आणि रोजचे अभ्यास स्मरणपत्र.
+</mr-IN>
+<ms>
+Baharu: butang "Fokus bersama" untuk menjemput rakan ke Pomodoro. Kod jemputan rakan kini digunakan secara automatik apabila dia memasang melalui pautan anda. Juga: penggalak kafe, perisai rentetan, pemberitahuan kira detik dan peringatan belajar harian.
+</ms>
+<ms-MY>
+Baharu: butang "Fokus bersama" untuk menjemput rakan ke Pomodoro. Kod jemputan rakan kini digunakan secara automatik apabila dia memasang melalui pautan anda. Juga: penggalak kafe, perisai rentetan, pemberitahuan kira detik dan peringatan belajar harian.
+</ms-MY>
+<my-MM>
+အသစ်- သူငယ်ချင်းကို Pomodoro သို့ ဖိတ်ရန် "အတူ အာရုံစိုက်ကြစို့" ခလုတ်။ သူငယ်ချင်းက သင့်လင့်ခ်မှ ထည့်သွင်းလျှင် ဖိတ်ကြားကုဒ်ကို အလိုအလျောက် သုံးပါမည်။ ထို့အပြင် ကဖေးဘူးစ်များ၊ ဆက်တိုက်ဒိုင်းလွှား၊ ရေတွက်ပြန်အသိပေးချက်နှင့် နေ့စဉ်လေ့လာရန် သတိပေးချက်များ။
+</my-MM>
+<ne-NP>
+नयाँ: साथीलाई पोमोडोरोमा बोलाउन "सँगै फोकस गरौँ" बटन। साथीले तपाईंको लिङ्कबाट इन्स्टल गर्दा निमन्त्रणा कोड आफैँ लागू हुन्छ। साथै: क्याफे बुस्ट, स्ट्रिक सिल्ड, काउन्टडाउन सूचना र दैनिक अध्ययन सम्झना।
+</ne-NP>
+<nl-NL>
+Nieuw: knop „Samen focussen” om een vriend voor een Pomodoro uit te nodigen. De uitnodigingscode van je vriend wordt nu automatisch toegepast als hij via jouw link installeert. Ook: café-boosts, reeksschild, aftelmelding en dagelijkse studieherinneringen.
+</nl-NL>
+<no-NO>
+Nytt: knappen «Fokuser sammen» for å invitere en venn til en Pomodoro. Vennens invitasjonskode brukes nå automatisk når vedkommende installerer fra lenken din. Dessuten: kafébooster, rekkeskjold, nedtellingsvarsel og daglige studiepåminnelser.
+</no-NO>
+<pa>
+ਨਵਾਂ: ਦੋਸਤ ਨੂੰ ਪੋਮੋਡੋਰੋ ਲਈ ਬੁਲਾਉਣ ਵਾਸਤੇ "ਇਕੱਠੇ ਫੋਕਸ ਕਰੋ" ਬਟਨ। ਦੋਸਤ ਤੁਹਾਡੇ ਲਿੰਕ ਤੋਂ ਇੰਸਟਾਲ ਕਰੇ ਤਾਂ ਸੱਦਾ ਕੋਡ ਆਪਣੇ-ਆਪ ਲਾਗੂ ਹੋ ਜਾਂਦਾ ਹੈ। ਨਾਲ ਹੀ: ਕੈਫ਼ੇ ਬੂਸਟ, ਸਟ੍ਰੀਕ ਸ਼ੀਲਡ, ਕਾਊਂਟਡਾਊਨ ਸੂਚਨਾ ਅਤੇ ਰੋਜ਼ਾਨਾ ਪੜ੍ਹਾਈ ਰਿਮਾਈਂਡਰ।
+</pa>
+<pl-PL>
+Nowość: przycisk „Skupmy się razem”, aby zaprosić znajomego na Pomodoro. Kod zaproszenia znajomego jest teraz stosowany automatycznie, gdy zainstaluje aplikację z Twojego linku. Ponadto: wzmocnienia z kawiarni, tarcza serii, powiadomienie z odliczaniem i codzienne przypomnienia o nauce.
+</pl-PL>
+<pt-BR>
+Novidade: botão "Focar juntos" para convidar um amigo para um Pomodoro. O código de convite do amigo agora é aplicado automaticamente quando ele instala pelo seu link. Também: reforços da cafeteria, escudo de sequência, notificação de contagem regressiva e lembretes diários de estudo.
+</pt-BR>
+<pt-PT>
+Novidade: botão "Focar juntos" para convidar um amigo para um Pomodoro. O código de convite do amigo é agora aplicado automaticamente quando instala através da tua ligação. Também: reforços da cafetaria, escudo de sequência, notificação de contagem decrescente e lembretes diários de estudo.
+</pt-PT>
+<rm>
+Nov: la tasta «Far attenziun ensemen» per envidar in ami ad in Pomodoro. Il code d'invit da l'ami vegn applitgà automaticamain cur ch'el installescha cun tia colliaziun. Er: potenziaders da la cafetaria, scut da la serie, notificaziun da cuntar anavos e regurdientschas da studi mintga di.
+</rm>
+<ro>
+Nou: butonul „Concentrați-vă împreună” pentru a invita un prieten la un Pomodoro. Codul de invitație al prietenului se aplică automat când instalează din linkul tău. De asemenea: bonusuri din cafenea, scut de serie, notificare cu numărătoare inversă și mementouri zilnice de studiu.
+</ro>
+<ru-RU>
+Новое: кнопка «Фокус вместе», чтобы пригласить друга на Pomodoro. Код приглашения друга теперь применяется автоматически, когда он устанавливает приложение по вашей ссылке. Также: бонусы кафе, щит серии, уведомление с обратным отсчётом и ежедневные напоминания об учёбе.
+</ru-RU>
+<si-LK>
+අලුත්: මිතුරෙකුට පොමොඩෝරෝවකට ආරාධනා කිරීමට "එකට අවධානය යොමු කරමු" බොත්තම. මිතුරා ඔබේ සබැඳියෙන් ස්ථාපනය කළ විට ආරාධනා කේතය ස්වයංක්‍රීයව යොදයි. එමෙන්ම: කැෆේ බූස්ට්, ස්ට්‍රීක් ෂීල්ඩ්, ගණන් කිරීමේ දැනුම්දීම සහ දෛනික අධ්‍යයන සිහිකැඳවීම්.
+</si-LK>
+<sk>
+Novinka: tlačidlo „Sústreďme sa spolu“ na pozvanie priateľa na Pomodoro. Kód pozvánky priateľa sa použije automaticky, keď si aplikáciu nainštaluje z tvojho odkazu. Ďalej: bonusy z kaviarne, štít série, odpočítavacie upozornenie a denné pripomienky učenia.
+</sk>
+<sl>
+Novo: gumb »Osredotočimo se skupaj« za povabilo prijatelja na Pomodoro. Prijateljeva koda povabila se zdaj uporabi samodejno, ko namesti aplikacijo prek tvoje povezave. Še: ojačitve iz kavarne, ščit serije, obvestilo z odštevanjem in dnevni opomniki za učenje.
+</sl>
+<sq>
+E re: butoni «Përqendrohemi bashkë» për të ftuar një mik në Pomodoro. Kodi i ftesës së mikut zbatohet automatikisht kur ai instalon nga lidhja jote. Gjithashtu: përforcues kafeneje, mburoja e serisë, njoftim me numërim mbrapsht dhe kujtesa ditore studimi.
+</sq>
+<sr>
+Novo: dugme „Fokusirajmo se zajedno“ za pozivanje prijatelja na Pomodoro. Prijateljev kôd pozivnice primenjuje se automatski kad instalira preko tvog linka. Takođe: pojačanja iz kafića, štit serije, obaveštenje sa odbrojavanjem i dnevni podsetnici za učenje.
+</sr>
+<sv-SE>
+Nytt: knappen ”Fokusera tillsammans” för att bjuda in en vän till en Pomodoro. Din väns inbjudningskod används nu automatiskt när hen installerar från din länk. Dessutom: cafébooster, serieskydd, nedräkningsavisering och dagliga studiepåminnelser.
+</sv-SE>
+<sw>
+Mpya: kitufe cha "Tuzingatie pamoja" cha kumwalika rafiki kwenye Pomodoro. Msimbo wa mwaliko wa rafiki sasa unatumika kiotomatiki anaposakinisha kupitia kiungo chako. Pia: viongezeo vya mkahawa, ngao ya mfululizo, arifa ya kuhesabu kurudi nyuma na vikumbusho vya kila siku vya kusoma.
+</sw>
+<ta-IN>
+புதியது: நண்பரை பொமோடோரோவுக்கு அழைக்க "இணைந்து கவனம் செலுத்துவோம்" பொத்தான். நண்பர் உங்கள் இணைப்பிலிருந்து நிறுவும்போது அழைப்புக் குறியீடு தானாகப் பயன்படுத்தப்படும். மேலும்: கஃபே பூஸ்ட்கள், தொடர் கவசம், கவுண்ட்டவுன் அறிவிப்பு, தினசரி படிப்பு நினைவூட்டல்கள்.
+</ta-IN>
+<te-IN>
+కొత్తది: స్నేహితుడిని పోమోడోరోకు ఆహ్వానించడానికి "కలిసి ఫోకస్ చేద్దాం" బటన్. స్నేహితుడు మీ లింక్ నుండి ఇన్‌స్టాల్ చేసినప్పుడు ఆహ్వాన కోడ్ ఆటోమేటిక్‌గా వర్తిస్తుంది. అలాగే: కేఫ్ బూస్ట్‌లు, స్ట్రీక్ షీల్డ్, కౌంట్‌డౌన్ నోటిఫికేషన్, రోజువారీ చదువు రిమైండర్లు.
+</te-IN>
+<th>
+ใหม่: ปุ่ม "โฟกัสด้วยกัน" เพื่อชวนเพื่อนมาทำ Pomodoro รหัสเชิญของเพื่อนจะถูกใช้อัตโนมัติเมื่อติดตั้งจากลิงก์ของคุณ นอกจากนี้ยังมี: บูสต์จากคาเฟ่ โล่รักษาสตรีค การแจ้งเตือนนับถอยหลัง และการเตือนอ่านหนังสือรายวัน
+</th>
+<tr-TR>
+Yeni: Bir arkadaşını pomodoroya davet etmek için "Birlikte odaklan" düğmesi. Arkadaşın linkinden kurulum yaptığında davet kodu artık otomatik uygulanıyor. Ayrıca: kafe güçlendirmeleri, seri kalkanı, geri sayım bildirimi ve günlük çalışma hatırlatıcıları.
+</tr-TR>
+<uk>
+Нове: кнопка «Фокус разом», щоб запросити друга на Pomodoro. Код запрошення друга тепер застосовується автоматично, коли він встановлює застосунок за вашим посиланням. Також: бонуси кафе, щит серії, сповіщення зі зворотним відліком і щоденні нагадування про навчання.
+</uk>
+<ur>
+نیا: دوست کو پومودورو میں مدعو کرنے کے لیے "ساتھ مل کر توجہ دیں" بٹن۔ دوست آپ کے لنک سے انسٹال کرے تو دعوتی کوڈ خودبخود لاگو ہو جاتا ہے۔ مزید: کیفے بوسٹ، اسٹریک شیلڈ، کاؤنٹ ڈاؤن نوٹیفکیشن اور روزانہ مطالعے کی یاد دہانیاں۔
+</ur>
+<vi>
+Mới: nút "Cùng tập trung" để mời bạn bè làm Pomodoro. Mã mời của bạn bè giờ được áp dụng tự động khi họ cài đặt từ liên kết của bạn. Ngoài ra: tăng cường từ quán cà phê, khiên chuỗi, thông báo đếm ngược và nhắc học hằng ngày.
+</vi>
+<zh-CN>
+新功能：“一起专注”按钮，可邀请好友一起做番茄钟。好友通过你的链接安装后，邀请码会自动生效。此外还有：咖啡馆加成、连续打卡护盾、倒计时通知和每日学习提醒。
+</zh-CN>
+<zh-HK>
+新功能：「一起專注」按鈕，可邀請朋友一起做番茄鐘。朋友透過你的連結安裝後，邀請碼會自動套用。另外還有：咖啡店加成、連續打卡護盾、倒數通知和每日學習提醒。
+</zh-HK>
+<zh-TW>
+新功能：「一起專注」按鈕，可邀請朋友一起做番茄鐘。朋友透過你的連結安裝後，邀請碼會自動套用。另外還有：咖啡店加成、連續打卡護盾、倒數通知和每日學習提醒。
+</zh-TW>
+<zu>
+Okusha: inkinobho ethi "Ake sigxile ndawonye" ukumema umngani ku-Pomodoro. Ikhodi yesimemo somngani manje isebenza ngokuzenzakalelayo uma efaka ngesixhumanisi sakho. Futhi: ukukhuthaza kwekhefi, ikhoba lochungechunge, isaziso sokubala emuva nezikhumbuzo zokufunda zansuku zonke.
+</zu>

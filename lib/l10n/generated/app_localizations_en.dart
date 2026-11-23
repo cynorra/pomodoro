@@ -856,8 +856,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rewardedAdHint => 'Earn +50 points';
 
   @override
-  String minutesShort(int count) {
-    return '${count}m';
+  String minutesShort(int minutes) {
+    return '$minutes min';
   }
 
   @override
@@ -984,5 +984,163 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String reminderAt(String time) {
     return 'Reminder at $time';
+  }
+
+  @override
+  String get dailyGoalTitle => 'Daily goal';
+
+  @override
+  String dailyGoalProgress(int done, int goal) {
+    return '$done / $goal min today';
+  }
+
+  @override
+  String get dailyGoalReached => 'Goal reached! Great work today.';
+
+  @override
+  String get dailyGoalChange => 'Change your daily goal';
+
+  @override
+  String get subjectPick => 'Choose a subject';
+
+  @override
+  String get subjectTitle => 'What are you studying?';
+
+  @override
+  String get subjectNone => 'No subject';
+
+  @override
+  String get subjectAddHint => 'Add a subject (e.g. Math)';
+
+  @override
+  String get statsBySubject => 'By subject';
+
+  @override
+  String levelLabel(int level) {
+    return 'Level $level';
+  }
+
+  @override
+  String get weeklyReportTitle => 'Weekly report';
+
+  @override
+  String weeklyReportSummary(int minutes, int days) {
+    return '$minutes min focused over $days days this week';
+  }
+
+  @override
+  String weeklyReportChange(int percent) {
+    return '$percent% vs last week';
+  }
+
+  @override
+  String get weeklyReportShare => 'Share report';
+
+  @override
+  String weeklyReportMessage(int minutes, String link) {
+    return 'I studied $minutes minutes this week with Study Cafe! $link';
+  }
+
+  @override
+  String get weeklyCardCaption => 'minutes this week';
+
+  @override
+  String weeklyCardDays(int days) {
+    return 'Studied on $days days';
+  }
+
+  @override
+  String weeklyCardTop(String subject) {
+    return 'Top subject: $subject';
+  }
+
+  @override
+  String get streakShare => 'Share streak';
+
+  @override
+  String get streakCardTitle => 'MY STUDY STREAK';
+
+  @override
+  String streakCardCaption(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'days in a row',
+      one: 'day in a row',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakMessage(int days, String link) {
+    return '$days-day study streak on Study Cafe! Can you beat it? $link';
+  }
+
+  @override
+  String get tasksTitle => 'Tasks';
+
+  @override
+  String get tasksAddHint => 'Add a task';
+
+  @override
+  String get tasksDelete => 'Delete task';
+
+  @override
+  String get roomTitle => 'Study room';
+
+  @override
+  String get roomIntro =>
+      'Study together with friends. Enter a friend’s invite code to join their room, or host your own and share your code.';
+
+  @override
+  String get roomCodeHint => 'Invite code (6 characters)';
+
+  @override
+  String get roomCodeInvalid => 'A code has 6 characters.';
+
+  @override
+  String get roomJoin => 'Join room';
+
+  @override
+  String roomHost(String code) {
+    return 'Host my room ($code)';
+  }
+
+  @override
+  String get roomJoinFailed =>
+      'Could not join. Check the code and your connection.';
+
+  @override
+  String get roomSignInRequired => 'Log in to use study rooms.';
+
+  @override
+  String roomCodeLabel(String code) {
+    return 'Room $code';
+  }
+
+  @override
+  String get roomLeave => 'Leave room';
+
+  @override
+  String roomInviteMessage(String code, String link) {
+    return 'Study with me on Study Cafe! Room code: $code $link';
+  }
+
+  @override
+  String get roomActiveNow => 'Active now';
+
+  @override
+  String roomActiveMinutes(int minutes) {
+    return 'Active $minutes min ago';
+  }
+
+  @override
+  String roomActiveHours(int hours) {
+    return 'Active $hours h ago';
+  }
+
+  @override
+  String roomActiveDays(int days) {
+    return 'Active $days d ago';
   }
 }

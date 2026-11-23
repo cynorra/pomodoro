@@ -1,0 +1,6 @@
+<en-US>
+New: invite friends with your personal code and both earn bonus points. Turn on the focus status in Settings and friends can send you a coffee, tea or cake while you focus, shown quietly in a new inbox behind the bell icon. Also: a more reliable timer and Reset button, cleaner stats charts, cafe purchase fixes and smaller-screen layout fixes.
+</en-US>
+<tr-TR>
+Yeni: kişisel kodunla arkadaşlarını davet et, ikiniz de bonus puan kazanın. Ayarlar'dan odak durumunu açarsan, arkadaşların odaklanırken sana kahve, çay veya pasta gönderebilir; ikramlar zil simgesinin arkasındaki yeni gelen kutusunda sessizce görünür. Ayrıca: daha güvenilir zamanlayıcı ve Sıfırla düğmesi, daha temiz istatistik grafikleri, kafe satın alma düzeltmeleri ve küçük ekran düzenleme iyileştirmeleri.
+</tr-TR>
