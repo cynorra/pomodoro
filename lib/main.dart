@@ -129,14 +129,19 @@ class _StudyCafeAppState extends ConsumerState<StudyCafeApp> {
           if (mounted) setState(() => _showSplash = false);
         },
       );
+    } else if (_showOnboarding) {
+      // Show the app's value first; the (long) privacy consent comes right after.
+      initialScreen = OnboardingScreen(
+        onDone: () {
+          if (mounted) setState(() => _showOnboarding = false);
+        },
+      );
     } else if (_needsConsent) {
       initialScreen = ConsentScreen(
         onDone: () {
           if (mounted) setState(() => _needsConsent = false);
         },
       );
-    } else if (_showOnboarding) {
-      initialScreen = const OnboardingScreen();
     } else {
       initialScreen = const MainShell();
     }

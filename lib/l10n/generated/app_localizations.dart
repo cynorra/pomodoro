@@ -2053,6 +2053,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Active {days} d ago'**
   String roomActiveDays(int days);
+
+  /// No description provided for @onboardGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set your daily focus goal'**
+  String get onboardGoalTitle;
+
+  /// No description provided for @onboardGoalBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Small, steady sessions beat marathons. Pick a goal you can hit every day and keep your streak alive.'**
+  String get onboardGoalBody;
+
+  /// No description provided for @onboardGoalMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String onboardGoalMinutes(int minutes);
 }
 
 class _AppLocalizationsDelegate

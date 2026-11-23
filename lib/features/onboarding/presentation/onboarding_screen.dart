@@ -5,11 +5,15 @@ import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../l10n/l10n_extension.dart';
-import '../../home/presentation/main_shell.dart';
+import '../../home/domain/daily_goal.dart';
 import '../../../core/ui/responsive.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
-  const OnboardingScreen({super.key});
+  /// Called once the user finishes (or skips); the parent decides what comes next
+  /// (consent screen, then the app).
+  final VoidCallback onDone;
+
+  const OnboardingScreen({super.key, required this.onDone});
 
   @override
   ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -19,6 +23,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final _pageController = PageController();
   int _currentPage = 0;
   final _storage = const FlutterSecureStorage();
+  int _goalMinutes = defaultDailyGoalMinutes;
 
   List<_OnboardingPage> _pages(BuildContext context) => [
         _OnboardingPage(
@@ -48,10 +53,59 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   Future<void> _completeOnboarding() async {
+    await _storage.write(key: 'daily_goal_minutes', value: '$_goalMinutes');
     await _storage.write(key: 'onboarding_completed', value: 'true');
     if (!mounted) return;
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const MainShell()),
+    widget.onDone();
+  }
+
+  /// Last page: pick a daily focus goal (feeds the daily goal card on the home screen).
+  Widget _goalPage(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(32),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.flag_rounded, color: ZyraColors.primary, size: 64),
+          const SizedBox(height: 24),
+          Text(
+            context.l10n.onboardGoalTitle,
+            style: ZyraTypography.headlineLarge
+                .copyWith(color: ZyraColors.primary),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            context.l10n.onboardGoalBody,
+            style: ZyraTypography.bodyMedium.copyWith(
+              color: ZyraColors.onSurface.withValues(alpha: 0.7),
+              height: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 28),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              for (final m in dailyGoalOptions)
+                ChoiceChip(
+                  label: Text(context.l10n.onboardGoalMinutes(m)),
+                  selected: _goalMinutes == m,
+                  onSelected: (_) => setState(() => _goalMinutes = m),
+                  selectedColor: ZyraColors.primary,
+                  labelStyle: TextStyle(
+                    color: _goalMinutes == m
+                        ? Colors.black
+                        : ZyraColors.onSurface,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -79,11 +133,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
-                itemCount: _pages(context).length,
+                itemCount: _pages(context).length + 1,
                 onPageChanged: (index) {
                   setState(() => _currentPage = index);
                 },
                 itemBuilder: (context, index) {
+                  if (index == _pages(context).length) return _goalPage(context);
                   final page = _pages(context)[index];
                   final compact = context.isShort;
                   return LayoutBuilder(
@@ -143,7 +198,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                _pages(context).length,
+                _pages(context).length + 1,
                 (index) => Container(
                   width: _currentPage == index ? 24 : 8,
                   height: 8,
@@ -162,7 +217,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: JellyButton(
                 onPressed: () {
-                  if (_currentPage == _pages(context).length - 1) {
+                  if (_currentPage == _pages(context).length) {
                     _completeOnboarding();
                   } else {
                     _pageController.nextPage(
@@ -171,7 +226,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     );
                   }
                 },
-                label: _currentPage == _pages(context).length - 1
+                label: _currentPage == _pages(context).length
                     ? (l10n.start)
                     : context.l10n.onboardNext,
               ),

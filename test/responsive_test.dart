@@ -27,7 +27,7 @@ void main() {
               locale: locale,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
-              home: const OnboardingScreen(),
+              home: OnboardingScreen(onDone: () {}),
             ),
           ),
         );

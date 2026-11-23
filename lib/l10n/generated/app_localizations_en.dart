@@ -1143,4 +1143,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String roomActiveDays(int days) {
     return 'Active $days d ago';
   }
+
+  @override
+  String get onboardGoalTitle => 'Set your daily focus goal';
+
+  @override
+  String get onboardGoalBody =>
+      'Small, steady sessions beat marathons. Pick a goal you can hit every day and keep your streak alive.';
+
+  @override
+  String onboardGoalMinutes(int minutes) {
+    return '$minutes min';
+  }
 }

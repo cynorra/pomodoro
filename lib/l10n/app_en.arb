@@ -443,10 +443,10 @@
   "onboardSkip": "Skip",
   "splashTagline": "Gamified Study Cafe",
   "rewardedAdHint": "Earn +50 points",
-  "minutesShort": "{count}m",
+  "minutesShort": "{minutes} min",
   "@minutesShort": {
     "placeholders": {
-      "count": {
+      "minutes": {
         "type": "int"
       }
     }
@@ -589,14 +589,6 @@
   "subjectNone": "No subject",
   "subjectAddHint": "Add a subject (e.g. Math)",
   "statsBySubject": "By subject",
-  "minutesShort": "{minutes} min",
-  "@minutesShort": {
-    "placeholders": {
-      "minutes": {
-        "type": "int"
-      }
-    }
-  },
   "levelLabel": "Level {level}",
   "@levelLabel": {
     "placeholders": {
@@ -734,6 +726,16 @@
   "@roomActiveDays": {
     "placeholders": {
       "days": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardGoalTitle": "Set your daily focus goal",
+  "onboardGoalBody": "Small, steady sessions beat marathons. Pick a goal you can hit every day and keep your streak alive.",
+  "onboardGoalMinutes": "{minutes} min",
+  "@onboardGoalMinutes": {
+    "placeholders": {
+      "minutes": {
         "type": "int"
       }
     }

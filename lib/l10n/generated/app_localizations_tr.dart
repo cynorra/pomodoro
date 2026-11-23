@@ -1134,4 +1134,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String roomActiveDays(int days) {
     return '$days gün önce aktifti';
   }
+
+  @override
+  String get onboardGoalTitle => 'Günlük odak hedefini belirle';
+
+  @override
+  String get onboardGoalBody =>
+      'Küçük ve düzenli seanslar maratondan iyidir. Her gün ulaşabileceğin bir hedef seç, serini koru.';
+
+  @override
+  String onboardGoalMinutes(int minutes) {
+    return '$minutes dk';
+  }
 }
