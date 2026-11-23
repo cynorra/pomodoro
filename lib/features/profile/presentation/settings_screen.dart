@@ -10,6 +10,7 @@ import '../../social/presentation/social_providers.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/data/state/locale_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../core/data/services/sfx_service.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -97,6 +98,7 @@ class _FocusStatusTile extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const _SfxTile(),
           _SettingsTile(
             icon: Icons.local_cafe_outlined,
             title: l10n.focusStatusTitle,
@@ -511,6 +513,44 @@ class _ClearCacheTile extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+
+/// Switch for the short feedback sounds (chime, coin, purchase).
+class _SfxTile extends StatefulWidget {
+  const _SfxTile();
+
+  @override
+  State<_SfxTile> createState() => _SfxTileState();
+}
+
+class _SfxTileState extends State<_SfxTile> {
+  bool _on = true;
+
+  @override
+  void initState() {
+    super.initState();
+    SfxService.isEnabled().then((v) {
+      if (mounted) setState(() => _on = v);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return _SettingsTile(
+      icon: Icons.volume_up_outlined,
+      title: l10n.sfxTitle,
+      trailing: Switch(
+        value: _on,
+        onChanged: (value) {
+          setState(() => _on = value);
+          SfxService.setEnabled(value);
+          if (value) SfxService.play(Sfx.coin);
+        },
       ),
     );
   }

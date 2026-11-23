@@ -1146,4 +1146,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String onboardGoalMinutes(int minutes) {
     return '$minutes dk';
   }
+
+  @override
+  String get sfxTitle => 'Ses efektleri';
 }

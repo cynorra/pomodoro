@@ -9,6 +9,9 @@ import '../../social/presentation/social_providers.dart';
 import '../../subjects/presentation/subject_chip.dart';
 import '../domain/pomodoro_state.dart';
 import 'pomodoro_notifier.dart';
+import 'package:flutter/services.dart';
+import '../../../core/data/services/sfx_service.dart';
+import 'reward_burst.dart';
 
 class PomodoroWidget extends ConsumerWidget {
   const PomodoroWidget({super.key});
@@ -24,18 +27,20 @@ class PomodoroWidget extends ConsumerWidget {
       pomodoroProvider.select((s) => s.lastReward),
       (previous, reward) {
         if (reward == null || reward.id == previous?.id) return;
-        if (!reward.wasFocus || reward.points <= 0) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              reward.boostPercent > 0
-                  ? l10n.sessionRewardBoost(
-                      reward.points, boostLabel(reward.boostPercent))
-                  : l10n.sessionRewardPlain(reward.points),
-            ),
-            backgroundColor: Colors.green.shade800,
-            behavior: SnackBarBehavior.floating,
-          ),
+        if (!reward.wasFocus) {
+          // Break is over: a soft descending pair and a light tap.
+          SfxService.play(Sfx.breakEnd);
+          HapticFeedback.lightImpact();
+          return;
+        }
+        if (reward.points <= 0) return;
+        showRewardBurst(
+          context,
+          points: reward.points,
+          boostLabel: reward.boostPercent > 0
+              ? l10n.sessionRewardBoost(
+                  reward.points, boostLabel(reward.boostPercent))
+              : null,
         );
       },
     );

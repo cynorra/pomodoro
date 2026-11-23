@@ -25,6 +25,8 @@ class NotificationService {
       : 'Notification when it is time for a break';
 
   static final _plugin = FlutterLocalNotificationsPlugin();
+  static const _sessionChannelId = 'pomodoro_channel_v2';
+  static const _breakChannelId = 'break_channel_v2';
   static bool _initialized = false;
 
   static Future<void> initialize() async {
@@ -49,11 +51,15 @@ class NotificationService {
     );
 
     if (Platform.isAndroid) {
+      // v2 channels: a channel's sound cannot be changed once created, so the
+      // new custom chime needs new ids.
       final channel = AndroidNotificationChannel(
-        'pomodoro_channel',
+        _sessionChannelId,
         _sessionChannelName,
         description: _sessionChannelDesc,
         importance: Importance.high,
+        sound: const RawResourceAndroidNotificationSound('session_complete'),
+        playSound: true,
       );
 
       await _plugin
@@ -62,10 +68,12 @@ class NotificationService {
           ?.createNotificationChannel(channel);
 
       final breakChannel = AndroidNotificationChannel(
-        'break_channel',
+        _breakChannelId,
         _breakChannelName,
         description: _breakChannelDesc,
         importance: Importance.max,
+        sound: const RawResourceAndroidNotificationSound('session_complete'),
+        playSound: true,
       );
 
       await _plugin
@@ -119,11 +127,13 @@ class NotificationService {
     required String body,
   }) async {
     final androidDetails = AndroidNotificationDetails(
-      'pomodoro_channel',
+      _sessionChannelId,
       _sessionChannelName,
       channelDescription: _sessionChannelDesc,
       importance: Importance.high,
       priority: Priority.high,
+      sound: const RawResourceAndroidNotificationSound('session_complete'),
+      playSound: true,
       color: _accent,
       icon: '@drawable/ic_stat_notification',
     );
@@ -155,24 +165,39 @@ class NotificationService {
 
     final notificationDetails = NotificationDetails(
       android: AndroidNotificationDetails(
-        'break_channel',
+        _breakChannelId,
         _breakChannelName,
         channelDescription: _breakChannelDesc,
         importance: Importance.max,
         priority: Priority.high,
+        sound: const RawResourceAndroidNotificationSound('session_complete'),
+        playSound: true,
         color: _accent,
       ),
       iOS: DarwinNotificationDetails(),
     );
 
-    await _plugin.zonedSchedule(
-      id: 1,
-      title: title,
-      body: body,
-      scheduledDate: scheduledTime,
-      notificationDetails: notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-    );
+    // A timer must ring on time even in Doze: ask for an exact alarm and fall back
+    // to the inexact one if the OS refuses.
+    try {
+      await _plugin.zonedSchedule(
+        id: 1,
+        title: title,
+        body: body,
+        scheduledDate: scheduledTime,
+        notificationDetails: notificationDetails,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      );
+    } catch (_) {
+      await _plugin.zonedSchedule(
+        id: 1,
+        title: title,
+        body: body,
+        scheduledDate: scheduledTime,
+        notificationDetails: notificationDetails,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      );
+    }
   }
 
   static const _timerId = 3;

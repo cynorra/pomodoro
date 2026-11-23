@@ -1155,4 +1155,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String onboardGoalMinutes(int minutes) {
     return '$minutes min';
   }
+
+  @override
+  String get sfxTitle => 'Sound effects';
 }

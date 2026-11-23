@@ -10,6 +10,7 @@ import 'subject_breakdown.dart';
 import 'weekly_report_card.dart';
 import '../../../l10n/l10n_extension.dart';
 import '../../../core/ui/responsive.dart';
+import '../../monetization/presentation/native_ad_card.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({super.key});
@@ -59,6 +60,12 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: _ActivityChart(filter: selectedFilter),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
+              child: NativeAdCard(),
             ),
           ),
           const SliverToBoxAdapter(

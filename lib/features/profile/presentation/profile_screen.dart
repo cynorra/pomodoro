@@ -18,6 +18,7 @@ import '../../social/presentation/invite_friends_screen.dart';
 import '../../../l10n/l10n_extension.dart';
 import '../../../core/utils/url_opener.dart';
 import '../../../core/data/services/auth_service.dart';
+import '../../monetization/presentation/native_ad_card.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -64,6 +65,8 @@ class ProfileScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             const LevelCard(),
+            const SizedBox(height: 16),
+            const NativeAdCard(),
             const SizedBox(height: 16),
             streakAsync.when(
               data: (streak) => _StatsGrid(

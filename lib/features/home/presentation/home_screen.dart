@@ -16,6 +16,7 @@ import '../../social/presentation/social_providers.dart';
 import '../../tasks/presentation/tasks_card.dart';
 import 'daily_goal_card.dart';
 import 'widgets/share_button.dart';
+import '../../monetization/presentation/native_ad_card.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -116,6 +117,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
                     child: TasksCard(),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
+                    child: NativeAdCard(),
                   ),
                 ),
                 SliverToBoxAdapter(

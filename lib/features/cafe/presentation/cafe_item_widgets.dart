@@ -11,6 +11,8 @@ import '../data/active_users_api.dart';
 import '../domain/cafe_rules.dart';
 import 'boost_notifier.dart';
 import 'cafe_notifier.dart';
+import 'package:flutter/services.dart';
+import '../../../core/data/services/sfx_service.dart';
 
 /// Balance, the running boost, shield count and (when switched on in Remote
 /// Config) how many people are focusing right now.
@@ -294,6 +296,8 @@ class _ItemSheet extends ConsumerWidget {
     );
     if (result == PurchaseResult.success) {
       ref.invalidate(cafeItemsProvider);
+      SfxService.play(Sfx.purchase);
+      HapticFeedback.mediumImpact();
       messenger.showSnackBar(_snack(l10n.purchaseSuccess));
     } else if (result == PurchaseResult.insufficientPoints) {
       messenger.showSnackBar(

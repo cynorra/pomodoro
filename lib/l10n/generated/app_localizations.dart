@@ -2071,6 +2071,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{minutes} min'**
   String onboardGoalMinutes(int minutes);
+
+  /// No description provided for @sfxTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound effects'**
+  String get sfxTitle;
 }
 
 class _AppLocalizationsDelegate
