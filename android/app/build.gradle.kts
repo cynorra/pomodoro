@@ -20,8 +20,7 @@ fun signingValue(propName: String, envName: String): String? =
 android {
     namespace = "com.cynora.studycafe.pomodoro"
     compileSdk = 36
-    ndkVersion = "27.1.12297006"
-    ndkPath = "D:/SDK-OZEL/ndk/27.1.12297006"
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
