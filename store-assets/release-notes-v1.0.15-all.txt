@@ -1,0 +1,261 @@
+<en-US>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</en-US>
+<af>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</af>
+<am>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</am>
+<ar>
+تم إصلاح إشعارات المؤقت في الخلفية وتنبيهات انتهاء الجلسة. تحسين تتبع الأهداف اليومية، والتقارير الأسبوعية، والمؤثرات الصوتية، والاستقرار العام.
+</ar>
+<az-AZ>
+Arka plan zamanlayıcı bildirimleri ve seans sonu uyarıları güvenilir odaklanma için düzeltildi. Günlük hedef takibi, haftalık raporlar, ses efektleri ve genel zamanlayıcı kararlılığı iyileştirildi.
+</az-AZ>
+<be>
+Исправлены фоновые уведомления таймера и оповещения об окончании сессии. Улучшено отслеживание ежедневных целей, еженедельные отчеты, звуковые эффекты и общая стабильность.
+</be>
+<bg>
+Поправени са фоновите известия на таймера и сигналите за край на сесията. Подобрено проследяване на дневните цели, седмични отчети, звукови ефекти и стабилност.
+</bg>
+<bn-BD>
+ব্যাকগ্রাউন্ড টাইমার বিজ্ঞপ্তি এবং সেশন শেষের সতর্কতা ঠিক করা হয়েছে। দৈনিক স্টাডি লক্ষ্য ট্র্যাকিং, সাপ্তাহিক রিপোর্ট, সাউন্ড ইফেক্ট এবং সামগ্রিক স্থিতিশীলতা উন্নত করা হয়েছে।
+</bn-BD>
+<ca>
+Se corrigieron las notificaciones en segundo plano y las alertas de fin de sesión. Se mejoró el seguimiento de objetivos diarios, informes semanales, efectos de sonido y estabilidad general.
+</ca>
+<cs-CZ>
+Opravena oznámení časovače na pozadí a upozornění na konec relace. Vylepšeno sledování denních cílů, týdenní přehledy, zvukové efekty a celková stabilita.
+</cs-CZ>
+<da-DK>
+Rettet baggrundsnotifikationer og advarsler ved sessionsafslutning. Forbedret daglige studiemål, ugentlige rapporter, lydeffekter og generel stabilitet.
+</da-DK>
+<de-DE>
+Fehler bei Benachrichtigungen im Hintergrund und Warnungen bei Sitzungsende behoben. Tägliche Studienziele, Wochenberichte, Soundeffekte und allgemeine Stabilität verbessert.
+</de-DE>
+<el-GR>
+Διορθώθηκαν οι ειδοποιήσεις χρονομέτρου στο παρασκήνιο και οι ειδοποιήσεις λήξης συνεδρίας. Βελτιώθηκαν οι καθημερινοί στόχοι, οι εβδομαδιαίες αναφορές και η σταθερότητα.
+</el-GR>
+<en-AU>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</en-AU>
+<en-CA>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</en-CA>
+<en-GB>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</en-GB>
+<en-IN>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</en-IN>
+<en-SG>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</en-SG>
+<en-ZA>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</en-ZA>
+<es-419>
+Se corrigieron las notificaciones en segundo plano y las alertas de fin de sesión. Se mejoró el seguimiento de objetivos diarios, informes semanales, efectos de sonido y estabilidad general.
+</es-419>
+<es-ES>
+Se corrigieron las notificaciones en segundo plano y las alertas de fin de sesión. Se mejoró el seguimiento de objetivos diarios, informes semanales, efectos de sonido y estabilidad general.
+</es-ES>
+<es-US>
+Se corrigieron las notificaciones en segundo plano y las alertas de fin de sesión. Se mejoró el seguimiento de objetivos diarios, informes semanales, efectos de sonido y estabilidad general.
+</es-US>
+<et>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</et>
+<eu-ES>
+Se corrigieron las notificaciones en segundo plano y las alertas de fin de sesión. Se mejoró el seguimiento de objetivos diarios, informes semanales, efectos de sonido y estabilidad general.
+</eu-ES>
+<fa>
+رفع مشکل اعلان‌های تایمر در پس‌زمینه و هشدارهای پایان جلسه. بهبود ردیابی اهداف روزانه، گزارش‌های هفتگی، جلوه‌های صوتی و پایداری کلی برنامه.
+</fa>
+<fa-AE>
+رفع مشکل اعلان‌های تایمر در پس‌زمینه و هشدارهای پایان جلسه. بهبود ردیابی اهداف روزانه، گزارش‌های هفتگی، جلوه‌های صوتی و پایداری کلی برنامه.
+</fa-AE>
+<fa-AF>
+رفع مشکل اعلان‌های تایمر در پس‌زمینه و هشدارهای پایان جلسه. بهبود ردیابی اهداف روزانه، گزارش‌های هفتگی، جلوه‌های صوتی و پایداری کلی برنامه.
+</fa-AF>
+<fa-IR>
+رفع مشکل اعلان‌های تایمر در پس‌زمینه و هشدارهای پایان جلسه. بهبود ردیابی اهداف روزانه، گزارش‌های هفتگی، جلوه‌های صوتی و پایداری کلی برنامه.
+</fa-IR>
+<fi-FI>
+Korjattu taustailmoitukset ja istunnon päättymishälytykset. Parannettu päivittäisiä opiskelutavoitteita, viikkoraportteja, äänitehosteita ja yleistä vakautta.
+</fi-FI>
+<fil>
+Inayos ang mga notification sa background at alerto sa pagtatapos ng session. Pinahusay ang pang-araw-araw na layunin, lingguhang ulat, sound effect, at pangkalahatang katatagan.
+</fil>
+<fr-CA>
+Correction des notifications d'arrière-plan et des alertes de fin de session. Amélioration du suivi des objectifs quotidiens, des rapports hebdomadaires, des effets sonores et de la stabilité.
+</fr-CA>
+<fr-FR>
+Correction des notifications d'arrière-plan et des alertes de fin de session. Amélioration du suivi des objectifs quotidiens, des rapports hebdomadaires, des effets sonores et de la stabilité.
+</fr-FR>
+<gl-ES>
+Se corrigieron las notificaciones en segundo plano y las alertas de fin de sesión. Se mejoró el seguimiento de objetivos diarios, informes semanales, efectos de sonido y estabilidad general.
+</gl-ES>
+<gu>
+बैकग्राउंड टाइमर नोटिफिकेशन और सत्र समाप्ति अलर्ट को ठीक किया गया। दैनिक अध्ययन लक्ष्यों की ट्रैकिंग, साप्ताहिक रिपोर्ट, ध्वनि प्रभाव और समग्र स्थिरता में सुधार।
+</gu>
+<hi-IN>
+बैकग्राउंड टाइमर नोटिफिकेशन और सत्र समाप्ति अलर्ट को ठीक किया गया। दैनिक अध्ययन लक्ष्यों की ट्रैकिंग, साप्ताहिक रिपोर्ट, ध्वनि प्रभाव और समग्र स्थिरता में सुधार।
+</hi-IN>
+<hr>
+Ispravljene su obavijesti u pozadini i upozorenja o završetku sesije. Poboljšano praćenje dnevnih ciljeva učenja, tjedna izvješća, zvučni efekti i stabilnost.
+</hr>
+<hu-HU>
+Javítva a háttérben futó értesítések és a munkamenet végére figyelmeztető jelzések. Javított napi tanulási célok, heti jelentések, hanghatások és általános stabilitás.
+</hu-HU>
+<hy-AM>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</hy-AM>
+<id>
+Memperbaiki notifikasi timer di latar belakang dan peringatan akhir sesi. Peningkatan pelacakan target harian, laporan mingguan, efek suara, dan stabilitas.
+</id>
+<is-IS>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</is-IS>
+<it-IT>
+Risolto il problema con le notifiche del timer in background e gli avvisi di fine sessione. Migliorato il monitoraggio degli obiettivi giornalieri, i report settimanali, gli effetti sonori e la stabilità.
+</it-IT>
+<iw-IL>
+תוקנו התראות הטיימר ברקע והתראות סיום הפעילות. שופרו מעקב יעדי הלימוד היומיים, הדוחות השבועיים, האפקטים הקוליים והיציבות הכללית.
+</iw-IL>
+<ja-JP>
+バックグラウンドでのタイマー通知およびセッション終了アラートを修正しました。毎日の学習目標トラッキング、週間レポート、サウンド効果、および全体的な安定性を向上。
+</ja-JP>
+<ka-GE>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</ka-GE>
+<kk>
+Исправлены фоновые уведомления таймера и оповещения об окончании сессии. Улучшено отслеживание ежедневных целей, еженедельные отчеты, звуковые эффекты и общая стабильность.
+</kk>
+<km-KH>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</km-KH>
+<kn-IN>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</kn-IN>
+<ko-KR>
+백그라운드 타이머 알림 및 세션 종료 알림을 수정했습니다. 일일 학습 목표 추적, 주간 보고서, 사운드 효과 및 전반적인 타이머 안정성이 향상되었습니다.
+</ko-KR>
+<ky-KG>
+Исправлены фоновые уведомления таймера и оповещения об окончании сессии. Улучшено отслеживание ежедневных целей, еженедельные отчеты, звуковые эффекты и общая стабильность.
+</ky-KG>
+<lo-LA>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</lo-LA>
+<lt>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</lt>
+<lv>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</lv>
+<mk-MK>
+Поправени са фоновите известия на таймера и сигналите за край на сесията. Подобрено проследяване на дневните цели, седмични отчети, звукови ефекти и стабилност.
+</mk-MK>
+<ml-IN>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</ml-IN>
+<mn-MN>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</mn-MN>
+<mr-IN>
+बैकग्राउंड टाइमर नोटिफिकेशन और सत्र समाप्ति अलर्ट को ठीक किया गया। दैनिक अध्ययन लक्ष्यों की ट्रैकिंग, साप्ताहिक रिपोर्ट, ध्वनि प्रभाव और समग्र स्थिरता में सुधार।
+</mr-IN>
+<ms>
+Memperbaiki pemberitahuan pemasa di latar belakang dan amaran tamat sesi. Penjejakan sasaran harian, laporan mingguan, kesan bunyi, dan kestabilan ditingkatkan.
+</ms>
+<ms-MY>
+Memperbaiki pemberitahuan pemasa di latar belakang dan amaran tamat sesi. Penjejakan sasaran harian, laporan mingguan, kesan bunyi, dan kestabilan ditingkatkan.
+</ms-MY>
+<my-MM>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</my-MM>
+<ne-NP>
+बैकग्राउंड टाइमर नोटिफिकेशन और सत्र समाप्ति अलर्ट को ठीक किया गया। दैनिक अध्ययन लक्ष्यों की ट्रैकिंग, साप्ताहिक रिपोर्ट, ध्वनि प्रभाव और समग्र स्थिरता में सुधार।
+</ne-NP>
+<nl-NL>
+Problemen met achtegrondmeldingen en meldingen aan het einde van de sessie opgelost. Dagelijkse studiedoelen, wekelijkse rapporten, geluidseffecten en stabiliteit verbeterd.
+</nl-NL>
+<no-NO>
+Rettet bakgrunnsvarsler og varsler ved øktens slutt. Forbedret daglige studiemål, ukerapporter, lydeffekter og generell stabilitet.
+</no-NO>
+<pa>
+बैकग्राउंड टाइमर नोटिफिकेशन और सत्र समाप्ति अलर्ट को ठीक किया गया। दैनिक अध्ययन लक्ष्यों की ट्रैकिंग, साप्ताहिक रिपोर्ट, ध्वनि प्रभाव और समग्र स्थिरता में सुधार।
+</pa>
+<pl-PL>
+Naprawiono powiadomienia w tle i alerty zakończenia sesji. Ulepszono śledzenie codziennych celów, raporty tygodniowe, efekty dźwiękowe i ogólną stabilność timera.
+</pl-PL>
+<pt-BR>
+Correção das notificações em segundo plano e alertas de término de sessão. Melhorias no acompanhamento de metas diárias, relatórios semanais, efeitos sonoros e estabilidade geral.
+</pt-BR>
+<pt-PT>
+Correção das notificações em segundo plano e alertas de fim de sessão. Melhorias no acompanhamento de metas diárias, relatórios semanais, efeitos sonoros e estabilidade geral.
+</pt-PT>
+<rm>
+Fehler bei Benachrichtigungen im Hintergrund und Warnungen bei Sitzungsende behoben. Tägliche Studienziele, Wochenberichte, Soundeffekte und allgemeine Stabilität verbessert.
+</rm>
+<ro>
+S-au remediat notificările din fundal și alertele de finalizare a sesiunii. S-au îmbunătățit obiectivele zilnice de studiu, rapoartele săptămânale, efectele sonore și stabilitatea.
+</ro>
+<ru-RU>
+Исправлены фоновые уведомления таймера и оповещения об окончании сессии. Улучшено отслеживание ежедневных целей, еженедельные отчеты, звуковые эффекты и общая стабильность.
+</ru-RU>
+<si-LK>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</si-LK>
+<sk>
+Opravena oznámení časovače na pozadí a upozornění na konec relace. Vylepšeno sledování denních cílů, týdenní přehledy, zvukové efekty a celková stabilita.
+</sk>
+<sl>
+Ispravljene su obavijesti u pozadini i upozorenja o završetku sesije. Poboljšano praćenje dnevnih ciljeva učenja, tjedna izvješća, zvučni efekti i stabilnost.
+</sl>
+<sq>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</sq>
+<sr>
+Ispravljene su obavijesti u pozadini i upozorenja o završetku sesije. Poboljšano praćenje dnevnih ciljeva učenja, tjedna izvješća, zvučni efekti i stabilnost.
+</sr>
+<sv-SE>
+Åtgärdat problem med bakgrundsaviseringar och varningar vid sessionsslut. Förbättrat dagliga studiemål, veckorapporter, ljudeffekter och allmän stabilitet.
+</sv-SE>
+<sw>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</sw>
+<ta-IN>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</ta-IN>
+<te-IN>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</te-IN>
+<th>
+แก้ไขการแจ้งเตือนตัวจับเวลาพื้นหลังและการแจ้งเตือนสิ้นสุดเซสชัน ปรับปรุงการติดตามเป้าหมายการเรียนรายวัน รายงานประจำสัปดาห์ เอฟเฟกต์เสียง และความเสถียรทั่วไป
+</th>
+<tr-TR>
+Arka plan zamanlayıcı bildirimleri ve seans sonu uyarıları güvenilir odaklanma için düzeltildi. Günlük hedef takibi, haftalık raporlar, ses efektleri ve genel zamanlayıcı kararlılığı iyileştirildi.
+</tr-TR>
+<uk>
+Виправлено фонові сповіщення таймера та сповіщення про завершення сесії. Покращено відстеження щоденних цілей, щотижневі звіти, звукові ефекти та загальну стабільність.
+</uk>
+<ur>
+بیک گراؤنڈ ٹائمر کی اطلاعات اور سیشن کے اختتام کے الرٹس کو درست کیا گیا۔ روزانہ مطالعے کے اہداف، ہفتہ وار رپورٹس، صوتی اثرات اور مجموعی استحکام میں بہتری۔
+</ur>
+<vi>
+Đã sửa thông báo hẹn giờ nền và cảnh báo kết thúc phiên. Cải thiện theo dõi mục tiêu học tập hàng ngày, báo cáo hàng tuần, hiệu ứng âm thanh và độ ổn định.
+</vi>
+<zh-CN>
+修复了后台计时器通知和会话结束提醒。优化了每日专注目标追踪、每周报告、音效以及整体稳定性。
+</zh-CN>
+<zh-HK>
+修復了後台計時器通知和會話結束提醒。優化了每日專注目標追蹤、每週報告、音效以及整體穩定性。
+</zh-HK>
+<zh-TW>
+修復了後台計時器通知和會話結束提醒。優化了每日專注目標追蹤、每週報告、音效以及整體穩定性。
+</zh-TW>
+<zu>
+Fixed background timer notifications and session-end alerts for reliable focus. Enhanced daily study goal tracking, weekly reports, sound effects, and overall timer stability.
+</zu>
