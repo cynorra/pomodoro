@@ -240,21 +240,27 @@ class _TopHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.orange.withValues(alpha: 0.15),
+            color: ZyraColors.primary.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: Colors.orange.withValues(alpha: 0.3),
+              color: ZyraColors.primary.withValues(alpha: 0.3),
             ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('🔥', style: TextStyle(fontSize: 18)),
-              const SizedBox(width: 6),
+              Icon(
+                Icons.local_fire_department_rounded,
+                color: currentStreak > 0
+                    ? ZyraColors.primary
+                    : ZyraColors.primary.withValues(alpha: 0.5),
+                size: 20,
+              ),
+              const SizedBox(width: 4),
               Text(
                 '$currentStreak',
                 style: ZyraTypography.titleMedium.copyWith(
-                  color: Colors.orange,
+                  color: ZyraColors.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
