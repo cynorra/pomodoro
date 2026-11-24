@@ -177,27 +177,15 @@ class NotificationService {
       iOS: DarwinNotificationDetails(),
     );
 
-    // A timer must ring on time even in Doze: ask for an exact alarm and fall back
-    // to the inexact one if the OS refuses.
-    try {
-      await _plugin.zonedSchedule(
-        id: 1,
-        title: title,
-        body: body,
-        scheduledDate: scheduledTime,
-        notificationDetails: notificationDetails,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      );
-    } catch (_) {
-      await _plugin.zonedSchedule(
-        id: 1,
-        title: title,
-        body: body,
-        scheduledDate: scheduledTime,
-        notificationDetails: notificationDetails,
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-      );
-    }
+    // Inexact scheduling avoids the restricted exact-alarm permission for Play Store compliance.
+    await _plugin.zonedSchedule(
+      id: 1,
+      title: title,
+      body: body,
+      scheduledDate: scheduledTime,
+      notificationDetails: notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+    );
   }
 
   static const _timerId = 3;
@@ -381,27 +369,15 @@ class NotificationService {
       );
       final when = tz.TZDateTime.now(tz.local).add(delay);
 
-      // A focus timer must end on time even in Doze: exact alarm first, inexact
-      // as a fallback if the OS refuses.
-      try {
-        await _plugin.zonedSchedule(
-          id: _sessionEndId,
-          title: title,
-          body: body,
-          scheduledDate: when,
-          notificationDetails: details,
-          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        );
-      } catch (_) {
-        await _plugin.zonedSchedule(
-          id: _sessionEndId,
-          title: title,
-          body: body,
-          scheduledDate: when,
-          notificationDetails: details,
-          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-        );
-      }
+      // Inexact scheduling avoids the restricted exact-alarm permission for Play Store compliance.
+      await _plugin.zonedSchedule(
+        id: _sessionEndId,
+        title: title,
+        body: body,
+        scheduledDate: when,
+        notificationDetails: details,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      );
     } catch (_) {}
   }
 
