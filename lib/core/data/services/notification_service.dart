@@ -368,24 +368,40 @@ class NotificationService {
       await initialize();
       if (!await _isPermitted()) return;
 
-      await _plugin.zonedSchedule(
-        id: _sessionEndId,
-        title: title,
-        body: body,
-        scheduledDate: tz.TZDateTime.now(tz.local).add(delay),
-        notificationDetails: NotificationDetails(
-          android: AndroidNotificationDetails(
-            'pomodoro_channel',
-            _sessionChannelName,
-            channelDescription: _sessionChannelDesc,
-            importance: Importance.high,
-            priority: Priority.high,
-            color: _accent,
-          ),
-          iOS: DarwinNotificationDetails(),
+      final details = NotificationDetails(
+        android: AndroidNotificationDetails(
+          'pomodoro_channel',
+          _sessionChannelName,
+          channelDescription: _sessionChannelDesc,
+          importance: Importance.high,
+          priority: Priority.high,
+          color: _accent,
         ),
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        iOS: DarwinNotificationDetails(),
       );
+      final when = tz.TZDateTime.now(tz.local).add(delay);
+
+      // A focus timer must end on time even in Doze: exact alarm first, inexact
+      // as a fallback if the OS refuses.
+      try {
+        await _plugin.zonedSchedule(
+          id: _sessionEndId,
+          title: title,
+          body: body,
+          scheduledDate: when,
+          notificationDetails: details,
+          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        );
+      } catch (_) {
+        await _plugin.zonedSchedule(
+          id: _sessionEndId,
+          title: title,
+          body: body,
+          scheduledDate: when,
+          notificationDetails: details,
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        );
+      }
     } catch (_) {}
   }
 
