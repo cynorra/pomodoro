@@ -22,8 +22,7 @@ class RemoteConfigService {
         'points_per_break_session': 2,
         'enable_ambient_sounds': true,
         'show_motivation_messages': true,
-        // Off until there is an audience worth showing (see the cafe screen).
-        'enable_rewarded_ads': false,
+        'enable_rewarded_ads': true,
         'show_active_users': false,
       });
 

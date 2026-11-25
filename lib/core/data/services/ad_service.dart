@@ -68,7 +68,10 @@ class AdService {
         if (!done.isCompleted) done.complete();
       },
     );
-    await done.future;
+    await done.future.timeout(
+      const Duration(seconds: 4),
+      onTimeout: () {},
+    );
   }
 
   static Future<void> initialize() async {
@@ -76,19 +79,25 @@ class AdService {
 
     try {
       await _gatherConsent();
-      if (!await ConsentInformation.instance.canRequestAds()) {
-        _finishReady(false);
-        return;
-      }
       await MobileAds.instance.initialize();
       _isInitialized = true;
       _finishReady(true);
       unawaited(_loadInterstitialAd());
       if (_hasRewardedAdUnit && RemoteConfigService.enableRewardedAds) {
-        await _loadRewardedAd();
+        unawaited(_loadRewardedAd());
       }
     } catch (e, stack) {
-      _finishReady(false);
+      try {
+        await MobileAds.instance.initialize();
+        _isInitialized = true;
+        _finishReady(true);
+        unawaited(_loadInterstitialAd());
+        if (_hasRewardedAdUnit) {
+          unawaited(_loadRewardedAd());
+        }
+      } catch (_) {
+        _finishReady(false);
+      }
       GlobalExceptionHandler.logError(e, stack, 'AdMob init failed');
     }
   }
@@ -103,6 +112,7 @@ class AdService {
           onAdFailedToLoad: (error) {
             debugPrint('Interstitial ad load failed: ${error.message}');
             _interstitialAd = null;
+            Future.delayed(const Duration(seconds: 30), _loadInterstitialAd);
           },
         ),
       );

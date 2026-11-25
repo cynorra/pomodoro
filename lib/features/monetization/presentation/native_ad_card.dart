@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/ad_service.dart';
@@ -14,6 +15,7 @@ class _NativeAdCardState extends State<NativeAdCard> {
   bool _loaded = false;
   bool _disposed = false;
   bool _started = false;
+  Timer? _retryTimer;
 
   @override
   void didChangeDependencies() {
@@ -21,11 +23,12 @@ class _NativeAdCardState extends State<NativeAdCard> {
     if (_started) return;
     _started = true;
     AdService.adsReady.then((ok) {
-      if (ok && !_disposed) _load();
+      if (ok && !_disposed && mounted) _load();
     });
   }
 
   void _load() {
+    if (_disposed || !mounted) return;
     final scheme = Theme.of(context).colorScheme;
     final ad = NativeAd(
       adUnitId: AdService.nativeAdUnitId,
@@ -45,7 +48,7 @@ class _NativeAdCardState extends State<NativeAdCard> {
       ),
       listener: NativeAdListener(
         onAdLoaded: (loaded) {
-          if (_disposed) {
+          if (_disposed || !mounted) {
             loaded.dispose();
             return;
           }
@@ -53,10 +56,16 @@ class _NativeAdCardState extends State<NativeAdCard> {
         },
         onAdFailedToLoad: (failed, error) {
           failed.dispose();
-          if (!_disposed) {
+          if (!_disposed && mounted) {
             setState(() {
               _ad = null;
               _loaded = false;
+            });
+            _retryTimer?.cancel();
+            _retryTimer = Timer(const Duration(seconds: 30), () {
+              if (!_disposed && mounted && _ad == null) {
+                _load();
+              }
             });
           }
         },
@@ -69,6 +78,7 @@ class _NativeAdCardState extends State<NativeAdCard> {
   @override
   void dispose() {
     _disposed = true;
+    _retryTimer?.cancel();
     _ad?.dispose();
     _ad = null;
     super.dispose();

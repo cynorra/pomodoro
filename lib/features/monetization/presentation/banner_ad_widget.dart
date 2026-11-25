@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/ad_service.dart';
@@ -15,6 +16,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   bool _disposed = false;
   bool _isLoading = false;
   AdSize? _adSize;
+  Timer? _retryTimer;
 
   @override
   void didChangeDependencies() {
@@ -25,6 +27,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   }
 
   Future<void> _loadAdaptiveBanner() async {
+    if (_disposed || !mounted) return;
     _isLoading = true;
     final ready = await AdService.adsReady;
     if (!ready || _disposed || !mounted) {
@@ -33,7 +36,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
     }
 
     final mediaQuery = MediaQuery.of(context);
-    final width = mediaQuery.size.width.truncate();
+    final width = mediaQuery.size.width.truncate().clamp(320, 1200);
     final orientation = mediaQuery.orientation;
 
     AdSize? size;
@@ -48,7 +51,10 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
 
     size ??= AdSize.banner;
 
-    if (_disposed || !mounted) return;
+    if (_disposed || !mounted) {
+      _isLoading = false;
+      return;
+    }
 
     final ad = BannerAd(
       adUnitId: AdService.bannerAdUnitId,
@@ -56,6 +62,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (loaded) {
+          _isLoading = false;
           if (_disposed || !mounted) {
             loaded.dispose();
             return;
@@ -67,12 +74,18 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
           });
         },
         onAdFailedToLoad: (failed, error) {
-          // Kod 3 (no fill) veya herhangi bir yükleme hatasında sessizce dispose et
+          _isLoading = false;
           failed.dispose();
           if (!_disposed && mounted) {
             setState(() {
               _loaded = false;
               _ad = null;
+            });
+            _retryTimer?.cancel();
+            _retryTimer = Timer(const Duration(seconds: 25), () {
+              if (!_disposed && mounted && _ad == null && !_isLoading) {
+                _loadAdaptiveBanner();
+              }
             });
           }
         },
@@ -85,6 +98,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   @override
   void dispose() {
     _disposed = true;
+    _retryTimer?.cancel();
     _ad?.dispose();
     _ad = null;
     super.dispose();
