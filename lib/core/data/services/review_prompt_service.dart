@@ -7,7 +7,7 @@ class ReviewPromptService {
   static const _storage = FlutterSecureStorage();
   static const _key = 'app_review_prompt_state_v1';
   static const _packageId = 'com.cynora.studycafe.pomodoro';
-  static const _minLaunches = 3;
+  static const _minLaunches = 2;
   static const _maxPrompts = 2;
   static const _cooldownMs = 21 * 24 * 60 * 60 * 1000;
 
