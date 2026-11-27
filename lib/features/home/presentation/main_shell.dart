@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/data/services/review_prompt_service.dart';
 import '../../../core/ui/widgets/bottom_nav_bar.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../monetization/presentation/banner_ad_widget.dart';
@@ -28,7 +29,10 @@ class _MainShellState extends ConsumerState<MainShell> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _useInstallCode());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _useInstallCode();
+      ReviewPromptService.maybePrompt(context);
+    });
   }
 
   /// A friend's code that came with the install link is used automatically.
