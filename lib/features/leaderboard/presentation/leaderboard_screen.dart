@@ -4,25 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/data/services/moderation_service.dart';
 import '../../../core/ui/zyra_theme.dart';
+import '../../../core/ui/widgets/glass_card.dart';
 import '../../../l10n/l10n_extension.dart';
-import '../../../core/ui/responsive.dart';
-
-const _rankAvatars = ['🥇', '🥈', '🥉'];
 
 final _leaderboardProvider =
     FutureProvider.autoDispose<List<_LeaderboardEntry>>((ref) async {
   final currentUid = FirebaseAuth.instance.currentUser?.uid;
   if (currentUid == null) return [];
 
-  // `leaderboard` holds only public fields (no email), unlike `users`.
   final snapshot = await FirebaseFirestore.instance
       .collection('leaderboard')
       .orderBy('totalPoints', descending: true)
       .limit(50)
       .get();
 
-  // Documents are client-written, so read every field defensively: one
-  // malformed entry must not break the list for everyone.
   String textOf(Object? v) => v is String ? v.trim() : '';
   int numberOf(Object? v) => v is num ? v.toInt() : 0;
 
@@ -37,7 +32,6 @@ final _leaderboardProvider =
         name: textOf(docs[i].data()['displayName']),
         points: numberOf(docs[i].data()['totalPoints']),
         streak: numberOf(docs[i].data()['currentStreak']),
-        avatar: i < _rankAvatars.length ? _rankAvatars[i] : '🏅',
         isCurrentUser: docs[i].id == currentUid,
       ),
   ];
@@ -58,13 +52,21 @@ class LeaderboardScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ZyraColors.background,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: ZyraColors.background,
         elevation: 0,
-        title: Text(
-          context.l10n.leaderboard,
-          style: ZyraTypography.headlineMedium,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(context.l10n.leaderboard, style: ZyraTypography.titleLarge),
+            Text(
+              'GECE SIRALAMASI',
+              style: ZyraTypography.sectionLabel.copyWith(
+                fontSize: 10,
+                color: ZyraColors.textTertiary,
+              ),
+            ),
+          ],
         ),
-        centerTitle: true,
         actions: [
           if ((ref.watch(_hiddenCountProvider).value ?? 0) > 0)
             IconButton(
@@ -95,24 +97,13 @@ class LeaderboardScreen extends ConsumerWidget {
                   : context.l10n.leaderboardSignInPrompt,
             );
           }
-          return Column(
-            children: [
-              _TopThreePodium(
-                entries: list.take(3).toList(),
-                onMore: (e) => _showActions(context, ref, e),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: list.length > 3 ? list.length - 3 : 0,
-                  itemBuilder: (context, index) => _LeaderboardTile(
-                    entry: list[index + 3],
-                    onMore: () => _showActions(context, ref, list[index + 3]),
-                  ),
-                ),
-              ),
-            ],
+          return ListView.builder(
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 24),
+            itemCount: list.length,
+            itemBuilder: (context, index) => _LeaderboardTile(
+              entry: list[index],
+              onMore: () => _showActions(context, ref, list[index]),
+            ),
           );
         },
       ),
@@ -136,12 +127,15 @@ Future<void> _showActions(
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            leading: const Icon(Icons.flag_outlined),
+            leading: const Icon(Icons.flag_outlined, color: ZyraColors.primary),
             title: Text(l10n.reportPlayer),
             onTap: () => Navigator.pop(sheetContext, 'report'),
           ),
           ListTile(
-            leading: const Icon(Icons.visibility_off_outlined),
+            leading: const Icon(
+              Icons.visibility_off_outlined,
+              color: ZyraColors.textSecondary,
+            ),
             title: Text(l10n.hidePlayer),
             onTap: () => Navigator.pop(sheetContext, 'hide'),
           ),
@@ -199,149 +193,28 @@ class _Message extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            text,
-            style: ZyraTypography.bodyMedium.copyWith(
-              color: ZyraColors.onSurface.withValues(alpha: 0.7),
-            ),
-          ),
-          if (actionLabel != null)
-            TextButton(onPressed: onAction, child: Text(actionLabel!)),
-        ],
-      ),
-    );
-  }
-}
-
-class _TopThreePodium extends StatelessWidget {
-  final List<_LeaderboardEntry> entries;
-  final ValueChanged<_LeaderboardEntry> onMore;
-
-  const _TopThreePodium({required this.entries, required this.onMore});
-
-  @override
-  Widget build(BuildContext context) {
-    if (entries.length < 3) return const SizedBox.shrink();
-
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          _PodiumItem(
-            entry: entries[1],
-            height: context.scaled(120),
-            order: 2,
-            onMore: () => onMore(entries[1]),
-          ),
-          _PodiumItem(
-            entry: entries[0],
-            height: context.scaled(160),
-            order: 1,
-            onMore: () => onMore(entries[0]),
-          ),
-          _PodiumItem(
-            entry: entries[2],
-            height: context.scaled(100),
-            order: 3,
-            onMore: () => onMore(entries[2]),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PodiumItem extends StatelessWidget {
-  final _LeaderboardEntry entry;
-  final double height;
-  final int order;
-  final VoidCallback onMore;
-
-  const _PodiumItem({
-    required this.entry,
-    required this.height,
-    required this.order,
-    required this.onMore,
-  });
-
-  Color get _color {
-    switch (order) {
-      case 1:
-        return const Color(0xFFFFD700);
-      case 2:
-        return const Color(0xFFC0C0C0);
-      case 3:
-        return const Color(0xFFCD7F32);
-      default:
-        return ZyraColors.primary;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(entry.avatar, style: TextStyle(fontSize: context.scaled(48))),
-        const SizedBox(height: 8),
-        Text(
-          entry.name,
-          style: ZyraTypography.labelLarge.copyWith(
-            color: ZyraColors.onSurface,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        if (!entry.isCurrentUser)
-          IconButton(
-            tooltip: context.l10n.reportPlayer,
-            visualDensity: VisualDensity.compact,
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(minWidth: 32, minHeight: 28),
-            iconSize: 18,
-            icon: const Icon(Icons.more_horiz),
-            onPressed: onMore,
-          ),
-        const SizedBox(height: 4),
-        Text(
-          context.l10n.pointsCount(entry.points),
-          style: ZyraTypography.labelSmall.copyWith(
-            color: _color,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          width: context.scaled(80),
-          height: height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                _color.withValues(alpha: 0.8),
-                _color.withValues(alpha: 0.3),
-              ],
-            ),
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(12),
-            ),
-          ),
-          child: Center(
-            child: Text(
-              '#${entry.rank}',
-              style: ZyraTypography.headlineMedium.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: GlassCard(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                text,
+                style: ZyraTypography.bodyMedium.copyWith(
+                  color: ZyraColors.textSecondary,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
+              if (actionLabel != null) ...[
+                const SizedBox(height: 12),
+                TextButton(onPressed: onAction, child: Text(actionLabel!)),
+              ],
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
@@ -354,79 +227,131 @@ class _LeaderboardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: entry.isCurrentUser
-            ? ZyraColors.primary.withValues(alpha: 0.15)
-            : ZyraColors.surface.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
+    final rankText = entry.rank.toString().padLeft(2, '0');
+    final initials = entry.name.trim().isNotEmpty
+        ? entry.name.trim().characters.take(2).toString().toUpperCase()
+        : 'NA';
+    final isTop3 = entry.rank <= 3;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        decoration: BoxDecoration(
           color: entry.isCurrentUser
-              ? ZyraColors.primary
-              : ZyraColors.onSurface.withValues(alpha: 0.1),
-          width: entry.isCurrentUser ? 2 : 1,
+              ? ZyraColors.surfaceElevated
+              : ZyraColors.surface,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: entry.isCurrentUser
+                ? ZyraColors.primary.withValues(alpha: 0.6)
+                : ZyraColors.hairline,
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: ZyraColors.onSurface.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Text(
-                '#${entry.rank}',
-                style: ZyraTypography.labelLarge.copyWith(
-                  color: ZyraColors.onSurface,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 28,
+                child: Text(
+                  rankText,
+                  style: ZyraTypography.dataMono.copyWith(
+                    color: isTop3 || entry.isCurrentUser
+                        ? ZyraColors.primary
+                        : ZyraColors.textTertiary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Text(entry.avatar, style: const TextStyle(fontSize: 28)),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  entry.name,
-                  style: ZyraTypography.titleMedium.copyWith(
-                    color: ZyraColors.onSurface,
-                    fontWeight: entry.isCurrentUser
-                        ? FontWeight.bold
-                        : FontWeight.normal,
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: entry.isCurrentUser
+                      ? ZyraColors.primary.withValues(alpha: 0.18)
+                      : ZyraColors.surfaceElevated,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: isTop3
+                        ? ZyraColors.primary.withValues(alpha: 0.45)
+                        : ZyraColors.hairlineStrong,
                   ),
                 ),
-                Text(
-                  context.l10n.streakDays(entry.streak),
-                  style: ZyraTypography.labelSmall.copyWith(
-                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
+                alignment: Alignment.center,
+                child: Text(
+                  initials,
+                  style: ZyraTypography.dataMono.copyWith(
+                    fontSize: 12,
+                    color: entry.isCurrentUser
+                        ? ZyraColors.primaryBright
+                        : ZyraColors.onBackground,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            entry.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: ZyraTypography.titleMedium.copyWith(
+                              fontSize: 14,
+                              color: entry.isCurrentUser
+                                  ? ZyraColors.primaryBright
+                                  : ZyraColors.onBackground,
+                            ),
+                          ),
+                        ),
+                        if (entry.isCurrentUser) ...[
+                          const SizedBox(width: 6),
+                          const NocturnePillBadge(
+                            label: 'SEN',
+                            textColor: ZyraColors.primaryBright,
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      context.l10n.streakDays(entry.streak),
+                      style: ZyraTypography.labelSmall.copyWith(
+                        color: ZyraColors.textTertiary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '${entry.points}',
+                style: ZyraTypography.dataMono.copyWith(
+                  color: entry.isCurrentUser || isTop3
+                      ? ZyraColors.primaryBright
+                      : ZyraColors.onBackground,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+              ),
+              if (!entry.isCurrentUser)
+                IconButton(
+                  tooltip: context.l10n.reportPlayer,
+                  visualDensity: VisualDensity.compact,
+                  icon: const Icon(
+                    Icons.more_vert_rounded,
+                    size: 18,
+                    color: ZyraColors.textTertiary,
+                  ),
+                  onPressed: onMore,
+                ),
+            ],
           ),
-          Text(
-            '${entry.points}',
-            style: ZyraTypography.titleMedium.copyWith(
-              color: ZyraColors.primary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          if (!entry.isCurrentUser)
-            IconButton(
-              tooltip: context.l10n.reportPlayer,
-              visualDensity: VisualDensity.compact,
-              icon: const Icon(Icons.more_vert, size: 20),
-              onPressed: onMore,
-            ),
-        ],
+        ),
       ),
     );
   }
@@ -438,7 +363,6 @@ class _LeaderboardEntry {
   final String name;
   final int points;
   final int streak;
-  final String avatar;
   final bool isCurrentUser;
 
   const _LeaderboardEntry({
@@ -447,7 +371,6 @@ class _LeaderboardEntry {
     required this.name,
     required this.points,
     required this.streak,
-    required this.avatar,
     this.isCurrentUser = false,
   });
 }

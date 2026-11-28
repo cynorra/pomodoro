@@ -149,6 +149,37 @@ class PomodoroNotifier extends Notifier<PomodoroState>
 
   void _clearPresence() => unawaited(clearFocusStatus(ref));
 
+  /// Switches between focus, short break, and long break when not running.
+  void selectSessionType(SessionType type) {
+    if (_isCompletingSession || state.sessionType == type) return;
+    _timer?.cancel();
+    _timer = null;
+    _deadline = null;
+    unawaited(NotificationService.cancelSessionEnd());
+    unawaited(NotificationService.cancelTimerRunning());
+    _clearPresence();
+    state = state.copyWith(
+      isRunning: false,
+      sessionType: type,
+      remainingSeconds: _getDuration(type) * 60,
+    );
+  }
+
+  /// Total duration in seconds for the given session type.
+  /// Falls back to standard 25/5/15 durations when Remote Config isn't ready
+  /// (e.g. in unit/widget tests without Firebase initialized).
+  int totalSecondsFor(SessionType type) {
+    try {
+      return _getDuration(type) * 60;
+    } catch (_) {
+      return switch (type) {
+        SessionType.focus => 25 * 60,
+        SessionType.shortBreak => 5 * 60,
+        SessionType.longBreak => 15 * 60,
+      };
+    }
+  }
+
   /// Stops the timer and puts the current session back to its full length.
   /// No points are given for an unfinished session.
   void resetTimer() {

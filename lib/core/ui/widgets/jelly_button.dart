@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import '../zyra_theme.dart';
 
+/// Nocturne Atelier pill action button.
+///
+/// Full-pill silhouette (`borderRadius: 9999`), Caramel `#D98E4A` fill with
+/// Espresso `#14100D` text by default, subtle `scale(0.98)` press feedback,
+/// and optional ghost/outlined variant.
 class JellyButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final String label;
@@ -9,6 +14,7 @@ class JellyButton extends StatefulWidget {
   final double height;
   final double? width;
   final Widget? icon;
+  final bool outlined;
 
   const JellyButton({
     super.key,
@@ -16,9 +22,10 @@ class JellyButton extends StatefulWidget {
     required this.label,
     this.backgroundColor,
     this.textColor,
-    this.height = 54,
+    this.height = 52,
     this.width,
     this.icon,
+    this.outlined = false,
   });
 
   @override
@@ -35,10 +42,10 @@ class _JellyButtonState extends State<JellyButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 120),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.94).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.98).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
   }
 
@@ -70,8 +77,12 @@ class _JellyButtonState extends State<JellyButton>
   @override
   Widget build(BuildContext context) {
     final bool isEnabled = widget.onPressed != null;
-    final bg = widget.backgroundColor ?? ZyraColors.primary;
-    final fg = widget.textColor ?? Colors.black;
+    final bg = widget.outlined
+        ? (widget.backgroundColor ?? ZyraColors.surface)
+        : (widget.backgroundColor ?? ZyraColors.primary);
+    final fg = widget.outlined
+        ? (widget.textColor ?? ZyraColors.onBackground)
+        : (widget.textColor ?? ZyraColors.onPrimary);
 
     return AnimatedBuilder(
       animation: _scaleAnimation,
@@ -88,32 +99,32 @@ class _JellyButtonState extends State<JellyButton>
         child: Container(
           height: widget.height,
           width: widget.width ?? double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: isEnabled ? bg : bg.withValues(alpha: 0.4),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: isEnabled
-                ? [
-                    BoxShadow(
-                      color: bg.withValues(alpha: 0.3),
-                      blurRadius: 16,
-                      offset: const Offset(0, 6),
-                    ),
-                  ]
-                : [],
+            borderRadius: BorderRadius.circular(999),
+            border: widget.outlined
+                ? Border.all(color: ZyraColors.hairlineStrong, width: 1)
+                : null,
           ),
           alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.icon != null) ...[
                 widget.icon!,
                 const SizedBox(width: 8),
               ],
-              Text(
-                widget.label,
-                style: ZyraTypography.labelLarge.copyWith(
-                  color: isEnabled ? fg : fg.withValues(alpha: 0.6),
-                  fontWeight: FontWeight.bold,
+              Flexible(
+                child: Text(
+                  widget.label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: ZyraTypography.labelLarge.copyWith(
+                    color: isEnabled ? fg : fg.withValues(alpha: 0.55),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],

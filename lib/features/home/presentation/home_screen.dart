@@ -7,6 +7,7 @@ import '../../../core/data/state/streak_notifier.dart';
 import '../../../core/data/state/achievement_event_notifier.dart';
 import '../../../core/data/models/achievement.dart';
 import '../../../core/ui/widgets/confetti_widget.dart';
+import '../../../core/ui/widgets/glass_card.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../pomodoro/presentation/pomodoro_widget.dart';
 import '../../monetization/presentation/rewarded_ad_button.dart';
@@ -86,7 +87,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               slivers: [
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                     child: streakAsync.when(
                       data: (streak) => _TopHeader(
                         totalPoints: userState.totalPoints,
@@ -94,23 +95,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         currentStreak: streak,
                         l10n: l10n,
                       ),
-                      loading: () => const SizedBox(height: 80),
-                      error: (_, __) => const SizedBox(height: 80),
+                      loading: () => const SizedBox(height: 52),
+                      error: (_, __) => const SizedBox(height: 52),
                     ),
                   ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
                     child: const PomodoroWidget()
                         .animate()
-                        .fadeIn(delay: 200.ms, duration: 600.ms),
+                        .fadeIn(delay: 120.ms, duration: 480.ms),
                   ),
                 ),
-                SliverToBoxAdapter(
+                const SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                    child: const DailyGoalCard(),
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
+                    child: DailyGoalCard(),
                   ),
                 ),
                 const SliverToBoxAdapter(
@@ -130,15 +131,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: const RewardedAdButton()
                         .animate()
-                        .fadeIn(delay: 400.ms, duration: 600.ms),
+                        .fadeIn(delay: 260.ms, duration: 480.ms),
                   ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
                     child: _MotivationCard(l10n: l10n)
                         .animate()
-                        .fadeIn(delay: 600.ms, duration: 600.ms),
+                        .fadeIn(delay: 360.ms, duration: 480.ms),
                   ),
                 ),
               ],
@@ -170,22 +171,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       context: context,
       builder: (dialogContext) => Dialog(
         backgroundColor: Colors.transparent,
-        child: Container(
+        child: GlassCard(
+          elevated: true,
           padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: ZyraColors.surface,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: ZyraColors.primary.withValues(alpha: 0.3),
-              width: 1.5,
-            ),
-          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 achievement.iconEmoji,
-                style: const TextStyle(fontSize: 64),
+                style: const TextStyle(fontSize: 56),
               ),
               const SizedBox(height: 16),
               Text(
@@ -193,6 +187,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 style: ZyraTypography.headlineMedium.copyWith(
                   color: ZyraColors.primary,
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
@@ -202,15 +197,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
-              TextButton(
+              const SizedBox(height: 20),
+              ElevatedButton(
                 onPressed: () => Navigator.pop(dialogContext),
-                child: Text(
-                  l10n.awesome,
-                  style: ZyraTypography.labelLarge.copyWith(
-                    color: ZyraColors.primary,
-                  ),
-                ),
+                child: Text(l10n.awesome),
               ),
             ],
           ),
@@ -237,71 +227,49 @@ class _TopHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          decoration: BoxDecoration(
-            color: ZyraColors.primary.withValues(alpha: 0.15),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: ZyraColors.primary.withValues(alpha: 0.3),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                Icons.local_fire_department_rounded,
-                color: currentStreak > 0
-                    ? ZyraColors.primary
-                    : ZyraColors.primary.withValues(alpha: 0.5),
-                size: 20,
-              ),
-              const SizedBox(width: 4),
               Text(
-                '$currentStreak',
-                style: ZyraTypography.titleMedium.copyWith(
-                  color: ZyraColors.primary,
-                  fontWeight: FontWeight.bold,
+                'NOCTURNE',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: ZyraTypography.titleLarge.copyWith(
+                  fontSize: 16,
+                  letterSpacing: 1.4,
+                  color: ZyraColors.onBackground,
+                ),
+              ),
+              Text(
+                l10n.navFocus.toUpperCase(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: ZyraTypography.sectionLabel.copyWith(
+                  fontSize: 10,
+                  color: ZyraColors.textTertiary,
+                  letterSpacing: 1.4,
                 ),
               ),
             ],
           ),
         ),
-        const Spacer(),
-        Flexible(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: ZyraColors.primary.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: ZyraColors.primary.withValues(alpha: 0.3),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.stars_rounded,
-                    color: ZyraColors.primary,
-                    size: 18,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    '$totalPoints',
-                    style: ZyraTypography.titleMedium.copyWith(
-                      color: ZyraColors.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        const SizedBox(width: 6),
+        NocturnePillBadge(
+          label: '$currentStreak',
+          icon: Icons.local_fire_department_rounded,
+          textColor: currentStreak > 0
+              ? ZyraColors.primary
+              : ZyraColors.textTertiary,
+          backgroundColor: ZyraColors.surface,
         ),
         const SizedBox(width: 4),
+        NocturnePillBadge(
+          label: '$totalPoints',
+          dotColor: ZyraColors.primary,
+          textColor: ZyraColors.primaryBright,
+          backgroundColor: ZyraColors.surface,
+        ),
         const _BellButton(),
         ShareButton(
           minutesStudied: totalMinutes,
@@ -322,16 +290,20 @@ class _BellButton extends ConsumerWidget {
     final unseen = ref.watch(unseenGiftCountProvider);
     return IconButton(
       tooltip: AppLocalizations.of(context).notifications,
+      visualDensity: VisualDensity.compact,
       onPressed: () => Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => const NotificationsScreen()),
       ),
       icon: Badge(
         isLabelVisible: unseen > 0,
+        backgroundColor: ZyraColors.primary,
+        textColor: ZyraColors.onPrimary,
         label: Text('$unseen'),
         child: const Icon(
           Icons.notifications_none_rounded,
-          color: ZyraColors.primary,
+          color: ZyraColors.textSecondary,
+          size: 22,
         ),
       ),
     );
@@ -345,40 +317,34 @@ class _MotivationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GlassCard(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: ZyraColors.surface.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: ZyraColors.onSurface.withValues(alpha: 0.1),
-        ),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               const Icon(
-                Icons.lightbulb_outline,
+                Icons.auto_stories_outlined,
                 color: ZyraColors.primary,
-                size: 20,
+                size: 16,
               ),
               const SizedBox(width: 8),
               Text(
-                l10n.dailyMotivation,
-                style: ZyraTypography.titleMedium.copyWith(
+                l10n.dailyMotivation.toUpperCase(),
+                style: ZyraTypography.sectionLabel.copyWith(
                   color: ZyraColors.primary,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           Text(
-            l10n.motivationText,
-            style: ZyraTypography.bodyMedium.copyWith(
-              color: ZyraColors.onSurface.withValues(alpha: 0.8),
-              height: 1.5,
+            '“${l10n.motivationText}”',
+            style: ZyraTypography.editorialItalic.copyWith(
+              fontSize: 17,
+              color: ZyraColors.onBackground.withValues(alpha: 0.9),
+              height: 1.45,
             ),
           ),
         ],

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/data/services/share_service.dart';
 import '../../../core/ui/zyra_theme.dart';
+import '../../../core/ui/widgets/glass_card.dart';
+import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../social/presentation/social_providers.dart';
 import '../data/room_api.dart';
 
-/// Study together: join a friend's room with their invite code, or host your
-/// own with yours, and see who studied recently.
+/// Nocturne Atelier "Gece Kütüphanesi" study room screen.
 class RoomScreen extends ConsumerStatefulWidget {
   const RoomScreen({super.key});
 
@@ -71,15 +72,37 @@ class _RoomScreenState extends ConsumerState<RoomScreen> {
     return Scaffold(
       backgroundColor: ZyraColors.background,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: ZyraColors.background,
         elevation: 0,
-        title: Text(l10n.roomTitle, style: ZyraTypography.headlineMedium),
-        centerTitle: true,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.roomTitle, style: ZyraTypography.titleLarge),
+            Text(
+              'GECE KÜTÜPHANESİ',
+              style: ZyraTypography.sectionLabel.copyWith(
+                fontSize: 10,
+                color: ZyraColors.textTertiary,
+              ),
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: !signedIn
-            ? Center(child: Text(l10n.roomSignInRequired))
+            ? Center(
+                child: GlassCard(
+                  padding: const EdgeInsets.all(24),
+                  child: Text(
+                    l10n.roomSignInRequired,
+                    style: ZyraTypography.bodyMedium.copyWith(
+                      color: ZyraColors.textSecondary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
             : _code == null
                 ? _joinForm(l10n)
                 : _roomView(l10n, _code!),
@@ -91,31 +114,65 @@ class _RoomScreenState extends ConsumerState<RoomScreen> {
     final myCode = ref.watch(inviteCodeProvider).value;
     return ListView(
       children: [
-        Text(l10n.roomIntro,
-            style: ZyraTypography.bodyMedium
-                .copyWith(color: ZyraColors.onSurface.withValues(alpha: 0.8))),
+        GlassCard(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const NocturnePillBadge(
+                label: 'KÜTÜPHANE & ŞÖMİNE · 38 dB',
+                dotColor: ZyraColors.primary,
+              ),
+              const SizedBox(height: 14),
+              Text(
+                '“Fısıltı dahi yok; yalnızca sayfaların hışırtısı ve lamba ışığı.”',
+                style: ZyraTypography.editorialItalic.copyWith(fontSize: 18),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                l10n.roomIntro,
+                style: ZyraTypography.bodySmall.copyWith(height: 1.5),
+              ),
+            ],
+          ),
+        ),
         const SizedBox(height: 16),
-        TextField(
-          controller: _controller,
-          maxLength: 6,
-          textCapitalization: TextCapitalization.characters,
-          decoration: InputDecoration(
-            hintText: l10n.roomCodeHint,
-            errorText: _error,
+        GlassCard(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                controller: _controller,
+                maxLength: 6,
+                textCapitalization: TextCapitalization.characters,
+                style: ZyraTypography.dataMono.copyWith(
+                  fontSize: 18,
+                  letterSpacing: 3,
+                ),
+                decoration: InputDecoration(
+                  hintText: l10n.roomCodeHint,
+                  errorText: _error,
+                  counterText: '',
+                ),
+                onSubmitted: _join,
+              ),
+              const SizedBox(height: 14),
+              JellyButton(
+                onPressed: _busy ? null : () => _join(_controller.text),
+                label: l10n.roomJoin,
+              ),
+              if (myCode != null) ...[
+                const SizedBox(height: 10),
+                JellyButton(
+                  onPressed: _busy ? null : () => _join(myCode),
+                  label: l10n.roomHost(myCode),
+                  outlined: true,
+                ),
+              ],
+            ],
           ),
-          onSubmitted: _join,
         ),
-        FilledButton(
-          onPressed: _busy ? null : () => _join(_controller.text),
-          child: Text(l10n.roomJoin),
-        ),
-        if (myCode != null) ...[
-          const SizedBox(height: 12),
-          OutlinedButton(
-            onPressed: _busy ? null : () => _join(myCode),
-            child: Text(l10n.roomHost(myCode)),
-          ),
-        ],
       ],
     );
   }
@@ -125,45 +182,180 @@ class _RoomScreenState extends ConsumerState<RoomScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Text(l10n.roomCodeLabel(code),
-                  style: ZyraTypography.titleMedium
-                      .copyWith(color: ZyraColors.primary)),
-            ),
-            IconButton(
-              icon: const Icon(Icons.share),
-              onPressed: () => ShareService.shareGeneral(
-                text: l10n.roomInviteMessage(
-                  code,
-                  ShareService.generateInviteLink(
-                    referralCode: code,
-                    campaign: 'study_room',
+        GlassCard(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.local_fire_department_outlined,
+                color: ZyraColors.primary,
+                size: 18,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.roomCodeLabel(code),
+                      style: ZyraTypography.dataMono.copyWith(
+                        color: ZyraColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      'Kütüphane & Şömine Çıtırtısı · 38 dB',
+                      style: ZyraTypography.bodySmall.copyWith(fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  Icons.share_outlined,
+                  color: ZyraColors.onBackground,
+                  size: 20,
+                ),
+                onPressed: () => ShareService.shareGeneral(
+                  text: l10n.roomInviteMessage(
+                    code,
+                    ShareService.generateInviteLink(
+                      referralCode: code,
+                      campaign: 'study_room',
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 14),
         Expanded(
           child: members.when(
-            data: (list) => ListView(
-              children: [
-                for (final m in list)
-                  ListTile(
-                    leading: const Icon(Icons.person_outline),
-                    title: Text(m.name),
-                    subtitle: Text(_ago(l10n, m.lastActive)),
+            data: (list) => GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 1.05,
+              ),
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                final m = list[index];
+                final activeNow = m.lastActive != null &&
+                    DateTime.now().difference(m.lastActive!).inMinutes < 5;
+                final initials = m.name.trim().isNotEmpty
+                    ? m.name.trim().characters.take(2).toString().toUpperCase()
+                    : 'M';
+                return GlassCard(
+                  padding: const EdgeInsets.all(14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 34,
+                            height: 34,
+                            decoration: BoxDecoration(
+                              color: activeNow
+                                  ? ZyraColors.primary.withValues(alpha: 0.2)
+                                  : ZyraColors.surfaceElevated,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: activeNow
+                                    ? ZyraColors.primary
+                                    : ZyraColors.hairlineStrong,
+                              ),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              initials,
+                              style: ZyraTypography.dataMono.copyWith(
+                                fontSize: 12,
+                                color: activeNow
+                                    ? ZyraColors.primaryBright
+                                    : ZyraColors.onBackground,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            'Masa ${index + 1}',
+                            style: ZyraTypography.dataMono.copyWith(
+                              fontSize: 11,
+                              color: ZyraColors.textTertiary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        m.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: ZyraTypography.titleMedium.copyWith(fontSize: 14),
+                      ),
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: activeNow
+                              ? ZyraColors.primary.withValues(alpha: 0.12)
+                              : ZyraColors.secondaryContainer
+                                  .withValues(alpha: 0.45),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 6,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                color: activeNow
+                                    ? ZyraColors.primary
+                                    : ZyraColors.secondary,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                _ago(l10n, m.lastActive),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: ZyraTypography.dataMono.copyWith(
+                                  fontSize: 11,
+                                  color: activeNow
+                                      ? ZyraColors.primaryBright
+                                      : ZyraColors.secondaryBright,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-              ],
+                );
+              },
             ),
-            loading: () => const Center(child: CircularProgressIndicator()),
+            loading: () => const Center(
+              child: CircularProgressIndicator(color: ZyraColors.primary),
+            ),
             error: (_, __) => Center(child: Text(l10n.roomJoinFailed)),
           ),
         ),
-        TextButton(onPressed: _leave, child: Text(l10n.roomLeave)),
+        const SizedBox(height: 10),
+        JellyButton(
+          onPressed: _leave,
+          label: l10n.roomLeave,
+          outlined: true,
+        ),
       ],
     );
   }
@@ -178,6 +370,7 @@ class _RoomScreenState extends ConsumerState<RoomScreen> {
   }
 }
 
-final _membersProvider = StreamProvider.autoDispose.family<List<RoomMember>, String>(
+final _membersProvider =
+    StreamProvider.autoDispose.family<List<RoomMember>, String>(
   (ref, code) => ref.watch(roomApiProvider).members(code),
 );

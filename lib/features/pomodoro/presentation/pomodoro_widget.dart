@@ -1,16 +1,19 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/ui/zyra_theme.dart';
 import '../../../core/ui/widgets/glass_card.dart';
+import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../core/data/services/share_service.dart';
+import '../../../core/data/services/sfx_service.dart';
 import '../../cafe/domain/cafe_rules.dart';
+import '../../cafe/presentation/boost_notifier.dart';
 import '../../social/presentation/social_providers.dart';
 import '../../subjects/presentation/subject_chip.dart';
 import '../domain/pomodoro_state.dart';
 import 'pomodoro_notifier.dart';
-import 'package:flutter/services.dart';
-import '../../../core/data/services/sfx_service.dart';
 import 'reward_burst.dart';
 
 class PomodoroWidget extends ConsumerWidget {
@@ -20,15 +23,14 @@ class PomodoroWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(pomodoroProvider);
     final notifier = ref.read(pomodoroProvider.notifier);
+    final activeBoost = ref.watch(activeBoostProvider);
     final l10n = AppLocalizations.of(context);
 
-    // Tell the user what the session they just finished paid out.
     ref.listen<SessionReward?>(
       pomodoroProvider.select((s) => s.lastReward),
       (previous, reward) {
         if (reward == null || reward.id == previous?.id) return;
         if (!reward.wasFocus) {
-          // Break is over: a soft descending pair and a light tap.
           SfxService.play(Sfx.breakEnd);
           HapticFeedback.lightImpact();
           return;
@@ -45,112 +47,198 @@ class PomodoroWidget extends ConsumerWidget {
       },
     );
 
-    String sessionLabel;
-    switch (state.sessionType) {
-      case SessionType.focus:
-        sessionLabel = l10n.deepFocus;
-        break;
-      case SessionType.shortBreak:
-        sessionLabel = l10n.cafeBreak;
-        break;
-      case SessionType.longBreak:
-        sessionLabel = l10n.longBreak;
-        break;
-    }
+    final isBreak = state.sessionType != SessionType.focus;
+    final accentColor = isBreak ? ZyraColors.secondary : ZyraColors.primary;
+    final totalSeconds = notifier.totalSecondsFor(state.sessionType);
+    final progress = totalSeconds > 0
+        ? (1.0 - (state.remainingSeconds / totalSeconds)).clamp(0.0, 1.0)
+        : 0.0;
 
-    return GlassCard(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          children: [
-            Text(
-              sessionLabel,
-              style: ZyraTypography.headlineMedium.copyWith(
-                color: ZyraColors.primary,
+    return Column(
+      children: [
+        // Mode segmented pill selector (Odak / Kısa Mola / Uzun Mola)
+        Container(
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: ZyraColors.surface,
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: ZyraColors.hairline),
+          ),
+          child: Row(
+            children: [
+              _ModeTab(
+                label: l10n.deepFocus,
+                selected: state.sessionType == SessionType.focus,
+                accent: ZyraColors.primary,
+                onTap: () => notifier.selectSessionType(SessionType.focus),
               ),
-            ),
-            if (state.sessionType == SessionType.focus) ...[
-              const SizedBox(height: 12),
-              const SubjectChip(),
+              _ModeTab(
+                label: l10n.cafeBreak,
+                selected: state.sessionType == SessionType.shortBreak,
+                accent: ZyraColors.secondary,
+                onTap: () => notifier.selectSessionType(SessionType.shortBreak),
+              ),
+              _ModeTab(
+                label: l10n.longBreak,
+                selected: state.sessionType == SessionType.longBreak,
+                accent: ZyraColors.secondary,
+                onTap: () => notifier.selectSessionType(SessionType.longBreak),
+              ),
             ],
-            const SizedBox(height: 24),
-            _TimerDisplay(remainingSeconds: state.remainingSeconds),
-            const SizedBox(height: 32),
-            Wrap(
-              alignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 12,
-              runSpacing: 12,
+          ),
+        ),
+        const SizedBox(height: 18),
+
+        // 60-tick Nocturne Atelier radial clock dial with static tungsten glow
+        NocturneLampGlow(
+          radius: 0.72,
+          glowColor: accentColor.withValues(alpha: 0.11),
+          child: SizedBox(
+            width: 268,
+            height: 268,
+            child: Stack(
+              alignment: Alignment.center,
               children: [
-                Semantics(
-                  button: true,
-                  label: state.isRunning ? l10n.pauseTimer : l10n.startTimer,
-                  child: GestureDetector(
-                    onTapUp: (_) => notifier.toggleTimer(),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        color: ZyraColors.primary,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: ZyraColors.primary.withValues(alpha: 0.3),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        state.isRunning ? l10n.pause : l10n.start,
-                        style: ZyraTypography.labelLarge.copyWith(
-                          color: ZyraColors.onPrimary,
-                        ),
-                      ),
-                    ),
+                CustomPaint(
+                  size: const Size(268, 268),
+                  painter: _RadialTickDialPainter(
+                    progress: progress,
+                    accentColor: accentColor,
+                    isRunning: state.isRunning,
                   ),
                 ),
-                Semantics(
-                  button: true,
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _TimerDisplay(remainingSeconds: state.remainingSeconds),
+                    if (state.sessionType == SessionType.focus) ...[
+                      const SizedBox(height: 12),
+                      const SubjectChip(),
+                    ] else ...[
+                      const SizedBox(height: 10),
+                      const NocturnePillBadge(
+                        label: 'MATCHA · MOLA',
+                        dotColor: ZyraColors.secondary,
+                        textColor: ZyraColors.secondaryBright,
+                      ),
+                    ],
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 20),
+
+        // Primary Start/Pause + Ghost Reset buttons
+        Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Semantics(
+                button: true,
+                label: state.isRunning ? l10n.pauseTimer : l10n.startTimer,
+                child: JellyButton(
+                  onPressed: notifier.toggleTimer,
+                  label: state.isRunning ? l10n.pause : l10n.start,
+                  backgroundColor: accentColor,
+                  textColor: ZyraColors.onPrimary,
+                  icon: Icon(
+                    state.isRunning
+                        ? Icons.pause_rounded
+                        : Icons.play_arrow_rounded,
+                    size: 20,
+                    color: ZyraColors.onPrimary,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              flex: 2,
+              child: Semantics(
+                button: true,
+                label: l10n.reset,
+                child: JellyButton(
+                  onPressed: notifier.resetTimer,
                   label: l10n.reset,
-                  child: OutlinedButton(
-                    onPressed: notifier.resetTimer,
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: ZyraColors.primary,
-                      side: const BorderSide(color: ZyraColors.primary),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
+                  outlined: true,
+                  icon: const Icon(
+                    Icons.refresh_rounded,
+                    size: 18,
+                    color: ZyraColors.textSecondary,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+
+        // Active Cafe Brew Boost indicator (if user bought a boost in Cafe)
+        if (activeBoost != null) ...[
+          const SizedBox(height: 14),
+          GlassCard(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            child: Row(
+              children: [
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: ZyraColors.surfaceElevated,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: ZyraColors.hairline),
+                  ),
+                  child: const Icon(
+                    Icons.local_cafe_outlined,
+                    color: ZyraColors.primary,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        activeBoost.itemId.toUpperCase(),
+                        style: ZyraTypography.titleMedium.copyWith(fontSize: 13),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                      Text(
+                        '${activeBoost.sessionsLeft}×',
+                        style: ZyraTypography.bodySmall.copyWith(fontSize: 12),
                       ),
-                    ),
-                    child: Text(
-                      l10n.reset,
-                      style: ZyraTypography.labelLarge,
-                    ),
+                    ],
+                  ),
+                ),
+                Text(
+                  '+%${activeBoost.percent} ⚡',
+                  style: ZyraTypography.dataMono.copyWith(
+                    color: ZyraColors.primary,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 12),
-            TextButton.icon(
-              onPressed: () => _inviteToFocus(ref, l10n),
-              icon: const Icon(Icons.group_add_rounded, size: 20),
-              label: Text(l10n.focusTogether),
-              style: TextButton.styleFrom(foregroundColor: ZyraColors.primary),
+          ),
+        ],
+
+        const SizedBox(height: 8),
+        TextButton.icon(
+          onPressed: () => _inviteToFocus(ref, l10n),
+          icon: const Icon(Icons.group_add_outlined, size: 17),
+          label: Text(
+            l10n.focusTogether,
+            style: ZyraTypography.bodySmall.copyWith(
+              color: ZyraColors.textSecondary,
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 
-  /// "Let's do a pomodoro together": shares the store link, with the user's
-  /// invite code when they are signed in so the friend gets the bonus too.
   Future<void> _inviteToFocus(WidgetRef ref, AppLocalizations l10n) async {
     String? code;
     if (ref.read(signedInProvider)) {
@@ -168,6 +256,49 @@ class PomodoroWidget extends ConsumerWidget {
   }
 }
 
+class _ModeTab extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final Color accent;
+  final VoidCallback onTap;
+
+  const _ModeTab({
+    required this.label,
+    required this.selected,
+    required this.accent,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 6),
+          decoration: BoxDecoration(
+            color: selected ? accent : Colors.transparent,
+            borderRadius: BorderRadius.circular(999),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: ZyraTypography.labelSmall.copyWith(
+              fontSize: 12,
+              fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+              color: selected ? ZyraColors.onPrimary : ZyraColors.textSecondary,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _TimerDisplay extends StatelessWidget {
   final int remainingSeconds;
 
@@ -181,9 +312,76 @@ class _TimerDisplay extends StatelessWidget {
     return Text(
       '$minutes:$seconds',
       style: ZyraTypography.displayLarge.copyWith(
+        fontSize: 54,
         color: ZyraColors.onBackground,
         fontFeatures: const [FontFeature.tabularFigures()],
       ),
     );
   }
+}
+
+/// Draws 60 radial clock ticks around the timer, matching `odak_zamanlay_c`.
+class _RadialTickDialPainter extends CustomPainter {
+  final double progress;
+  final Color accentColor;
+  final bool isRunning;
+
+  const _RadialTickDialPainter({
+    required this.progress,
+    required this.accentColor,
+    required this.isRunning,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const tickCount = 60;
+    final center = Offset(size.width / 2, size.height / 2);
+    final outerR = size.width / 2 - 4;
+    final elapsedTicks = (progress * tickCount).round();
+
+    for (int i = 0; i < tickCount; i++) {
+      final angle = -math.pi / 2 + (i * 2 * math.pi / tickCount);
+      final isMajor = i % 5 == 0;
+      final isTop = i == 0;
+      final isElapsed = i < elapsedTicks;
+      final isCurrentHead = i == elapsedTicks && isRunning;
+
+      final tickLength = isTop
+          ? 14.0
+          : (isMajor ? 11.0 : 7.0);
+      final innerR = outerR - tickLength;
+
+      Color color;
+      if (isTop || isCurrentHead) {
+        color = accentColor;
+      } else if (isElapsed) {
+        color = ZyraColors.textTertiary.withValues(alpha: 0.35);
+      } else {
+        color = isMajor
+            ? ZyraColors.onBackground.withValues(alpha: 0.85)
+            : ZyraColors.onBackground.withValues(alpha: 0.45);
+      }
+
+      final paint = Paint()
+        ..color = color
+        ..strokeWidth = isTop || isCurrentHead ? 2.2 : (isMajor ? 1.6 : 1.1)
+        ..strokeCap = StrokeCap.round;
+
+      final p1 = Offset(
+        center.dx + innerR * math.cos(angle),
+        center.dy + innerR * math.sin(angle),
+      );
+      final p2 = Offset(
+        center.dx + outerR * math.cos(angle),
+        center.dy + outerR * math.sin(angle),
+      );
+      canvas.drawLine(p1, p2, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _RadialTickDialPainter oldDelegate) =>
+      oldDelegate.progress != progress ||
+      oldDelegate.accentColor != accentColor ||
+      oldDelegate.isRunning != isRunning;
 }

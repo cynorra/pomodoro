@@ -157,17 +157,7 @@ class _StudyCafeAppState extends ConsumerState<StudyCafeApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: ZyraColors.primary,
-        scaffoldBackgroundColor: ZyraColors.background,
-        colorScheme: const ColorScheme.dark(
-          primary: ZyraColors.primary,
-          secondary: ZyraColors.secondary,
-          surface: ZyraColors.surface,
-        ),
-        useMaterial3: true,
-      ),
+      theme: ZyraTheme.darkTheme,
       // Keep phone-style layouts readable on tablets/landscape and cap
       // system font scaling so fixed-size widgets do not overflow.
       builder: (context, child) {

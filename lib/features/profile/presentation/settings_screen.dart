@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../core/data/services/notification_service.dart';
@@ -8,6 +9,7 @@ import '../../../core/data/services/data_export_service.dart';
 import '../../../core/data/services/local_data_service.dart';
 import '../../social/presentation/social_providers.dart';
 import '../../../core/ui/zyra_theme.dart';
+import '../../../core/ui/widgets/glass_card.dart';
 import '../../../core/data/state/locale_notifier.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../core/data/services/sfx_service.dart';
@@ -23,18 +25,29 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ZyraColors.background,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: ZyraColors.background,
         elevation: 0,
-        title: Text(
-          l10n.settings,
-          style: ZyraTypography.headlineMedium,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.settings, style: ZyraTypography.titleLarge),
+            Text(
+              'MASA & DUYUSAL ATÖLYE',
+              style: ZyraTypography.sectionLabel.copyWith(
+                fontSize: 10,
+                color: ZyraColors.textTertiary,
+              ),
+            ),
+          ],
         ),
-        centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 28),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _SectionHeader(title: l10n.settings.toUpperCase()),
+            const SizedBox(height: 8),
             _SettingsTile(
               icon: Icons.language_rounded,
               title: l10n.language,
@@ -42,9 +55,9 @@ class SettingsScreen extends ConsumerWidget {
                 value: _isValidLocale(currentLocale)
                     ? currentLocale
                     : const Locale('en'),
-                dropdownColor: ZyraColors.surface,
+                dropdownColor: ZyraColors.surfaceElevated,
                 underline: const SizedBox.shrink(),
-                style: ZyraTypography.titleMedium.copyWith(
+                style: ZyraTypography.dataMono.copyWith(
                   color: ZyraColors.primary,
                 ),
                 items: [
@@ -66,7 +79,16 @@ class SettingsScreen extends ConsumerWidget {
             ),
             const _NotificationsTile(),
             const _ReminderTile(),
+            const SizedBox(height: 20),
+            const _SectionHeader(title: 'AKUSTİK & DOKUNSAL ATÖLYE'),
+            const SizedBox(height: 8),
+            const _SfxTile(),
+            const SizedBox(height: 12),
+            const _HapticStudioCard(),
             const _FocusStatusTile(),
+            const SizedBox(height: 20),
+            const _SectionHeader(title: 'GİZLİLİK & VERİ'),
+            const SizedBox(height: 8),
             const _AnalyticsConsentTile(),
             const _AdPrivacyTile(),
             const _ExportDataTile(),
@@ -82,8 +104,170 @@ class SettingsScreen extends ConsumerWidget {
   }
 }
 
-/// Opt-in switch: while on, friends can see this user is focusing and send
-/// treats. Off by default because it shares the display name and session end.
+class _SectionHeader extends StatelessWidget {
+  final String title;
+
+  const _SectionHeader({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4),
+      child: Text(
+        title,
+        style: ZyraTypography.sectionLabel.copyWith(
+          color: ZyraColors.primary,
+          letterSpacing: 1.4,
+        ),
+      ),
+    );
+  }
+}
+
+/// Interactive Haptic & Sound Preview Studio from Nocturne Atelier design.
+class _HapticStudioCard extends StatefulWidget {
+  const _HapticStudioCard();
+
+  @override
+  State<_HapticStudioCard> createState() => _HapticStudioCardState();
+}
+
+class _HapticStudioCardState extends State<_HapticStudioCard> {
+  int _intensityIndex = 2; // 0: Off, 1: Light, 2: Balanced, 3: Strong
+
+  static const _levels = [
+    ('Kapalı', 'Sessiz ekran'),
+    ('Hafif', 'İnce vuruş'),
+    ('Dengeli', 'Ceviz tıkırtı'),
+    ('Güçlü', 'Mühür darbesi'),
+  ];
+
+  void _triggerPreview() {
+    switch (_intensityIndex) {
+      case 1:
+        HapticFeedback.selectionClick();
+        break;
+      case 2:
+        HapticFeedback.mediumImpact();
+        SfxService.play(Sfx.coin);
+        break;
+      case 3:
+        HapticFeedback.heavyImpact();
+        SfxService.play(Sfx.purchase);
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.vibration_rounded,
+                color: ZyraColors.primary,
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Haptic Titreşim Yoğunluğu',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: ZyraTypography.titleMedium.copyWith(fontSize: 14),
+                ),
+              ),
+              const SizedBox(width: 8),
+              NocturnePillBadge(
+                label: _levels[_intensityIndex].$1,
+                textColor: ZyraColors.primaryBright,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 2.0,
+            children: [
+              for (var i = 0; i < _levels.length; i++)
+                GestureDetector(
+                  onTap: () {
+                    setState(() => _intensityIndex = i);
+                    _triggerPreview();
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 180),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: _intensityIndex == i
+                          ? ZyraColors.primary
+                          : ZyraColors.surfaceElevated,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: _intensityIndex == i
+                            ? ZyraColors.primary
+                            : ZyraColors.hairline,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          _levels[i].$1,
+                          style: ZyraTypography.labelLarge.copyWith(
+                            fontSize: 13,
+                            color: _intensityIndex == i
+                                ? ZyraColors.onPrimary
+                                : ZyraColors.onBackground,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          _levels[i].$2,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: ZyraTypography.labelSmall.copyWith(
+                            fontSize: 10,
+                            color: _intensityIndex == i
+                                ? ZyraColors.onPrimary.withValues(alpha: 0.78)
+                                : ZyraColors.textTertiary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: _triggerPreview,
+              icon: const Icon(Icons.touch_app_outlined, size: 17),
+              label: const Text('Titreşimi & Sesi Test Et'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _FocusStatusTile extends ConsumerWidget {
   const _FocusStatusTile();
 
@@ -98,7 +282,6 @@ class _FocusStatusTile extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SfxTile(),
           _SettingsTile(
             icon: Icons.local_cafe_outlined,
             title: l10n.focusStatusTitle,
@@ -120,7 +303,7 @@ class _FocusStatusTile extends ConsumerWidget {
             child: Text(
               l10n.focusStatusHelp,
               style: ZyraTypography.labelSmall.copyWith(
-                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+                color: ZyraColors.textTertiary,
               ),
             ),
           ),
@@ -130,10 +313,6 @@ class _FocusStatusTile extends ConsumerWidget {
   }
 }
 
-/// Shows whether session-end notifications are allowed and lets the user ask
-/// for the permission again. Android only lets the app ask while the system
-/// has not blocked it, so when it stays off the dialog explains where to turn
-/// it on.
 class _NotificationsTile extends StatefulWidget {
   const _NotificationsTile();
 
@@ -200,10 +379,8 @@ class _NotificationsTileState extends State<_NotificationsTile> {
           onPressed: _enabled == null ? null : _onTap,
           child: Text(
             on ? l10n.notificationsOn : l10n.notificationsOff,
-            style: ZyraTypography.titleMedium.copyWith(
-              color: on
-                  ? ZyraColors.primary
-                  : ZyraColors.onSurface.withValues(alpha: 0.6),
+            style: ZyraTypography.dataMono.copyWith(
+              color: on ? ZyraColors.secondaryBright : ZyraColors.textTertiary,
             ),
           ),
         ),
@@ -212,8 +389,6 @@ class _NotificationsTileState extends State<_NotificationsTile> {
   }
 }
 
-/// Daily study reminder: an on/off switch and the time of day. Planned by
-/// [ReminderService]; it stays quiet on days the user already studied.
 class _ReminderTile extends StatefulWidget {
   const _ReminderTile();
 
@@ -291,7 +466,7 @@ class _ReminderTileState extends State<_ReminderTile> {
             child: Text(
               l10n.reminderHelp,
               style: ZyraTypography.labelSmall.copyWith(
-                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+                color: ZyraColors.textTertiary,
               ),
             ),
           ),
@@ -301,8 +476,6 @@ class _ReminderTileState extends State<_ReminderTile> {
   }
 }
 
-/// Entry point to Google's ad-consent form; only shown where the consent
-/// framework says users must be able to revisit their choice.
 class _AdPrivacyTile extends StatelessWidget {
   const _AdPrivacyTile();
 
@@ -352,25 +525,16 @@ class _SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: ZyraColors.surface.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: ZyraColors.onSurface.withValues(alpha: 0.1),
-        ),
-      ),
+    return GlassCard(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
-          Icon(icon, color: ZyraColors.primary, size: 24),
-          const SizedBox(width: 16),
+          Icon(icon, color: ZyraColors.primary, size: 20),
+          const SizedBox(width: 14),
           Expanded(
             child: Text(
               title,
-              style: ZyraTypography.titleMedium.copyWith(
-                color: ZyraColors.onSurface,
-              ),
+              style: ZyraTypography.titleMedium.copyWith(fontSize: 14),
             ),
           ),
           trailing,
@@ -380,7 +544,6 @@ class _SettingsTile extends StatelessWidget {
   }
 }
 
-/// Switch for anonymous usage and crash data; off means nothing is sent.
 class _AnalyticsConsentTile extends StatefulWidget {
   const _AnalyticsConsentTile();
 
@@ -402,38 +565,34 @@ class _AnalyticsConsentTileState extends State<_AnalyticsConsentTile> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return Padding(
-      padding: const EdgeInsets.only(top: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _SettingsTile(
-            icon: Icons.insights_outlined,
-            title: l10n.analyticsConsentTitle,
-            trailing: Switch(
-              value: _on,
-              onChanged: (value) async {
-                setState(() => _on = value);
-                await PrivacyConsentService.save(value);
-              },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SettingsTile(
+          icon: Icons.insights_outlined,
+          title: l10n.analyticsConsentTitle,
+          trailing: Switch(
+            value: _on,
+            onChanged: (value) async {
+              setState(() => _on = value);
+              await PrivacyConsentService.save(value);
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
+          child: Text(
+            l10n.analyticsConsentHelp,
+            style: ZyraTypography.labelSmall.copyWith(
+              color: ZyraColors.textTertiary,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
-            child: Text(
-              l10n.analyticsConsentHelp,
-              style: ZyraTypography.labelSmall.copyWith(
-                color: ZyraColors.onSurface.withValues(alpha: 0.6),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-/// Lets the user take a machine-readable copy of their data.
 class _ExportDataTile extends StatelessWidget {
   const _ExportDataTile();
 
@@ -449,7 +608,10 @@ class _ExportDataTile extends StatelessWidget {
             icon: Icons.download_outlined,
             title: l10n.exportData,
             trailing: IconButton(
-              icon: const Icon(Icons.chevron_right_rounded),
+              icon: const Icon(
+                Icons.chevron_right_rounded,
+                color: ZyraColors.textSecondary,
+              ),
               onPressed: () async {
                 final messenger = ScaffoldMessenger.of(context);
                 try {
@@ -467,7 +629,7 @@ class _ExportDataTile extends StatelessWidget {
             child: Text(
               l10n.exportDataHelp,
               style: ZyraTypography.labelSmall.copyWith(
-                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+                color: ZyraColors.textTertiary,
               ),
             ),
           ),
@@ -477,7 +639,6 @@ class _ExportDataTile extends StatelessWidget {
   }
 }
 
-/// Removes temporary files only; progress, points and settings are untouched.
 class _ClearCacheTile extends StatelessWidget {
   const _ClearCacheTile();
 
@@ -493,7 +654,10 @@ class _ClearCacheTile extends StatelessWidget {
             icon: Icons.cleaning_services_outlined,
             title: l10n.clearCache,
             trailing: IconButton(
-              icon: const Icon(Icons.chevron_right_rounded),
+              icon: const Icon(
+                Icons.chevron_right_rounded,
+                color: ZyraColors.textSecondary,
+              ),
               onPressed: () async {
                 final messenger = ScaffoldMessenger.of(context);
                 await LocalDataService.clearCache();
@@ -508,7 +672,7 @@ class _ClearCacheTile extends StatelessWidget {
             child: Text(
               l10n.clearCacheHelp,
               style: ZyraTypography.labelSmall.copyWith(
-                color: ZyraColors.onSurface.withValues(alpha: 0.6),
+                color: ZyraColors.textTertiary,
               ),
             ),
           ),
@@ -518,8 +682,6 @@ class _ClearCacheTile extends StatelessWidget {
   }
 }
 
-
-/// Switch for the short feedback sounds (chime, coin, purchase).
 class _SfxTile extends StatefulWidget {
   const _SfxTile();
 

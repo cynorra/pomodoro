@@ -1,21 +1,21 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/data/database/database_service.dart';
 import '../../../core/data/models/cafe_item.dart';
 import '../../../core/data/services/cafe_purchase_service.dart';
+import '../../../core/data/services/sfx_service.dart';
 import '../../../core/data/state/user_notifier.dart';
 import '../../../core/ui/zyra_theme.dart';
+import '../../../core/ui/widgets/glass_card.dart';
+import '../../../core/ui/widgets/jelly_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../data/active_users_api.dart';
 import '../domain/cafe_rules.dart';
 import 'boost_notifier.dart';
 import 'cafe_notifier.dart';
-import 'package:flutter/services.dart';
-import '../../../core/data/services/sfx_service.dart';
 
-/// Balance, the running boost, shield count and (when switched on in Remote
-/// Config) how many people are focusing right now.
+/// Balance, running boost, shield count, and active focusing people.
 class CafeStatus extends ConsumerWidget {
   const CafeStatus({super.key});
 
@@ -30,46 +30,53 @@ class CafeStatus extends ConsumerWidget {
         .fold<int>(0, (sum, i) => sum + i.quantity);
     final people = ref.watch(activeUsersProvider).value;
 
-    Widget chip(String text, IconData icon) => Container(
-          width: double.infinity,
-          margin: const EdgeInsets.only(top: 8),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          decoration: BoxDecoration(
-            color: ZyraColors.primary.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(14),
-            border:
-                Border.all(color: ZyraColors.primary.withValues(alpha: 0.35)),
-          ),
-          child: Row(
-            children: [
-              Icon(icon, size: 20, color: ZyraColors.primary),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  text,
-                  style: ZyraTypography.labelLarge
-                      .copyWith(color: ZyraColors.onSurface),
+    Widget rowChip(String text, IconData icon, {Color accent = ZyraColors.primary}) =>
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: GlassCard(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+            child: Row(
+              children: [
+                Icon(icon, size: 18, color: accent),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    text,
+                    style: ZyraTypography.bodyMedium.copyWith(
+                      fontSize: 13,
+                      color: ZyraColors.onBackground,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
       child: Column(
         children: [
-          chip(l10n.cafeBalance(points), Icons.stars_rounded),
+          rowChip(l10n.cafeBalance(points), Icons.toll_outlined),
           if (boost != null)
-            chip(
+            rowChip(
               l10n.cafeBoostBanner(
                   boostLabel(boost.percent), boost.sessionsLeft),
               Icons.bolt_rounded,
+              accent: ZyraColors.primaryBright,
             ),
           if (shields > 0)
-            chip(l10n.cafeShieldBanner(shields), Icons.shield_rounded),
+            rowChip(
+              l10n.cafeShieldBanner(shields),
+              Icons.shield_outlined,
+              accent: ZyraColors.secondaryBright,
+            ),
           if (people != null)
-            chip(l10n.peopleFocusing(people), Icons.groups_rounded),
+            rowChip(
+              l10n.peopleFocusing(people),
+              Icons.groups_outlined,
+              accent: ZyraColors.secondary,
+            ),
         ],
       ),
     );
@@ -91,77 +98,56 @@ class CafeItemCard extends ConsumerWidget {
       label: l10n.buyItem(name, item.cost),
       child: GestureDetector(
         onTap: () => showCafeItemSheet(context, item.itemId),
-        child: Container(
-          decoration: BoxDecoration(
-            color: ZyraColors.surface.withValues(alpha: 0.7),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: item.quantity > 0
-                  ? ZyraColors.primary.withValues(alpha: 0.5)
-                  : ZyraColors.secondary.withValues(alpha: 0.3),
-              width: 1.5,
-            ),
+        child: GlassCard(
+          padding: const EdgeInsets.all(14),
+          border: Border.all(
+            color: item.quantity > 0
+                ? ZyraColors.primary.withValues(alpha: 0.45)
+                : ZyraColors.hairline,
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                // Scale the content down to whatever the grid cell offers, so
-                // the card never overflows on narrow phones or with large
-                // system fonts.
-                child: Center(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          height: 60,
-                          child: Text(
-                            item.iconCode,
-                            style: const TextStyle(fontSize: 48),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          name,
-                          style: ZyraTypography.titleMedium.copyWith(
-                            color: ZyraColors.onSurface,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: ZyraColors.primary.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            '${item.cost} ${l10n.points}',
-                            style: ZyraTypography.labelLarge.copyWith(
-                              color: ZyraColors.primary,
-                            ),
-                          ),
-                        ),
-                        if (item.quantity > 0) ...[
-                          const SizedBox(height: 8),
-                          Text(
-                            l10n.cafeOwned(item.quantity),
-                            style: ZyraTypography.labelSmall.copyWith(
-                              color: ZyraColors.secondary,
-                            ),
-                          ),
-                        ],
-                      ],
+          child: Center(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: ZyraColors.surfaceElevated,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: ZyraColors.hairline),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      item.iconCode,
+                      style: const TextStyle(fontSize: 32),
                     ),
                   ),
-                ),
+                  const SizedBox(height: 12),
+                  Text(
+                    name,
+                    style: ZyraTypography.titleMedium.copyWith(fontSize: 14),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  NocturnePillBadge(
+                    label: '${item.cost} ${l10n.points}',
+                    dotColor: ZyraColors.primary,
+                    textColor: ZyraColors.primaryBright,
+                  ),
+                  if (item.quantity > 0) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      l10n.cafeOwned(item.quantity),
+                      style: ZyraTypography.dataMono.copyWith(
+                        fontSize: 11,
+                        color: ZyraColors.secondaryBright,
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ),
           ),
@@ -180,17 +166,15 @@ void showCafeItemSheet(BuildContext context, String itemId) {
   );
 }
 
-/// Details of one cafe item with Buy and Use buttons.
 class _ItemSheet extends ConsumerWidget {
   final String itemId;
   const _ItemSheet({required this.itemId});
 
-  SnackBar _snack(String text, {Color color = const Color(0xFF1B5E20)}) =>
-      SnackBar(
+  SnackBar _snack(String text, {bool isError = false}) => SnackBar(
         content: Text(text),
-        backgroundColor: color,
+        backgroundColor:
+            isError ? ZyraColors.errorContainer : ZyraColors.surfaceElevated,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       );
 
   @override
@@ -217,64 +201,79 @@ class _ItemSheet extends ConsumerWidget {
         decoration: const BoxDecoration(
           color: ZyraColors.surface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          border: Border(
+            top: BorderSide(color: ZyraColors.hairlineStrong),
+          ),
         ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(item.iconCode, style: const TextStyle(fontSize: 56)),
-              const SizedBox(height: 8),
+              Container(
+                width: 36,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 18),
+                decoration: BoxDecoration(
+                  color: ZyraColors.textTertiary.withValues(alpha: 0.4),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+              ),
+              Container(
+                width: 72,
+                height: 72,
+                decoration: BoxDecoration(
+                  color: ZyraColors.surfaceElevated,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: ZyraColors.hairlineStrong),
+                ),
+                alignment: Alignment.center,
+                child: Text(item.iconCode, style: const TextStyle(fontSize: 38)),
+              ),
+              const SizedBox(height: 14),
               Text(
                 isTr ? item.nameTr : item.nameEn,
-                style: ZyraTypography.headlineMedium
-                    .copyWith(color: ZyraColors.onSurface),
+                style: ZyraTypography.headlineMedium,
               ),
               const SizedBox(height: 8),
               Text(
                 description,
                 textAlign: TextAlign.center,
-                style: ZyraTypography.bodyMedium.copyWith(
-                  color: ZyraColors.onSurface.withValues(alpha: 0.8),
-                ),
+                style: ZyraTypography.bodySmall.copyWith(height: 1.5),
               ),
               if (item.quantity > 0) ...[
-                const SizedBox(height: 8),
-                Text(
-                  l10n.cafeOwned(item.quantity),
-                  style: ZyraTypography.labelLarge
-                      .copyWith(color: ZyraColors.secondary),
+                const SizedBox(height: 10),
+                NocturnePillBadge(
+                  label: l10n.cafeOwned(item.quantity),
+                  dotColor: ZyraColors.secondary,
+                  textColor: ZyraColors.secondaryBright,
                 ),
               ],
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed:
-                      canAfford ? () => _buy(context, ref, l10n) : null,
-                  child: Text(l10n.cafeBuy(item.cost)),
-                ),
+              const SizedBox(height: 20),
+              JellyButton(
+                onPressed: canAfford ? () => _buy(context, ref, l10n) : null,
+                label: l10n.cafeBuy(item.cost),
               ),
               if (!canAfford)
                 Padding(
-                  padding: const EdgeInsets.only(top: 6),
+                  padding: const EdgeInsets.only(top: 8),
                   child: Text(
                     l10n.insufficientPoints,
-                    style: ZyraTypography.labelSmall
-                        .copyWith(color: Colors.red.shade300),
+                    style: ZyraTypography.labelSmall.copyWith(
+                      color: ZyraColors.error,
+                    ),
                   ),
                 ),
               if (isBoost) ...[
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: item.quantity > 0
-                        ? () => _use(context, ref, l10n, entry, boostRunning)
-                        : null,
-                    child: Text(l10n.cafeUse),
-                  ),
+                const SizedBox(height: 10),
+                JellyButton(
+                  onPressed: item.quantity > 0
+                      ? () => _use(context, ref, l10n, entry, boostRunning)
+                      : null,
+                  label: l10n.cafeUse,
+                  outlined: true,
                 ),
               ],
+              const SizedBox(height: 6),
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(l10n.close),
@@ -300,11 +299,9 @@ class _ItemSheet extends ConsumerWidget {
       HapticFeedback.mediumImpact();
       messenger.showSnackBar(_snack(l10n.purchaseSuccess));
     } else if (result == PurchaseResult.insufficientPoints) {
-      messenger.showSnackBar(
-          _snack(l10n.insufficientPoints, color: Colors.red.shade900));
+      messenger.showSnackBar(_snack(l10n.insufficientPoints, isError: true));
     } else {
-      messenger.showSnackBar(
-          _snack(l10n.somethingWentWrong, color: Colors.red.shade900));
+      messenger.showSnackBar(_snack(l10n.somethingWentWrong, isError: true));
     }
   }
 
@@ -313,8 +310,7 @@ class _ItemSheet extends ConsumerWidget {
     final messenger = ScaffoldMessenger.of(context);
     final navigator = Navigator.of(context);
     if (boostRunning) {
-      messenger.showSnackBar(
-          _snack(l10n.cafeBoostBusy, color: Colors.orange.shade900));
+      messenger.showSnackBar(_snack(l10n.cafeBoostBusy, isError: true));
       return;
     }
     final boost = boostFor(entry.itemId);

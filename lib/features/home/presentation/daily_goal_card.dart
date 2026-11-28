@@ -6,10 +6,11 @@ import '../../../core/data/database/database_service.dart';
 import '../../../core/data/models/study_session.dart';
 import '../../../core/data/state/user_notifier.dart';
 import '../../../core/ui/zyra_theme.dart';
+import '../../../core/ui/widgets/glass_card.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/daily_goal.dart';
 
-/// Quiet progress bar for today's focus minutes. Tap to pick another goal.
+/// Quiet 2px progress track for today's focus minutes. Tap to pick another goal.
 class DailyGoalCard extends ConsumerStatefulWidget {
   const DailyGoalCard({super.key});
 
@@ -58,26 +59,31 @@ class _DailyGoalCardState extends ConsumerState<DailyGoalCard> {
       context: context,
       backgroundColor: ZyraColors.surface,
       builder: (ctx) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
                 l10n.dailyGoalChange,
-                style: ZyraTypography.titleMedium
-                    .copyWith(color: ZyraColors.primary),
+                style: ZyraTypography.titleLarge,
               ),
-            ),
-            for (final m in dailyGoalOptions)
-              ListTile(
-                title: Text('$m min'),
-                trailing: m == _goal
-                    ? const Icon(Icons.check, color: ZyraColors.primary)
-                    : null,
-                onTap: () => Navigator.pop(ctx, m),
-              ),
-          ],
+              const SizedBox(height: 12),
+              for (final m in dailyGoalOptions)
+                ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                  title: Text(
+                    '$m min',
+                    style: ZyraTypography.dataMono.copyWith(fontSize: 15),
+                  ),
+                  trailing: m == _goal
+                      ? const Icon(Icons.check_rounded, color: ZyraColors.primary)
+                      : null,
+                  onTap: () => Navigator.pop(ctx, m),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -90,69 +96,72 @@ class _DailyGoalCardState extends ConsumerState<DailyGoalCard> {
 
   @override
   Widget build(BuildContext context) {
-    // Study minutes change after every finished session: refresh today's total.
     ref.listen(userProvider.select((u) => u.totalStudyMinutes),
         (_, __) => _loadToday());
     final l10n = AppLocalizations.of(context);
     final progress = dailyGoalProgress(_done, _goal);
     final reached = progress >= 1;
 
-    return InkWell(
+    return GestureDetector(
       onTap: _pickGoal,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: ZyraColors.surface.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: (reached ? ZyraColors.primary : ZyraColors.onSurface)
-                .withValues(alpha: 0.2),
-          ),
-        ),
+      child: GlassCard(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Icon(
-                  reached ? Icons.check_circle : Icons.flag_outlined,
-                  color: ZyraColors.primary,
-                  size: 20,
-                ),
-                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    l10n.dailyGoalTitle,
-                    style: ZyraTypography.titleMedium
-                        .copyWith(color: ZyraColors.primary),
+                    l10n.dailyGoalTitle.toUpperCase(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: ZyraTypography.sectionLabel.copyWith(
+                      color: reached
+                          ? ZyraColors.secondary
+                          : ZyraColors.textSecondary,
+                    ),
                   ),
                 ),
+                const SizedBox(width: 8),
                 Text(
                   l10n.dailyGoalProgress(_done, _goal),
-                  style: ZyraTypography.bodyMedium.copyWith(
-                    color: ZyraColors.onSurface.withValues(alpha: 0.8),
+                  style: ZyraTypography.dataMono.copyWith(
+                    color: ZyraColors.onBackground,
+                    fontSize: 12,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
             ClipRRect(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(999),
               child: LinearProgressIndicator(
                 value: progress,
-                minHeight: 8,
-                color: ZyraColors.primary,
-                backgroundColor: ZyraColors.onSurface.withValues(alpha: 0.1),
+                minHeight: 3,
+                color: reached ? ZyraColors.secondary : ZyraColors.primary,
+                backgroundColor: ZyraColors.surfaceElevated,
               ),
             ),
             if (reached) ...[
               const SizedBox(height: 8),
-              Text(
-                l10n.dailyGoalReached,
-                style: ZyraTypography.bodyMedium.copyWith(
-                  color: ZyraColors.onSurface.withValues(alpha: 0.7),
-                ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.check_circle_outline_rounded,
+                    size: 14,
+                    color: ZyraColors.secondary,
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      l10n.dailyGoalReached,
+                      style: ZyraTypography.bodySmall.copyWith(
+                        color: ZyraColors.secondaryBright,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ],

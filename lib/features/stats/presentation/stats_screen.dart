@@ -1,8 +1,8 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../core/ui/zyra_theme.dart';
+import '../../../core/ui/widgets/glass_card.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import 'chart_buckets.dart';
 import 'stats_provider.dart';
@@ -28,20 +28,35 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
     return Scaffold(
       backgroundColor: ZyraColors.background,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: ZyraColors.background,
         elevation: 0,
-        title: Text(
-          l10n.statistics,
-          style: ZyraTypography.headlineMedium,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'NOCTURNE',
+              style: ZyraTypography.titleLarge.copyWith(
+                fontSize: 18,
+                letterSpacing: 1.8,
+              ),
+            ),
+            Text(
+              l10n.statistics.toUpperCase(),
+              style: ZyraTypography.sectionLabel.copyWith(
+                fontSize: 10,
+                color: ZyraColors.textTertiary,
+                letterSpacing: 1.6,
+              ),
+            ),
+          ],
         ),
-        centerTitle: true,
       ),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 14),
               child: _FilterSelector(
                 selected: selectedFilter,
                 onSelected: (filter) {
@@ -70,20 +85,46 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           ),
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+              padding: EdgeInsets.fromLTRB(16, 4, 16, 0),
               child: WeeklyReportCard(),
             ),
           ),
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+              padding: EdgeInsets.fromLTRB(16, 14, 16, 0),
               child: SubjectBreakdown(),
             ),
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
               child: _AchievementBadges(l10n: l10n),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
+              child: Column(
+                children: [
+                  Text(
+                    '“Gecenin sessizliği, zihnin en berrak suyudur.”',
+                    textAlign: TextAlign.center,
+                    style: ZyraTypography.editorialItalic.copyWith(
+                      fontSize: 14,
+                      color: ZyraColors.textSecondary,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '— NOCTURNE ATELIER',
+                    style: ZyraTypography.dataMono.copyWith(
+                      fontSize: 10,
+                      color: ZyraColors.textTertiary,
+                      letterSpacing: 1.4,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -108,8 +149,9 @@ class _FilterSelector extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: ZyraColors.surface.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(16),
+        color: ZyraColors.surface,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: ZyraColors.hairline),
       ),
       child: Row(
         children: [
@@ -134,7 +176,7 @@ class _FilterSelector extends StatelessWidget {
   }
 }
 
-class _FilterButton extends StatefulWidget {
+class _FilterButton extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
@@ -146,49 +188,26 @@ class _FilterButton extends StatefulWidget {
   });
 
   @override
-  State<_FilterButton> createState() => _FilterButtonState();
-}
-
-class _FilterButtonState extends State<_FilterButton> {
-  bool _isPressed = false;
-
-  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTapDown: (_) => setState(() => _isPressed = true),
-        onTapUp: (_) {
-          setState(() => _isPressed = false);
-          widget.onTap();
-        },
-        onTapCancel: () => setState(() => _isPressed = false),
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          curve: Curves.easeOutCubic,
-          transform: Matrix4.diagonal3Values(
-            _isPressed ? 0.95 : 1.0,
-            _isPressed ? 0.95 : 1.0,
-            1.0,
+          padding: const EdgeInsets.symmetric(vertical: 9),
+          decoration: BoxDecoration(
+            color: isSelected ? ZyraColors.primary : Colors.transparent,
+            borderRadius: BorderRadius.circular(999),
           ),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              color: widget.isSelected
-                  ? ZyraColors.primary.withValues(alpha: 0.2)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(12),
-              border: widget.isSelected
-                  ? Border.all(color: ZyraColors.primary, width: 1.5)
-                  : null,
-            ),
-            child: Text(
-              widget.label,
-              textAlign: TextAlign.center,
-              style: ZyraTypography.labelLarge.copyWith(
-                color: widget.isSelected
-                    ? ZyraColors.primary
-                    : ZyraColors.onSurface.withValues(alpha: 0.6),
-              ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: ZyraTypography.labelSmall.copyWith(
+              fontSize: 12,
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              color:
+                  isSelected ? ZyraColors.onPrimary : ZyraColors.textSecondary,
             ),
           ),
         ),
@@ -219,101 +238,86 @@ class _SummaryCards extends ConsumerWidget {
         );
         final sessionsCompleted = sessions.length;
 
-        return Row(
-          children: [
-            Expanded(
-              child: _SummaryCard(
-                icon: Icons.timer_outlined,
-                value: (totalMinutes / 60).toStringAsFixed(1),
-                unit: l10n.hours,
-                color: ZyraColors.primary,
+        return GlassCard(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Expanded(
+                child: _MetricCell(
+                  label: l10n.hours.toUpperCase(),
+                  value: (totalMinutes / 60).toStringAsFixed(1),
+                  accent: ZyraColors.onBackground,
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _SummaryCard(
-                icon: Icons.stars_rounded,
-                value: '$totalPoints',
-                unit: l10n.points,
-                color: ZyraColors.secondary,
+              Container(width: 1, height: 42, color: ZyraColors.divider),
+              Expanded(
+                child: _MetricCell(
+                  label: l10n.sessions.toUpperCase(),
+                  value: '$sessionsCompleted',
+                  accent: ZyraColors.secondaryBright,
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _SummaryCard(
-                icon: Icons.check_circle_outline,
-                value: '$sessionsCompleted',
-                unit: l10n.sessions,
-                color: ZyraColors.primary,
+              Container(width: 1, height: 42, color: ZyraColors.divider),
+              Expanded(
+                child: _MetricCell(
+                  label: l10n.points.toUpperCase(),
+                  value: '$totalPoints',
+                  accent: ZyraColors.primary,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
       loading: () => const Center(
-        child: CircularProgressIndicator(color: ZyraColors.primary),
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: CircularProgressIndicator(color: ZyraColors.primary),
+        ),
       ),
       error: (err, stack) => Center(
         child: Text(
           l10n.somethingWentWrong,
-          style: const TextStyle(color: Colors.red),
+          style: const TextStyle(color: ZyraColors.error),
         ),
       ),
     );
   }
 }
 
-class _SummaryCard extends StatelessWidget {
-  final IconData icon;
+class _MetricCell extends StatelessWidget {
+  final String label;
   final String value;
-  final String unit;
-  final Color color;
+  final Color accent;
 
-  const _SummaryCard({
-    required this.icon,
+  const _MetricCell({
+    required this.label,
     required this.value,
-    required this.unit,
-    required this.color,
+    required this.accent,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: ZyraColors.surface.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-          width: 1.5,
-        ),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-          child: Column(
-            children: [
-              Icon(icon, color: color, size: 28),
-              const SizedBox(height: 8),
-              Text(
-                value,
-                style: ZyraTypography.headlineMedium.copyWith(
-                  color: color,
-                  fontFeatures: const [FontFeature.tabularFigures()],
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                unit,
-                style: ZyraTypography.labelSmall.copyWith(
-                  color: ZyraColors.onSurface.withValues(alpha: 0.7),
-                ),
-              ),
-            ],
+    return Column(
+      children: [
+        Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: ZyraTypography.sectionLabel.copyWith(
+            fontSize: 10,
+            color: ZyraColors.textTertiary,
           ),
         ),
-      ),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: ZyraTypography.dataMonoLarge.copyWith(
+            fontSize: 24,
+            color: accent,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -328,35 +332,24 @@ class _ActivityChart extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final sessionsAsync = ref.watch(statsDataProvider);
 
-    final decoration = BoxDecoration(
-      color: ZyraColors.surface.withValues(alpha: 0.5),
-      borderRadius: BorderRadius.circular(24),
-      border: Border.all(
-        color: ZyraColors.primary.withValues(alpha: 0.2),
-        width: 1.5,
-      ),
-    );
-
     return sessionsAsync.when(
       data: (sessions) {
         if (sessions.isEmpty) {
-          return Container(
-            padding: const EdgeInsets.all(20),
-            decoration: decoration,
+          return GlassCard(
+            padding: const EdgeInsets.all(24),
             child: Center(
               child: Column(
                 children: [
                   const Icon(
-                    Icons.show_chart,
-                    color: ZyraColors.primary,
-                    size: 48,
+                    Icons.bar_chart_rounded,
+                    color: ZyraColors.textTertiary,
+                    size: 40,
                   ),
                   const SizedBox(height: 12),
                   Text(
                     context.l10n.noStudyData,
-                    style: ZyraTypography.bodyMedium.copyWith(
-                      color: ZyraColors.onSurface.withValues(alpha: 0.6),
-                    ),
+                    style: ZyraTypography.bodySmall,
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -393,22 +386,31 @@ class _ActivityChart extends ConsumerWidget {
           StatsFilter.allTime => l10n.allTimeChart,
         };
 
-        return Container(
+        return GlassCard(
           padding: const EdgeInsets.all(20),
-          decoration: decoration,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: ZyraTypography.titleMedium.copyWith(
-                  color: ZyraColors.onSurface,
-                ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.bar_chart_rounded,
+                    color: ZyraColors.primary,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: ZyraTypography.titleLarge.copyWith(fontSize: 18),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: (context.screenSize.height * 0.28)
-                    .clamp(190.0, 280.0)
+                height: (context.screenSize.height * 0.26)
+                    .clamp(185.0, 250.0)
                     .toDouble(),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -419,6 +421,8 @@ class _ActivityChart extends ConsumerWidget {
                           label: labelOf(bucket),
                           minutes: bucket.minutes,
                           maxMinutes: maxMinutes,
+                          isPeak:
+                              maxMinutes > 0 && bucket.minutes == maxMinutes,
                         ),
                       ),
                   ],
@@ -429,7 +433,7 @@ class _ActivityChart extends ConsumerWidget {
         );
       },
       loading: () => const SizedBox(
-        height: 250,
+        height: 220,
         child: Center(
           child: CircularProgressIndicator(color: ZyraColors.primary),
         ),
@@ -451,17 +455,17 @@ class _ActivityChart extends ConsumerWidget {
   }
 }
 
-/// One bar. It takes whatever width and height its slot gives it, so the chart
-/// can never overflow, whether it shows 5, 6 or 7 bars and on any screen size.
 class _BarChartItem extends StatelessWidget {
   final String label;
   final int minutes;
   final int maxMinutes;
+  final bool isPeak;
 
   const _BarChartItem({
     required this.label,
     required this.minutes,
     required this.maxMinutes,
+    required this.isPeak,
   });
 
   String _amount(BuildContext context) {
@@ -478,56 +482,66 @@ class _BarChartItem extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final barArea =
-            (constraints.maxHeight - labelsHeight).clamp(0.0, 400.0).toDouble();
-        final barWidth = (constraints.maxWidth * 0.62)
-            .clamp(8.0, context.scaled(36))
+            (constraints.maxHeight - labelsHeight).clamp(0.0, 360.0).toDouble();
+        final barWidth = (constraints.maxWidth * 0.34)
+            .clamp(8.0, context.scaled(16))
             .toDouble();
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 600),
-              curve: Curves.easeOutCubic,
-              width: barWidth,
-              height: barArea * heightFactor,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    ZyraColors.primary.withValues(alpha: 0.8),
-                    ZyraColors.secondary.withValues(alpha: 0.8),
-                  ],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            const SizedBox(height: 8),
             SizedBox(
               height: 14,
               width: constraints.maxWidth,
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  _amount(context),
-                  style: ZyraTypography.labelSmall.copyWith(
-                    color: ZyraColors.onSurface.withValues(alpha: 0.6),
+                  minutes > 0 ? _amount(context) : '',
+                  style: ZyraTypography.dataMono.copyWith(
+                    color: isPeak
+                        ? ZyraColors.primary
+                        : ZyraColors.textTertiary,
                     fontSize: 10,
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 6),
+            // Pill track + fill matching `i_statistik_al_ma_defteri`
+            Container(
+              width: barWidth,
+              height: barArea,
+              alignment: Alignment.bottomCenter,
+              decoration: BoxDecoration(
+                color: ZyraColors.surfaceElevated,
+                borderRadius: BorderRadius.circular(999),
+              ),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 520),
+                curve: Curves.easeOutCubic,
+                width: barWidth,
+                height: (barArea * heightFactor).clamp(0.0, barArea),
+                decoration: BoxDecoration(
+                  color: isPeak
+                      ? ZyraColors.primary
+                      : ZyraColors.textTertiary.withValues(alpha: 0.65),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
             SizedBox(
-              height: 18,
+              height: 16,
               width: constraints.maxWidth,
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
                   label,
                   style: ZyraTypography.labelSmall.copyWith(
-                    color: ZyraColors.onSurface,
+                    color: isPeak
+                        ? ZyraColors.onBackground
+                        : ZyraColors.textTertiary,
+                    fontWeight: isPeak ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
@@ -547,110 +561,77 @@ class _AchievementBadges extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final badges = [
-      {
-        'icon': '🔥',
-        'title': l10n.threeDayStreak,
-        'description': l10n.threeDayStreakDesc
-      },
-      {
-        'icon': '⭐',
-        'title': l10n.first100Points,
-        'description': l10n.first100PointsDesc
-      },
-      {
-        'icon': '🎯',
-        'title': l10n.focusMaster,
-        'description': l10n.focusMasterDesc
-      },
+      (
+        icon: Icons.local_fire_department_outlined,
+        title: l10n.threeDayStreak,
+        description: l10n.threeDayStreakDesc,
+      ),
+      (
+        icon: Icons.stars_outlined,
+        title: l10n.first100Points,
+        description: l10n.first100PointsDesc,
+      ),
+      (
+        icon: Icons.track_changes_outlined,
+        title: l10n.focusMaster,
+        description: l10n.focusMasterDesc,
+      ),
     ];
 
-    return Container(
+    return GlassCard(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: ZyraColors.surface.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: ZyraColors.secondary.withValues(alpha: 0.2),
-          width: 1.5,
-        ),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             l10n.achievementBadges,
-            style: ZyraTypography.titleMedium.copyWith(
-              color: ZyraColors.onSurface,
-            ),
+            style: ZyraTypography.titleLarge.copyWith(fontSize: 18),
           ),
-          const SizedBox(height: 16),
-          ...badges.map(
-            (badge) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: _BadgeItem(
-                icon: badge['icon'] as String,
-                title: badge['title'] as String,
-                description: badge['description'] as String,
+          const SizedBox(height: 14),
+          for (var i = 0; i < badges.length; i++) ...[
+            if (i > 0)
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Divider(color: ZyraColors.divider),
               ),
+            Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: ZyraColors.surfaceElevated,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: ZyraColors.hairline),
+                  ),
+                  child: Icon(
+                    badges[i].icon,
+                    color: ZyraColors.primary,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        badges[i].title,
+                        style: ZyraTypography.titleMedium.copyWith(fontSize: 14),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        badges[i].description,
+                        style: ZyraTypography.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ),
+          ],
         ],
       ),
-    );
-  }
-}
-
-class _BadgeItem extends StatelessWidget {
-  final String icon;
-  final String title;
-  final String description;
-
-  const _BadgeItem({
-    required this.icon,
-    required this.title,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(
-            color: ZyraColors.primary.withValues(alpha: 0.2),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Center(
-            child: Text(
-              icon,
-              style: const TextStyle(fontSize: 24),
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: ZyraTypography.titleMedium.copyWith(
-                  color: ZyraColors.onSurface,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                description,
-                style: ZyraTypography.bodyMedium.copyWith(
-                  color: ZyraColors.onSurface.withValues(alpha: 0.6),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

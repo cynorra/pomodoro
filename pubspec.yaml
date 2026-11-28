@@ -1,7 +1,7 @@
 name: cynora_focus
 description: "Study Cafe: Pomodoro Timer - gamified focus and study timer with a virtual cafe."
 publish_to: 'none'
-version: 1.0.18+33
+version: 1.1.0+34
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -26,6 +26,7 @@ dependencies:
   
   flutter_animate: ^4.5.0
   shimmer: ^3.0.0
+  google_fonts: ^6.2.1
   
   vibration: ^3.1.3
   audioplayers: ^6.0.0
